@@ -1,0 +1,44 @@
+# =============================================================================
+# Docker Compose - Ambiente Base: Jupyter + PySpark (modo local)
+# Curso: Big Data Processing - MBA Engenharia de Dados (Mackenzie)
+# =============================================================================
+# A imagem jupyter/pyspark-notebook já inclui Spark embutido.
+# Os notebooks usam master("local[*]") — todos os cores da máquina.
+# Isso é suficiente para os labs do curso (até 1M de registros).
+#
+# Uso:
+#   docker compose up -d        # Iniciar
+#   docker compose down         # Parar
+#
+# Acesso:
+#   - Jupyter Notebook: http://localhost:8888 (sem token)
+#   - Spark UI (durante execução): http://localhost:4040
+#
+# Requisitos mínimos: 8GB RAM, 4 cores de CPU
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Jupyter Notebook com PySpark embutido (Spark local mode)
+  # ---------------------------------------------------------------------------
+  jupyter:
+    image: quay.io/jupyter/pyspark-notebook:latest
+    container_name: jupyter-spark
+    ports:
+      - "8888:8888"
+      - "4040:4040"   # Spark UI (ativa quando um job está rodando)
+    environment:
+      - JUPYTER_TOKEN=
+    command: start-notebook.py --IdentityProvider.token=''
+    volumes:
+      # Diretório de trabalho (persistente entre restarts)
+      - ./notebooks:/home/jovyan/work
+      # Datasets do curso (somente leitura)
+      - ../datasets:/home/jovyan/work/data:ro
+      # Notebooks prontos de cada aula
+      - ../aula_01/code:/home/jovyan/work/aula_01:ro
+      - ../aula_02/code:/home/jovyan/work/aula_02:ro
+      - ../aula_03/code:/home/jovyan/work/aula_03:ro
+      - ../aula_06/code:/home/jovyan/work/aula_06:ro
+    working_dir: /home/jovyan/work
+    restart: unless-stopped

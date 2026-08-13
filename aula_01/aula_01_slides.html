@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 1 — Fundamentos de Big Data e Apache Spark | Mackenzie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC092F;
+  --red-dark:#9E0724;
+  --red-light:#F9E8EB;
+  --gold:#C4A35A;
+  --white:#FFFFFF;
+  --gray-50:#FAFAFA;
+  --gray-100:#F4F4F5;
+  --gray-200:#E4E4E7;
+  --gray-500:#71717A;
+  --gray-700:#3F3F46;
+  --gray-900:#18181B;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+body{background:var(--gray-900);}
+
+.slide{
+  display:none;position:absolute;inset:0;
+  width:100vw;height:100vh;
+  padding:60px 80px;
+  flex-direction:column;justify-content:flex-start;
+  background:var(--white);color:var(--gray-900);
+  overflow-y:auto;
+}
+.slide.active{display:flex;}
+.slide::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--red-dark));
+}
+.slide .mackenzie-mark{
+  position:absolute;top:18px;right:40px;
+  font-size:.7em;font-weight:700;letter-spacing:2px;color:var(--red);
+}
+
+/* Capa */
+.slide.cover{
+  background:linear-gradient(145deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);align-items:center;justify-content:center;text-align:center;
+  padding:80px;
+}
+.slide.cover::before{display:none;}
+.slide.cover h1{font-size:2.8em;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.slide.cover .subtitle{font-size:1.15em;font-weight:300;opacity:.9;margin-bottom:4px;}
+.slide.cover .meta{
+  margin-top:30px;display:inline-flex;gap:16px;
+  background:rgba(255,255,255,.15);padding:10px 24px;border-radius:24px;
+  font-size:.9em;
+}
+
+/* Section divider */
+.slide.section{
+  background:var(--gray-900);color:var(--white);
+  align-items:center;justify-content:center;text-align:center;
+}
+.slide.section::before{background:var(--gold);}
+.slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+
+/* Typography */
+.slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
+.slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
+.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide ul,.slide ol{margin:8px 0 12px 28px;}
+.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide strong{color:var(--gray-900);}
+
+/* Code */
+.slide pre{
+  background:var(--gray-900);color:#e4e4e7;
+  padding:18px 22px;border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.8em;
+  line-height:1.6;margin:12px 0;overflow-x:auto;
+  border-left:4px solid var(--red);
+}
+
+/* Table */
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide tr:nth-child(even) td{background:var(--gray-50);}
+
+/* Blockquote */
+.slide blockquote{
+  border-left:4px solid var(--gold);background:var(--gray-50);
+  padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
+  font-style:italic;color:var(--gray-700);font-size:.95em;
+}
+
+/* Columns */
+.cols{display:flex;gap:32px;margin:12px 0;}
+.cols .col{flex:1;}
+
+/* Highlight box */
+.highlight{
+  background:var(--red-light);border:1px solid var(--red);
+  padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Navigation */
+.nav{position:fixed;bottom:24px;right:36px;display:flex;gap:8px;z-index:999;}
+.nav button{
+  background:var(--red);color:var(--white);border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-size:1em;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.nav button:hover{background:var(--red-dark);transform:scale(1.05);}
+.counter{
+  position:fixed;bottom:28px;left:36px;
+  color:var(--gray-500);font-size:.8em;font-weight:500;z-index:999;
+}
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:var(--red);transition:width .3s;z-index:999;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- SLIDE 1 — Capa -->
+<div class="slide cover active">
+<h1>Fundamentos de Big Data<br>e Apache Spark</h1>
+<p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
+<p class="subtitle">Universidade Presbiteriana Mackenzie</p>
+<div class="meta"><span>📅 Semana 1</span><span>⏱️ 50 min teoria</span></div>
+</div>
+
+<!-- SLIDE 2 — Quem Sou Eu -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2 style="border-bottom:none;margin-bottom:8px;">Quem Sou Eu?</h2>
+<div class="cols">
+<div class="col" style="flex:0.4;text-align:center;">
+<div style="background:var(--red);color:var(--white);padding:24px 20px;border-radius:12px;">
+<h3 style="color:var(--white);font-size:1.4em;margin-bottom:12px;">Alexandre Tavares</h3>
+<p style="color:rgba(255,255,255,.9);font-size:.85em;line-height:1.6;">
+Head de Dados — AWSales<br>
+Fundador — Tavares Data & IA<br>
+Professor MBA — Mackenzie / UniFAAT
+</p>
+</div>
+</div>
+<div class="col" style="flex:0.6;">
+<ul>
+<li>Nos últimos <strong>24 anos</strong>, naveguei por quase todas as áreas de TI</li>
+<li>Comecei em desenvolvimento, mergulhei em <strong>Big Data e Inteligência Artificial</strong></li>
+<li>Líder de times e arquiteto de soluções na nuvem</li>
+<li>Atualmente: <strong>Head de Dados na AWSales</strong>, liderando a estratégia de dados da empresa</li>
+<li><strong>Fundador da Tavares Data & IA</strong> — consultoria em engenharia de dados e IA</li>
+<li>Professor de MBA na <strong>Universidade Presbiteriana Mackenzie</strong> e na <strong>UniFAAT</strong></li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 3 — Apresentação dos Alunos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>👋 Sua Vez — Apresente-se!</h2>
+<p style="font-size:1.1em;margin-bottom:24px;">Conte para a turma:</p>
+<div style="background:var(--gray-50);border:2px solid var(--red);border-radius:12px;padding:28px 32px;">
+<ol style="font-size:1.15em;line-height:2.2;">
+<li><strong>Nome</strong> — Como gosta de ser chamado(a)?</li>
+<li><strong>Onde trabalha e qual sua função</strong> — Empresa, cargo, área</li>
+<li><strong>O que espera deste curso?</strong> — Qual problema quer resolver? O que quer aprender?</li>
+</ol>
+</div>
+<blockquote style="margin-top:20px;">Não existe resposta errada. O objetivo é nos conhecermos e alinhar expectativas.</blockquote>
+</div>
+
+<!-- SLIDE 4 — Projeto Final (Resumo) -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏆 Projeto Final — O Entregável do Curso</h2>
+<p>O único entregável é um <strong>pipeline de dados end-to-end</strong> apresentado em grupo na <strong>Aula 8</strong>.</p>
+<div class="cols">
+<div class="col">
+<h3>O que vocês vão construir:</h3>
+<ul>
+<li><strong>Apache Spark (PySpark)</strong> — processamento de dados</li>
+<li><strong>Apache Airflow</strong> — orquestração automática</li>
+<li><strong>Docker</strong> — infraestrutura reproduzível</li>
+<li><strong>Arquitetura Medallion</strong> — Bronze → Silver → Gold</li>
+<li><strong>Qualidade de dados</strong> — checks + quarentena</li>
+</ul>
+</div>
+<div class="col">
+<h3>Apresentação (Aula 8):</h3>
+<ul>
+<li>Grupos de 3-5 integrantes</li>
+<li><strong>20 min apresentação + demo ao vivo</strong></li>
+<li>5 min para perguntas (Q&A)</li>
+<li>Demo obrigatória: <code>docker compose up</code> → pipeline rodando</li>
+<li>Todos os membros devem falar</li>
+</ul>
+</div>
+</div>
+<div class="highlight" style="margin-top:16px;">
+<strong>Avaliação:</strong> Funcionamento (30%) · Arquitetura (25%) · Apresentação (20%) · Qualidade de Dados (15%) · Documentação (10%)
+</div>
+</div>
+
+<!-- SLIDE 5 — Objetivos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Objetivos de Aprendizagem</h2>
+<ol>
+<li><strong>Compreender</strong> o conceito de Big Data e os 5 V's</li>
+<li><strong>Explicar</strong> por que pandas tem limite de escala</li>
+<li><strong>Descrever</strong> a arquitetura do Spark (Driver, Executors, Cluster Manager)</li>
+<li><strong>Diferenciar</strong> transformações de ações (lazy evaluation)</li>
+<li><strong>Conhecer</strong> o ecossistema Spark e o papel do Catalyst Optimizer</li>
+</ol>
+</div>
+
+<!-- SLIDE 6 — Section: Big Data -->
+<div class="slide section">
+<h2>O Que É Big Data?</h2>
+<p>Por que ferramentas tradicionais não são suficientes</p>
+</div>
+
+<!-- SLIDE 7 — Definição -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Big Data — Definição</h2>
+<blockquote>Conjuntos de dados cujo <strong>volume</strong>, <strong>velocidade</strong> ou <strong>variedade</strong> excedem a capacidade de ferramentas tradicionais de processamento.</blockquote>
+<p><strong>Não é apenas sobre tamanho!</strong></p>
+<table>
+<tr><th>Ferramenta</th><th>Limite prático</th><th>Modelo</th></tr>
+<tr><td>Excel</td><td>~1M linhas</td><td>Single thread, memória</td></tr>
+<tr><td>pandas</td><td>~10-50M linhas</td><td>Single machine, in-memory</td></tr>
+<tr><td>Spark</td><td>Petabytes</td><td>Distribuído, lazy</td></tr>
+<tr><td>Hadoop</td><td>Petabytes</td><td>Distribuído, disco</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 8 — 5 V's diagrama -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📐 Os 5 V's do Big Data</h2>
+<pre>
+              ┌─────────────┐
+              │   VOLUME    │  ← Quantidade
+              └──────┬──────┘
+                     │
+         ┌───────────┼───────────┐
+         │           │           │
+     ┌───┴───┐  ┌───┴───┐  ┌───┴───┐
+     │VELOCI-│  │VARIE- │  │VERACI-│
+     │ DADE  │  │ DADE  │  │ DADE  │
+     └───┬───┘  └───┬───┘  └───┬───┘
+         │           │           │
+         └───────────┼───────────┘
+                     │
+              ┌──────┴──────┐
+              │    VALOR    │  ← Insights
+              └─────────────┘
+</pre>
+</div>
+
+<!-- SLIDE 9 — 5 V's detalhes -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📐 Os 5 V's — Aplicação na DataFlow</h2>
+<table>
+<tr><th>V</th><th>Descrição</th><th>Exemplo</th></tr>
+<tr><td><strong>Volume</strong></td><td>Quantidade massiva de dados</td><td>100K → 10M registros de vendas</td></tr>
+<tr><td><strong>Velocidade</strong></td><td>Taxa de geração / processamento</td><td>Relatório diário, Black Friday 10x</td></tr>
+<tr><td><strong>Variedade</strong></td><td>Múltiplos formatos</td><td>CSV, JSON, Parquet</td></tr>
+<tr><td><strong>Veracidade</strong></td><td>Qualidade dos dados</td><td>Duplicatas, nulls, valores errados</td></tr>
+<tr><td><strong>Valor</strong></td><td>Insights acionáveis</td><td>Faturamento por estado, tendências</td></tr>
+</table>
+<div class="highlight">
+<strong>Hoje:</strong> O problema é de <strong>Volume</strong>. Nas próximas aulas enfrentaremos todos os V's.
+</div>
+</div>
+
+<!-- SLIDE 10 — Limitações pandas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🐼 Por Que Pandas Não Escala?</h2>
+<ol>
+<li><strong>Memória limitada</strong> — Todo o DataFrame cabe na RAM<br>
+<span style="color:var(--gray-500);">Regra: precisa de 5-10x a RAM do tamanho dos dados</span></li>
+<li><strong>Single-threaded</strong> — Usa apenas 1 core da CPU</li>
+<li><strong>Sem paralelismo</strong> — Não distribui entre máquinas</li>
+<li><strong>Sem lazy evaluation</strong> — Cada operação executa imediatamente</li>
+</ol>
+<pre># Isso tenta carregar TUDO na memória:
+df = pd.read_csv("vendas_100M.csv")  # 💀 MemoryError</pre>
+</div>
+
+<!-- SLIDE 11 — Vertical vs Horizontal -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📈 Escala Vertical vs Horizontal</h2>
+<div class="cols">
+<div class="col">
+<h3>Scale Up (Vertical)</h3>
+<pre>┌───────────────────┐
+│  MÁQUINA MAIOR    │
+│  256GB RAM        │
+│  64 cores         │
+│  $$$$$$$          │
+└───────────────────┘
+       pandas</pre>
+</div>
+<div class="col">
+<h3>Scale Out (Horizontal)</h3>
+<pre>┌─────┐┌─────┐┌─────┐┌─────┐
+│Nó 1 ││Nó 2 ││Nó 3 ││Nó 4 │
+│16GB ││16GB ││16GB ││16GB │
+└─────┘└─────┘└─────┘└─────┘
+    = 64GB distribuído
+       Apache Spark</pre>
+</div>
+</div>
+<table>
+<tr><th>Aspecto</th><th>Vertical</th><th>Horizontal</th></tr>
+<tr><td>Custo</td><td>Exponencial</td><td>Linear</td></tr>
+<tr><td>Limite</td><td>Físico (~TB)</td><td>Virtualmente ilimitado</td></tr>
+<tr><td>Tolerância a falhas</td><td>Zero</td><td>Built-in</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 12 — Section: Spark -->
+<div class="slide section">
+<h2>Apache Spark</h2>
+<p>Arquitetura e conceitos fundamentais</p>
+</div>
+
+<!-- SLIDE 13 — O que é Spark -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚡ O Que É Apache Spark?</h2>
+<blockquote>Motor de processamento distribuído de dados, projetado para ser rápido, generalista e tolerante a falhas.</blockquote>
+<ul>
+<li>🚀 <strong>In-memory:</strong> até 100x mais rápido que Hadoop MapReduce</li>
+<li>🐍 <strong>APIs:</strong> Python (PySpark), Scala, Java, R</li>
+<li>📦 <strong>Unificado:</strong> batch, streaming, ML, grafos</li>
+<li>🔄 <strong>Lazy evaluation:</strong> otimiza antes de executar</li>
+<li>💪 <strong>Fault-tolerant:</strong> recupera de falhas automaticamente</li>
+<li>🌐 <strong>Open source:</strong> Apache Foundation (desde 2009, UC Berkeley)</li>
+</ul>
+</div>
+
+<!-- SLIDE 14 — Arquitetura -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏗️ Arquitetura do Spark</h2>
+<pre>
+┌──────────────────────────────────────────────────────────┐
+│                   SPARK APPLICATION                        │
+├──────────────────────────────────────────────────────────┤
+│  ┌────────────────┐          ┌──────────────────────┐    │
+│  │ DRIVER PROGRAM │◄────────►│   CLUSTER MANAGER    │    │
+│  │  • SparkContext│          │  Standalone/YARN/K8s │    │
+│  │  • DAG Sched.  │          └──────────────────────┘    │
+│  └───────┬────────┘                                      │
+│          │ distribui tasks                               │
+│          ▼                                               │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐         │
+│  │ EXECUTOR 1 │  │ EXECUTOR 2 │  │ EXECUTOR N │         │
+│  │  Tasks +   │  │  Tasks +   │  │  Tasks +   │         │
+│  │  Cache     │  │  Cache     │  │  Cache     │         │
+│  └────────────┘  └────────────┘  └────────────┘         │
+└──────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<!-- SLIDE 15 — Componentes -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏗️ Papel de Cada Componente</h2>
+<table>
+<tr><th>Componente</th><th>Função</th><th>Analogia</th></tr>
+<tr><td><strong>Driver</strong></td><td>Coordena: cria DAG, distribui tasks</td><td>Maestro</td></tr>
+<tr><td><strong>Cluster Manager</strong></td><td>Gerencia recursos (CPU, RAM)</td><td>RH</td></tr>
+<tr><td><strong>Executors</strong></td><td>Executam tasks em paralelo + cache</td><td>Músicos</td></tr>
+</table>
+<h3>Fluxo:</h3>
+<ol>
+<li>Driver cria plano de execução (DAG)</li>
+<li>Solicita recursos ao Cluster Manager</li>
+<li>Cluster Manager aloca Executors</li>
+<li>Driver distribui tasks → Executors processam em paralelo</li>
+<li>Resultados consolidados no Driver</li>
+</ol>
+</div>
+
+<!-- SLIDE 16 — Modos de deploy -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🌐 Onde o Spark Roda?</h2>
+<table>
+<tr><th>Modo</th><th>Descrição</th><th>Quando usar</th></tr>
+<tr><td><strong>Local</strong></td><td>Uma máquina, simula cluster</td><td>Dev e testes</td></tr>
+<tr><td><strong>Standalone</strong></td><td>Cluster manager do Spark</td><td>Clusters dedicados</td></tr>
+<tr><td><strong>YARN</strong></td><td>Hadoop integrado</td><td>Ambientes Hadoop</td></tr>
+<tr><td><strong>Kubernetes</strong></td><td>Containers orquestrados</td><td>Cloud-native</td></tr>
+</table>
+<p><strong>No curso:</strong> usaremos <code>local[*]</code> (todos os cores) via Docker.</p>
+<pre>spark = SparkSession.builder \
+    .master("local[*]") \
+    .appName("DataFlow") \
+    .getOrCreate()</pre>
+</div>
+
+<!-- SLIDE 17 — Section: Lazy Evaluation -->
+<div class="slide section">
+<h2>Lazy Evaluation</h2>
+<p>O segredo da performance do Spark</p>
+</div>
+
+<!-- SLIDE 18 — Lazy Evaluation -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>😴 Lazy Evaluation</h2>
+<blockquote>O Spark <strong>não executa</strong> operações imediatamente. Constrói um plano (DAG) e só executa quando uma <strong>ação</strong> é chamada.</blockquote>
+<pre># Nenhuma dessas linhas executa nada:
+df = spark.read.csv("vendas.csv")             # transformação
+df_sp = df.filter(col("state") == "SP")       # transformação
+df_total = df_sp.groupBy("city").sum("amount")# transformação
+
+# Só AQUI executa tudo (otimizado):
+df_total.show()  # ← AÇÃO!</pre>
+<h3>Benefícios:</h3>
+<ul>
+<li>Otimização global do plano inteiro</li>
+<li>Elimina operações desnecessárias</li>
+<li>Minimiza leitura de disco e rede</li>
+</ul>
+</div>
+
+<!-- SLIDE 19 — DAG -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔀 DAG — Directed Acyclic Graph</h2>
+<pre>
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│ read CSV │───►│  filter  │───►│ groupBy  │───►│  show()  │
+│(transf.) │    │(transf.) │    │(transf.) │    │  (AÇÃO)  │
+└──────────┘    └──────────┘    └──────────┘    └──────────┘
+                                                      │
+                                                      ▼
+                                                 EXECUTA TUDO
+</pre>
+<h3>Conceitos-chave:</h3>
+<ul>
+<li><strong>Job:</strong> disparado por uma ação</li>
+<li><strong>Stage:</strong> grupo de transformações sem shuffle</li>
+<li><strong>Shuffle:</strong> redistribuição de dados (operação cara!)</li>
+<li><strong>Task:</strong> unidade mínima — 1 task = 1 partição</li>
+</ul>
+</div>
+
+<!-- SLIDE 20 — Transformações vs Ações -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚙️ Transformações vs Ações</h2>
+<div class="cols">
+<div class="col">
+<h3>Transformações (Lazy)</h3>
+<ul>
+<li>Constroem o DAG</li>
+<li>Retornam novo DataFrame</li>
+<li><strong>Não executam nada</strong></li>
+</ul>
+<p style="margin-top:8px;"><code>select()</code> · <code>filter()</code> · <code>groupBy()</code> · <code>join()</code> · <code>withColumn()</code> · <code>orderBy()</code></p>
+</div>
+<div class="col">
+<h3>Ações (Eager)</h3>
+<ul>
+<li>Disparam a execução</li>
+<li>Retornam valores ao Driver</li>
+<li><strong>Executam o DAG inteiro</strong></li>
+</ul>
+<p style="margin-top:8px;"><code>show()</code> · <code>count()</code> · <code>collect()</code> · <code>write</code> · <code>first()</code></p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 21 — Evolução APIs -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📜 Evolução das APIs</h2>
+<pre>
+2011           2015             2016            2020+
+ │              │                │               │
+ ▼              ▼                ▼               ▼
+ RDD  ────►  DataFrame  ────►  Dataset  ────►  DataFrame
+(baixo nível)  (otimizado)   (Scala only)     (unificado)
+</pre>
+<table>
+<tr><th>API</th><th>Otimização</th><th>Python?</th></tr>
+<tr><td>RDD</td><td>Nenhuma (manual)</td><td>Possível, lento</td></tr>
+<tr><td><strong>DataFrame</strong></td><td>Catalyst + Tungsten</td><td>✅ Recomendado</td></tr>
+<tr><td>Dataset</td><td>Catalyst + Tungsten</td><td>❌ Só Scala/Java</td></tr>
+</table>
+<div class="highlight">Para PySpark: <strong>sempre use DataFrame API</strong>.</div>
+</div>
+
+<!-- SLIDE 22 — Section: Otimização -->
+<div class="slide section">
+<h2>Motor de Otimização</h2>
+<p>Catalyst + Tungsten</p>
+</div>
+
+<!-- SLIDE 23 — Catalyst -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧠 Catalyst Optimizer</h2>
+<pre>
+Unresolved ──► Logical ──► Optimized ──► Physical
+  Plan           Plan       Plan           Plan
+ (parsing)    (análise)  (otimização)   (execução)
+</pre>
+<h3>Otimizações automáticas:</h3>
+<ol>
+<li><strong>Predicate Pushdown:</strong> filtra antes de ler</li>
+<li><strong>Column Pruning:</strong> lê apenas colunas usadas</li>
+<li><strong>Constant Folding:</strong> resolve constantes em compile-time</li>
+<li><strong>Join Reordering:</strong> reordena para minimizar shuffle</li>
+</ol>
+<pre># Você escreve:
+df.select("name", "city").filter(col("state") == "SP")
+
+# Spark otimiza para:
+# 1. Lê APENAS colunas name, city, state
+# 2. Filtra DURANTE a leitura (pushdown)
+# 3. Retorna apenas name e city</pre>
+</div>
+
+<!-- SLIDE 24 — Tungsten -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚙️ Project Tungsten</h2>
+<p>Motor de execução de baixo nível que otimiza performance no hardware:</p>
+<table>
+<tr><th>Aspecto</th><th>O que faz</th><th>Benefício</th></tr>
+<tr><td><strong>Memory Mgmt</strong></td><td>Memória off-heap manual</td><td>Evita GC do Java</td></tr>
+<tr><td><strong>Code Gen</strong></td><td>Gera bytecode JVM em runtime</td><td>Sem interpretação</td></tr>
+<tr><td><strong>Cache-aware</strong></td><td>Layout otimizado p/ CPU</td><td>Menos cache misses</td></tr>
+<tr><td><strong>Binary Format</strong></td><td>Dados binários compactos</td><td>Menos memória</td></tr>
+</table>
+<div class="highlight">
+DataFrame roda ordens de magnitude mais rápido que RDD — sem mudar seu código.
+</div>
+</div>
+
+<!-- SLIDE 25 — Ecossistema -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🌐 Ecossistema Spark</h2>
+<pre>
+  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐
+  │ Spark SQL │  │  MLlib    │  │ Streaming │  │  GraphX   │
+  │ DataFrames│  │    ML     │  │ Real-time │  │  Grafos   │
+  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
+        └───────────────┴───────────────┴───────────────┘
+                          │
+                  ┌───────┴───────┐
+                  │  Spark Core   │
+                  │ (RDD, Sched.) │
+                  └───────┬───────┘
+                          │
+            ┌─────────────┼─────────────┐
+            │             │             │
+        ┌───┴───┐    ┌───┴───┐    ┌───┴───┐
+        │ HDFS  │    │  S3   │    │ Local │
+        └───────┘    └───────┘    └───────┘
+</pre>
+<p><strong>Neste curso:</strong> foco em Spark SQL / DataFrame API (90%+ do trabalho de engenharia de dados).</p>
+</div>
+
+<!-- SLIDE 26 — Spark UI -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Spark Web UI — Monitoramento</h2>
+<p>Disponível em <code>http://localhost:4040</code> durante a execução:</p>
+<pre>
+┌─────────────────────────────────────────────────┐
+│  SPARK UI                                        │
+├─────────────────────────────────────────────────┤
+│  Jobs  │  Stages  │  Storage  │  Executors      │
+│                                                  │
+│  Job 0: show() at script.py:45                   │
+│  ├── Stage 0: csv scan (2 tasks, 1.2s)          │
+│  └── Stage 1: groupBy+agg (8 tasks, 0.8s)      │
+│                                                  │
+│  Total: 2.0s │ Input: 45MB │ Shuffle: 2.1MB    │
+└─────────────────────────────────────────────────┘
+</pre>
+<h3>O que monitorar:</h3>
+<ul>
+<li>⏱️ Tempo por stage/task</li>
+<li>🔀 Volume de shuffle</li>
+<li>💾 Uso de memória e cache</li>
+<li>⚠️ Data skew (partições desbalanceadas)</li>
+</ul>
+</div>
+
+<!-- SLIDE 27 — Comparação performance -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚡ pandas vs Spark — Performance</h2>
+<table>
+<tr><th>Volume</th><th>pandas</th><th>PySpark</th></tr>
+<tr><td>100K registros</td><td>~5s</td><td>~3s</td></tr>
+<tr><td>1M registros</td><td>~45s</td><td>~8s</td></tr>
+<tr><td>10M registros</td><td>MemoryError 💀</td><td>~25s</td></tr>
+<tr><td>100M registros</td><td>Impossível</td><td>~2min</td></tr>
+</table>
+<div class="highlight">
+Para volumes pequenos (&lt;100K), pandas pode ser mais rápido (overhead de inicialização do Spark). A vantagem aparece na <strong>escala</strong>.
+</div>
+</div>
+
+<!-- SLIDE 28 — Boas Práticas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Boas Práticas — Resumo</h2>
+<table>
+<tr><th>Prática</th><th>Por quê</th></tr>
+<tr><td>Use DataFrame API, não RDD</td><td>Otimização do Catalyst</td></tr>
+<tr><td>Schema explícito em produção</td><td>Evita inferência dupla</td></tr>
+<tr><td>Prefira Parquet sobre CSV</td><td>Colunar, comprimido</td></tr>
+<tr><td>Não use <code>collect()</code> em dados grandes</td><td>Traz tudo pro Driver (OOM)</td></tr>
+<tr><td>Encadeie transformações</td><td>Otimização global</td></tr>
+<tr><td>Monitore via Spark UI</td><td>Gargalos e skew</td></tr>
+<tr><td>Ajuste <code>shuffle.partitions</code></td><td>Default 200 é excessivo p/ dados pequenos</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 29 — Encerramento -->
+<div class="slide cover">
+<h1>Hora do Lab! 🔬</h1>
+<p class="subtitle">Agora vocês vão resolver o problema do Carlos</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">Spark + Docker + 100K registros de vendas</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">◀</button>
+<button onclick="next()">▶</button>
+</div>
+<div class="counter" id="counter"></div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;const total=slides.length;
+function show(n){
+  slides[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  slides[cur].classList.add('active');
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+}
+function next(){show(cur+1);}
+function prev(){show(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});
+show(0);
+</script>
+</body>
+</html>

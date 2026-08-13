@@ -1,0 +1,50 @@
+{
+  "name": "Big Data Processing - Ambiente de Desenvolvimento",
+  "dockerComposeFile": "../shared/docker-compose.full.yml",
+  "service": "jupyter",
+  "workspaceFolder": "/home/jovyan/work",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "dockerDashComposeVersion": "v2"
+    }
+  },
+  "forwardPorts": [8080, 8081, 8888],
+  "portsAttributes": {
+    "8080": {
+      "label": "Spark Master UI",
+      "onAutoForward": "notify"
+    },
+    "8081": {
+      "label": "Airflow Webserver",
+      "onAutoForward": "notify"
+    },
+    "8888": {
+      "label": "Jupyter Notebook",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        "editor.formatOnSave": true,
+        "python.formatting.provider": "black",
+        "python.linting.enabled": true,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000
+      }
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt || echo 'requirements.txt not found, skipping pip install'",
+  "remoteUser": "jovyan"
+}

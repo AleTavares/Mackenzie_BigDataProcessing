@@ -1,0 +1,2 @@
+# Esta pasta contém as DAGs compartilhadas do Apache Airflow.
+# DAGs específicas de cada aula são montadas via Docker volumes.

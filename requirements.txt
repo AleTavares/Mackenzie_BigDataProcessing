@@ -1,0 +1,35 @@
+# =============================================================================
+# Dependências Python - Curso Big Data Processing
+# MBA Engenharia de Dados - Mackenzie
+# =============================================================================
+# Este arquivo contém todas as dependências Python necessárias para o ambiente
+# de laboratório do curso. Todas as versões são fixadas para garantir
+# reprodutibilidade entre os alunos e consistência nos labs.
+#
+# Instalação: pip install -r requirements.txt
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Core: Processamento de dados e orquestração
+# -----------------------------------------------------------------------------
+pyspark==3.5.3
+apache-airflow==2.8.4
+pandas==2.2.1
+numpy==1.26.4
+
+# -----------------------------------------------------------------------------
+# Visualização: Geração de gráficos e relatórios
+# -----------------------------------------------------------------------------
+matplotlib==3.8.3
+seaborn==0.13.2
+
+# -----------------------------------------------------------------------------
+# Testes: Framework de testes automatizados
+# -----------------------------------------------------------------------------
+pytest==8.1.1
+
+# -----------------------------------------------------------------------------
+# Utilitários: Geração de dados sintéticos e suporte a formatos
+# -----------------------------------------------------------------------------
+faker==24.3.0
+pyarrow==15.0.2

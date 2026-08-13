@@ -1,0 +1,144 @@
+# =============================================================================
+# Docker Compose Override - Apache Airflow (Webserver + Scheduler)
+# Curso: Big Data Processing - MBA Engenharia de Dados (Mackenzie)
+# =============================================================================
+# Este arquivo é um OVERRIDE que adiciona Apache Airflow ao ambiente base.
+# Deve ser usado em conjunto com o docker-compose.yml base:
+#
+#   docker compose -f shared/docker-compose.yml -f shared/docker-compose.airflow.yml up -d
+#
+# Serviços adicionados:
+#   - airflow-init: Inicializa o banco de dados e cria usuário admin
+#   - airflow-webserver: Interface web do Airflow (porta 8081)
+#   - airflow-scheduler: Agendador de DAGs
+#
+# Portas:
+#   - Airflow Webserver: http://localhost:8081
+#   (Porta 8081 para evitar conflito com Spark Master na 8080)
+#
+# Credenciais padrão (ambiente de laboratório):
+#   - Usuário: admin
+#   - Senha: admin
+#
+# Requisitos: Docker Compose v2 (sem chave "version:")
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Airflow Init - Inicialização do banco de dados e criação do usuário admin
+  # ---------------------------------------------------------------------------
+  # Este serviço roda apenas uma vez para configurar o ambiente do Airflow.
+  # Após a inicialização, ele encerra automaticamente.
+  airflow-init:
+    image: apache/airflow:2.8-python3.11
+    container_name: airflow-init
+    environment:
+      # Executor local (SQLite) - adequado para ambiente de laboratório
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      # Não carregar DAGs de exemplo para manter o ambiente limpo
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      # Usar SQLite para simplicidade (não requer PostgreSQL externo)
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        # Inicializar o banco de dados do Airflow
+        airflow db init
+        # Criar usuário administrador padrão (apenas para laboratório)
+        airflow users create \
+          --username admin \
+          --password admin \
+          --firstname Admin \
+          --lastname User \
+          --role Admin \
+          --email admin@dataflow.local
+        echo "✅ Airflow inicializado com sucesso! Usuário admin/admin criado."
+    volumes:
+      # Volume compartilhado para o banco SQLite persistir entre serviços
+      - airflow-data:/opt/airflow
+      # DAGs do curso - pasta compartilhada
+      - ./dags:/opt/airflow/dags
+    networks:
+      - dataflow-network
+
+  # ---------------------------------------------------------------------------
+  # Airflow Webserver - Interface web para monitoramento de DAGs
+  # ---------------------------------------------------------------------------
+  # Acesse em: http://localhost:8081
+  # Login: admin / admin
+  airflow-webserver:
+    image: apache/airflow:2.8-python3.11
+    container_name: airflow-webserver
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      # Porta interna do webserver
+      - AIRFLOW__WEBSERVER__WEB_SERVER_PORT=8080
+    ports:
+      # Mapeia porta 8081 externa → 8080 interna
+      # (8081 para evitar conflito com Spark Master UI na porta 8080)
+      - "8081:8080"
+    volumes:
+      # Volume compartilhado com o banco SQLite
+      - airflow-data:/opt/airflow
+      # DAGs do curso - pasta compartilhada
+      - ./dags:/opt/airflow/dags
+      # DAGs da Aula 4 (montagem adicional para labs específicos)
+      - ../aula_04/code/dags:/opt/airflow/dags/aula_04
+    command: airflow webserver
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - dataflow-network
+
+  # ---------------------------------------------------------------------------
+  # Airflow Scheduler - Responsável por agendar e executar as DAGs
+  # ---------------------------------------------------------------------------
+  # O scheduler monitora a pasta de DAGs e executa tasks conforme agendamento.
+  airflow-scheduler:
+    image: apache/airflow:2.8-python3.11
+    container_name: airflow-scheduler
+    depends_on:
+      airflow-webserver:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    volumes:
+      # Volume compartilhado com o banco SQLite
+      - airflow-data:/opt/airflow
+      # DAGs do curso - pasta compartilhada
+      - ./dags:/opt/airflow/dags
+      # DAGs da Aula 4 (montagem adicional para labs específicos)
+      - ../aula_04/code/dags:/opt/airflow/dags/aula_04
+    command: airflow scheduler
+    restart: unless-stopped
+    networks:
+      - dataflow-network
+
+# =============================================================================
+# Volumes - Persistência de dados do Airflow
+# =============================================================================
+volumes:
+  # Volume para armazenar o banco SQLite e configurações do Airflow
+  airflow-data:
+    driver: local
+
+# =============================================================================
+# Rede - Reutiliza a rede definida no docker-compose.yml base
+# =============================================================================
+networks:
+  dataflow-network:
+    external: true
+    name: dataflow-network

@@ -1,0 +1,976 @@
+order_id,customer_id,product_id,quantity,unit_price,total_amount,order_date,payment_method,shipping_city,shipping_state,status,partner_source
+1ccce91a-4c89-5216-5a93-e34406d0166d,CUST_21905,PROD_0801,4,2456.01,9824.04,2023-11-13,pix,Gomes da Mata,DF,delivered,parceiro_b
+7ce0449f-a771-4d22-5518-5ece9ee09981,CUST_47663,PROD_0419,6,4185.19,25111.14,2023-11-13,debit_card,Sales,AL,delivered,parceiro_b
+d225e21e-a9e7-9acc-8c62-e33a39fd45d9,CUST_21873,PROD_2299,10,494.85,4948.5,2023-11-13,pix,Monteiro,MG,delivered,parceiro_b
+6fde6265-c55b-e051-ef10-895792a0de68,CUST_03348,PROD_4508,19,2689.34,51097.46,2023-11-13,credit_card,Souza do Norte,SP,delivered,parceiro_b
+98017710-533d-79a3-b3ca-e827a42dcee1,CUST_44118,PROD_4478,12,53.8,645.6,2023-11-13,debit_card,Leão,DF,shipped,parceiro_a
+9afa091a-68ff-958b-5363-59335a379dd1,CUST_30263,PROD_4957,4,1323.08,5292.32,2023-11-13,debit_card,Sampaio das Pedras,MG,delivered,parceiro_c
+a99e66da-6624-956a-eef3-f9cc97894346,CUST_48889,PROD_4015,11,1707.3,18780.3,2023-11-13,boleto,Siqueira de Albuquerque,MG,delivered,parceiro_b
+1b44147d-22a7-9864-d792-8300f97516c9,CUST_21357,PROD_2508,2,4519.17,9038.34,2023-11-13,credit_card,Cavalcanti de Goiás,PR,shipped,parceiro_b
+02f1ecae-978c-668f-24c9-6c35a71caec4,CUST_00981,PROD_1656,19,3009.9,57188.1,2023-11-13,credit_card,Garcia,SP,pending,parceiro_b
+73d2a1fe-cfc8-38ac-6eff-20e7e015471b,CUST_36176,PROD_0795,20,2343.68,46873.6,2023-11-13,boleto,da Mata,GO,shipped,parceiro_b
+871d5591-2859-061d-dfcf-91f9f368ad95,CUST_05738,PROD_0305,11,788.63,8674.93,2023-11-13,credit_card,Cavalcanti,RS,delivered,parceiro_a
+c8697c13-f0b5-d08b-49be-f099d4bb453c,CUST_29767,PROD_4870,14,4797.85,67169.9,2023-11-13,credit_card,Silveira dos Dourados,SC,shipped,parceiro_c
+22a6c0a3-99de-171b-c974-0b33b6303c3a,CUST_37675,PROD_2665,3,4307.25,12921.75,2023-11-13,boleto,Cunha,SP,delivered,parceiro_b
+d6f672af-005b-8e9c-f778-b5eccd003759,CUST_26298,PROD_1306,3,144.96,434.88,2023-11-13,pix,Monteiro da Praia,MG,shipped,parceiro_b
+a997492b-edc6-44a8-0d56-6e1b6a42af90,CUST_09401,PROD_4819,18,4727.4,85093.2,2023-11-13,pix,Lima,SP,delivered,parceiro_a
+d3ee3948-bc21-d55c-4083-40d2b64e29fd,CUST_41139,PROD_3501,11,1665.64,18322.04,2023-11-13,credit_card,Sá do Campo,SC,delivered,parceiro_c
+c6dc4cd1-4785-de3b-e9a5-8b5eec3505c7,CUST_19818,PROD_3582,3,3581.13,10743.39,2023-11-13,pix,Aparecida do Oeste,CE,delivered,parceiro_c
+c4e1c2eb-df15-95c6-8221-1208241dc632,CUST_41812,PROD_1820,13,1540.39,20025.07,2023-11-13,pix,Andrade da Praia,ES,pending,parceiro_c
+6df06298-2be5-617e-d659-6282e50a77f9,CUST_26611,PROD_1486,20,1921.47,38429.4,2023-11-13,boleto,Ribeiro dos Dourados,RJ,pending,parceiro_c
+05851a85-93ff-672a-2557-659495f10455,CUST_37806,PROD_3349,8,3891.2,31129.6,2023-11-13,pix,das Neves,SP,delivered,parceiro_c
+8e8676fc-c59c-8ae7-740c-165dd33faccd,CUST_10204,PROD_0583,20,601.34,12026.8,2023-11-13,pix,Moraes do Norte,MG,delivered,parceiro_c
+92efef14-a924-c457-ad9e-5e909b539641,CUST_23745,PROD_1807,7,1324.24,9269.68,2023-11-13,boleto,da Cunha,SP,pending,parceiro_c
+31adf41e-e4c0-b2c3-abc1-98dc574768ec,CUST_29313,PROD_3421,17,4786.4,81368.8,2023-11-13,debit_card,Cardoso de Pimenta,RS,delivered,parceiro_a
+d6f36cdd-e5ac-c664-50b4-dd2eb570ad9e,CUST_46013,PROD_4073,20,4077.64,81552.8,2023-11-13,pix,Machado das Pedras,RJ,delivered,parceiro_b
+ca089e23-ee18-fd31-4d0e-9723d609cd0d,CUST_31624,PROD_2870,4,780.83,3123.32,2023-11-13,debit_card,Nascimento,PA,delivered,parceiro_b
+6a284201-0ceb-8c9d-3d7f-f0b01d20e471,CUST_43101,PROD_4404,1,2895.84,2895.84,2023-11-13,debit_card,Cunha do Oeste,PR,delivered,parceiro_a
+c1e45656-b775-f763-ea40-def9a9bc9884,CUST_46551,PROD_1972,4,3892.8,15571.2,2023-11-13,boleto,Santos,MG,shipped,parceiro_b
+8dcedefc-7f2e-ca49-c1ad-f210ac001ac0,CUST_09449,PROD_3281,7,2602.56,18217.92,2023-11-13,pix,Porto,RS,delivered,parceiro_a
+4e30b58e-0515-7a80-36dd-0ebb09177d49,CUST_37429,PROD_1038,13,994.15,12923.95,2023-11-13,credit_card,Macedo de Minas,SP,delivered,parceiro_c
+40f95385-616e-e8e0-3a6b-e103fae15c07,CUST_37489,PROD_4280,5,4903.62,24518.1,2023-11-13,credit_card,Costa da Serra,PR,delivered,parceiro_b
+2e6672b7-6c89-37e3-f747-dc80fcafcd4c,CUST_17148,PROD_1388,8,3979.19,31833.52,2023-11-13,credit_card,Porto,PR,shipped,parceiro_a
+0497d8fc-df28-9caf-11e1-2ce7593419b9,CUST_43282,PROD_3201,5,4847.78,24238.9,2023-11-13,credit_card,Moura da Prata,SP,delivered,parceiro_a
+303a0bb2-fb2b-e38e-8b08-067903a99acf,CUST_00829,PROD_2005,6,1203.47,7220.82,2023-11-13,pix,Guerra,SP,delivered,parceiro_c
+bc475717-9118-5f9b-c92b-767a610d337f,CUST_24482,PROD_1841,15,3215.94,48239.1,2023-11-13,pix,Marques das Pedras,RS,delivered,parceiro_a
+d04da86d-eb9c-c264-abc4-e7101e463ea6,CUST_07481,PROD_4390,4,984.1,3936.4,2023-11-13,credit_card,Costa,DF,shipped,parceiro_c
+cc32a5bb-9280-5611-213d-eaf679fbb496,CUST_12442,PROD_4459,11,4256.47,46821.17,2023-11-13,pix,Costa da Praia,PA,delivered,parceiro_c
+6088f484-fd5a-dbc5-5f99-c5ce6a45910e,CUST_36031,PROD_3198,20,1681.42,33628.4,2023-11-13,credit_card,Pacheco,MG,delivered,parceiro_a
+9d701069-961b-2941-ff11-6f08bfd95103,CUST_37906,PROD_2159,14,1691.75,23684.5,2023-11-13,pix,Pires,PI,delivered,parceiro_b
+e65b8841-a0a0-50f9-0413-0f2edc928572,CUST_02900,PROD_1071,3,4149.86,12449.58,2023-11-13,debit_card,da Conceição de Sales,SP,delivered,parceiro_a
+2d8baf85-a32f-12f7-f33a-8e89a8f48af1,CUST_02717,PROD_4204,6,2512.28,15073.68,2023-11-13,credit_card,Camargo Paulista,PR,delivered,parceiro_c
+23924f74-249e-6464-a490-461115cf14f1,CUST_02450,PROD_2717,8,1873.17,14985.36,2023-11-13,pix,Costela,SC,delivered,parceiro_a
+fc924517-ab5f-9f25-b9c2-b7a6b146e1a3,CUST_20008,PROD_1675,9,2426.27,21836.43,2023-11-13,pix,da Conceição,MG,delivered,parceiro_b
+170d0009-bf27-eccb-13e3-bd7424f18739,CUST_15950,PROD_0680,15,1950.32,29254.8,2023-11-13,credit_card,Oliveira,RJ,shipped,parceiro_a
+637cfdb6-fd17-a2a1-ce2a-98db302b8444,CUST_47400,PROD_2871,11,1971.13,21682.43,2023-11-13,pix,da Mata,RN,delivered,parceiro_a
+4f87d498-8049-dc2c-bec0-6f9745121f3f,CUST_20523,PROD_0874,9,1355.1,12195.9,2023-11-13,debit_card,Caldeira,RJ,delivered,parceiro_a
+7d843c02-5b7f-ebb7-f48a-c7214c0794a0,CUST_13716,PROD_0334,17,2938.81,49959.77,2023-11-13,credit_card,Nogueira de Novais,SP,delivered,parceiro_b
+9d56d771-365e-b693-6560-d841b7e61feb,CUST_38533,PROD_4431,9,4059.54,36535.86,2023-11-13,pix,Farias,SP,delivered,parceiro_a
+0604bd03-3994-cd3f-ba22-e21406903ed1,CUST_17137,PROD_2997,11,1419.57,15615.27,2023-11-13,credit_card,Nogueira,CE,delivered,parceiro_a
+2eb5447b-1114-937f-ba74-6486af37fa43,CUST_25214,PROD_0168,10,674.66,6746.6,2023-11-13,credit_card,Viana da Prata,SP,shipped,parceiro_a
+d36b0ec5-c946-5ae1-6c9b-5fc5c9958203,CUST_11234,PROD_4129,17,4400.97,74816.49,2023-11-13,boleto,Ramos de Duarte,RS,shipped,parceiro_b
+11cb619f-30ff-738c-5497-59777389b697,CUST_38766,PROD_3034,19,4313.19,81950.61,2023-11-13,credit_card,Silva Alegre,CE,delivered,parceiro_c
+d70ab06a-3528-de4e-e397-febd329ccd8a,CUST_04521,PROD_4389,7,1943.33,13603.31,2023-11-13,credit_card,Ferreira da Mata,MG,shipped,parceiro_b
+fe49ccb2-f643-0d9a-b767-3a984cd8b40f,CUST_09952,PROD_0708,10,3730.35,37303.5,2023-11-13,credit_card,Marques da Prata,MG,delivered,parceiro_c
+b5585928-bc42-e5d8-5f2d-d32176aeeaee,CUST_24519,PROD_1517,12,3658.91,43906.92,2023-11-13,credit_card,Casa Grande de Aragão,PR,delivered,parceiro_b
+8bf68b2d-de6c-3bf8-c5bc-6a551054c7c1,CUST_05943,PROD_2022,19,1615.9,30702.1,2023-11-13,credit_card,Gomes de Alves,SP,delivered,parceiro_a
+5db75c87-c04b-0546-ec4d-409907892c8e,CUST_19561,PROD_1275,9,1898.88,17089.92,2023-11-13,credit_card,Castro de Goiás,PE,delivered,parceiro_a
+bfd30790-ff85-b8df-42bb-6f78d6a6f624,CUST_43652,PROD_2829,10,1072.34,10723.4,2023-11-13,pix,Fernandes das Pedras,PE,delivered,parceiro_c
+81beadf2-31c6-74c0-1442-5756b04d954c,CUST_19331,PROD_1160,9,3880.01,34920.09,2023-11-13,pix,Moura,BA,pending,parceiro_c
+d336972e-c304-a264-004d-88389c30e9bd,CUST_13821,PROD_4766,3,2208.93,6626.79,2023-11-13,debit_card,Brito das Flores,SC,delivered,parceiro_c
+ef95408c-a8c9-4537-2ff2-a447bca32053,CUST_07806,PROD_4981,6,2638.43,15830.58,2023-11-13,boleto,Alves,CE,shipped,parceiro_a
+4edc85b9-ccd2-2575-c22e-71c6108d67e5,CUST_02223,PROD_0191,6,2744.65,16467.9,2023-11-13,credit_card,Brito do Oeste,MG,delivered,parceiro_b
+9b9eadb2-31f2-eacd-e66c-e61927b1e3c9,CUST_44692,PROD_1932,5,3743.22,18716.1,2023-11-13,pix,Silva da Praia,SP,delivered,parceiro_b
+e0839123-a2ff-84ef-8f51-a02c7a636673,CUST_10593,PROD_1736,4,1480.13,5920.52,2023-11-13,credit_card,Andrade Alegre,SP,shipped,parceiro_c
+b01763ab-5bc4-929e-b62c-d669563a9bf5,CUST_04563,PROD_0438,8,4939.46,39515.68,2023-11-13,debit_card,Pacheco,RS,shipped,parceiro_a
+ab33806d-393f-6a9a-6a02-aaaa29eaf9dd,CUST_10802,PROD_3781,19,2807.78,53347.82,2023-11-13,credit_card,Fonseca,AL,pending,parceiro_b
+4036cb04-9f3f-e775-bfb4-e1a7b5401a2b,CUST_20475,PROD_0270,18,4993.54,89883.72,2023-11-13,credit_card,Pacheco do Amparo,RN,delivered,parceiro_a
+b6389433-d177-57f3-20a9-50cb40ebbbda,CUST_38973,PROD_1813,9,4767.32,42905.88,2023-11-13,credit_card,Sampaio do Norte,RS,delivered,parceiro_b
+bb172d27-43b0-8d69-0768-b325369d2471,CUST_15277,PROD_1877,9,530.66,4775.94,2023-11-13,debit_card,Pastor dos Dourados,SP,delivered,parceiro_c
+4908934e-e253-0145-3264-1cc625d00eb6,CUST_23794,PROD_3105,5,4140.28,20701.4,2023-11-13,boleto,Rios,SP,delivered,parceiro_a
+1d9a07a3-f2eb-90bf-01dc-107d79e46306,CUST_22775,PROD_0737,17,1825.72,31037.24,2023-11-13,credit_card,Nunes,RJ,delivered,parceiro_a
+fc83ff32-18f6-7d02-d6c2-b1495334393c,CUST_12635,PROD_0037,11,551.74,6069.14,2023-11-13,pix,Cassiano Paulista,SC,pending,parceiro_b
+9aae7a7d-14a6-8ea9-98a0-8d000c72911c,CUST_22624,PROD_4976,7,3665.2,25656.4,2023-11-13,credit_card,Araújo do Sul,RJ,delivered,parceiro_b
+90872603-99d1-fa78-295f-072e28075039,CUST_02931,PROD_4170,13,4698.48,61080.24,2023-11-13,debit_card,Aragão,CE,delivered,parceiro_b
+171acf3f-0680-5f88-f75d-039dfcc2da2a,CUST_16198,PROD_4745,15,437.11,6556.65,2023-11-13,pix,Sousa,MT,pending,parceiro_b
+df3414c1-8877-10fd-b97f-621b17bf05cb,CUST_40389,PROD_3103,4,2299.35,9197.4,2023-11-13,debit_card,Cunha,BA,delivered,parceiro_a
+4f2f12c2-096b-863e-7736-6c299531fc74,CUST_40243,PROD_4210,10,2922.55,29225.5,2023-11-13,credit_card,Andrade Verde,MG,delivered,parceiro_a
+dda3538f-66bd-7e3e-a6db-fe1a12a1b611,CUST_42994,PROD_0003,15,4020.3,60304.5,2023-11-13,credit_card,Carvalho,RS,delivered,parceiro_b
+c4de4b13-a004-b894-3438-0b7440c2b519,CUST_23171,PROD_4306,10,1516.58,15165.8,2023-11-13,debit_card,da Mata,RS,delivered,parceiro_a
+b95370d6-50fe-aeeb-57e6-fedd73d147cb,CUST_38699,PROD_2426,3,4300.18,12900.54,2023-11-13,pix,Fonseca Alegre,SP,shipped,parceiro_a
+d6723935-5055-0dd3-b4b9-3a6a5be89aff,CUST_29239,PROD_1902,16,4770.65,76330.4,2023-11-13,debit_card,Almeida,SP,delivered,parceiro_b
+4fca479a-a391-92c3-2b4f-b58efb660439,CUST_18009,PROD_4297,20,3933.58,78671.6,2023-11-13,pix,da Costa da Mata,CE,cancelled,parceiro_a
+4b8a7bb8-b88d-1393-d21d-7d82acc3d4dc,CUST_49399,PROD_1259,7,906.72,6347.04,2023-11-13,credit_card,Macedo Alegre,SP,delivered,parceiro_c
+756e5d36-f3f8-ead1-0c37-0bee9199e6cd,CUST_23399,PROD_2680,4,1822.55,7290.2,2023-11-13,debit_card,Nogueira,ES,pending,parceiro_b
+dac32239-4e88-f421-2f86-ab6dda04e2b8,CUST_28607,PROD_1925,19,2764.4,52523.6,2023-11-13,boleto,Marques,SP,delivered,parceiro_a
+62b1aa41-f3ac-75a6-4122-dd76241f9111,CUST_25405,PROD_0855,9,959.34,8634.06,2023-11-13,pix,Fogaça dos Dourados,SP,cancelled,parceiro_c
+14f0a4a9-afd7-b6da-dca3-453e212e800c,CUST_31577,PROD_3798,11,1129.13,12420.43,2023-11-13,debit_card,Moreira,PE,pending,parceiro_a
+bec316ae-f112-3045-e39b-d109c5ded719,CUST_32998,PROD_0125,3,2280.51,6841.53,2023-11-13,debit_card,Moura,SC,delivered,parceiro_c
+f6045974-f00e-0a36-5a91-12328bf2eda4,CUST_38370,PROD_2658,5,476.31,2381.55,2023-11-13,pix,Nunes do Campo,AL,delivered,parceiro_a
+081c3931-c586-df18-c3dd-08199bc712ac,CUST_10563,PROD_0975,4,531.3,2125.2,2023-11-13,pix,Santos,PE,delivered,parceiro_c
+eadd9870-796d-932c-1751-fd059f756a1f,CUST_00843,PROD_1735,18,1418.85,25539.3,2023-11-13,boleto,Guerra,BA,delivered,parceiro_a
+2ab86d71-da1c-7546-1bd7-a35a6e55c9db,CUST_18896,PROD_1206,15,4284.87,64273.05,2023-11-13,boleto,da Mota Grande,SP,shipped,parceiro_a
+bd3c1496-8456-44a6-c8e6-4cffb157ae69,CUST_41705,PROD_2638,6,503.98,3023.88,2023-11-13,credit_card,Pastor de Lima,PE,delivered,parceiro_a
+66f02157-7ea3-de7c-3062-58b0b25d1a2f,CUST_18267,PROD_2530,19,3994.29,75891.51,2023-11-13,credit_card,Rocha dos Dourados,RO,delivered,parceiro_a
+567382c9-ce1e-5117-4268-2bcf0eb4941c,CUST_01918,PROD_4422,15,3873.33,58099.95,2023-11-13,credit_card,Fernandes,SP,pending,parceiro_b
+da8569bc-4c81-42e4-15ab-11546a32853b,CUST_22988,PROD_3912,10,3725.83,37258.3,2023-11-13,debit_card,Brito das Pedras,RJ,delivered,parceiro_b
+ffb6c8f0-a763-3f37-e061-4327c7c49469,CUST_33055,PROD_0338,19,3255.15,61847.85,2023-11-13,debit_card,Vargas de Goiás,SP,cancelled,parceiro_b
+f7d4bfca-66c2-2246-799f-661e0a470706,CUST_01960,PROD_4405,17,615.47,10462.99,2023-11-13,pix,Souza,MG,pending,parceiro_c
+95b47bdc-6f3f-116f-5a88-e4bd048b2448,CUST_10113,PROD_1228,10,741.47,7414.7,2023-11-13,debit_card,Moraes do Sul,PR,delivered,parceiro_b
+7952ad56-d69b-bbbb-b9f8-5fcddd979492,CUST_23903,PROD_3619,2,2432.94,4865.88,2023-11-13,pix,Lima,SC,shipped,parceiro_b
+1f2592f6-30ee-9075-177e-650014617822,CUST_33721,PROD_3631,14,4592.76,64298.64,2023-11-13,pix,Nunes de Goiás,AM,delivered,parceiro_a
+3d0d1a99-9ca8-14ed-bacc-f92ccdbc42d5,CUST_48658,PROD_0146,11,4829.38,53123.18,2023-11-13,boleto,Novais,SC,delivered,parceiro_b
+2297fc89-6242-24af-8ce4-6ceb6d3cb8f4,CUST_35254,PROD_0600,5,2580.29,12901.45,2023-11-13,credit_card,Santos,CE,delivered,parceiro_a
+2e8ef658-f6db-b31c-7a8a-39ba610e4382,CUST_40246,PROD_3768,13,4981.74,64762.62,2023-11-13,pix,Correia da Prata,MG,delivered,parceiro_a
+757398de-894d-a282-e5b9-07135d888279,CUST_45719,PROD_3227,15,4846.79,72701.85,2023-11-13,pix,Cavalcanti,BA,delivered,parceiro_a
+f0bdb374-0c1f-9b31-dc3f-c95f4f9ef8af,CUST_04292,PROD_2726,18,1954.82,35186.76,2023-11-13,boleto,Nogueira,DF,cancelled,parceiro_c
+77978efe-f66e-ecea-b88f-d78c7a14a57a,CUST_46877,PROD_0116,12,3321.27,39855.24,2023-11-13,debit_card,Casa Grande Alegre,AC,delivered,parceiro_a
+f41f42a0-bba0-0013-6496-f32fa19bc013,CUST_46042,PROD_3041,13,2895.88,37646.44,2023-11-13,credit_card,Duarte,SC,delivered,parceiro_a
+95fe6176-9a93-d586-592e-631f25e0587f,CUST_30914,PROD_3182,1,797.36,797.36,2023-11-13,credit_card,Santos de Goiás,AM,delivered,parceiro_a
+a04f1c9c-0c4c-2ced-e069-d828ee319bed,CUST_19542,PROD_1410,14,1041.6,14582.4,2023-11-13,boleto,da Conceição,SP,shipped,parceiro_b
+f5ef002a-c5de-e4dc-99d8-047c895be949,CUST_17492,PROD_0321,1,2674.19,2674.19,2023-11-13,boleto,Moraes,SP,shipped,parceiro_b
+299c7ebf-5e7e-0925-38f4-0a3b0b17f553,CUST_35244,PROD_2467,10,2202.36,22023.6,2023-11-13,credit_card,Mendes Grande,PR,pending,parceiro_a
+29a49656-1c5f-9447-e59e-260184edb3e1,CUST_05693,PROD_3062,18,973.85,17529.3,2023-11-13,credit_card,Costela de Sampaio,MG,delivered,parceiro_a
+265fe0e2-6511-7ed9-bffb-600ec7835c3a,CUST_38309,PROD_4520,19,269.5,5120.5,2023-11-13,pix,Rodrigues Verde,DF,cancelled,parceiro_c
+fe99df76-5f54-6810-3f49-4fd9b31c264f,CUST_36686,PROD_3920,17,2966.17,50424.89,2023-11-13,boleto,Vasconcelos Alegre,DF,delivered,parceiro_a
+22a9bc3a-89f2-1a40-b971-9946bf76a54a,CUST_07851,PROD_2018,3,76.07,228.21,2023-11-13,credit_card,Cavalcanti do Sul,SP,delivered,parceiro_a
+c2662249-a898-9fc6-951d-f24d18d91699,CUST_38949,PROD_0575,12,2959.84,35518.08,2023-11-13,pix,da Costa de Rios,ES,cancelled,parceiro_a
+3cae3596-79de-2d4a-4bbd-ec550915658b,CUST_26038,PROD_0055,18,2529.53,45531.54,2023-11-13,pix,Correia,SE,delivered,parceiro_a
+2a2458cc-191a-25e8-4e31-f2e48cf42a0c,CUST_21626,PROD_4633,7,3393.75,23756.25,2023-11-13,credit_card,Cavalcanti de Gonçalves,PR,delivered,parceiro_b
+9a10f7a4-c28c-69b5-4a69-8e275f67723a,CUST_09701,PROD_3946,15,4277.83,64167.45,2023-11-13,debit_card,Silveira da Mata,SP,delivered,parceiro_a
+e357b25a-d4eb-2c17-aa74-aa6bff1b8346,CUST_23464,PROD_4472,8,2022.22,16177.76,2023-11-13,pix,Moraes,BA,cancelled,parceiro_a
+f205d6c2-0528-8d5a-f17d-0d6626e15660,CUST_46100,PROD_2958,14,879.32,12310.48,2023-11-13,credit_card,Moreira Alegre,DF,delivered,parceiro_c
+b0457007-6140-f06d-b540-e141e1792d87,CUST_13114,PROD_0974,15,342.38,5135.7,2023-11-13,credit_card,Monteiro,GO,delivered,parceiro_a
+157fe038-4114-2f18-a68e-22cd5cf22f59,CUST_34280,PROD_3367,12,4964.93,59579.16,2023-11-13,debit_card,da Costa,MG,delivered,parceiro_b
+7ad24cb4-c3cd-6b8e-c6f4-d926757306c4,CUST_14191,PROD_1391,15,3530.93,52963.95,2023-11-13,debit_card,Almeida da Serra,PA,cancelled,parceiro_b
+fec7af67-0110-0651-156a-4782f3dac3d4,CUST_07545,PROD_4976,3,132.16,396.48,2023-11-13,credit_card,Marques,MS,delivered,parceiro_a
+59736c6d-f199-98f8-d196-93b647932cf7,CUST_44657,PROD_1666,14,3333.84,46673.76,2023-11-13,debit_card,da Rocha,PR,delivered,parceiro_a
+32bcd8ac-ede8-daee-0d0a-44e43c44062f,CUST_38389,PROD_0536,14,3095.37,43335.18,2023-11-13,debit_card,Silveira,BA,delivered,parceiro_a
+3a18f6ac-1cc5-76c9-2754-4ea682ee4c51,CUST_35132,PROD_0304,19,4865.46,92443.74,2023-11-13,boleto,Lima,SP,shipped,parceiro_b
+daed34c3-9e33-355d-fa1a-70fb9da47ac8,CUST_49367,PROD_0474,17,2315.07,39356.19,2023-11-13,debit_card,Cardoso,RJ,delivered,parceiro_a
+ce1b4120-5917-7af5-aefc-386d444a1a00,CUST_46035,PROD_1939,2,139.31,278.62,2023-11-13,boleto,Campos da Mata,MG,delivered,parceiro_c
+40cb3a6a-7d74-9710-461a-33d9637e95d0,CUST_16655,PROD_0578,4,875.84,3503.36,2023-11-13,credit_card,da Costa,RS,delivered,parceiro_c
+668192ba-8a53-21a0-633c-5358efc95a24,CUST_25638,PROD_3551,15,238.37,3575.55,2023-11-13,pix,Albuquerque,SP,delivered,parceiro_b
+632dfce3-06b9-bff3-46bf-e27499497d5b,CUST_18490,PROD_2493,16,319.15,5106.4,2023-11-13,credit_card,Câmara,DF,shipped,parceiro_b
+a6b00cc2-ff72-9cac-6a0b-99a4fda2d9ad,CUST_05742,PROD_3346,14,3421.01,47894.14,2023-11-13,debit_card,Porto de da Paz,SC,delivered,parceiro_c
+c285c06f-b348-8330-1b9a-7f15eef8ad21,CUST_49191,PROD_2683,2,605.34,1210.68,2023-11-13,debit_card,Gonçalves,SP,delivered,parceiro_b
+fa358a0a-0102-2dd2-f7b0-740b532e4b53,CUST_01118,PROD_3002,4,1347.06,5388.24,2023-11-13,credit_card,Siqueira,SC,delivered,parceiro_a
+5b324aad-52c4-644c-aa87-0401c3813a45,CUST_36661,PROD_3585,7,2462.55,17237.85,2023-11-13,debit_card,Nogueira Paulista,SP,delivered,parceiro_b
+eb36bf67-f8a8-65bc-fec9-0dbf2907a3d0,CUST_28573,PROD_1870,13,4671.5,60729.5,2023-11-13,boleto,Mendes da Mata,RS,delivered,parceiro_c
+1655b266-c50e-f315-af4e-b9949c2461fc,CUST_33177,PROD_0712,9,3727.95,33551.55,2023-11-13,debit_card,Camargo,MG,delivered,parceiro_a
+adf711b9-fc46-7d3f-5944-4da3c2fd88d6,CUST_23698,PROD_3133,19,1762.41,33485.79,2023-11-13,pix,Pereira,SC,pending,parceiro_a
+e858cc25-0c6b-c3e6-d85f-9276a14116b0,CUST_09024,PROD_1030,10,3467.33,34673.3,2023-11-13,credit_card,Casa Grande,SP,delivered,parceiro_b
+710e37ce-6777-398c-c453-42999388b237,CUST_22561,PROD_2457,15,689.43,10341.45,2023-11-13,pix,Rocha de Minas,PA,delivered,parceiro_c
+c9c79db1-f78f-df6d-2152-06a6edf764d5,CUST_39740,PROD_1733,15,2606.28,39094.2,2023-11-13,pix,Barros,GO,cancelled,parceiro_b
+081f490a-7276-01ea-7c95-13149fc6921f,CUST_48024,PROD_2710,19,864.34,16422.46,2023-11-13,credit_card,Machado de Minas,SP,shipped,parceiro_a
+5eed5c2e-47aa-de64-9413-b9aadaa689f8,CUST_31439,PROD_4464,8,3860.42,30883.36,2023-11-13,credit_card,Aragão do Oeste,PE,shipped,parceiro_c
+baa77dbb-a6cf-b02f-f69f-941d37aae688,CUST_39127,PROD_3858,19,3641.46,69187.74,2023-11-13,debit_card,da Cruz dos Dourados,SP,delivered,parceiro_b
+3bb1cbc5-8dc8-2776-da19-8d09c393959e,CUST_24197,PROD_1692,8,4979.67,39837.36,2023-11-13,credit_card,Novaes,SP,delivered,parceiro_b
+b07bc5d4-3677-bbff-d99c-03d427cc0edf,CUST_42137,PROD_4794,10,2891.18,28911.8,2023-11-13,pix,Silveira,PA,cancelled,parceiro_a
+31f212f6-38ab-52e0-cd8b-3c7ef3f5f70b,CUST_48094,PROD_1787,18,16.81,302.58,2023-11-13,boleto,Costela das Pedras,RS,delivered,parceiro_a
+55535a20-5362-fe2b-a514-9764ef465b60,CUST_10821,PROD_3256,7,3279.71,22957.97,2023-11-13,debit_card,Azevedo Verde,SC,delivered,parceiro_a
+696a2f80-25cb-8d43-5278-eb768478c2b5,CUST_35045,PROD_1373,19,3688.22,70076.18,2023-11-13,debit_card,Sampaio,MT,pending,parceiro_b
+d49d098b-7bc1-4d2a-1933-acb0d18194e3,CUST_38496,PROD_3670,16,4230.04,67680.64,2023-11-13,credit_card,Rodrigues da Mata,BA,delivered,parceiro_c
+d46be730-6473-0464-e7f3-7cd2bb1c26c4,CUST_27018,PROD_4416,8,4492.33,35938.64,2023-11-13,debit_card,Andrade,PR,pending,parceiro_b
+32366e1f-6eb7-ca22-5a4f-5fa1a17d2a67,CUST_29414,PROD_0803,1,1340.05,1340.05,2023-11-13,credit_card,Vieira,SP,delivered,parceiro_a
+863b2aff-0ad8-202d-e546-8ac886842824,CUST_32007,PROD_0717,8,2790.71,22325.68,2023-11-13,credit_card,Silva Verde,MG,delivered,parceiro_a
+c02c63ad-d89e-7897-ca00-e4c68c192cdb,CUST_35262,PROD_1533,6,1897.87,11387.22,2023-11-13,credit_card,Sampaio de Brito,RO,pending,parceiro_a
+06a39a4f-0d8a-537b-c58d-15c788bd1659,CUST_11091,PROD_3595,4,107.6,430.4,2023-11-13,pix,da Rosa,MT,pending,parceiro_a
+5492f8b6-97df-003c-b502-19b7b611e658,CUST_46461,PROD_3440,15,3953.58,59303.7,2023-11-13,credit_card,Siqueira do Sul,GO,shipped,parceiro_c
+4653a76f-1bd0-7863-999a-216b4f7d896a,CUST_16843,PROD_3652,7,337.82,2364.74,2023-11-13,credit_card,Nunes,RO,delivered,parceiro_c
+2c34cc81-b0c0-4d46-5672-8e42053eb4d4,CUST_49630,PROD_0534,5,2956.84,14784.2,2023-11-13,boleto,Nascimento,BA,pending,parceiro_c
+e33602fb-650a-159a-0976-b4c682f52124,CUST_47188,PROD_1063,9,3576.36,32187.24,2023-11-13,boleto,Vargas,PI,pending,parceiro_c
+12eb7517-7c6a-adb2-0678-70a419221a5c,CUST_24968,PROD_3636,13,3566.73,46367.49,2023-11-13,debit_card,Albuquerque de Teixeira,SP,shipped,parceiro_a
+4643ef31-884e-0c4a-293b-c8f8f9024406,CUST_22511,PROD_2442,3,4010.02,12030.06,2023-11-13,debit_card,Pires,RJ,delivered,parceiro_a
+0cc820ac-44d7-8c93-484e-690287603349,CUST_45316,PROD_0646,10,4595.85,45958.5,2023-11-13,pix,Caldeira da Mata,RS,shipped,parceiro_b
+f80a1467-2bca-f4b0-de76-0a0cf901d7ef,CUST_45728,PROD_1336,4,3313.3,13253.2,2023-11-13,credit_card,Carvalho de Nascimento,RJ,pending,parceiro_c
+a9f4ccb2-0763-b2ff-0fe0-2566974e4796,CUST_48695,PROD_3615,3,303.99,911.97,2023-11-13,debit_card,Marques,SP,delivered,parceiro_a
+bba9bf4b-792b-b48f-14d4-b8792562bee7,CUST_26010,PROD_3721,6,2105.9,12635.4,2023-11-13,pix,Freitas do Sul,SC,delivered,parceiro_a
+6061f300-f363-e719-230c-4563c3bb1f7c,CUST_00692,PROD_4054,13,3295.65,42843.45,2023-11-13,credit_card,Pereira das Flores,MG,pending,parceiro_b
+a6166d2a-95f0-76fa-676e-acba174f10b8,CUST_44658,PROD_4050,7,4004.25,28029.75,2023-11-13,credit_card,Nunes da Mata,BA,pending,parceiro_a
+9bfbfc7b-dcf5-ae26-cf90-bd95561f68db,CUST_06473,PROD_4829,8,1048.73,8389.84,2023-11-13,pix,Porto do Campo,PA,delivered,parceiro_a
+8be1dadd-addc-e172-5198-3b10b445df2e,CUST_18073,PROD_4793,14,2018.64,28260.96,2023-11-13,pix,Mendonça,MA,shipped,parceiro_b
+2528c525-99d9-5c7f-185d-9597a1e1f1ca,CUST_38003,PROD_2075,12,1291.02,15492.24,2023-11-13,boleto,Castro de Fogaça,SP,delivered,parceiro_a
+35f7d14b-59dc-a0b5-7e7e-bb35d335a128,CUST_11857,PROD_3878,18,1931.71,34770.78,2023-11-13,boleto,Rios do Amparo,SC,delivered,parceiro_c
+35ee018a-1cc8-a652-19e2-17cbb7afb256,CUST_24472,PROD_3038,4,706.64,2826.56,2023-11-13,credit_card,Cavalcanti do Oeste,SP,delivered,parceiro_b
+e8d43433-74fb-5f19-c73b-0f18c4c6e10c,CUST_20484,PROD_3497,17,1063.47,18078.99,2023-11-13,credit_card,Rios das Pedras,SP,delivered,parceiro_b
+5593ac22-63d5-ab95-ffbd-0c084f55419f,CUST_28996,PROD_4490,17,2109.91,35868.47,2023-11-13,debit_card,Casa Grande,PR,delivered,parceiro_a
+fd6551a3-b489-7a96-9269-801016b51b5c,CUST_47556,PROD_3453,5,348.29,1741.45,2023-11-13,pix,Casa Grande,SP,delivered,parceiro_a
+39bfead5-b42d-8012-3353-0494ae7be901,CUST_04332,PROD_4509,14,590.74,8270.36,2023-11-13,debit_card,Castro,SE,delivered,parceiro_a
+84c541ce-3261-998b-8c9b-ff5429b60b8e,CUST_24170,PROD_1456,7,1953.04,13671.28,2023-11-13,debit_card,Campos,SP,delivered,parceiro_b
+f17be56e-cf1c-0959-7b01-00ad41880de2,CUST_29414,PROD_1614,15,406.08,6091.2,2023-11-13,pix,Castro de Rios,GO,delivered,parceiro_c
+335ee779-1e90-1ffc-8d11-1d1aa5135304,CUST_10349,PROD_0497,15,1871.77,28076.55,2023-11-13,credit_card,Câmara Grande,GO,shipped,parceiro_b
+a33ae043-9cd7-bf69-0f4f-0dc1deb6f247,CUST_21707,PROD_3463,13,1322.12,17187.56,2023-11-13,credit_card,Mendes,GO,shipped,parceiro_b
+71636a2d-40c2-dd4b-4ac2-8e780ea96177,CUST_35162,PROD_2694,10,2678.65,26786.5,2023-11-13,debit_card,da Paz,SP,delivered,parceiro_c
+8013cadf-39ac-862b-aa89-397ea3d71f85,CUST_07529,PROD_3066,8,4654.96,37239.68,2023-11-13,pix,da Conceição do Amparo,MG,pending,parceiro_a
+12db3025-d0d9-5b3c-7333-4b727985cd44,CUST_49248,PROD_2532,16,3170.89,50734.24,2023-11-13,credit_card,Camargo Grande,SP,shipped,parceiro_a
+8601a0ad-be9d-5a94-afc6-4e7b5e57c95d,CUST_26532,PROD_0536,2,742.82,1485.64,2023-11-13,credit_card,Pacheco,SP,shipped,parceiro_a
+332c74a7-c8ba-b566-c8d4-93586e71cb47,CUST_30342,PROD_3771,9,3554.26,31988.34,2023-11-13,debit_card,Nogueira do Sul,MG,delivered,parceiro_a
+e830402f-99f6-4586-d376-54c4a33ceda0,CUST_47198,PROD_0432,16,4979.39,79670.24,2023-11-13,debit_card,Correia da Mata,MG,shipped,parceiro_c
+6c82b0cb-4c30-0c38-dd92-2dddd295454e,CUST_10061,PROD_2168,5,3062.32,15311.6,2023-11-13,debit_card,Moraes do Galho,SP,delivered,parceiro_a
+c2d963e5-22f5-bc3b-0d94-e8969c5f2d3b,CUST_09265,PROD_1716,18,1331.24,23962.32,2023-11-13,credit_card,da Mata de Oliveira,GO,delivered,parceiro_b
+32404871-1548-565f-3dc1-e9de65157686,CUST_44404,PROD_0852,2,270.63,541.26,2023-11-13,debit_card,Abreu,MT,delivered,parceiro_b
+03f51e7d-2d31-a192-4695-736920870ffc,CUST_36665,PROD_1863,7,1731.06,12117.42,2023-11-13,debit_card,Abreu,SP,cancelled,parceiro_a
+080515a5-b9e5-c8ef-367b-62b57f5a433c,CUST_10440,PROD_4780,3,3923.98,11771.94,2023-11-13,credit_card,Cavalcante,MG,cancelled,parceiro_a
+3f6eb7af-2513-f184-6c26-50eef798437d,CUST_40346,PROD_2944,7,3098.27,21687.89,2023-11-13,debit_card,Azevedo Grande,PR,delivered,parceiro_a
+0ca021eb-0cc9-6388-7a42-1a2255d60ba0,CUST_27028,PROD_3850,9,3686.52,33178.68,2023-11-13,credit_card,Abreu do Campo,PA,delivered,parceiro_b
+0c5b97dc-19cf-acc9-f1cc-ed8b5a904b1c,CUST_25421,PROD_0909,7,4102.05,28714.35,2023-11-13,credit_card,Rodrigues,MG,delivered,parceiro_c
+95e4412b-8e8d-db57-2657-372da061fcd2,CUST_11081,PROD_4190,5,2907.9,14539.5,2023-11-13,debit_card,Carvalho,RJ,delivered,parceiro_b
+cc1b621e-d277-2e42-d7f1-091c48d2ccd9,CUST_01492,PROD_0039,20,4592.51,91850.2,2023-11-13,debit_card,Casa Grande,GO,cancelled,parceiro_c
+4823f0c2-2714-523e-38f6-d42d7e2e02b6,CUST_19088,PROD_3452,13,3864.93,50244.09,2023-11-13,credit_card,Ferreira dos Dourados,BA,cancelled,parceiro_a
+350e18c1-fa38-3598-c3cb-0f3d18f2a7ff,CUST_06847,PROD_4582,2,2255.77,4511.54,2023-11-13,pix,Costa,MG,delivered,parceiro_a
+b72f221c-a8b5-7422-23d0-6356c25baa82,CUST_20264,PROD_1127,3,4307.9,12923.7,2023-11-13,credit_card,da Costa,PR,delivered,parceiro_a
+55a6c3fe-ffb6-671a-25d5-bc8905295c94,CUST_33961,PROD_0193,17,3038.95,51662.15,2023-11-13,debit_card,Rocha das Pedras,SP,shipped,parceiro_c
+5b9564a3-53d6-73ed-4e17-9dc5322c5bd2,CUST_32985,PROD_2847,20,699.99,13999.8,2023-11-13,boleto,Caldeira de Lima,SC,delivered,parceiro_a
+625e9c30-7eb0-5963-ca49-5a2ea335ebb3,CUST_13099,PROD_4553,14,3151.29,44118.06,2023-11-13,debit_card,Pastor do Amparo,RJ,delivered,parceiro_b
+e6c33e6e-17c6-56ad-1ba4-0dbc1da3aa0b,CUST_38084,PROD_4517,14,1148.72,16082.08,2023-11-13,credit_card,Ribeiro da Prata,MA,delivered,parceiro_a
+a94fb24d-e04b-fdea-1da7-dcba8c7479ce,CUST_33480,PROD_3071,20,507.45,10149.0,2023-11-13,credit_card,Vieira,RJ,delivered,parceiro_a
+240a4331-8d99-a657-fe1f-8abc8a6612b2,CUST_23051,PROD_4537,4,1034.82,4139.28,2023-11-13,pix,Sá da Mata,CE,cancelled,parceiro_c
+67004ea1-0083-61b7-9e46-56439e762b85,CUST_12114,PROD_4190,3,1790.25,5370.75,2023-11-13,pix,Cavalcanti de Rocha,RS,cancelled,parceiro_b
+044bf650-089c-bf04-ee13-a04781d5919f,CUST_17019,PROD_1265,9,2942.5,26482.5,2023-11-13,boleto,Azevedo,MG,delivered,parceiro_b
+5f90abc0-e40b-35d9-7b7e-e59227d98e2a,CUST_47415,PROD_3332,18,1892.45,34064.1,2023-11-13,debit_card,Sales Alegre,ES,delivered,parceiro_c
+3adeabf6-cbeb-e6c4-ef72-23ef234adadd,CUST_28884,PROD_3960,14,1819.5,25473.0,2023-11-13,credit_card,Costela Paulista,PA,delivered,parceiro_c
+92cf0f6e-39a7-99ee-2491-a9233db5814a,CUST_07068,PROD_4522,3,3680.7,11042.1,2023-11-13,boleto,Ramos,RJ,delivered,parceiro_b
+712b3848-605c-f256-a5d1-41b5cb543ece,CUST_06516,PROD_4460,19,1829.96,34769.24,2023-11-13,pix,Andrade,PA,delivered,parceiro_c
+3f3261b7-ad84-48b3-e32d-a433d3e37872,CUST_00090,PROD_2331,11,3382.32,37205.52,2023-11-13,debit_card,da Paz da Praia,SP,shipped,parceiro_c
+bd8da561-4851-e2cb-3347-e2105ff305be,CUST_10878,PROD_1198,7,3368.47,23579.29,2023-11-13,credit_card,Câmara,SP,delivered,parceiro_c
+a5aff2c5-0c30-c2a1-fa6a-7933b09c987e,CUST_25662,PROD_0872,10,4774.69,47746.9,2023-11-13,pix,Cavalcante,RS,delivered,parceiro_a
+ff421fa1-bc67-344c-f5d2-7bd1288577f0,CUST_45445,PROD_3637,3,4322.85,12968.55,2023-11-13,boleto,Marques,SP,delivered,parceiro_a
+0cb6529c-85b0-d88c-c2d5-69a131af1d9b,CUST_22265,PROD_1838,2,4529.13,9058.26,2023-11-13,credit_card,Gonçalves,MG,delivered,parceiro_a
+178232a7-af96-2c75-b343-1fc1a3a2fa79,CUST_27102,PROD_1916,2,3697.75,7395.5,2023-11-13,debit_card,Silveira de Souza,RS,shipped,parceiro_b
+c4e1a782-076b-62d2-8e11-3404601e8822,CUST_20811,PROD_0145,17,3027.08,51460.36,2023-11-13,credit_card,Albuquerque,BA,delivered,parceiro_b
+6614b9b6-a85c-7d19-e9e0-30dcba2c1bc6,CUST_25214,PROD_3777,7,2968.41,20778.87,2023-11-13,credit_card,Nascimento,ES,shipped,parceiro_a
+fc7c0a59-6bd4-4dd7-c1d1-78b1f14eeed6,CUST_06160,PROD_2787,7,1525.63,10679.41,2023-11-13,pix,Sousa de Farias,MT,delivered,parceiro_a
+b239b695-43d7-99b1-b8bd-a29e31ab0547,CUST_28092,PROD_0693,20,2666.86,53337.2,2023-11-13,boleto,Souza,PR,delivered,parceiro_c
+339513a1-e9de-c75b-c128-26515bf74f03,CUST_18277,PROD_0224,6,2369.13,14214.78,2023-11-13,pix,Rezende de da Paz,PR,delivered,parceiro_c
+82de2239-89b6-64f0-0bc5-84795dae476b,CUST_36677,PROD_1046,3,4872.91,14618.73,2023-11-13,boleto,Nogueira,SP,cancelled,parceiro_b
+94b293a0-528b-aea6-0cef-e608e8dc9b35,CUST_13841,PROD_4464,14,3630.11,50821.54,2023-11-13,pix,Casa Grande,DF,delivered,parceiro_b
+0bdcb154-27c4-fafa-0942-83ff600a841c,CUST_21360,PROD_0700,7,2484.73,17393.11,2023-11-13,pix,Marques Verde,ES,pending,parceiro_b
+8be5a769-673e-706f-2e14-72a810ac060c,CUST_34914,PROD_4596,4,4643.78,18575.12,2023-11-13,credit_card,Moreira Grande,PR,delivered,parceiro_b
+2416f601-1854-78ae-6c9c-e0833cd867ed,CUST_02187,PROD_2795,13,515.61,6702.93,2023-11-13,boleto,Rezende de Minas,RJ,shipped,parceiro_a
+1db70b39-e125-a539-42ad-cce6d323807b,CUST_01703,PROD_0253,11,4208.15,46289.65,2023-11-13,credit_card,Cunha,CE,delivered,parceiro_b
+16add69a-8811-7450-8341-cc1fc3fc25d1,CUST_09075,PROD_1694,10,4558.54,45585.4,2023-11-13,pix,Pastor das Flores,MS,delivered,parceiro_c
+3ba7c9d4-282c-4066-b041-86592c552cf9,CUST_45546,PROD_1677,9,2302.32,20720.88,2023-11-13,boleto,Fogaça de Campos,GO,shipped,parceiro_a
+84d79889-948e-459a-aaec-2225aaf271f3,CUST_06010,PROD_4385,11,4384.19,48226.09,2023-11-13,debit_card,Nascimento,SC,delivered,parceiro_a
+ae3a1415-e1a3-209d-a8e3-70e6d8df64d2,CUST_48228,PROD_0582,14,2674.95,37449.3,2023-11-13,boleto,Mendonça das Flores,SP,pending,parceiro_a
+bc1dd6a5-0122-562a-99f7-665f464045fb,CUST_34291,PROD_3375,3,906.54,2719.62,2023-11-13,pix,Barbosa,PE,delivered,parceiro_c
+8b1cbf32-a07c-49fd-a384-2dfe7c743ba2,CUST_08038,PROD_2937,7,4734.96,33144.72,2023-11-13,boleto,Alves dos Dourados,ES,delivered,parceiro_c
+10aceda6-4221-4124-d0b2-2ff576c7caae,CUST_15506,PROD_4545,5,2382.32,11911.6,2023-11-13,pix,Cirino Paulista,PE,pending,parceiro_a
+e51345cc-09b0-98d4-2758-4e16cff723be,CUST_13043,PROD_3322,17,3838.8,65259.6,2023-11-13,debit_card,Sousa de Câmara,MG,delivered,parceiro_c
+e30923d7-2b93-b9a6-230f-e3a6e3811bcc,CUST_45126,PROD_2543,8,1417.43,11339.44,2023-11-13,credit_card,Leão,RS,delivered,parceiro_b
+c63d1820-1ad0-54f0-a7cb-7401fd8fb0be,CUST_21240,PROD_3666,16,1561.41,24982.56,2023-11-13,credit_card,Macedo Grande,SP,delivered,parceiro_a
+ea1a3427-73ef-1baa-22be-fafbc7431f33,CUST_10876,PROD_3892,7,1616.95,11318.65,2023-11-13,boleto,da Mota,BA,shipped,parceiro_c
+90e419f4-69c6-05d1-6b9c-6347cbfd14c3,CUST_23881,PROD_1867,11,1146.18,12607.98,2023-11-13,pix,Porto,MG,shipped,parceiro_a
+e91ed8ac-3bd8-81fa-5f6c-9889840f2226,CUST_38381,PROD_1589,10,3391.61,33916.1,2023-11-13,credit_card,Fonseca da Prata,SP,cancelled,parceiro_a
+ec23a9fc-bf65-1f3c-7fe3-6d79f80b59f3,CUST_45587,PROD_4634,19,1914.64,36378.16,2023-11-13,credit_card,Correia,PE,delivered,parceiro_b
+bfad3f24-73a7-f9d0-a848-bdbfe2a5852a,CUST_39502,PROD_0853,3,617.03,1851.09,2023-11-13,pix,Novaes,MG,delivered,parceiro_b
+a2ea5fab-15ff-7809-9537-0af048c8fe5d,CUST_22357,PROD_1876,9,1690.47,15214.23,2023-11-13,pix,Souza de Caldeira,RS,delivered,parceiro_c
+9eeacfd6-5c70-b87d-ea44-5fdbeed31989,CUST_44686,PROD_0983,6,2198.91,13193.46,2023-11-13,pix,Silva de Cunha,RS,shipped,parceiro_c
+e491a5a0-9517-b659-0e42-ad19c9dd133d,CUST_49658,PROD_3964,18,421.96,7595.28,2023-11-13,pix,Souza,RS,shipped,parceiro_c
+fffb9b45-c78a-6bc1-4ad8-58b58056140f,CUST_33968,PROD_2233,14,3538.41,49537.74,2023-11-13,pix,Siqueira,GO,pending,parceiro_a
+f665dd69-e237-d358-cd81-1a09b32aaf3b,CUST_07617,PROD_2325,15,1764.77,26471.55,2023-11-13,debit_card,Rocha,SP,pending,parceiro_c
+7046bf27-5d80-9419-7a79-633bc63f814a,CUST_06808,PROD_0699,20,1618.35,32367.0,2023-11-13,credit_card,Rodrigues,SP,shipped,parceiro_b
+5324de25-c365-6633-7ff2-62be596937e7,CUST_38441,PROD_0439,10,3415.83,34158.3,2023-11-13,boleto,Melo de Camargo,SP,delivered,parceiro_a
+31de4f25-5b87-47d8-59e1-c110e34e9287,CUST_14828,PROD_1729,6,4591.35,27548.1,2023-11-13,credit_card,Correia,BA,delivered,parceiro_b
+4886ca42-7d5a-96da-63c0-1a3dd2db2011,CUST_01123,PROD_1231,4,4430.69,17722.76,2023-11-13,credit_card,Pereira,BA,delivered,parceiro_b
+ae42ef30-bc41-9697-8412-8b73da85cab9,CUST_38468,PROD_0343,17,1456.31,24757.27,2023-11-13,credit_card,Novais do Campo,RJ,pending,parceiro_b
+9aa67a37-5fa9-ede8-f2b4-46bcad52b25c,CUST_43903,PROD_1905,20,4814.97,96299.4,2023-11-13,boleto,Cunha,SP,shipped,parceiro_c
+f979071a-d3ce-d24f-6710-77866df46c64,CUST_05626,PROD_0700,18,4739.17,85305.06,2023-11-13,boleto,Fonseca de Mendonça,SP,cancelled,parceiro_a
+1c89a700-d536-8bfa-b4a9-9edf8e94e916,CUST_23721,PROD_2764,6,3616.47,21698.82,2023-11-13,credit_card,Oliveira de Fogaça,PB,cancelled,parceiro_b
+2fe16a22-c5cb-6643-df0f-dfc83b71526a,CUST_27907,PROD_1629,2,2094.62,4189.24,2023-11-13,boleto,Rocha,SP,cancelled,parceiro_b
+10938bd1-5c7a-cc87-b275-34e87ded22ae,CUST_29839,PROD_1962,2,2381.51,4763.02,2023-11-13,boleto,Novaes,MG,pending,parceiro_b
+a98f5750-959d-273b-6a2e-ceb5135fc681,CUST_18952,PROD_2673,18,2608.41,46951.38,2023-11-13,credit_card,Peixoto,GO,delivered,parceiro_b
+773bc0e0-13c3-bd58-e2cb-d29079dc0d7d,CUST_28366,PROD_1925,20,1624.7,32494.0,2023-11-13,pix,Araújo do Campo,PR,delivered,parceiro_a
+ede5fa37-a4cf-1e2c-bf3c-4114331074fb,CUST_00786,PROD_0891,4,4665.51,18662.04,2023-11-13,debit_card,Pinto,AC,shipped,parceiro_b
+e5c8ca23-b7bf-1bdc-a966-8dc5ecf94174,CUST_42272,PROD_0967,12,942.88,11314.56,2023-11-13,pix,Castro,MG,delivered,parceiro_a
+3cde8a1f-2f17-7c6e-3f0e-f654ec0eaecb,CUST_43512,PROD_2113,18,117.41,2113.38,2023-11-13,credit_card,Alves,MG,delivered,parceiro_b
+9ecab047-1a76-24e0-4275-5a3700a1bf00,CUST_02851,PROD_0621,1,1245.93,1245.93,2023-11-13,debit_card,Rezende do Oeste,CE,delivered,parceiro_a
+28234e23-dc3b-ccdb-6bc1-c5fc9743e67f,CUST_13515,PROD_1915,11,1852.79,20380.69,2023-11-13,credit_card,Cavalcanti do Oeste,SP,delivered,parceiro_c
+5c7c5452-3db7-c2a5-a047-9e0649d742a5,CUST_21302,PROD_1422,15,180.13,2701.95,2023-11-13,pix,Novais,SP,shipped,parceiro_b
+83b15772-d42b-b871-fac6-2404a30919d2,CUST_16167,PROD_4469,17,1010.89,17185.13,2023-11-13,credit_card,da Costa,RJ,shipped,parceiro_b
+19db4db6-19cf-b6fd-cbe6-01d7cc4d63fa,CUST_03295,PROD_0459,7,2095.78,14670.46,2023-11-13,debit_card,Carvalho da Serra,BA,delivered,parceiro_c
+9a7ed4a6-a772-ebf2-2fac-d230138cfca4,CUST_21393,PROD_0955,14,1605.34,22474.76,2023-11-13,credit_card,Pastor,RJ,delivered,parceiro_a
+f78fe8f4-e029-247e-8d44-805bfa98bb65,CUST_02238,PROD_0668,2,3106.65,6213.3,2023-11-13,debit_card,Moura,CE,delivered,parceiro_b
+4fa8db5b-fe7a-6e1a-420b-7bc39510821e,CUST_41637,PROD_1214,16,2919.63,46714.08,2023-11-13,boleto,Brito do Campo,RO,delivered,parceiro_a
+8e78d182-1bfc-3e8a-89dc-c81c5d7ae642,CUST_14300,PROD_4396,14,4273.62,59830.68,2023-11-13,debit_card,Campos,RJ,delivered,parceiro_b
+0452cff8-bcd2-5090-20d0-5e74ae7a1bae,CUST_24767,PROD_1639,20,1787.78,35755.6,2023-11-13,credit_card,Camargo,SP,delivered,parceiro_a
+3e942b00-6635-bbc6-ea67-da7999fe9a54,CUST_43993,PROD_4023,18,2018.6,36334.8,2023-11-13,debit_card,Cassiano,RS,delivered,parceiro_c
+acb6edc7-e6ca-1020-e081-3017ff46d4b3,CUST_20382,PROD_2162,18,2260.43,40687.74,2023-11-13,credit_card,da Rosa,PR,delivered,parceiro_a
+aca25374-e5fa-8c88-9686-5928f3436809,CUST_31044,PROD_1448,20,4446.93,88938.6,2023-11-13,boleto,Moreira,PR,pending,parceiro_a
+163f9d81-b0cd-4b40-c806-8f5726061100,CUST_25358,PROD_1686,20,1848.62,36972.4,2023-11-13,credit_card,Nunes Alegre,SC,delivered,parceiro_b
+743cef63-8a9d-eb95-d8a7-9d23b8171f83,CUST_40351,PROD_4474,15,2641.35,39620.25,2023-11-13,debit_card,Gonçalves da Mata,MG,delivered,parceiro_a
+74f1be4f-6912-8f0a-8a04-6e2f5ee1ef86,CUST_38165,PROD_0564,16,1812.36,28997.76,2023-11-13,credit_card,Aparecida da Praia,RJ,delivered,parceiro_a
+96a81c62-36e1-21d7-dab6-24a2e87ad147,CUST_42873,PROD_4337,7,3047.64,21333.48,2023-11-13,pix,Viana,MG,delivered,parceiro_b
+04b719cd-be4a-8a8c-b553-a5434e1aa388,CUST_45085,PROD_2176,10,1246.87,12468.7,2023-11-13,pix,Brito,SC,delivered,parceiro_b
+792f81b3-2b33-1288-e3bd-734f3341c555,CUST_41795,PROD_1665,14,1877.8,26289.2,2023-11-13,boleto,Vargas das Flores,ES,shipped,parceiro_a
+daf04f2c-8282-d784-6524-76a731d5b431,CUST_33841,PROD_0253,11,183.07,2013.77,2023-11-13,debit_card,Novaes,SP,delivered,parceiro_a
+d6be5bfa-89aa-7a86-2ee2-22e47ae1c478,CUST_49968,PROD_4042,7,2175.93,15231.51,2023-11-13,pix,Montenegro Grande,CE,delivered,parceiro_a
+19b50950-2bc3-b03c-815a-ad930c62fdae,CUST_12717,PROD_1801,11,2261.74,24879.14,2023-11-13,credit_card,Garcia da Prata,SP,delivered,parceiro_c
+24923e41-d03f-dc40-8059-20f44369f05d,CUST_25496,PROD_0817,5,1737.48,8687.4,2023-11-13,credit_card,Gonçalves,MA,delivered,parceiro_c
+2d250c79-c729-2ffa-46ec-50cc8a7377ff,CUST_18194,PROD_2240,20,2850.57,57011.4,2023-11-13,boleto,Monteiro da Praia,MG,delivered,parceiro_c
+6ffa53ae-8c41-a02f-3dfc-3ca820ec0db7,CUST_13283,PROD_0033,18,27.38,492.84,2023-11-13,debit_card,Cirino,CE,delivered,parceiro_c
+dd731133-0446-82d8-e060-78767980b838,CUST_38554,PROD_1226,13,3247.85,42222.05,2023-11-13,credit_card,Moreira Verde,RJ,delivered,parceiro_b
+644dce91-3ed9-fe8c-4c0e-70e7fa323a3a,CUST_23766,PROD_1631,17,4199.17,71385.89,2023-11-13,boleto,Freitas de Sá,RJ,delivered,parceiro_b
+3f49acc7-6b4d-1788-2f32-4569d9245003,CUST_48411,PROD_2633,14,1561.79,21865.06,2023-11-13,pix,Montenegro,CE,delivered,parceiro_a
+30f602c8-babe-2e95-4146-a693d17c9cb9,CUST_07443,PROD_1458,16,178.25,2852.0,2023-11-13,pix,Vasconcelos,RS,delivered,parceiro_a
+b0c57602-93bf-50a2-8487-507d551b026e,CUST_05732,PROD_2429,5,3634.73,18173.65,2023-11-13,boleto,Abreu,SP,delivered,parceiro_b
+3d07530c-295d-ac96-bb31-550a4f053d9f,CUST_11768,PROD_2287,12,3538.48,42461.76,2023-11-13,boleto,Novaes,SP,delivered,parceiro_a
+4a542b10-f0d5-ad4c-d815-0ca9d4427357,CUST_46169,PROD_2813,19,4081.96,77557.24,2023-11-13,pix,Fernandes,RJ,delivered,parceiro_c
+ce496b8a-becf-a836-33ae-e647639d12e4,CUST_18391,PROD_1742,3,2394.54,7183.62,2023-11-13,debit_card,Costa de Novaes,RJ,cancelled,parceiro_c
+8ea760d1-6811-7478-54e7-39c119d8d23c,CUST_32995,PROD_4982,6,1123.86,6743.16,2023-11-13,credit_card,Alves do Campo,RJ,delivered,parceiro_c
+8d1290ab-b484-c241-8c8d-5bc933d10806,CUST_41924,PROD_0027,16,1509.12,24145.92,2023-11-13,pix,Costela do Sul,RJ,cancelled,parceiro_b
+51a2b9d7-a3c8-a438-44eb-6ce88d36b02b,CUST_05156,PROD_4694,13,441.63,5741.19,2023-11-13,credit_card,Peixoto,MG,delivered,parceiro_b
+d499852c-80eb-3e0e-7889-fdf3015de1a8,CUST_42537,PROD_4364,6,34.28,205.68,2023-11-13,pix,Moreira do Campo,SP,delivered,parceiro_a
+803730ce-44b9-a8c2-2810-3615b9acb6c6,CUST_16875,PROD_3209,16,3142.38,50278.08,2023-11-13,credit_card,Correia,RJ,pending,parceiro_c
+036c717a-e2ed-b2f9-2584-99e5facdc06d,CUST_48997,PROD_1148,17,3351.62,56977.54,2023-11-13,credit_card,Cunha de Goiás,AL,delivered,parceiro_c
+66627aa1-9a06-2d36-cf11-efb7eb8c5b72,CUST_26763,PROD_1590,9,3915.41,35238.69,2023-11-13,credit_card,Almeida,MG,delivered,parceiro_a
+8bd173e5-a3dd-b01a-3b4a-fd4635ec98ad,CUST_14421,PROD_0668,5,1848.8,9244.0,2023-11-13,credit_card,Oliveira das Pedras,MG,delivered,parceiro_b
+d9727d04-0561-d98d-1875-cf51b8d4a5b9,CUST_23860,PROD_1970,3,2012.63,6037.89,2023-11-13,credit_card,Cavalcante do Amparo,SP,delivered,parceiro_a
+5a24218b-bc69-a253-0ed0-7b476fcbabc2,CUST_12036,PROD_4565,11,909.46,10004.06,2023-11-13,credit_card,Cirino,SP,delivered,parceiro_a
+ab6016c2-52dc-4694-7b12-bb5d673e530d,CUST_29713,PROD_1764,6,2263.56,13581.36,2023-11-13,pix,Sá,PE,delivered,parceiro_c
+e5df26b0-ba66-1f3c-52e0-ae1e13b282ef,CUST_30915,PROD_1562,6,3488.75,20932.5,2023-11-13,credit_card,Moreira de Moura,RJ,cancelled,parceiro_a
+bdaa132d-e532-1643-1b72-97afabe4c4c2,CUST_24893,PROD_3895,6,1307.6,7845.6,2023-11-13,pix,Nascimento Paulista,RJ,delivered,parceiro_b
+d21182ab-cefd-9a7b-4bf4-0d096acbd335,CUST_17514,PROD_2020,5,3105.06,15525.3,2023-11-13,credit_card,Azevedo,BA,delivered,parceiro_b
+bd9672c5-c110-030e-499c-4a1c0c926af6,CUST_04344,PROD_4585,8,4411.4,35291.2,2023-11-13,credit_card,Pimenta,RJ,delivered,parceiro_a
+87d8b40f-e8aa-c75a-b601-83b0954e5ba9,CUST_23561,PROD_4440,10,4835.39,48353.9,2023-11-13,credit_card,da Luz Verde,PE,delivered,parceiro_c
+cbe5ac6b-3060-2e4e-47b8-c08cc5c5bd26,CUST_01277,PROD_2636,13,984.46,12797.98,2023-11-13,pix,da Rocha do Amparo,RJ,delivered,parceiro_a
+5370fca9-7f80-5c78-cab2-1f127e172854,CUST_17659,PROD_0454,13,2317.44,30126.72,2023-11-13,debit_card,da Rocha,RJ,pending,parceiro_a
+56ff09e2-dc48-37ef-90cf-76682109f702,CUST_23188,PROD_0524,1,668.26,668.26,2023-11-13,credit_card,Martins do Sul,ES,delivered,parceiro_a
+f4969330-f9c7-e3fb-92d6-711258c94ca1,CUST_26214,PROD_2274,7,3384.73,23693.11,2023-11-13,credit_card,Machado,SP,shipped,parceiro_b
+4205da5d-ff79-9b72-88ef-7f5cfc077cbf,CUST_47404,PROD_1449,20,4772.19,95443.8,2023-11-13,pix,Dias de Garcia,RJ,pending,parceiro_c
+7954592b-4920-723c-01ee-0da5e5bc7ec5,CUST_38845,PROD_0032,9,2110.14,18991.26,2023-11-13,credit_card,Fogaça,SC,delivered,parceiro_b
+9038d80e-26c9-20be-0953-9ff9739f9cd3,CUST_11118,PROD_0654,17,4557.11,77470.87,2023-11-13,boleto,Novais,PR,delivered,parceiro_a
+f9ce767b-5f93-d90f-d79a-5bd71759e2f7,CUST_29279,PROD_2632,7,3907.86,27355.02,2023-11-13,credit_card,Farias,RO,delivered,parceiro_c
+f3f71339-c353-e956-f0be-9794aba7e1c4,CUST_36678,PROD_0138,12,4460.06,53520.72,2023-11-13,boleto,Garcia Grande,SP,delivered,parceiro_a
+48a4bd82-0f8e-a8e6-cec0-f554c77141bf,CUST_05948,PROD_0927,2,558.81,1117.62,2023-11-13,pix,Santos do Norte,MG,delivered,parceiro_a
+8a806d8d-22b1-fc7e-c681-d14aa60a90dc,CUST_22489,PROD_2764,4,4224.28,16897.12,2023-11-13,pix,Nascimento do Campo,MG,shipped,parceiro_b
+2becea81-6241-1371-b95c-a0267b88ad1b,CUST_15596,PROD_3615,17,4396.71,74744.07,2023-11-13,pix,Rios,PB,pending,parceiro_a
+8b6b2c94-76a5-fef0-dc21-b187c03a34d7,CUST_21702,PROD_3506,2,4441.19,8882.38,2023-11-13,credit_card,Mendes do Oeste,SP,delivered,parceiro_c
+34080ce1-2ffe-0b9a-4f6c-6d5641a290c4,CUST_29933,PROD_0632,7,1131.94,7923.58,2023-11-13,boleto,Casa Grande Alegre,CE,delivered,parceiro_c
+36b27aa9-eb39-0758-a70d-df8a9f925099,CUST_28930,PROD_2513,5,3277.28,16386.4,2023-11-13,debit_card,Silveira do Sul,SP,delivered,parceiro_b
+22708d80-6756-72f2-c6c6-b8876548f10f,CUST_04090,PROD_3201,9,4894.05,44046.45,2023-11-13,credit_card,Vieira,RS,delivered,parceiro_a
+f07220d1-c7a5-3032-802e-c63fe6bb6df9,CUST_49644,PROD_0192,4,2271.04,9084.16,2023-11-13,debit_card,Jesus Alegre,SP,pending,parceiro_b
+7a527ace-d3c9-9152-428f-7c5c3774af9c,CUST_12455,PROD_3853,1,3453.21,3453.21,2023-11-13,credit_card,Castro de Pacheco,BA,pending,parceiro_b
+6e245330-89e9-c0cd-72de-bfbdd51894c0,CUST_46410,PROD_1324,4,1946.74,7786.96,2023-11-13,pix,da Mota,MA,delivered,parceiro_a
+1bb465af-ee66-1c5e-9843-3f4585108572,CUST_36856,PROD_0884,9,1336.59,12029.31,2023-11-13,pix,Pastor da Praia,DF,delivered,parceiro_b
+15d3296d-38be-628d-aa54-c05723368a00,CUST_05368,PROD_3572,6,2786.31,16717.86,2023-11-13,debit_card,Sousa de Minas,RJ,pending,parceiro_a
+0e7dd665-3348-d155-26f6-73f735dda4d9,CUST_14198,PROD_0353,17,774.0,13158.0,2023-11-13,credit_card,Correia do Galho,CE,pending,parceiro_c
+b2f0ac4a-2998-4b3b-247f-feb0227c9945,CUST_07030,PROD_4361,10,493.53,4935.3,2023-11-13,boleto,Costela do Oeste,BA,cancelled,parceiro_b
+c836dc38-d882-ad9e-b499-f5f0cf9eb8fd,CUST_16146,PROD_1000,12,2924.39,35092.68,2023-11-13,credit_card,Costa Grande,SP,cancelled,parceiro_a
+245aab8c-fba1-5c32-cd7d-62b4487e1723,CUST_32364,PROD_2851,6,316.16,1896.96,2023-11-13,debit_card,da Costa de Goiás,RN,shipped,parceiro_c
+310464e4-69d7-651a-6d34-20fab87eedc1,CUST_44581,PROD_2569,10,4237.01,42370.1,2023-11-13,debit_card,Macedo,SP,cancelled,parceiro_a
+f3b5822a-0c59-185a-6c6e-da1421c21d39,CUST_46765,PROD_2824,18,197.73,3559.14,2023-11-13,debit_card,Rodrigues,SP,delivered,parceiro_a
+4f3a31a8-8eac-5c36-b5a0-073f5e0879d7,CUST_46531,PROD_3718,5,4308.76,21543.8,2023-11-13,credit_card,Souza,RJ,delivered,parceiro_c
+221fb8f1-31ed-9233-6be8-d9f4a35c7da6,CUST_32887,PROD_3705,4,1902.84,7611.36,2023-11-13,credit_card,da Cunha,RJ,delivered,parceiro_c
+32a7c53d-8311-e7d6-3881-624e724e16bd,CUST_07973,PROD_3370,8,3303.92,26431.36,2023-11-13,pix,da Luz de Pires,SP,pending,parceiro_b
+59c1b970-a4c4-7e6d-dc69-b0a5d6678a59,CUST_05483,PROD_2074,16,4988.88,79822.08,2023-11-13,credit_card,Ramos,SP,delivered,parceiro_c
+ebde049a-96d8-3566-3c2d-3fe2eb99b6e6,CUST_00507,PROD_4083,2,3420.4,6840.8,2023-11-13,pix,Santos,RJ,shipped,parceiro_b
+da6f4071-9edb-d26f-e653-42c251a5717a,CUST_37625,PROD_3139,18,3602.94,64852.92,2023-11-13,debit_card,Martins,RS,delivered,parceiro_b
+5455a759-21c8-7800-3889-5b378fb9a1a7,CUST_47147,PROD_3930,15,323.14,4847.1,2023-11-13,debit_card,Ferreira,MA,shipped,parceiro_c
+36871226-f0ec-ed31-7098-6258f2503122,CUST_26309,PROD_4980,16,4483.2,71731.2,2023-11-13,boleto,Mendonça do Sul,PR,shipped,parceiro_b
+dbd8c6ea-bee8-daad-a0c5-a9e78a67d0e4,CUST_41585,PROD_0291,12,4662.52,55950.24,2023-11-13,pix,Mendes,CE,delivered,parceiro_c
+dd88582e-0d58-3549-932f-a3d4ad4b71df,CUST_30083,PROD_2297,20,4332.45,86649.0,2023-11-13,credit_card,Viana da Mata,MG,cancelled,parceiro_a
+7e3510ba-b502-fef4-c250-62c8cace5475,CUST_39215,PROD_2941,3,176.26,528.78,2023-11-13,debit_card,da Mata,RJ,cancelled,parceiro_a
+28675f80-934b-7b27-823c-01e274aab329,CUST_11089,PROD_1744,6,1583.06,9498.36,2023-11-13,boleto,Araújo,RJ,delivered,parceiro_a
+f4ec0451-b856-984e-7ca9-2f9fd0ea8bdc,CUST_00323,PROD_0597,7,669.83,4688.81,2023-11-13,pix,da Mata de Goiás,RO,cancelled,parceiro_c
+743f5628-fcf2-6719-a02f-b5e84eeaaa31,CUST_42452,PROD_1841,8,2753.48,22027.84,2023-11-13,pix,Brito de Minas,RJ,delivered,parceiro_a
+366f2b10-2867-6cdc-ca57-8d89b6b8fe50,CUST_33000,PROD_4899,17,1397.84,23763.28,2023-11-13,boleto,Peixoto,SP,delivered,parceiro_c
+34bca10f-c737-58b6-5f94-e9958bd091c8,CUST_04864,PROD_1489,18,4754.87,85587.66,2023-11-13,boleto,Rezende,SP,pending,parceiro_a
+c4d164bf-d906-246e-b5ea-17a4a93c0ab6,CUST_36393,PROD_1466,5,3476.43,17382.15,2023-11-13,pix,Araújo,SP,pending,parceiro_a
+f16da437-0b59-ef2d-d83b-c453cfeca147,CUST_01006,PROD_0096,3,2548.09,7644.27,2023-11-13,credit_card,Vieira de da Costa,MG,delivered,parceiro_a
+c784cd1b-5aee-d6ae-1993-bcfd46267de0,CUST_17237,PROD_3556,10,1801.57,18015.7,2023-11-13,debit_card,Abreu,MG,pending,parceiro_a
+e1078b9f-96e6-9217-1205-a1a20e56f889,CUST_15928,PROD_2686,7,3616.78,25317.46,2023-11-13,pix,Monteiro,PE,delivered,parceiro_b
+c090b08f-4b67-4960-03a9-8f72a43f20a3,CUST_38483,PROD_4581,10,2789.44,27894.4,2023-11-13,pix,Nogueira de Goiás,RJ,delivered,parceiro_b
+755f310c-a826-85f7-ef54-331b8a898c18,CUST_00440,PROD_2652,9,2064.65,18581.85,2023-11-13,credit_card,Martins,SP,cancelled,parceiro_c
+f156d0e7-b377-b3d4-3726-8f91e3cccf1e,CUST_22796,PROD_3910,9,4526.96,40742.64,2023-11-13,pix,Cardoso,SP,shipped,parceiro_c
+16577628-ef06-20fa-82cc-ba2e03f48d03,CUST_16263,PROD_1061,20,3335.94,66718.8,2023-11-13,pix,Andrade,MG,shipped,parceiro_b
+08a1a5b0-d64a-c69c-f65d-aff60cd32fb0,CUST_47835,PROD_0200,8,597.21,4777.68,2023-11-13,credit_card,da Cruz,GO,shipped,parceiro_a
+ad46288f-5b46-ce30-3d9b-427403c663ad,CUST_22439,PROD_4222,8,2980.26,23842.08,2023-11-13,pix,Brito,RJ,pending,parceiro_b
+ac4c4617-0951-0827-96c9-6bf5bd314cb2,CUST_21208,PROD_2339,19,3515.47,66793.93,2023-11-13,pix,Sá do Sul,SC,delivered,parceiro_c
+db40ed0d-0621-18f7-d5bb-785c5dfd1948,CUST_37883,PROD_2253,8,4931.12,39448.96,2023-11-13,credit_card,Ribeiro,SC,delivered,parceiro_b
+5bb35658-c2e7-8978-ad45-25ac2aef8293,CUST_49662,PROD_0541,2,2287.1,4574.2,2023-11-13,debit_card,Fernandes,SP,delivered,parceiro_a
+696b3cd2-8f2c-ee19-f9e1-912909341cb3,CUST_14128,PROD_4525,3,2137.14,6411.42,2023-11-13,pix,Machado,SP,shipped,parceiro_a
+1a4bbeb0-eabf-7752-948d-d353b5c5f58d,CUST_32769,PROD_1903,8,2894.65,23157.2,2023-11-13,pix,Lima,SC,delivered,parceiro_b
+5b4a0403-4b27-27a2-dbbe-03298a7deea7,CUST_12652,PROD_1451,2,4509.22,9018.44,2023-11-13,pix,Rios,MG,delivered,parceiro_c
+09f09ed4-7d7b-9607-24bd-56b48f650b6e,CUST_33428,PROD_1252,13,4663.76,60628.88,2023-11-13,pix,Gomes,PR,pending,parceiro_b
+07217762-5fb0-f85b-f1b5-1c8d7750e805,CUST_21352,PROD_2775,18,2134.26,38416.68,2023-11-13,credit_card,Guerra de Lima,BA,delivered,parceiro_c
+7e3a12aa-abe1-6104-7204-526152ae76f3,CUST_34677,PROD_0462,11,4095.11,45046.21,2023-11-13,boleto,Siqueira,RJ,delivered,parceiro_b
+05691f15-120b-445c-a393-df2887276d09,CUST_34613,PROD_1214,3,2833.38,8500.14,2023-11-13,debit_card,Leão,SP,delivered,parceiro_b
+fbac87c9-46f2-4981-2ae5-05adf90c95d2,CUST_31341,PROD_3852,16,2617.74,41883.84,2023-11-13,boleto,Pires do Galho,SP,pending,parceiro_b
+a658ae80-c146-97c5-1855-3e08d78a62dd,CUST_11234,PROD_3885,10,3709.86,37098.6,2023-11-13,boleto,Pereira das Pedras,SP,delivered,parceiro_c
+32f8dffe-9f29-5c47-ab51-8ae3135f87d7,CUST_02744,PROD_0999,11,4300.59,47306.49,2023-11-13,debit_card,Campos Paulista,MG,shipped,parceiro_a
+9b9a7dfd-c2fb-adee-9db3-e0f8e8afa67a,CUST_30613,PROD_0198,11,3205.28,35258.08,2023-11-13,debit_card,Gomes de Fogaça,SP,pending,parceiro_b
+48b16962-fdf6-8ef7-2da8-ab7da45097e3,CUST_35939,PROD_1998,7,2915.41,20407.87,2023-11-13,credit_card,Rodrigues de Pereira,MA,delivered,parceiro_a
+afd13b1c-e3f8-dad2-64d1-72d5737660a2,CUST_38136,PROD_1075,1,428.18,428.18,2023-11-13,debit_card,Novaes dos Dourados,RJ,delivered,parceiro_a
+423f1950-4f1f-be7a-46c8-973d73e275f8,CUST_44307,PROD_4560,15,756.9,11353.5,2023-11-13,boleto,Ramos,PE,shipped,parceiro_c
+0b1cb8c2-ed2b-d3ee-0f2a-a668fd3b2b40,CUST_09768,PROD_3902,6,898.41,5390.46,2023-11-13,credit_card,da Cruz,SP,cancelled,parceiro_a
+2a359eda-11bb-3d73-430e-2806b1ecfd48,CUST_27655,PROD_1670,19,3718.42,70649.98,2023-11-13,pix,da Paz,RJ,shipped,parceiro_b
+65b67862-a8b5-808e-8eab-1985c890cc1f,CUST_38381,PROD_0058,8,4005.76,32046.08,2023-11-13,debit_card,Vargas das Pedras,SP,pending,parceiro_c
+f10633d8-8f53-a957-bb10-94c9d4622839,CUST_17391,PROD_4346,7,3468.76,24281.32,2023-11-13,pix,da Cunha,RJ,shipped,parceiro_a
+38844459-ed48-9cf9-7f1b-a69e9f5e6a5a,CUST_01055,PROD_3305,6,2460.46,14762.76,2023-11-13,boleto,Novais,PA,pending,parceiro_c
+6d350e7e-adf5-be16-127c-43efe4b93bfa,CUST_44228,PROD_0780,3,1109.4,3328.2,2023-11-13,boleto,Monteiro,SP,cancelled,parceiro_c
+58738e37-efe1-59e5-bd4a-c81a704edd65,CUST_28708,PROD_0780,7,3330.9,23316.3,2023-11-13,debit_card,Castro,RJ,delivered,parceiro_c
+863d0e22-740f-685f-0839-b5e39f496968,CUST_03298,PROD_0666,9,85.39,768.51,2023-11-13,credit_card,Porto Alegre,SP,delivered,parceiro_c
+696a10d4-27d8-2101-6fbf-194e06f7ca20,CUST_20666,PROD_4278,9,508.83,4579.47,2023-11-13,boleto,Araújo dos Dourados,MT,delivered,parceiro_b
+ffaf8622-c98f-9517-a6ff-7b2e4ea89372,CUST_09072,PROD_4837,1,1825.2,1825.2,2023-11-13,debit_card,Vargas,PI,delivered,parceiro_a
+80987799-bbf6-d048-e3de-a5f2974b5157,CUST_36605,PROD_1635,12,4262.87,51154.44,2023-11-13,debit_card,Pimenta de Farias,RS,delivered,parceiro_b
+d69aba63-be2e-5205-8519-236af2e328be,CUST_15947,PROD_0170,3,547.65,1642.95,2023-11-13,credit_card,Alves Verde,PA,delivered,parceiro_c
+cc2d8368-f086-2a01-0743-6bb7734e9690,CUST_00458,PROD_2438,9,3879.44,34914.96,2023-11-13,credit_card,Cavalcanti,PR,delivered,parceiro_c
+6ee479d6-3120-3a69-0de2-755f6ba1dd5f,CUST_10013,PROD_4463,4,2164.79,8659.16,2023-11-13,credit_card,Fernandes do Oeste,RJ,delivered,parceiro_a
+8cccf7f1-5f3a-aa96-37c8-b873f77ec662,CUST_03647,PROD_4598,15,3936.37,59045.55,2023-11-13,pix,Cavalcante do Sul,RJ,delivered,parceiro_b
+8ed61d90-6334-235f-a8fc-9a018f5f4d5e,CUST_26110,PROD_1730,20,2647.12,52942.4,2023-11-13,boleto,Teixeira,SP,delivered,parceiro_b
+a9ea5498-c44e-35a7-1ff6-1f8d5f11dcd7,CUST_14921,PROD_3714,15,1590.3,23854.5,2023-11-13,credit_card,Oliveira,MG,delivered,parceiro_b
+ca56362b-4004-ef6a-c9d8-8bab262ae771,CUST_22187,PROD_3500,2,4595.31,9190.62,2023-11-13,boleto,Fogaça,TO,delivered,parceiro_b
+b0bae65e-746e-cd98-47f8-46ad8aefc18e,CUST_49384,PROD_2568,12,27.36,328.32,2023-11-13,debit_card,Moraes,PB,delivered,parceiro_b
+84714f59-5e60-2c39-aa5b-acadcbd2039c,CUST_33524,PROD_2225,6,684.84,4109.04,2023-11-13,boleto,Cirino das Flores,MG,pending,parceiro_a
+c6ee2073-0cea-4420-e3df-e00ba9c51834,CUST_30393,PROD_3836,19,4962.47,94286.93,2023-11-13,debit_card,Cunha,BA,delivered,parceiro_b
+f9700f05-2977-3d0f-f5e5-e34225b8fa18,CUST_47977,PROD_3143,4,2035.45,8141.8,2023-11-13,credit_card,Nogueira,AM,delivered,parceiro_c
+68ffd3bd-6999-dc6b-a1c7-47034ddcbc6f,CUST_38680,PROD_3386,2,1553.78,3107.56,2023-11-13,credit_card,Silva,PR,cancelled,parceiro_b
+7a8af953-31cd-b6ed-93ad-4d3233c0f784,CUST_32526,PROD_1893,19,4119.74,78275.06,2023-11-13,pix,Siqueira do Campo,DF,cancelled,parceiro_a
+f544e40f-2b98-ba27-210d-4179026330b2,CUST_27845,PROD_1411,11,3994.76,43942.36,2023-11-13,debit_card,Barros Alegre,PA,pending,parceiro_c
+4e95938a-eb9e-f74a-d956-d4d5644d47b0,CUST_14465,PROD_1281,19,2606.11,49516.09,2023-11-13,debit_card,Peixoto,RJ,delivered,parceiro_c
+3cf203c9-558c-c30a-38ad-27805e219c72,CUST_10344,PROD_0847,19,2585.28,49120.32,2023-11-13,boleto,Monteiro de Minas,SP,delivered,parceiro_a
+013383bd-f3dd-22b9-513f-380a3d055dfd,CUST_03295,PROD_2523,8,2117.65,16941.2,2023-11-13,credit_card,da Paz,SP,shipped,parceiro_b
+05a8c414-7329-1340-917b-5e16b4335916,CUST_30779,PROD_0868,8,1495.8,11966.4,2023-11-13,pix,Vieira,PE,delivered,parceiro_a
+4c65358f-c946-e00c-a5c2-0b9a8894ce4b,CUST_03505,PROD_1297,7,2435.36,17047.52,2023-11-13,pix,Barros Verde,SP,delivered,parceiro_b
+1e93cbd9-b0e4-f7ae-c510-8cb77b80584e,CUST_03978,PROD_1633,8,2244.04,17952.32,2023-11-13,debit_card,Costela,SP,cancelled,parceiro_a
+83006cb2-c889-e6a8-2dc7-00a5c7954472,CUST_34718,PROD_0705,17,628.42,10683.14,2023-11-13,debit_card,Fonseca,SP,delivered,parceiro_b
+8b3fe5dd-6c51-8ab2-fe13-1528b2630068,CUST_00408,PROD_4260,8,3785.29,30282.32,2023-11-13,boleto,Nascimento,PA,cancelled,parceiro_b
+f131eb65-1345-c4ae-d38f-0373a26c6fcf,CUST_19689,PROD_2310,12,1265.92,15191.04,2023-11-13,pix,Rezende da Serra,SP,delivered,parceiro_b
+586f2371-45bb-d350-63bd-a0d3352f325a,CUST_11050,PROD_3895,17,3828.37,65082.29,2023-11-13,pix,da Cruz de Garcia,PR,delivered,parceiro_c
+ccdc46c6-458c-d442-e59f-63a332fbbf3c,CUST_28940,PROD_0967,6,4894.67,29368.02,2023-11-13,credit_card,Peixoto do Oeste,SP,delivered,parceiro_a
+13b09503-984e-b9e6-12be-e8bc785ba690,CUST_12538,PROD_4392,17,3767.93,64054.81,2023-11-13,pix,Silveira,SC,delivered,parceiro_c
+ee9d5321-3ead-c08a-f267-6e729008a68a,CUST_48871,PROD_1969,1,3958.26,3958.26,2023-11-13,debit_card,Andrade,PR,delivered,parceiro_a
+820ba6a8-a040-a34b-b08a-aec892467a00,CUST_12739,PROD_1792,1,3095.01,3095.01,2023-11-13,pix,da Rosa,RS,delivered,parceiro_a
+0c13b60f-7129-c9cb-e7be-799785a5b9d6,CUST_37169,PROD_2017,19,1033.16,19630.04,2023-11-13,debit_card,Sousa,SP,delivered,parceiro_b
+90249fa3-4fbe-269c-fda5-dfc60af7646f,CUST_20240,PROD_2038,20,2982.12,59642.4,2023-11-13,pix,Teixeira,MG,delivered,parceiro_c
+05276628-3960-d0d6-fd63-6268586bff3f,CUST_41185,PROD_4631,4,1404.38,5617.52,2023-11-13,boleto,Vieira de Novais,DF,delivered,parceiro_a
+1be163cd-6d69-a910-0635-fdf7f6f3d22a,CUST_20860,PROD_2984,7,687.86,4815.02,2023-11-13,credit_card,Pinto,SP,delivered,parceiro_a
+9590cce7-ede1-796f-1987-0130b9ec90c2,CUST_25360,PROD_1752,3,2863.12,8589.36,2023-11-13,debit_card,Farias das Flores,SP,delivered,parceiro_b
+b422e46d-f82a-5569-479d-48617355205f,CUST_22778,PROD_3733,13,4011.13,52144.69,2023-11-13,pix,Moreira,MG,delivered,parceiro_b
+68db9bf4-7501-8eac-efb2-76ba517e3fe6,CUST_31876,PROD_3958,8,1603.37,12826.96,2023-11-13,credit_card,Nogueira do Campo,MG,delivered,parceiro_b
+b09e01ac-9029-acdc-e572-a24d992d8d0e,CUST_10544,PROD_0493,15,3196.31,47944.65,2023-11-13,credit_card,Barbosa,RJ,delivered,parceiro_a
+c88e3945-cc9c-81b7-52ca-1e79ca6188d5,CUST_13791,PROD_2527,3,4514.15,13542.45,2023-11-13,debit_card,Pastor,RJ,cancelled,parceiro_a
+2c8b2549-540c-a4c5-3f4e-0796b2ee3bd7,CUST_32128,PROD_4786,8,4735.44,37883.52,2023-11-13,pix,Ramos de Caldeira,MG,delivered,parceiro_c
+0fcd14ae-f575-cc4f-b43f-872ffef7872b,CUST_31477,PROD_3455,20,358.08,7161.6,2023-11-13,boleto,Cunha,CE,delivered,parceiro_c
+135a570f-60fa-38e7-08ab-6710240fbd8e,CUST_07334,PROD_4440,3,1957.26,5871.78,2023-11-13,credit_card,Montenegro do Sul,CE,delivered,parceiro_b
+4f0ea0e9-23c2-b973-a06b-86881bfbe57a,CUST_07214,PROD_0962,9,1405.78,12652.02,2023-11-13,boleto,Lopes,MG,delivered,parceiro_b
+4c0b33cb-8c8a-ebfc-80bd-8974c14658f1,CUST_44138,PROD_4567,9,4128.05,37152.45,2023-11-13,pix,Fernandes de da Cruz,RJ,delivered,parceiro_b
+e5517d7c-23c0-c394-3964-27854202c5a5,CUST_16028,PROD_1985,6,2461.05,14766.3,2023-11-13,pix,Pimenta de Santos,PE,delivered,parceiro_c
+a79ceb46-b990-d2f2-5376-81b78c43d696,CUST_34253,PROD_4223,19,3953.92,75124.48,2023-11-13,debit_card,Carvalho das Pedras,SP,delivered,parceiro_a
+068b6e59-c3b4-a1e8-d0dd-1a8f25247d8e,CUST_15472,PROD_4658,3,3936.8,11810.4,2023-11-13,boleto,Guerra,MG,delivered,parceiro_b
+1bf5d8ff-a593-122d-7586-fccedfab8e38,CUST_30546,PROD_4772,11,1388.28,15271.08,2023-11-13,debit_card,Caldeira,SP,shipped,parceiro_b
+29db164a-8fce-ca28-3968-d13da49e6bc8,CUST_10816,PROD_1132,6,2910.36,17462.16,2023-11-13,credit_card,Gomes dos Dourados,SP,cancelled,parceiro_b
+db50f3e1-ba7e-724c-4bf6-b02b353b17ee,CUST_45751,PROD_4881,9,2329.88,20968.92,2023-11-13,debit_card,Castro das Flores,SP,shipped,parceiro_a
+14239534-1e61-b2cb-717e-9264994dcf4f,CUST_38972,PROD_0314,9,1063.48,9571.32,2023-11-13,pix,Andrade,MG,delivered,parceiro_b
+7a013e4d-35b6-c865-6bb1-15621c056531,CUST_20373,PROD_1713,6,79.85,479.1,2023-11-13,boleto,Costela Alegre,RJ,delivered,parceiro_b
+69b083af-ca77-02ad-19c1-8301231872eb,CUST_48795,PROD_0351,12,1817.73,21812.76,2023-11-13,credit_card,Ribeiro,PE,delivered,parceiro_b
+b48d1140-424e-91a6-71da-84127f652083,CUST_02802,PROD_0078,18,2846.85,51243.3,2023-11-13,pix,Sá do Campo,PR,delivered,parceiro_c
+7e5d4fc3-9edf-98bc-e917-43ceb264a631,CUST_32585,PROD_1323,14,1844.96,25829.44,2023-11-13,boleto,Leão,SP,pending,parceiro_a
+21a635f8-433e-da09-2387-932733189402,CUST_16258,PROD_0518,18,514.75,9265.5,2023-11-13,pix,Nogueira da Mata,RJ,cancelled,parceiro_a
+3b1f3fb8-255f-09a3-8596-5bd8352122ee,CUST_28704,PROD_2167,12,157.61,1891.32,2023-11-13,credit_card,da Cunha,PI,shipped,parceiro_c
+36a025cd-2c2e-a6b0-a422-3e79b59f5182,CUST_21735,PROD_4342,5,3332.4,16662.0,2023-11-13,pix,da Paz,AL,delivered,parceiro_c
+d6a9cb45-45ee-f4b4-02cf-e081770c7f8b,CUST_39539,PROD_3318,18,3625.55,65259.9,2023-11-13,pix,Monteiro da Mata,RJ,pending,parceiro_c
+0419d59f-4aeb-eb28-6d19-38eb4e6d1572,CUST_32678,PROD_0451,17,641.63,10907.71,2023-11-13,debit_card,Novaes da Prata,MG,pending,parceiro_a
+7203b612-afdf-f39b-64bd-892d198116ea,CUST_07009,PROD_1883,2,2485.8,4971.6,2023-11-13,debit_card,Costa do Amparo,MA,delivered,parceiro_a
+eaea9835-823c-8155-c5d7-5a8cc4e5ea53,CUST_16943,PROD_0516,5,4179.65,20898.25,2023-11-13,credit_card,Marques das Pedras,ES,delivered,parceiro_a
+b981ab26-c38f-80ad-4cb2-f2ed79e67571,CUST_01622,PROD_0103,18,2565.08,46171.44,2023-11-13,credit_card,Aparecida,MG,delivered,parceiro_a
+a3284776-f3eb-893e-74b2-c7fc58daed04,CUST_28642,PROD_0226,14,4069.4,56971.6,2023-11-13,credit_card,Macedo,RJ,delivered,parceiro_b
+5310c5cf-6b43-829b-9237-645799bf8cdf,CUST_20902,PROD_3700,18,3145.35,56616.3,2023-11-13,credit_card,da Costa da Prata,SP,delivered,parceiro_b
+a10e0d7a-ac8f-2afa-d51c-9a7e88a0e04a,CUST_21074,PROD_0518,4,866.0,3464.0,2023-11-13,credit_card,Pereira,PR,shipped,parceiro_c
+ead5e789-2720-b1b2-e95c-138ecd8ddccc,CUST_12175,PROD_1821,14,3782.81,52959.34,2023-11-13,pix,Rios de Moraes,SP,shipped,parceiro_a
+81081fe4-dcc1-654d-5531-39c5e9549d51,CUST_38625,PROD_3627,19,2988.52,56781.88,2023-11-13,pix,Alves de Goiás,RJ,pending,parceiro_a
+7cba1d85-209b-da39-2510-0db36594faa7,CUST_27209,PROD_2749,9,661.3,5951.7,2023-11-13,credit_card,da Costa,SC,cancelled,parceiro_b
+6ef060f9-a57a-b462-8d97-5c5f84c43de5,CUST_01543,PROD_2759,20,683.47,13669.4,2023-11-13,pix,Sousa da Serra,MG,delivered,parceiro_c
+ca647074-2531-dca3-df0a-d9b4d86364a4,CUST_28476,PROD_1342,10,4401.48,44014.8,2023-11-13,debit_card,Correia,SP,shipped,parceiro_a
+1d9e4341-aeeb-3329-66b1-04a6ce164e48,CUST_48990,PROD_3782,8,2863.32,22906.56,2023-11-13,pix,da Rocha de Fernandes,DF,delivered,parceiro_b
+e6519bcd-e556-139e-48ad-09613d3da6d8,CUST_30812,PROD_4635,11,3571.5,39286.5,2023-11-13,credit_card,da Rosa,PI,delivered,parceiro_c
+2fac6f6e-91c4-0390-ac56-485cc279e38a,CUST_31354,PROD_0896,16,3263.14,52210.24,2023-11-13,debit_card,Cirino do Sul,GO,pending,parceiro_b
+0879b114-6e9f-0afa-b6d2-443bcc71c918,CUST_49731,PROD_3724,12,2236.44,26837.28,2023-11-13,pix,Teixeira de Alves,SP,delivered,parceiro_a
+1aa66918-b10a-852a-8384-39eacfdaf25b,CUST_06689,PROD_3649,3,2900.78,8702.34,2023-11-13,debit_card,Nascimento,SP,delivered,parceiro_b
+ee74de4e-b7c3-8d0c-80e3-c8596d0c8ccd,CUST_40315,PROD_1074,20,2610.97,52219.4,2023-11-13,credit_card,Lima de Dias,MG,shipped,parceiro_c
+113f5036-74e0-7b63-c1cc-645941da47dd,CUST_34620,PROD_3834,4,551.78,2207.12,2023-11-13,pix,Pinto Verde,MG,cancelled,parceiro_c
+9f72eaae-0fbd-22b5-ef61-4ef1b53fad99,CUST_33532,PROD_3785,7,1802.82,12619.74,2023-11-13,boleto,Oliveira,MG,delivered,parceiro_a
+df68e004-f0c7-c8b0-b9c5-488886a25263,CUST_31565,PROD_0300,2,3595.81,7191.62,2023-11-13,credit_card,Teixeira da Praia,MG,shipped,parceiro_a
+40365a4a-3837-563d-395b-b241396ab7d8,CUST_48831,PROD_0729,2,2646.45,5292.9,2023-11-13,pix,Jesus de Gomes,CE,delivered,parceiro_a
+51ad8c6d-7935-d550-d060-9b3f0a58a52c,CUST_17606,PROD_1291,14,1245.43,17436.02,2023-11-13,credit_card,Rodrigues,PE,delivered,parceiro_b
+7921d35a-e415-bbc4-bb09-890e6e9aa3da,CUST_44512,PROD_2680,12,2646.64,31759.68,2023-11-13,pix,Porto,MG,delivered,parceiro_c
+056433ed-e74d-b019-1df7-be426f5ae178,CUST_23845,PROD_3635,10,689.69,6896.9,2023-11-13,debit_card,Costa,ES,delivered,parceiro_a
+34ef9ff1-0bf5-05e5-249d-16dd2cf8399e,CUST_43884,PROD_1726,1,4315.4,4315.4,2023-11-13,pix,Ramos Alegre,PR,delivered,parceiro_b
+c1b8d07d-436a-f393-6e5f-aba0a1811cfc,CUST_49413,PROD_3478,10,3855.64,38556.4,2023-11-13,pix,Duarte,PI,delivered,parceiro_a
+ee4a59fa-8e51-7880-c02f-0c99e2e0cd54,CUST_34842,PROD_1363,19,1415.89,26901.91,2023-11-13,credit_card,Monteiro,SP,delivered,parceiro_b
+c22982aa-6320-b18d-6c8d-f327338d36fa,CUST_01213,PROD_4631,20,239.93,4798.6,2023-11-13,debit_card,Cavalcanti do Sul,SP,delivered,parceiro_b
+0c791455-ce43-9c05-10dd-53db09159b3d,CUST_45708,PROD_1232,12,2760.85,33130.2,2023-11-13,boleto,da Mata de Duarte,PE,delivered,parceiro_a
+1c8aea92-08c8-2727-2dae-a77bfe646a99,CUST_09113,PROD_4395,3,2117.07,6351.21,2023-11-13,pix,Macedo da Serra,ES,delivered,parceiro_a
+320ad1b6-c219-734a-8595-4ae0f8a53c8f,CUST_17436,PROD_1393,5,1720.51,8602.55,2023-11-13,credit_card,Porto de Freitas,PA,delivered,parceiro_a
+26ac6d17-3cbd-d420-b10d-602521fc59f7,CUST_09148,PROD_0173,10,4692.87,46928.7,2023-11-13,pix,Câmara Paulista,SE,delivered,parceiro_b
+2d7e7922-e885-cc75-fde8-427491b818b8,CUST_27288,PROD_0253,17,4831.0,82127.0,2023-11-13,debit_card,Abreu do Galho,RJ,delivered,parceiro_a
+fa1a1fe6-d77d-61ee-2728-9543a3dba5f8,CUST_01415,PROD_3495,6,2342.12,14052.72,2023-11-13,pix,Carvalho de Minas,RJ,shipped,parceiro_a
+e2ded7a2-0f3d-2348-d7b9-75d21b49abef,CUST_16994,PROD_0015,8,2806.76,22454.08,2023-11-13,pix,Silva,RJ,delivered,parceiro_a
+c03d30ce-b38b-0302-3e67-07390976b9ce,CUST_20797,PROD_1755,20,3224.87,64497.4,2023-11-13,pix,Silveira,SC,delivered,parceiro_a
+26f73278-fc4e-7c7c-507c-88c6c3754073,CUST_02937,PROD_0060,9,4724.87,42523.83,2023-11-13,pix,Cunha,MG,pending,parceiro_c
+b836bffc-9437-f3b2-39db-7b72c4a310b9,CUST_48605,PROD_0537,2,3416.76,6833.52,2023-11-13,pix,Ramos Verde,RJ,shipped,parceiro_a
+2b54985f-571a-28be-8de1-360ea07abbc3,CUST_26540,PROD_3247,6,222.07,1332.42,2023-11-13,credit_card,Cardoso de Leão,DF,cancelled,parceiro_c
+896e8213-3417-6cae-8f1c-5477eedc5ee0,CUST_40373,PROD_2983,2,185.02,370.04,2023-11-13,pix,Fogaça,RJ,delivered,parceiro_b
+c2c10327-93a2-e819-39eb-d773ac89cb31,CUST_24285,PROD_2637,1,2156.64,2156.64,2023-11-13,credit_card,Monteiro,PE,delivered,parceiro_c
+16f2a125-06b0-b1cc-20f2-87385b385d49,CUST_30255,PROD_3528,8,1559.1,12472.8,2023-11-13,boleto,Marques,MG,delivered,parceiro_a
+c35473bf-58c5-97e7-5a91-e26ec2f36e28,CUST_42026,PROD_3252,19,4749.25,90235.75,2023-11-13,debit_card,das Neves,RS,delivered,parceiro_b
+86154b13-30aa-b554-2825-14fd6e4ce191,CUST_00754,PROD_2526,18,4018.36,72330.48,2023-11-13,pix,Cunha,RS,delivered,parceiro_b
+5860fbfd-1c16-5d56-215e-e18c4a6bb921,CUST_40782,PROD_2594,13,4242.36,55150.68,2023-11-13,credit_card,Jesus do Campo,SC,cancelled,parceiro_b
+2058fba7-23ce-4af6-b59c-881f8058f4c7,CUST_25535,PROD_3288,8,319.14,2553.12,2023-11-13,credit_card,Moura de das Neves,SP,delivered,parceiro_c
+9e01ad55-6738-33bb-7112-9a40b910d37a,CUST_08063,PROD_3173,5,1055.97,5279.85,2023-11-13,pix,Lima,PE,pending,parceiro_a
+7af246da-61f8-05be-7428-e502888badc4,CUST_04377,PROD_3291,11,4017.65,44194.15,2023-11-13,debit_card,Fogaça de Goiás,MA,delivered,parceiro_a
+207d0bb1-4f22-2157-87c3-7d49762b41b8,CUST_46325,PROD_2190,2,4115.37,8230.74,2023-11-13,credit_card,Santos,PE,delivered,parceiro_b
+6c1c9577-6779-595a-dfa3-051b00d583f3,CUST_48334,PROD_2311,13,2655.66,34523.58,2023-11-13,credit_card,Nascimento,RJ,delivered,parceiro_c
+a222f3a3-6da0-59b4-de0c-7b741d0e86a3,CUST_27806,PROD_4442,9,1195.68,10761.12,2023-11-13,debit_card,Câmara de Goiás,SP,delivered,parceiro_b
+39d470c9-b5c9-2758-f100-5d208d208e6e,CUST_43499,PROD_1132,14,3664.09,51297.26,2023-11-13,boleto,Silveira de Rezende,MG,delivered,parceiro_c
+136784ff-48f3-69aa-eac6-0a439cca8d5c,CUST_16973,PROD_4985,14,229.7,3215.8,2023-11-13,credit_card,Camargo,SP,delivered,parceiro_c
+9e608602-c489-c438-3b22-571106b98d6f,CUST_14658,PROD_0315,4,3964.13,15856.52,2023-11-13,pix,Nogueira do Norte,DF,pending,parceiro_a
+5c2a650f-3ae6-7107-661e-92487d4ea808,CUST_07559,PROD_1542,6,4393.26,26359.56,2023-11-13,pix,Oliveira Verde,AM,shipped,parceiro_a
+8e02806b-8e09-fa48-feb6-7930c4e16fd0,CUST_05355,PROD_1610,2,2162.59,4325.18,2023-11-13,boleto,da Cruz,SP,pending,parceiro_b
+0e97fad3-14e4-3648-d1af-eb7b963c5913,CUST_43066,PROD_3541,7,3561.05,24927.35,2023-11-13,boleto,Siqueira do Galho,SP,shipped,parceiro_a
+6ee8961b-daba-a54b-3834-953fac96bec3,CUST_23736,PROD_1073,1,2274.73,2274.73,2023-11-13,pix,Machado do Oeste,SP,pending,parceiro_a
+49bbc032-b256-2b93-b6fb-e7560019395a,CUST_00509,PROD_1786,17,2478.2,42129.4,2023-11-13,debit_card,Cavalcante,SC,delivered,parceiro_b
+2b49baa0-cd37-6052-c11c-2376d3fa23f2,CUST_18735,PROD_4128,4,2936.56,11746.24,2023-11-13,credit_card,Souza Alegre,DF,delivered,parceiro_a
+982d3156-df5f-0f63-9cce-8f82e3c4e394,CUST_01556,PROD_1446,20,999.88,19997.6,2023-11-13,debit_card,Fernandes da Mata,RS,delivered,parceiro_c
+8f716750-3428-6b1f-8392-1a2a1a936938,CUST_29055,PROD_0174,4,82.15,328.6,2023-11-13,debit_card,Moraes,MG,shipped,parceiro_b
+d5629a0c-acec-3553-3019-a8d7e528b7f5,CUST_37571,PROD_4736,11,2371.59,26087.49,2023-11-13,debit_card,Teixeira,MA,pending,parceiro_b
+97883452-e9d9-8eb4-bed3-8eedfbb55dfd,CUST_29016,PROD_1386,2,4844.15,9688.3,2023-11-13,debit_card,Rocha,PR,delivered,parceiro_a
+df8c911b-36e9-3640-6c31-10538d0bd61e,CUST_21497,PROD_1934,7,4602.91,32220.37,2023-11-13,pix,Sá Grande,PA,pending,parceiro_c
+d1becc58-0930-6df6-2a74-6de0f4cb9492,CUST_16698,PROD_2286,15,4482.33,67234.95,2023-11-13,credit_card,Alves do Norte,CE,delivered,parceiro_c
+c6951769-c394-fb9c-363d-65d56d0dc7bc,CUST_37237,PROD_2839,2,4432.49,8864.98,2023-11-13,pix,Souza Alegre,PR,delivered,parceiro_a
+792548d4-934b-5af5-de0d-465a65407bee,CUST_37465,PROD_1111,6,4286.25,25717.5,2023-11-13,credit_card,Gomes,SP,delivered,parceiro_b
+fecfb8f7-60f2-61b9-3efe-f7c09db40916,CUST_32142,PROD_4644,17,3883.64,66021.88,2023-11-13,pix,Barros,MG,delivered,parceiro_b
+623ad89a-2490-55e9-df18-c1aebab1e2f7,CUST_46113,PROD_3427,3,732.8,2198.4,2023-11-13,pix,Cavalcanti do Galho,MG,delivered,parceiro_a
+af323ac7-9a23-cb99-88c5-5c0f1acd2fe1,CUST_33967,PROD_3217,17,3584.19,60931.23,2023-11-13,debit_card,Silva do Sul,MG,delivered,parceiro_a
+e3321e15-c049-ec97-4015-2c1e58e08531,CUST_01389,PROD_3884,16,4871.4,77942.4,2023-11-13,credit_card,Fonseca,PB,pending,parceiro_c
+e067244b-e4aa-351a-b562-904e50a41a85,CUST_30929,PROD_4171,13,3673.06,47749.78,2023-11-13,debit_card,Souza,SP,shipped,parceiro_c
+d526a44d-cea8-6024-d29a-7dad70cf9782,CUST_13288,PROD_0585,19,70.53,1340.07,2023-11-13,debit_card,Fernandes do Galho,RS,delivered,parceiro_c
+330c10ff-b3f2-96f1-3dab-a81624f4270c,CUST_27866,PROD_2741,13,42.9,557.7,2023-11-13,pix,da Luz de Barros,CE,cancelled,parceiro_c
+660bff0a-0e18-9634-ed71-19973df9cb21,CUST_33197,PROD_1368,3,3197.58,9592.74,2023-11-13,debit_card,Peixoto,RN,cancelled,parceiro_b
+2bb9b5a6-43c7-8f30-f3fc-2f684ab4962d,CUST_19198,PROD_3260,19,1718.5,32651.5,2023-11-13,credit_card,Moraes,PR,delivered,parceiro_c
+46887181-bcc4-9dac-27be-8e3ab3f35b1d,CUST_07494,PROD_3864,7,4990.68,34934.76,2023-11-13,pix,Cavalcanti,SP,delivered,parceiro_a
+7f162f50-1874-3f96-c4bd-6e8c279f62f2,CUST_21651,PROD_2208,18,1359.17,24465.06,2023-11-13,credit_card,Ribeiro das Pedras,GO,delivered,parceiro_c
+cf1cfce8-68f4-3471-0ab3-cc998312ff77,CUST_09893,PROD_1584,6,1130.4,6782.4,2023-11-13,boleto,Moraes,BA,shipped,parceiro_a
+e5df00ba-7658-266c-140c-fe9f594615e6,CUST_30745,PROD_1002,16,1206.18,19298.88,2023-11-13,credit_card,Cardoso,DF,delivered,parceiro_b
+82912c35-7a9f-a523-e287-9739115fa800,CUST_47361,PROD_2851,12,1869.64,22435.68,2023-11-13,pix,Marques do Campo,SP,delivered,parceiro_b
+dace486e-837b-8b90-d01b-811b8bf2a0ba,CUST_41434,PROD_3524,2,1113.28,2226.56,2023-11-13,pix,Sousa da Serra,GO,delivered,parceiro_b
+57f883ad-43af-c1fa-634e-be68a94d8676,CUST_03358,PROD_0834,18,607.82,10940.76,2023-11-13,credit_card,Rodrigues Verde,RS,delivered,parceiro_a
+821a6eda-293f-5671-f2e6-847b5217102f,CUST_15465,PROD_0936,17,4181.61,71087.37,2023-11-13,boleto,Porto de Mendonça,RJ,delivered,parceiro_b
+0f75ca65-d3ac-e734-a943-9d4d67f91ab0,CUST_16031,PROD_0007,11,4298.28,47281.08,2023-11-13,debit_card,Pacheco do Amparo,MG,delivered,parceiro_c
+b4eedd70-3d56-bab8-3c62-e77844161476,CUST_21263,PROD_4992,15,3881.68,58225.2,2023-11-13,credit_card,Mendes de Nascimento,MT,shipped,parceiro_b
+3d630229-2a6d-6177-bd69-bb235632effa,CUST_00450,PROD_2344,17,1305.44,22192.48,2023-11-13,credit_card,Leão,SP,delivered,parceiro_a
+853f87a7-7f0a-033d-4279-1cacadd0edd5,CUST_15444,PROD_4124,15,2856.01,42840.15,2023-11-13,credit_card,Abreu de Goiás,PR,delivered,parceiro_b
+9feb388e-b04a-2f48-5ffa-45536de4989a,CUST_35690,PROD_2526,7,3182.9,22280.3,2023-11-13,pix,da Mota,SP,delivered,parceiro_c
+5f5cb537-0eed-ac8f-8661-39788fd115ed,CUST_29140,PROD_3640,2,4792.42,9584.84,2023-11-13,debit_card,da Cunha de da Conceição,SP,delivered,parceiro_c
+178d850a-e61b-5ff1-9ab2-705c0b874e90,CUST_28078,PROD_3108,18,142.91,2572.38,2023-11-13,boleto,da Cruz,RJ,delivered,parceiro_b
+16a007fb-4db9-dcf3-89dc-e11c82260e38,CUST_09718,PROD_2918,1,929.98,929.98,2023-11-13,credit_card,Viana Alegre,SP,delivered,parceiro_c
+0de4c435-6795-ec37-3b52-7b5549597cc2,CUST_42675,PROD_2095,8,4132.15,33057.2,2023-11-13,credit_card,Silva,RJ,shipped,parceiro_a
+d74772b0-d8f7-ef57-2a50-e6bb4c7d111b,CUST_23966,PROD_4333,5,2170.5,10852.5,2023-11-13,credit_card,Leão do Amparo,BA,shipped,parceiro_c
+105182d4-385d-aad5-0a3a-e10ef5d4b30f,CUST_24988,PROD_3435,11,1814.06,19954.66,2023-11-13,debit_card,da Mota de Azevedo,RJ,delivered,parceiro_a
+51926a30-7ebf-57f2-6b0f-bd1657cb4100,CUST_17348,PROD_2229,16,2509.94,40159.04,2023-11-13,debit_card,Rios de Pimenta,CE,shipped,parceiro_a
+0db10e6a-8020-5829-6c07-f0e8f673a2f8,CUST_28259,PROD_1254,11,3808.6,41894.6,2023-11-13,debit_card,Cassiano Paulista,PI,delivered,parceiro_a
+bfa5c98b-6709-d691-ba16-49ec932d841d,CUST_38389,PROD_2366,13,1235.79,16065.27,2023-11-13,debit_card,Abreu de da Rosa,MS,delivered,parceiro_a
+3d9b538a-bbcd-fda8-daf8-d7b11468cb5d,CUST_21113,PROD_4720,15,3208.1,48121.5,2023-11-13,debit_card,Nunes Alegre,SP,delivered,parceiro_a
+ff0050d0-f707-67bb-26c8-5dc8840eefeb,CUST_18248,PROD_1655,12,842.1,10105.2,2023-11-13,pix,Nunes,DF,delivered,parceiro_a
+b627b475-8b47-d09a-40d1-429321327931,CUST_10855,PROD_1207,7,3091.78,21642.46,2023-11-13,credit_card,Câmara,SC,delivered,parceiro_a
+3a3b5022-ac5c-e103-f690-1200f2caa58d,CUST_34900,PROD_3979,17,1391.76,23659.92,2023-11-13,pix,Rocha dos Dourados,SP,cancelled,parceiro_a
+d2a87063-1341-78c7-f2fd-25d431ea2ae0,CUST_30931,PROD_0740,12,2090.56,25086.72,2023-11-13,credit_card,da Luz,MG,delivered,parceiro_a
+f0752578-b1b0-2ea7-8e2e-f64ad4fa822e,CUST_40830,PROD_4194,5,607.09,3035.45,2023-11-13,credit_card,Pimenta,MG,delivered,parceiro_b
+020bfee2-d42b-1ba0-8aa0-df5693fbf331,CUST_06040,PROD_4943,1,1876.06,1876.06,2023-11-13,debit_card,Borges de Novais,SP,delivered,parceiro_a
+429ffe6e-6795-6d97-770d-dc451b1cd7c1,CUST_34651,PROD_2040,13,242.16,3148.08,2023-11-13,credit_card,Moreira,BA,shipped,parceiro_c
+3f895ef8-dc51-5528-a666-f25a5f9a15a0,CUST_16720,PROD_4716,5,1346.44,6732.2,2023-11-13,boleto,Rodrigues dos Dourados,AM,delivered,parceiro_b
+e5c8be03-98af-0391-21a0-bcee166e4a3d,CUST_39166,PROD_1925,4,3008.33,12033.32,2023-11-13,pix,Peixoto,SP,delivered,parceiro_a
+65144967-4343-33fa-2217-1b490c4aa203,CUST_35255,PROD_1379,19,3089.65,58703.35,2023-11-13,debit_card,Nunes do Campo,SP,delivered,parceiro_a
+ca0fee59-5c87-766f-2fb9-36228dd5369a,CUST_41799,PROD_3455,10,2781.24,27812.4,2023-11-13,debit_card,Viana,PR,delivered,parceiro_b
+38085aea-4829-826f-0924-b8cabf3b9580,CUST_04246,PROD_1655,12,4227.53,50730.36,2023-11-13,boleto,Pires do Campo,MG,delivered,parceiro_c
+4e5ec6df-72f4-f0ae-a4b1-d1f3bb302f6d,CUST_03847,PROD_0105,1,3809.98,3809.98,2023-11-13,debit_card,Albuquerque,RJ,cancelled,parceiro_b
+94cd1f18-72a3-5216-2c8e-f259c88d373a,CUST_34931,PROD_1075,13,4141.16,53835.08,2023-11-13,credit_card,Fonseca das Flores,SC,pending,parceiro_c
+27842bb3-03d5-7a31-101f-4dfffbd9ed46,CUST_07791,PROD_2959,6,3400.63,20403.78,2023-11-13,credit_card,Lopes de Siqueira,BA,delivered,parceiro_a
+81f5c416-a24a-c3b3-c4c9-c9b623c368f5,CUST_37546,PROD_3747,14,49.78,696.92,2023-11-13,credit_card,Farias de Viana,CE,delivered,parceiro_b
+0df0af89-100e-5362-43bd-2a27d7297091,CUST_12940,PROD_4079,8,1754.3,14034.4,2023-11-13,boleto,Cunha,PA,delivered,parceiro_b
+c6f9670e-7c36-a899-87f4-7752ff9c3717,CUST_22680,PROD_1499,2,4262.38,8524.76,2023-11-13,boleto,Guerra de Leão,MG,delivered,parceiro_b
+276606f0-685d-cd11-ce2c-651ef619e36e,CUST_03842,PROD_4127,1,4534.58,4534.58,2023-11-13,credit_card,Silveira,PR,delivered,parceiro_a
+9637eff1-8a66-3084-f282-e8bfd352a3fe,CUST_19860,PROD_4485,10,4166.35,41663.5,2023-11-13,debit_card,Casa Grande das Flores,MG,delivered,parceiro_b
+32598664-3f70-ec80-b047-504da7b988f6,CUST_49947,PROD_3687,20,1256.38,25127.6,2023-11-13,credit_card,da Cunha Alegre,RN,delivered,parceiro_c
+ce4f6365-ba8e-2ea1-58f0-fd7a21919d8c,CUST_36387,PROD_4908,1,1840.95,1840.95,2023-11-13,pix,da Mota de Goiás,SP,delivered,parceiro_a
+5e1edffb-02cf-3f1b-8c0d-08f5a6d5f7ae,CUST_39932,PROD_0863,16,4569.43,73110.88,2023-11-13,credit_card,Camargo Verde,RS,pending,parceiro_a
+ae9f641e-f4b7-0eaa-3508-05aae087495d,CUST_45870,PROD_1184,4,1920.57,7682.28,2023-11-13,boleto,Rodrigues do Campo,SP,delivered,parceiro_c
+0738bc06-c346-d0e6-c72c-698f5521f717,CUST_47375,PROD_0810,9,3485.23,31367.07,2023-11-13,credit_card,Alves,TO,delivered,parceiro_b
+62966210-ee99-52ea-91e4-30d00865885e,CUST_14392,PROD_0151,3,815.98,2447.94,2023-11-13,boleto,Vieira das Flores,AL,delivered,parceiro_b
+993414a2-73b4-70e2-b2be-185aea79177a,CUST_36921,PROD_4510,4,1119.58,4478.32,2023-11-13,debit_card,Pacheco,SP,delivered,parceiro_c
+426892df-0622-f585-0e85-6d92573bae7d,CUST_17115,PROD_3679,16,3663.57,58617.12,2023-11-13,pix,Silva dos Dourados,RJ,delivered,parceiro_a
+fd1ddde5-e26b-7729-5c13-036848285503,CUST_30100,PROD_4502,20,3581.78,71635.6,2023-11-13,pix,Fogaça,RS,delivered,parceiro_b
+c14e854a-d1af-40ee-e50b-22c2dbb9e773,CUST_14619,PROD_1808,19,1411.56,26819.64,2023-11-13,boleto,Câmara,SP,pending,parceiro_c
+91d99b66-ab94-9420-eb57-f7cc65dd7523,CUST_47857,PROD_3350,18,3070.7,55272.6,2023-11-13,boleto,Garcia Paulista,PE,delivered,parceiro_a
+defa2fd2-fa0e-d202-d71f-5630631e124b,CUST_18852,PROD_2457,16,2517.44,40279.04,2023-11-13,pix,Machado,CE,delivered,parceiro_a
+10f9f722-09a5-dece-7fdd-ba2987b5bff7,CUST_11058,PROD_1945,11,29.76,327.36,2023-11-13,debit_card,Câmara do Sul,SP,shipped,parceiro_c
+c32d838a-a7ee-21e3-649b-da5ff13bb66d,CUST_18149,PROD_4770,11,2097.44,23071.84,2023-11-13,credit_card,Oliveira Paulista,PR,shipped,parceiro_c
+34a4f9b5-b82d-e212-090f-3ef6db5522ec,CUST_29783,PROD_0176,15,950.67,14260.05,2023-11-13,debit_card,Fogaça,RJ,delivered,parceiro_c
+1bbb7fe2-0567-f508-a576-3978599a912e,CUST_13282,PROD_2920,12,1651.2,19814.4,2023-11-13,debit_card,da Cruz Grande,RJ,cancelled,parceiro_c
+54c77de8-3b74-583f-9373-c9f06632e3be,CUST_03261,PROD_4086,8,3383.78,27070.24,2023-11-13,credit_card,Moraes,MA,delivered,parceiro_a
+d1817840-f171-1f4d-f3ba-c7ef11f19c28,CUST_33893,PROD_0172,1,1466.08,1466.08,2023-11-13,pix,Mendonça de da Luz,RJ,cancelled,parceiro_a
+3aa33f7e-1eda-fd62-d3bd-aa2e65a5a7a9,CUST_07496,PROD_3646,9,4077.41,36696.69,2023-11-13,boleto,Machado do Campo,PR,cancelled,parceiro_a
+558d5c16-1120-5e31-3071-0e23f600cd61,CUST_25082,PROD_4955,10,193.4,1934.0,2023-11-13,credit_card,Ferreira,RS,delivered,parceiro_b
+4f56249c-fc5b-f395-4f84-8f7de0f55d93,CUST_00755,PROD_3771,8,3943.36,31546.88,2023-11-13,credit_card,Montenegro da Prata,AL,delivered,parceiro_b
+8e3fa470-0ad9-5f0b-b6ed-89f5247b7b67,CUST_37841,PROD_1790,1,3900.46,3900.46,2023-11-13,debit_card,Peixoto,RJ,delivered,parceiro_c
+87f2e54b-dccf-4730-8dc2-4f60e99d4d06,CUST_00550,PROD_0574,10,1845.54,18455.4,2023-11-13,pix,das Neves das Pedras,RN,delivered,parceiro_a
+ca397056-62e1-6ace-d006-9fc4f9abbb48,CUST_49579,PROD_3775,7,2467.12,17269.84,2023-11-13,debit_card,Rodrigues,MT,delivered,parceiro_b
+2ecf9b3e-a591-541f-bd65-921c7f68730e,CUST_00052,PROD_2690,12,2362.79,28353.48,2023-11-13,credit_card,Moura,RJ,delivered,parceiro_a
+c769818f-a34e-6eea-998f-994bda296bc7,CUST_13826,PROD_1200,13,1580.17,20542.21,2023-11-13,pix,Pastor de Minas,RJ,delivered,parceiro_a
+d180c273-a837-074e-0617-98e9806e5f1a,CUST_33832,PROD_4407,16,4198.79,67180.64,2023-11-13,credit_card,Cirino,PB,delivered,parceiro_a
+a50a05de-4a48-bfd0-39d4-7178f0ba5b4f,CUST_13025,PROD_2358,3,873.08,2619.24,2023-11-13,boleto,Ramos,CE,delivered,parceiro_c
+8aaa4b64-d56e-2aa2-1b33-398f15e0cc89,CUST_49316,PROD_0088,4,857.44,3429.76,2023-11-13,debit_card,da Cruz das Flores,RN,shipped,parceiro_b
+9ca34126-cf1b-e8cc-31d8-8f0937ec0053,CUST_34358,PROD_2974,8,44.6,356.8,2023-11-13,credit_card,Castro do Campo,GO,shipped,parceiro_b
+774eb630-123c-a6e9-3cf7-afce33a13f6f,CUST_33123,PROD_4746,18,2875.09,51751.62,2023-11-13,pix,Pinto,RS,delivered,parceiro_a
+b881ef39-ff55-aee2-69c1-b6474708312d,CUST_38675,PROD_1889,2,4488.66,8977.32,2023-11-13,pix,da Mota,PA,delivered,parceiro_a
+a2cea1ab-7223-89b6-d7f2-c51523ad4502,CUST_17403,PROD_1553,4,1104.27,4417.08,2023-11-13,debit_card,Macedo,TO,pending,parceiro_c
+7bd48706-a54f-b2d7-9082-09b6295cbf0d,CUST_12521,PROD_0658,9,4650.62,41855.58,2023-11-13,boleto,Montenegro da Praia,SP,delivered,parceiro_c
+fa4979fd-3c7a-5af3-9e38-b9b6098eed20,CUST_47556,PROD_2143,18,4677.91,84202.38,2023-11-13,credit_card,Macedo do Oeste,SP,delivered,parceiro_b
+25754624-b382-07a9-e33a-f98386410ac1,CUST_44245,PROD_2845,16,233.5,3736.0,2023-11-13,pix,Aparecida,AM,delivered,parceiro_b
+6fe61664-05e3-5c36-1ea7-3899819a0722,CUST_05313,PROD_0020,18,4372.4,78703.2,2023-11-13,pix,Ramos,SC,delivered,parceiro_b
+c4b7cdc2-7958-e0b4-135d-a91fd0955aad,CUST_43296,PROD_4221,14,3423.86,47934.04,2023-11-13,pix,Correia,SC,delivered,parceiro_a
+25bddac3-3137-b621-74bf-5afba715a821,CUST_30269,PROD_3993,13,3249.75,42246.75,2023-11-13,credit_card,Farias do Norte,MT,delivered,parceiro_b
+e661fe35-b4fd-d16f-268a-69e05e24eb9b,CUST_26548,PROD_4303,5,1487.48,7437.4,2023-11-13,debit_card,Moraes do Amparo,PR,shipped,parceiro_a
+f9ff9406-744c-2a97-6ef2-f056732292c9,CUST_37307,PROD_3617,14,2035.62,28498.68,2023-11-13,credit_card,Nascimento,SP,delivered,parceiro_b
+c0dd2fc2-33c9-943b-ddc6-5e9aaf27eb37,CUST_03824,PROD_3081,8,4863.25,38906.0,2023-11-13,boleto,da Mota,SP,delivered,parceiro_b
+56a6fde7-a43d-4eb9-6574-e4a322d43e70,CUST_33274,PROD_3508,5,692.57,3462.85,2023-11-13,credit_card,Araújo,SP,pending,parceiro_c
+ab797dea-70b5-4102-5c11-a593697bc1e3,CUST_27377,PROD_4223,7,3039.69,21277.83,2023-11-13,debit_card,Duarte,GO,shipped,parceiro_a
+7dd35573-231f-e8da-d403-399c0a933fb2,CUST_24629,PROD_4485,4,3681.54,14726.16,2023-11-13,pix,Pires Grande,PR,delivered,parceiro_c
+b271cc1f-e937-63bb-c6d9-d7f8b73e6cac,CUST_24918,PROD_0955,7,2514.74,17603.18,2023-11-13,debit_card,Correia das Flores,SP,cancelled,parceiro_b
+6f66313c-daca-0831-a21b-135ed21544a0,CUST_17492,PROD_3720,8,732.37,5858.96,2023-11-13,credit_card,Abreu,MT,delivered,parceiro_b
+f07a6496-9605-fbfc-be97-d2f6ba30eabe,CUST_46438,PROD_3661,17,781.28,13281.76,2023-11-13,pix,Camargo,SP,delivered,parceiro_b
+3c0c3c55-6490-0443-6c85-892e38bc80bd,CUST_01643,PROD_4666,10,3567.35,35673.5,2023-11-13,boleto,Santos,GO,delivered,parceiro_a
+83d2a0a9-cd32-aff8-7161-483a482d356c,CUST_19109,PROD_0542,16,2274.87,36397.92,2023-11-13,pix,Gonçalves de Rocha,RJ,cancelled,parceiro_c
+3e3d7409-5452-5134-82a5-526c6a4531dd,CUST_35321,PROD_4138,18,2439.43,43909.74,2023-11-13,boleto,da Conceição das Pedras,RJ,delivered,parceiro_a
+01c4e85d-0e16-9f89-99cf-19fa1ffae678,CUST_29767,PROD_2406,20,1821.74,36434.8,2023-11-13,credit_card,Azevedo,MG,delivered,parceiro_b
+5481476a-2ae6-4695-2e65-716e92eb025c,CUST_37471,PROD_3015,4,4944.68,19778.72,2023-11-13,pix,Monteiro Alegre,ES,delivered,parceiro_a
+bf16aa2f-1e02-6ae9-797e-1535fc963edd,CUST_49143,PROD_0241,1,414.47,414.47,2023-11-13,credit_card,Freitas,RS,delivered,parceiro_c
+7c0944b2-86d4-c3c9-4cd0-4fc6f9b00d0d,CUST_34474,PROD_3671,3,2555.55,7666.65,2023-11-13,pix,Novais de da Cunha,DF,cancelled,parceiro_c
+ce7daa4d-c37d-520d-cecc-30840d7cfe3c,CUST_40135,PROD_0321,15,4396.31,65944.65,2023-11-13,debit_card,Campos do Sul,SP,shipped,parceiro_b
+0c40a6b7-4886-1264-04d4-c37dffac9e23,CUST_41189,PROD_3500,15,638.63,9579.45,2023-11-13,debit_card,Cavalcanti,SP,delivered,parceiro_b
+f92cafc1-7be1-5b40-f840-fba16ff63872,CUST_03506,PROD_0937,5,4045.77,20228.85,2023-11-13,credit_card,Andrade das Pedras,SC,delivered,parceiro_a
+ca2806dc-aac7-57f7-e1e7-b58c58ea83c9,CUST_42603,PROD_0610,6,4587.4,27524.4,2023-11-13,debit_card,da Rosa Paulista,CE,delivered,parceiro_a
+a9d9d228-1920-ee99-070e-cfee86b0d048,CUST_42574,PROD_2166,12,3853.91,46246.92,2023-11-13,debit_card,da Mata,GO,delivered,parceiro_a
+6169f94c-41d4-041b-ed73-5804002df7e3,CUST_13812,PROD_4180,13,2865.56,37252.28,2023-11-13,pix,Araújo,BA,cancelled,parceiro_b
+8adb1f57-f53f-d129-95d6-2d952ec60582,CUST_17896,PROD_3014,17,3107.55,52828.35,2023-11-13,debit_card,Vieira,SP,delivered,parceiro_b
+a827e403-a14b-9629-1d54-0a3367a17f7f,CUST_39088,PROD_2930,4,4126.28,16505.12,2023-11-13,credit_card,Abreu,RJ,shipped,parceiro_a
+1bee4bf2-0007-504d-d9e4-c9795493f226,CUST_00122,PROD_1483,16,2352.19,37635.04,2023-11-13,debit_card,Ribeiro,MG,delivered,parceiro_b
+12e4cb21-0782-ac17-3fd7-c5b193883aa9,CUST_02721,PROD_4665,14,2429.49,34012.86,2023-11-13,pix,Silva de Novais,RS,delivered,parceiro_a
+b9331556-1906-8697-a1a0-c2e229258dfd,CUST_46475,PROD_3343,13,4723.77,61409.01,2023-11-13,credit_card,Souza,SC,delivered,parceiro_c
+07c22d62-dcd4-e110-b71d-b7f332131313,CUST_08601,PROD_3159,17,1923.64,32701.88,2023-11-13,debit_card,da Luz das Pedras,PR,delivered,parceiro_b
+f6974be2-2571-124b-c744-679284a61253,CUST_27341,PROD_2338,9,2678.87,24109.83,2023-11-13,boleto,Melo,MG,delivered,parceiro_b
+0786c4be-eac4-0a91-4c4a-703f578bcd81,CUST_41324,PROD_2612,16,2548.85,40781.6,2023-11-13,pix,Rocha do Norte,RJ,delivered,parceiro_b
+36beec19-13eb-4a25-1e89-27b9d373038b,CUST_41858,PROD_2412,7,483.87,3387.09,2023-11-13,credit_card,Teixeira do Galho,SP,delivered,parceiro_a
+2eda5fc5-dcc6-9ac5-e5af-6bfdedc8c86d,CUST_19771,PROD_4338,7,3427.5,23992.5,2023-11-13,debit_card,Vargas de Nunes,SC,pending,parceiro_a
+aa84e025-f884-d561-226a-14bbb13e5577,CUST_06319,PROD_0552,5,4796.36,23981.8,2023-11-13,boleto,Vargas,BA,delivered,parceiro_a
+9c295310-c1ab-8d4f-0ef5-3a2c2c443817,CUST_13119,PROD_3982,9,4124.05,37116.45,2023-11-13,credit_card,Jesus,RJ,pending,parceiro_c
+20dc4694-2a17-a873-c233-bd885a932bf8,CUST_23905,PROD_0919,9,820.55,7384.95,2023-11-13,credit_card,Sampaio,SC,shipped,parceiro_a
+0a1f82f2-1d26-d172-d95e-6406962c7e1d,CUST_05219,PROD_1470,10,4065.87,40658.7,2023-11-13,boleto,da Rocha das Pedras,RS,delivered,parceiro_a
+e6415a9e-102e-5fa4-dd3b-23f3628b3030,CUST_15614,PROD_4380,12,837.49,10049.88,2023-11-13,credit_card,Moura,BA,cancelled,parceiro_b
+f0953577-4972-8151-4a2c-d1b7ce19eff6,CUST_07424,PROD_4142,16,282.74,4523.84,2023-11-13,credit_card,da Mota,SP,delivered,parceiro_c
+7a3abe8b-7037-85a1-e5f9-8431a64d2dc2,CUST_32200,PROD_2659,13,2870.71,37319.23,2023-11-13,credit_card,Câmara de Nascimento,RJ,cancelled,parceiro_c
+419261af-72fd-625e-79aa-fd2321142c2c,CUST_25836,PROD_1166,18,3953.37,71160.66,2023-11-13,pix,Monteiro,SP,delivered,parceiro_a
+1d87614e-a169-6388-860b-072d0d3d6caf,CUST_16494,PROD_1575,10,3168.01,31680.1,2023-11-13,credit_card,da Rocha,PB,delivered,parceiro_c
+0b96371d-8827-8710-fa9e-a42dba169f70,CUST_09567,PROD_3315,13,2150.26,27953.38,2023-11-13,boleto,Leão,SP,shipped,parceiro_b
+03cc873f-d54c-002e-f9b4-721d21b1cbe9,CUST_25423,PROD_4724,14,4124.17,57738.38,2023-11-13,pix,Pires do Campo,RJ,cancelled,parceiro_b
+f06f487a-78b5-53ff-ef29-4d97d5da3a88,CUST_21397,PROD_4637,2,4747.07,9494.14,2023-11-13,debit_card,Cassiano,BA,delivered,parceiro_a
+e5ed3c22-6f39-cce5-a197-9dbffcc855c6,CUST_08629,PROD_3763,4,1354.27,5417.08,2023-11-13,credit_card,Aragão do Amparo,RJ,cancelled,parceiro_b
+4e54eaa4-030c-265f-ea69-a2de4cc41d3f,CUST_40567,PROD_1951,3,191.45,574.35,2023-11-13,debit_card,Aparecida de Novais,BA,delivered,parceiro_c
+e9566cbf-fd86-32d0-d0d8-fcb76757650d,CUST_40788,PROD_1191,17,1030.41,17516.97,2023-11-13,pix,Mendes da Mata,SP,delivered,parceiro_b
+930eb6ed-9560-9fa4-e7a9-78f516e9fafc,CUST_46296,PROD_0860,11,111.0,1221.0,2023-11-13,boleto,Moraes,CE,delivered,parceiro_b
+7e02e1c3-7bed-d45a-b008-2742e40aef50,CUST_13903,PROD_2882,19,4384.24,83300.56,2023-11-13,credit_card,da Luz,PE,delivered,parceiro_b
+3fb61d7d-6b45-a707-2cfd-27463d72bfd3,CUST_28542,PROD_1100,1,4711.93,4711.93,2023-11-13,boleto,Nunes,DF,delivered,parceiro_a
+88d083b9-07d9-67c8-cb7c-7ed612f28b59,CUST_02080,PROD_3748,5,3021.48,15107.4,2023-11-13,pix,Porto dos Dourados,RJ,delivered,parceiro_a
+1514cb99-7d14-6df6-b5c2-f65b49d5c375,CUST_29117,PROD_1110,19,1698.93,32279.67,2023-11-13,credit_card,da Costa,RJ,delivered,parceiro_c
+1c2dd4c0-cebf-e33b-40de-8bbe935d086f,CUST_44629,PROD_0887,20,567.87,11357.4,2023-11-13,credit_card,Oliveira,RJ,delivered,parceiro_a
+f4106f00-ecc7-ae98-ea42-b4dc893ebb0a,CUST_38768,PROD_0985,1,4481.81,4481.81,2023-11-13,credit_card,Santos do Sul,SP,pending,parceiro_b
+cfe0bd04-0748-a1c5-72df-f57a5b32dc1f,CUST_18857,PROD_0907,9,1140.91,10268.19,2023-11-13,credit_card,Cardoso,BA,delivered,parceiro_c
+f39a1aa4-9de0-95af-024e-2d48d7ce7179,CUST_05890,PROD_0623,10,4633.02,46330.2,2023-11-13,boleto,Pimenta,PR,cancelled,parceiro_b
+ed85eba2-ff23-71a4-bf00-c294925fff7f,CUST_40353,PROD_1756,16,3810.28,60964.48,2023-11-13,boleto,Jesus,CE,shipped,parceiro_b
+e6dc617e-d623-0c10-3615-1d6478f899b1,CUST_29032,PROD_3698,14,771.59,10802.26,2023-11-13,boleto,Campos da Mata,SC,pending,parceiro_c
+a9169b63-281a-06bd-079b-26aeff4fe83a,CUST_18852,PROD_0579,6,3104.29,18625.74,2023-11-13,credit_card,Ribeiro do Oeste,SC,cancelled,parceiro_c
+aea55619-3d41-28c0-3a8a-d49a8bb890c8,CUST_45285,PROD_4439,10,197.83,1978.3,2023-11-13,credit_card,Sousa,PR,delivered,parceiro_b
+979cf651-6194-f20d-146e-00bef105ceb5,CUST_41114,PROD_1864,7,92.4,646.8,2023-11-13,credit_card,Ferreira das Flores,SP,delivered,parceiro_c
+1ddb5a6c-3f79-eeec-e9ad-36a66d303dd6,CUST_22173,PROD_0427,17,3450.46,58657.82,2023-11-13,credit_card,Pastor de Dias,MG,delivered,parceiro_c
+0eb4b2ed-4b8a-8e08-f72e-d5db4060bf07,CUST_18255,PROD_3971,20,4442.96,88859.2,2023-11-13,debit_card,Azevedo,RN,delivered,parceiro_a
+1a05ba0b-a13a-a21a-0a4f-b94d2ea4556b,CUST_04261,PROD_2482,11,1629.96,17929.56,2023-11-13,debit_card,Casa Grande,MG,delivered,parceiro_a
+a2efc5a6-c41c-ece5-c6db-5252f189c4ec,CUST_21969,PROD_4668,9,1090.61,9815.49,2023-11-13,boleto,Barbosa da Mata,GO,delivered,parceiro_a
+3202ce03-65ed-b5a5-ea10-4f2892fa02c1,CUST_43794,PROD_1996,18,638.14,11486.52,2023-11-13,credit_card,Souza do Sul,ES,shipped,parceiro_b
+9a285d72-cc20-e0de-8382-dd5e9d204a57,CUST_40979,PROD_2200,5,1179.76,5898.8,2023-11-13,pix,Souza da Prata,RJ,delivered,parceiro_c
+3a9c64ec-67f1-e94a-91ae-6631957cf2fc,CUST_45368,PROD_2688,14,4303.0,60242.0,2023-11-13,pix,Vasconcelos,PR,delivered,parceiro_a
+91383e40-6827-6652-29c2-68fea5bd2e14,CUST_04308,PROD_0365,6,1123.01,6738.06,2023-11-13,credit_card,Araújo,RJ,pending,parceiro_c
+19f43694-6244-b96e-8ac7-ef701b4d4137,CUST_39514,PROD_4128,10,3423.5,34235.0,2023-11-13,pix,da Rocha,RO,delivered,parceiro_b
+5ec6d4a7-6c37-cb08-4e95-7456f8be7770,CUST_07565,PROD_0948,3,2861.95,8585.85,2023-11-13,debit_card,Caldeira,MG,pending,parceiro_a
+b0d422ca-ab24-bdd6-c824-7f02d5a07956,CUST_48811,PROD_3750,9,103.58,932.22,2023-11-13,pix,Lima,PE,delivered,parceiro_b
+cf0f90de-e106-b243-57f9-d19479167026,CUST_01583,PROD_4073,20,3832.74,76654.8,2023-11-13,credit_card,Moraes,PR,delivered,parceiro_b
+9b8a95d3-b5ff-f2e3-488f-b43c254c78c4,CUST_45494,PROD_2312,6,2365.7,14194.2,2023-11-13,credit_card,Rios da Serra,MT,shipped,parceiro_b
+abdb84af-0e32-0960-7f67-c5bc2b8144a5,CUST_21288,PROD_3374,14,4689.77,65656.78,2023-11-13,credit_card,Aragão de Guerra,SP,delivered,parceiro_b
+1023fa4a-0463-49bc-ec4e-369cdaf58575,CUST_30446,PROD_2490,2,555.2,1110.4,2023-11-13,pix,Macedo,PR,shipped,parceiro_c
+efdbdf62-8e2b-6da0-9cd5-0b7da83726f3,CUST_03522,PROD_4458,9,3694.74,33252.66,2023-11-13,credit_card,Camargo,BA,delivered,parceiro_b
+74432f57-d2b3-7a3e-55c1-49bfb21e38ba,CUST_13887,PROD_0101,8,3344.58,26756.64,2023-11-13,pix,Moraes,RS,delivered,parceiro_a
+19ec158d-be8e-7baa-997e-dfbe1a8add29,CUST_25326,PROD_3560,13,3821.97,49685.61,2023-11-13,credit_card,Araújo do Oeste,PR,delivered,parceiro_c
+618e9f8e-e7aa-d7b0-08a1-909f15f43d3d,CUST_08670,PROD_3458,18,897.25,16150.5,2023-11-13,pix,Aragão das Flores,SC,pending,parceiro_a
+33cffd16-1edd-cfaa-5b0c-b8162d9cf615,CUST_46447,PROD_1743,11,3766.39,41430.29,2023-11-13,debit_card,Jesus,RJ,pending,parceiro_c
+bb6cdbaf-ed25-4d61-b58a-164a9990c52a,CUST_15126,PROD_0716,14,4370.17,61182.38,2023-11-13,pix,Lima,DF,delivered,parceiro_b
+76544cd5-9005-88c0-365e-b18969c5888e,CUST_39148,PROD_0608,3,176.47,529.41,2023-11-13,debit_card,Câmara,SP,delivered,parceiro_b
+9a36f036-8ed9-5d9d-c509-d41555614438,CUST_18028,PROD_1968,19,1416.36,26910.84,2023-11-13,pix,Nogueira de Minas,SP,delivered,parceiro_c
+9ff1c310-9438-fb28-566c-a18191ab4b83,CUST_26900,PROD_2099,1,2604.32,2604.32,2023-11-13,credit_card,Camargo da Serra,RS,shipped,parceiro_b
+0ee4fc44-f1f0-fb5d-b808-dbafecd59a6b,CUST_32215,PROD_0278,5,2545.09,12725.45,2023-11-13,debit_card,Pinto,SP,delivered,parceiro_a
+bcfc7089-9a8e-04fa-4709-1401aa29d7b7,CUST_05722,PROD_3524,20,530.22,10604.4,2023-11-13,pix,Almeida,CE,delivered,parceiro_a
+e91ee93f-63e9-0e75-0d2b-2e3060afa190,CUST_48441,PROD_4976,1,4772.25,4772.25,2023-11-13,credit_card,Casa Grande de Minas,CE,delivered,parceiro_b
+18a326fb-e787-f593-646c-8b8f1ff6ef0c,CUST_07786,PROD_4266,17,531.94,9042.98,2023-11-13,credit_card,Mendonça Paulista,PE,delivered,parceiro_a
+f1bd6e0a-6934-d8db-95af-eda92d2561ba,CUST_10463,PROD_2809,10,1992.17,19921.7,2023-11-13,debit_card,da Rocha do Sul,SP,cancelled,parceiro_a
+9f8c72ca-c2c6-1487-1b54-45d501c75ff6,CUST_00899,PROD_0216,20,3535.04,70700.8,2023-11-13,credit_card,Fernandes,RS,delivered,parceiro_c
+a9fcd338-cc95-b7c8-f6b4-fe3c9534ae1d,CUST_15702,PROD_4275,8,2143.81,17150.48,2023-11-13,boleto,Monteiro,PA,shipped,parceiro_a
+94885944-ab74-57a2-01af-47a1c503eb51,CUST_18807,PROD_0531,5,1976.08,9880.4,2023-11-13,credit_card,Almeida da Prata,SP,delivered,parceiro_a
+9fdb635c-36e0-6c0c-5683-68edbc04b248,CUST_16203,PROD_3798,20,121.71,2434.2,2023-11-13,credit_card,Souza do Amparo,RJ,pending,parceiro_b
+f6871b92-085e-4931-3361-e9b712bf9d12,CUST_32248,PROD_3052,4,347.77,1391.08,2023-11-13,credit_card,Azevedo de Rezende,DF,delivered,parceiro_c
+75add2d5-98f6-055f-1d86-744347d80ae0,CUST_11421,PROD_4760,11,1026.91,11296.01,2023-11-13,pix,Cunha do Amparo,RJ,delivered,parceiro_b
+15451718-f2c5-6349-b669-5a47440072e6,CUST_33776,PROD_0593,18,1960.35,35286.3,2023-11-13,debit_card,da Conceição do Campo,SP,delivered,parceiro_c
+8c1e0d8d-6a50-ffc4-ad0d-a3cb55a7ff77,CUST_33947,PROD_4585,11,145.45,1599.95,2023-11-13,debit_card,Caldeira,PR,delivered,parceiro_b
+9ac395f8-7fa7-9598-d644-2b5016e1b792,CUST_19680,PROD_2609,1,1289.88,1289.88,2023-11-13,pix,Nogueira da Serra,CE,delivered,parceiro_a
+33ba2976-df43-009b-0d4a-790678a2b5f5,CUST_29209,PROD_3520,20,2183.19,43663.8,2023-11-13,boleto,Aragão de Câmara,GO,delivered,parceiro_b
+ef3a7d24-fbb7-c824-f228-27d4cf56b3c2,CUST_10361,PROD_3111,18,1143.33,20579.94,2023-11-13,credit_card,Abreu do Galho,SP,delivered,parceiro_b
+a1ee7ed0-0dbd-021c-bf89-fc90ec7cee8f,CUST_41870,PROD_1872,13,91.2,1185.6,2023-11-13,boleto,Abreu,RJ,delivered,parceiro_a
+0dfac103-c766-de4f-ee26-15c00a6b437d,CUST_13904,PROD_2806,10,2081.58,20815.8,2023-11-13,pix,Barros do Galho,SP,delivered,parceiro_a
+67b6c8d1-8601-531f-0e19-fee1201dda93,CUST_06862,PROD_2671,8,1131.28,9050.24,2023-11-13,debit_card,Abreu Verde,BA,delivered,parceiro_b
+ea751684-9311-c756-9a2c-25ef94b20d21,CUST_44056,PROD_4255,14,3787.01,53018.14,2023-11-13,credit_card,da Mata,SP,delivered,parceiro_a
+ebe58c25-3a13-dd18-9196-9fb2ded8e95b,CUST_25980,PROD_1722,2,3845.7,7691.4,2023-11-13,debit_card,Moreira,PR,delivered,parceiro_c
+e29101dc-5f2e-20e6-33d3-12c78953718c,CUST_38177,PROD_1357,13,186.85,2429.05,2023-11-13,debit_card,Vasconcelos,SP,delivered,parceiro_b
+6b7c12c1-5c1f-83a0-2541-bb6900e221fa,CUST_49807,PROD_4435,10,2806.31,28063.1,2023-11-13,credit_card,Brito Alegre,SP,delivered,parceiro_b
+56e6c809-c8c6-aa9f-ab9f-508f341dcfde,CUST_31518,PROD_4007,15,1487.38,22310.7,2023-11-13,pix,Leão do Norte,SP,delivered,parceiro_b
+790e921a-6479-3c96-eb1d-732d4fe448d3,CUST_07461,PROD_1573,19,3225.91,61292.29,2023-11-13,credit_card,Aparecida,CE,shipped,parceiro_c
+b076b502-9a8a-86cb-c828-9a100e76200e,CUST_29425,PROD_4353,5,3045.28,15226.4,2023-11-13,debit_card,Siqueira,SP,delivered,parceiro_b
+8e3d8432-9767-87da-bb40-ea0dcb2ce6f0,CUST_49927,PROD_2920,7,3353.21,23472.47,2023-11-13,boleto,Freitas da Serra,PA,cancelled,parceiro_b
+88128855-67e8-cd24-e10d-b6540f13ecc6,CUST_06227,PROD_3001,17,3224.42,54815.14,2023-11-13,credit_card,Macedo,RJ,delivered,parceiro_b
+edee806d-c557-0964-44c0-f3feb1ec5cf1,CUST_36387,PROD_1233,2,4107.94,8215.88,2023-11-13,pix,Rodrigues,SP,delivered,parceiro_a
+368e9465-7a25-a6c3-0712-253b04dc4fa0,CUST_46458,PROD_1001,1,2945.47,2945.47,2023-11-13,boleto,Dias de Ferreira,SP,delivered,parceiro_b
+ef10ff69-26d0-5de0-2138-9e2844bce5df,CUST_02156,PROD_2985,19,2660.43,50548.17,2023-11-13,credit_card,Costa,MG,shipped,parceiro_a
+53d5f18c-4d22-11f1-6d2f-6b4609984c67,CUST_49842,PROD_3353,5,435.98,2179.9,2023-11-13,credit_card,Duarte Verde,SP,shipped,parceiro_a
+9d34f7b7-a497-556f-316e-f979e8e6d6a3,CUST_35540,PROD_0573,14,524.97,7349.58,2023-11-13,pix,Freitas,PA,shipped,parceiro_c
+74b01d1a-0aa4-5b79-2b21-9ac36ef4bbbd,CUST_16931,PROD_1229,7,3168.02,22176.14,2023-11-13,pix,Silva,RS,shipped,parceiro_c
+89368fd3-c028-0a6d-487a-442c64c73350,CUST_11501,PROD_0811,16,3939.54,63032.64,2023-11-13,pix,Gomes,MG,delivered,parceiro_b
+64848d97-70c8-4a87-ef0b-9180f610bb04,CUST_13766,PROD_1772,14,1687.18,23620.52,2023-11-13,debit_card,Casa Grande da Serra,SP,delivered,parceiro_c
+e3215370-52a0-d96b-f85f-f902d6881621,CUST_02907,PROD_0537,3,2583.21,7749.63,2023-11-13,debit_card,Rodrigues de Aparecida,SP,delivered,parceiro_c
+f2263e03-234e-8913-eabd-a8e0fd3fb6d4,CUST_26738,PROD_3322,13,3760.08,48881.04,2023-11-13,debit_card,Costa,SP,delivered,parceiro_a
+6272b72a-b032-b03f-6f9a-a22f27193981,CUST_11336,PROD_0243,4,1736.84,6947.36,2023-11-13,debit_card,Pinto de Rios,ES,cancelled,parceiro_a
+38569835-5a9a-0080-f5a2-1f2f35ed6d6b,CUST_10684,PROD_1333,15,1613.19,24197.85,2023-11-13,credit_card,Fernandes de Ribeiro,CE,delivered,parceiro_c
+a07f881b-b49f-74a7-e8b9-dad1dd0627e1,CUST_02701,PROD_0829,5,740.36,3701.8,2023-11-13,boleto,da Conceição do Campo,RS,delivered,parceiro_b
+47c17b19-7064-7d52-9dbc-bd04e0ff6e0a,CUST_47996,PROD_3828,16,4556.76,72908.16,2023-11-13,pix,Araújo de Borges,SP,delivered,parceiro_c
+3b2bfbcc-8306-ab96-bf54-967edf861a7a,CUST_46447,PROD_1543,12,4207.9,50494.8,2023-11-13,credit_card,Câmara,CE,delivered,parceiro_a
+23863715-af70-8dfc-e979-627344c32fc8,CUST_18481,PROD_2504,9,2433.34,21900.06,2023-11-13,credit_card,Santos do Campo,PR,cancelled,parceiro_b
+e067fd9c-c689-9199-8408-d1a8b8183139,CUST_48348,PROD_2572,2,4422.6,8845.2,2023-11-13,pix,Camargo Verde,SC,shipped,parceiro_a
+26c35bcd-d2a7-125a-4b5d-9833fb7f8a2b,CUST_08792,PROD_2245,16,1236.41,19782.56,2023-11-13,credit_card,Aparecida do Norte,RS,delivered,parceiro_c
+c5ff6fe6-1475-f204-3412-ed5979100b0a,CUST_05890,PROD_2784,14,2386.82,33415.48,2023-11-13,boleto,Martins,RJ,pending,parceiro_c
+06244a4e-50a8-ebf9-9b6f-a1950223129e,CUST_08525,PROD_3347,1,3727.05,3727.05,2023-11-13,debit_card,Freitas Alegre,PB,delivered,parceiro_a
+917ea06d-b710-855b-7c6f-f3efd4112275,CUST_43463,PROD_1125,17,3988.69,67807.73,2023-11-13,pix,Moreira da Mata,SP,delivered,parceiro_a
+c299cc2e-11a2-8ded-bc5c-4e7ff201a08e,CUST_07773,PROD_2372,20,903.45,18069.0,2023-11-13,credit_card,da Paz do Amparo,SC,delivered,parceiro_b
+7ff9036a-60da-9dcf-1cfe-983dc5475503,CUST_13774,PROD_1453,3,1902.44,5707.32,2023-11-13,boleto,Vargas Alegre,CE,delivered,parceiro_a
+4e00fd18-3a42-fe72-15b4-aea4a8a422a2,CUST_46293,PROD_4494,5,1462.53,7312.65,2023-11-13,boleto,Silva,SP,cancelled,parceiro_c
+8fb2f3dc-ab31-0849-afa3-9eb31d6ba69f,CUST_01874,PROD_0192,3,4837.11,14511.33,2023-11-13,credit_card,Ribeiro,MG,cancelled,parceiro_b
+6ff13d1f-7af6-e8b0-d0e4-f8dff36ba7d0,CUST_19445,PROD_1320,19,3253.36,61813.84,2023-11-13,pix,Mendes,MA,cancelled,parceiro_a
+3d3aa9a0-dc4e-a658-d845-0d2aa2fb8855,CUST_10959,PROD_4906,1,2819.83,2819.83,2023-11-13,debit_card,da Cunha Grande,RJ,delivered,parceiro_a
+60b47712-d73e-7e24-02f3-31eb51586a70,CUST_30095,PROD_4185,8,3360.81,26886.48,2023-11-13,pix,Monteiro Grande,SP,delivered,parceiro_c
+0fbc3cb7-76a1-13b6-43cd-4f8641b0adc0,CUST_06282,PROD_0518,17,4263.46,72478.82,2023-11-13,pix,Pacheco,RJ,delivered,parceiro_c
+c9aa8630-e5d5-9e7e-77ea-bd793a6d5836,CUST_29009,PROD_0950,5,1001.68,5008.4,2023-11-13,debit_card,Costela,BA,shipped,parceiro_b
+be4d1142-2d14-ca92-a4d5-db43ea7e7303,CUST_12106,PROD_1985,2,348.69,697.38,2023-11-13,boleto,Cassiano do Oeste,PE,cancelled,parceiro_b
+99b49c0b-bbe6-7daf-a982-1b63d90048b2,CUST_08105,PROD_0130,7,1715.19,12006.33,2023-11-13,boleto,Vasconcelos,ES,delivered,parceiro_c
+2cce83f3-f176-e827-f93f-92f4f34b720f,CUST_15202,PROD_2830,13,629.94,8189.22,2023-11-13,debit_card,Guerra do Campo,BA,delivered,parceiro_a
+624f21ff-9d28-880f-338d-ab19a09e2227,CUST_43304,PROD_0336,1,3305.85,3305.85,2023-11-13,credit_card,Pacheco,GO,delivered,parceiro_a
+0faf238f-1d14-fe7b-ff33-7c55ba7e03ec,CUST_35169,PROD_4935,2,4522.95,9045.9,2023-11-13,pix,Vieira,SP,delivered,parceiro_c
+748c2731-987b-8520-965a-b4d02696fc1d,CUST_45764,PROD_4048,9,1729.8,15568.2,2023-11-13,debit_card,Martins da Mata,BA,delivered,parceiro_a
+6e13dc3d-7341-fb3f-5a7e-1c77f5019a19,CUST_04294,PROD_3196,6,4591.98,27551.88,2023-11-13,pix,Barros,SP,shipped,parceiro_c
+29069a9b-1b1f-2209-7118-580528cc1d7b,CUST_32932,PROD_1738,4,3000.39,12001.56,2023-11-13,pix,Aragão,SP,shipped,parceiro_c
+99d06539-c93c-60bb-63ae-4ab22a3fab26,CUST_36142,PROD_4539,7,1825.11,12775.77,2023-11-13,debit_card,Andrade da Prata,MG,delivered,parceiro_c
+a990db88-3357-163a-19aa-32c66ea48893,CUST_23719,PROD_0914,14,2223.44,31128.16,2023-11-13,boleto,Cardoso,PE,delivered,parceiro_a
+05c9f3e9-ce5e-122a-5ad3-43f83811496d,CUST_38172,PROD_3578,5,1042.99,5214.95,2023-11-13,debit_card,Campos de das Neves,PR,delivered,parceiro_b
+048bf916-715c-2369-5431-e4af0201fd5f,CUST_46189,PROD_3279,11,1431.56,15747.16,2023-11-13,credit_card,Silveira,BA,delivered,parceiro_a
+84949bd3-acf3-fb3a-cdde-e42f8fd66286,CUST_15580,PROD_0894,13,4242.34,55150.42,2023-11-13,credit_card,Jesus dos Dourados,RJ,delivered,parceiro_a
+6ee7ebac-c883-6405-dd2b-480a9ed91b3f,CUST_22052,PROD_2933,10,882.98,8829.8,2023-11-13,pix,da Mata da Praia,RJ,delivered,parceiro_b
+3f5327ea-0bcf-22a0-196b-02de984687da,CUST_33927,PROD_4417,2,847.29,1694.58,2023-11-13,credit_card,Sousa,CE,delivered,parceiro_c
+51deafe0-d48e-37fa-3c86-e8a35eacfff1,CUST_17376,PROD_2939,5,4368.19,21840.95,2023-11-13,pix,Lopes do Norte,MG,delivered,parceiro_c
+26f5cf78-ff6f-09fc-5b04-68209d381021,CUST_49584,PROD_4571,12,1123.9,13486.8,2023-11-13,debit_card,Barbosa da Prata,ES,shipped,parceiro_b
+25008c78-d233-3896-1de7-88228f02cb81,CUST_21829,PROD_1103,7,1818.96,12732.72,2023-11-13,debit_card,Leão Verde,SP,delivered,parceiro_a
+45f55d74-5561-4409-e964-591bf9afbb3d,CUST_04037,PROD_2651,16,1967.74,31483.84,2023-11-13,boleto,Rodrigues do Oeste,SP,delivered,parceiro_c
+50a79b69-de0e-cc6a-3ba0-cfedf7de26aa,CUST_41605,PROD_4599,2,4265.76,8531.52,2023-11-13,credit_card,da Cruz,SP,shipped,parceiro_c
+cf0b5186-d8bf-abd0-ea8b-1538e1d55a5d,CUST_37498,PROD_3168,20,2857.99,57159.8,2023-11-13,pix,Nogueira,DF,delivered,parceiro_a
+81313065-4463-1700-0428-cc52fcd2ccd1,CUST_39922,PROD_4837,18,1627.05,29286.9,2023-11-13,credit_card,da Rosa de Cirino,MG,shipped,parceiro_c
+047de82b-f95b-bfbd-caaa-0b1c4ba20a80,CUST_10002,PROD_0727,12,3681.14,44173.68,2023-11-13,credit_card,Nascimento de Sousa,SC,delivered,parceiro_a
+638f1bbb-82c2-4973-7b97-3fa658c9026d,CUST_24318,PROD_3960,9,3275.32,29477.88,2023-11-13,pix,Teixeira,MG,delivered,parceiro_a
+758d9390-493e-2bf9-98a9-afa8471e7f92,CUST_32022,PROD_0366,10,446.68,4466.8,2023-11-13,credit_card,Castro,AP,delivered,parceiro_a
+b0cd47e0-65df-8b61-9c50-eb7ba119d6cb,CUST_36193,PROD_1320,20,1229.33,24586.6,2023-11-13,credit_card,da Conceição,SE,delivered,parceiro_a
+3b8e0143-47d1-a53a-6f06-2ce296c65774,CUST_15551,PROD_1835,18,4305.18,77493.24,2023-11-13,debit_card,Mendes de Costela,SE,delivered,parceiro_a
+942e50d2-8105-5428-de69-7de4e92d2d56,CUST_15525,PROD_3866,20,1697.28,33945.6,2023-11-13,boleto,Azevedo de Goiás,RJ,shipped,parceiro_c
+669d1255-9240-b8db-1002-c2cc4f2c3537,CUST_10115,PROD_0437,1,323.18,323.18,2023-11-13,debit_card,Cunha da Praia,RJ,delivered,parceiro_a
+5a8567d5-13c7-4742-3735-d85886e7c36e,CUST_33621,PROD_1652,4,62.91,251.64,2023-11-13,debit_card,da Cruz de Ferreira,SP,shipped,parceiro_b
+143f66f4-e10d-7303-23bd-fe22927d960c,CUST_15870,PROD_0748,15,1410.49,21157.35,2023-11-13,boleto,Gomes de Cassiano,DF,cancelled,parceiro_a
+1ab6c38f-3b12-01e7-7562-43a3f27d250f,CUST_12789,PROD_1075,10,42.51,425.1,2023-11-13,pix,Aparecida,MA,delivered,parceiro_c
+eb465b86-4374-28e6-8930-bff1f8044061,CUST_46016,PROD_4113,10,4436.02,44360.2,2023-11-13,credit_card,Castro,PR,delivered,parceiro_a
+c8e51ddd-9aa7-068d-2a9b-52152982e647,CUST_39280,PROD_0829,1,4268.66,4268.66,2023-11-13,boleto,Correia do Galho,RJ,delivered,parceiro_c
+f5340b89-b384-6f6e-188f-45ab44a5af26,CUST_39780,PROD_2147,15,4434.36,66515.4,2023-11-13,boleto,Jesus das Pedras,PA,cancelled,parceiro_a
+0fa79381-42c9-1bee-6af7-7c4b6b568b38,CUST_27459,PROD_2885,20,511.64,10232.8,2023-11-13,credit_card,Aparecida,SP,pending,parceiro_c
+c5a8e3fb-2008-07a2-bc4e-925e412553d0,CUST_49653,PROD_4877,20,1897.86,37957.2,2023-11-13,boleto,Alves,RS,shipped,parceiro_b
+222a43e3-399e-be07-a72e-2e807f839b33,CUST_44773,PROD_0560,18,1675.53,30159.54,2023-11-13,boleto,Pires,SP,pending,parceiro_b
+1a1a4daf-d489-49d8-e4c6-47a34fdd1043,CUST_23112,PROD_3173,19,4059.22,77125.18,2023-11-13,boleto,Araújo Verde,RS,delivered,parceiro_a
+4c233930-5686-6e30-1c5b-ee1d99d0d657,CUST_27409,PROD_1217,5,4876.11,24380.55,2023-11-13,pix,Viana,PE,shipped,parceiro_b
+f931ea1c-04cd-ce81-afc1-42dd7f32923b,CUST_41665,PROD_0828,5,991.19,4955.95,2023-11-13,credit_card,Garcia dos Dourados,SC,delivered,parceiro_b
+c8179344-f29c-f3dd-9943-1c39de252a1e,CUST_22579,PROD_1409,3,779.63,2338.89,2023-11-13,credit_card,Sousa,BA,cancelled,parceiro_b
+5b633b1d-9802-7845-ec5c-389f685e3c66,CUST_48924,PROD_0015,19,4037.26,76707.94,2023-11-13,boleto,Aparecida do Galho,RS,pending,parceiro_c
+c030867c-5c44-bb98-0a90-03127b943b0d,CUST_10214,PROD_4947,2,1140.41,2280.82,2023-11-13,debit_card,Farias,SP,delivered,parceiro_b
+a09b81ae-3fe9-b77f-a80c-5578279f6436,CUST_36517,PROD_1557,8,4728.94,37831.52,2023-11-13,credit_card,Pimenta,CE,delivered,parceiro_b
+3e2d2268-db38-a34d-2da6-f69ff7d998c7,CUST_29973,PROD_4227,8,4861.83,38894.64,2023-11-13,credit_card,Jesus,PE,delivered,parceiro_b
+dbb918ba-b13f-34dc-c44c-f619ec7bf8d0,CUST_32609,PROD_0889,20,1433.09,28661.8,2023-11-13,debit_card,Araújo de Cardoso,SC,delivered,parceiro_b
+5f3177d3-e9a2-d47f-e1b7-d360aea611d8,CUST_27393,PROD_3145,17,1943.44,33038.48,2023-11-13,credit_card,Oliveira Verde,MS,delivered,parceiro_b
+b696bd25-8e11-9b61-c49c-948692f980ae,CUST_05152,PROD_0539,19,1034.78,19660.82,2023-11-13,pix,Mendonça,SP,delivered,parceiro_a
+c8934f35-2cdb-1894-6c47-4045c1754c56,CUST_04744,PROD_2731,3,3988.55,11965.65,2023-11-13,credit_card,Vieira,RJ,cancelled,parceiro_a
+812f92c4-6248-7177-459e-63aa096b6bef,CUST_33777,PROD_3506,10,4859.07,48590.7,2023-11-13,credit_card,Cirino das Flores,RN,delivered,parceiro_a
+6a923a31-3e52-96a9-cfbc-58e1a83aa366,CUST_40455,PROD_2975,9,2553.08,22977.72,2023-11-13,pix,Leão,RJ,delivered,parceiro_b
+ab70c709-d613-23f6-1a48-63268d4876cf,CUST_41995,PROD_2152,2,96.94,193.88,2023-11-13,boleto,da Cunha,BA,delivered,parceiro_b
+36ddcf59-9e58-94c6-e822-54800e3541b6,CUST_35687,PROD_4787,14,4745.6,66438.4,2023-11-13,pix,Dias,MS,delivered,parceiro_c
+cb970cfc-6a38-b7e7-24ca-e891337b43c6,CUST_29029,PROD_4989,17,1435.87,24409.79,2023-11-13,boleto,Carvalho,RR,delivered,parceiro_a
+7586d452-d5e4-6223-f70a-1e4e38df9724,CUST_05989,PROD_2261,10,1418.96,14189.6,2023-11-13,credit_card,Jesus,PE,delivered,parceiro_c
+3e143d4f-257c-bda2-bb8e-6537b175ff0f,CUST_33680,PROD_1094,10,537.28,5372.8,2023-11-13,credit_card,Aparecida do Campo,RJ,delivered,parceiro_c
+9ce4d3c3-27f7-f723-a110-be5210f07ce3,CUST_40385,PROD_3007,17,714.06,12139.02,2023-11-13,boleto,Freitas da Praia,MG,delivered,parceiro_c
+aced9c1c-8118-87c3-fa9e-65931ccb280b,CUST_43794,PROD_2540,3,2277.38,6832.14,2023-11-13,credit_card,Gomes,RJ,delivered,parceiro_c
+d8038b6b-08c9-7048-54c2-396aa1f24ca1,CUST_27945,PROD_3667,19,2441.32,46385.08,2023-11-13,credit_card,Porto do Campo,BA,shipped,parceiro_b
+ba621817-b3e4-f1ec-b123-0d0099a963b5,CUST_40445,PROD_3834,3,1614.75,4844.25,2023-11-13,credit_card,Almeida,SC,delivered,parceiro_c
+b5858501-b13d-50db-5ee0-08056e220f50,CUST_16145,PROD_1611,13,4798.99,62386.87,2023-11-13,pix,Moura,SP,delivered,parceiro_c
+83cb8ebf-acfe-d96e-cf94-51e4130f6340,CUST_07819,PROD_3022,1,2567.85,2567.85,2023-11-13,boleto,Rezende do Amparo,MG,cancelled,parceiro_c
+3607f623-2841-b782-a311-3777ad43c4b0,CUST_32310,PROD_0983,2,3933.83,7867.66,2023-11-13,credit_card,Teixeira do Amparo,RJ,shipped,parceiro_c
+ec138adf-9535-5927-7314-4ac38d4c68f6,CUST_07603,PROD_0620,19,334.85,6362.15,2023-11-13,credit_card,Pimenta,MS,delivered,parceiro_c
+92cc16a7-3a54-6b3f-719c-08f19bd75b36,CUST_30059,PROD_3298,15,345.93,5188.95,2023-11-13,debit_card,Rodrigues,PR,delivered,parceiro_a
+b61e00ca-5bc3-f20d-dc5b-49c211897153,CUST_15510,PROD_2369,10,793.68,7936.8,2023-11-13,pix,Camargo Grande,BA,delivered,parceiro_a
+98309dde-2100-b80f-a200-1274a2a40ef3,CUST_21415,PROD_3305,18,3688.84,66399.12,2023-11-13,pix,Camargo do Oeste,SP,delivered,parceiro_a
+7cf9931b-f20a-1513-9ba6-b79ea843788f,CUST_00203,PROD_2612,12,3209.55,38514.6,2023-11-13,pix,Aparecida dos Dourados,DF,delivered,parceiro_a
+7c68b8a1-78a9-c54e-c287-6b7c1511ca56,CUST_36201,PROD_2917,16,2941.77,47068.32,2023-11-13,credit_card,Novais,PR,delivered,parceiro_c
+b505e677-e2b2-2c21-b94c-ccb067cd19b5,CUST_44807,PROD_2807,14,1832.12,25649.68,2023-11-13,boleto,Pereira,MG,delivered,parceiro_b
+4d139341-83d2-f326-49f4-147d436b6681,CUST_49110,PROD_4284,12,1753.56,21042.72,2023-11-13,debit_card,Câmara de Barros,DF,pending,parceiro_a
+9ac6d819-ae07-0d4a-b490-c69cbb9c1e0d,CUST_25138,PROD_0602,14,1438.46,20138.44,2023-11-13,credit_card,da Costa,SE,delivered,parceiro_b
+bac8b609-29f7-a4f9-1bad-eb2038f397cc,CUST_31183,PROD_0059,13,1716.36,22312.68,2023-11-13,credit_card,Lopes Alegre,SP,pending,parceiro_a
+746ed7b0-b331-5e1b-6160-75919e90b3fa,CUST_06387,PROD_0311,8,1813.92,14511.36,2023-11-13,pix,Duarte da Prata,PE,shipped,parceiro_a
+ba8bcc43-2378-8c59-5d85-2fc989aba751,CUST_11084,PROD_3842,13,2610.4,33935.2,2023-11-13,credit_card,Silva de Peixoto,RJ,delivered,parceiro_b
+ce9e78b0-79bb-700b-ffc6-734ec764454c,CUST_21819,PROD_0495,16,3237.3,51796.8,2023-11-13,credit_card,Caldeira,RJ,delivered,parceiro_a
+004c1060-7d3e-5345-4b11-3eea75a04ce9,CUST_04623,PROD_1392,18,890.96,16037.28,2023-11-13,credit_card,Borges,BA,delivered,parceiro_a
+7a85d7cf-9519-f3bc-0497-4348f874e4ee,CUST_13532,PROD_1431,8,1135.45,9083.6,2023-11-13,boleto,Araújo,SP,delivered,parceiro_a
+02302d1b-8752-2f4f-41d4-20c7ad8a245c,CUST_08989,PROD_3096,9,4710.65,42395.85,2023-11-13,boleto,Cavalcante do Sul,RS,delivered,parceiro_a
+d1241976-737e-ea09-4024-b97df4de46fb,CUST_01972,PROD_2769,16,3509.82,56157.12,2023-11-13,debit_card,da Rosa,MG,delivered,parceiro_a
+34578831-f39e-4247-e8d1-f9382819e256,CUST_37611,PROD_2569,7,1530.57,10713.99,2023-11-13,boleto,Sá Alegre,SP,delivered,parceiro_b
+52e6cbc4-4a76-48d8-fe1c-5f81b05c6c88,CUST_45584,PROD_0934,11,2105.83,23164.13,2023-11-13,credit_card,Pinto,RJ,delivered,parceiro_a
+77db14b9-2029-70f3-0e65-d3bdc4cc32a3,CUST_42264,PROD_3924,15,3396.85,50952.75,2023-11-13,credit_card,Silva,BA,delivered,parceiro_c
+79f51329-6bad-2b5c-8dc6-3ef678eae5eb,CUST_30437,PROD_1621,14,877.53,12285.42,2023-11-13,pix,Oliveira,BA,delivered,parceiro_a
+3f66aba5-c656-9c63-adaf-20ad179610d8,CUST_14566,PROD_3586,19,2407.77,45747.63,2023-11-13,pix,Vasconcelos Verde,CE,delivered,parceiro_b
+512ad951-7b1a-b873-2a58-9285835197be,CUST_08791,PROD_2523,2,3647.76,7295.52,2023-11-13,pix,Abreu,SP,pending,parceiro_a
+0054d514-986f-23b5-9de5-45dddcafd03b,CUST_26181,PROD_3102,5,4105.29,20526.45,2023-11-13,credit_card,Porto Paulista,RS,delivered,parceiro_c
+dfa6aa41-2ab7-c0a8-4dab-30fd1576d512,CUST_08378,PROD_4007,14,4832.95,67661.3,2023-11-13,boleto,Sá,RJ,delivered,parceiro_c
+b6794ebc-2d10-28de-f364-f7ccab4998fd,CUST_26978,PROD_0334,16,4954.89,79278.24,2023-11-13,pix,da Paz,SP,delivered,parceiro_b
+ae7607f1-74a3-d0d2-a235-af8f8cb01c77,CUST_22626,PROD_0304,20,429.52,8590.4,2023-11-13,debit_card,Oliveira,PR,delivered,parceiro_a
+bae04de3-f61e-fffd-cbf5-a0e21310efa9,CUST_04693,PROD_1948,3,2182.67,6548.01,2023-11-13,debit_card,Ribeiro,SP,delivered,parceiro_a
+c80018f9-59d9-bd4b-126f-42753369c8ae,CUST_12330,PROD_2690,9,4592.5,41332.5,2023-11-13,debit_card,Abreu,BA,delivered,parceiro_c
+0b81343f-3202-d2c5-8bb0-f246dae8677d,CUST_00463,PROD_1798,19,1970.12,37432.28,2023-11-13,pix,Cardoso,SP,delivered,parceiro_a
+fd941a47-c8c3-08fa-3cdb-2e9aba4b552c,CUST_47272,PROD_4274,15,3896.01,58440.15,2023-11-13,debit_card,Pimenta,ES,delivered,parceiro_b
+4e488f55-911f-2374-5bf1-02dc2748b0b2,CUST_35051,PROD_2434,19,1262.12,23980.28,2023-11-13,pix,Barros da Serra,RJ,pending,parceiro_a
+0c56bf74-d14e-53c8-9c72-c39ce96583fb,CUST_29426,PROD_1446,13,869.75,11306.75,2023-11-13,pix,Oliveira,SP,delivered,parceiro_a
+068fc193-e378-5bef-1d20-7722788816d0,CUST_10635,PROD_4987,13,2178.85,28325.05,2023-11-13,boleto,Cassiano da Prata,CE,pending,parceiro_b
+e8e89060-b80e-f836-d2c7-ef466c8bb2f9,CUST_31339,PROD_3811,13,685.58,8912.54,2023-11-13,pix,Melo,CE,shipped,parceiro_c
+2f62d9dd-e25f-91e1-89c1-1b4a90ca971d,CUST_37347,PROD_1942,9,1639.34,14754.06,2023-11-13,boleto,Gonçalves da Prata,RS,cancelled,parceiro_a
+89356559-ae90-2f2f-37bd-59db6ed12c6d,CUST_09751,PROD_1595,6,3145.61,18873.66,2023-11-13,credit_card,Pereira,SP,delivered,parceiro_c
+aa9e944a-5820-1eb1-fd05-1f585e8605eb,CUST_27279,PROD_1757,12,2411.19,28934.28,2023-11-13,credit_card,Freitas,PE,cancelled,parceiro_a
+1dbf7238-8a52-2233-8f91-6d3d89e7edd1,CUST_11440,PROD_3713,20,172.67,3453.4,2023-11-13,pix,Lima Grande,PR,delivered,parceiro_a
+d0a7857a-0961-9379-6f5e-4d86cf3fb742,CUST_32936,PROD_3348,17,3727.52,63367.84,2023-11-13,pix,Teixeira,RS,pending,parceiro_a
+e8140edc-8e83-c8f0-01da-a5bd2f9c6d71,CUST_26330,PROD_2261,13,4865.09,63246.17,2023-11-13,credit_card,da Mata das Pedras,SP,shipped,parceiro_a
+5f677368-b8fc-714c-6718-1aaa734e4da0,CUST_04147,PROD_1085,16,2880.43,46086.88,2023-11-13,credit_card,Viana,PA,delivered,parceiro_c
+f16aea87-9763-b5ab-5411-ee950de01fed,CUST_28913,PROD_3202,1,158.34,158.34,2023-11-13,boleto,Sampaio,RJ,cancelled,parceiro_b
+88ebdf45-3bdc-252f-9d66-f294d7bd1034,CUST_13130,PROD_3417,20,4676.75,93535.0,2023-11-13,pix,Souza do Campo,SP,delivered,parceiro_a
+d4b1bc47-b811-afd8-2bb6-fa257a8a09ee,CUST_13789,PROD_2934,15,1262.38,18935.7,2023-11-13,pix,Novais,RJ,delivered,parceiro_a
+aa854674-925b-7086-d207-4fd991c344c9,CUST_38654,PROD_0913,14,3255.17,45572.38,2023-11-13,pix,Silveira de Viana,RS,delivered,parceiro_c
+6b5e7384-ae1d-7ad7-5cea-5ecd3c9a6b35,CUST_26337,PROD_3860,5,3170.52,15852.6,2023-11-13,credit_card,Vieira da Praia,ES,delivered,parceiro_b
+5ccde5fb-6334-d99e-9e4a-7bc840056f66,CUST_10220,PROD_3596,8,3695.28,29562.24,2023-11-13,pix,Castro do Sul,MG,delivered,parceiro_b
+69707e87-2fc3-9074-d743-8a3cf4cb8f55,CUST_10943,PROD_1620,2,1841.34,3682.68,2023-11-13,credit_card,Pimenta,BA,delivered,parceiro_b
+0cd7f7a7-944f-efc2-80bf-1787f8036031,CUST_39061,PROD_1713,20,3213.0,64260.0,2023-11-13,debit_card,Vargas,AM,delivered,parceiro_a
+1e2d5e31-9bd7-02a2-3103-3c59af9dafd7,CUST_05437,PROD_2882,8,2299.67,18397.36,2023-11-13,pix,Oliveira,SP,shipped,parceiro_a
+466d2c09-7b79-227c-cd6d-d0910cfdbf51,CUST_41704,PROD_0460,3,2574.05,7722.15,2023-11-13,boleto,Vargas de Minas,GO,delivered,parceiro_a
+2b7d9373-3aa8-62e0-cd65-639057e6713b,CUST_06155,PROD_4987,7,1755.63,12289.41,2023-11-13,pix,Sales,SC,cancelled,parceiro_a
+cc4b1254-6532-d9d9-3d04-2a83b6c8cac7,CUST_21467,PROD_2799,10,3798.87,37988.7,2023-11-13,debit_card,da Mota de Castro,RJ,delivered,parceiro_c
+9602f266-ccee-b1d1-bcb9-0d6a9894d07e,CUST_05979,PROD_4191,3,4883.38,14650.14,2023-11-13,debit_card,Oliveira dos Dourados,RS,delivered,parceiro_a
+2ed03152-e43d-bf1c-79f1-5e6311f47521,CUST_00796,PROD_1390,4,2277.05,9108.2,2023-11-13,credit_card,da Mata da Mata,SP,cancelled,parceiro_b
+1e3e94e7-59a1-41dc-4710-df388b64d435,CUST_29905,PROD_0862,19,3872.63,73579.97,2023-11-13,credit_card,Sales,DF,delivered,parceiro_a
+f65b02d3-2122-4df0-9827-fc5c56bc83f4,CUST_25023,PROD_1524,13,51.31,667.03,2023-11-13,credit_card,Jesus,RJ,shipped,parceiro_b
+dce20c02-1122-0b14-0c9e-f850409fd01a,CUST_30104,PROD_1166,19,2404.56,45686.64,2023-11-13,credit_card,Silva,PR,delivered,parceiro_a
+f650ef37-3d78-4d4a-d17c-bf2b4c691365,CUST_38715,PROD_3429,18,2234.89,40228.02,2023-11-13,credit_card,Câmara do Galho,BA,delivered,parceiro_a
+da848392-12a4-e7fa-2e8d-eec3ef7062be,CUST_44929,PROD_2924,5,405.85,2029.25,2023-11-13,credit_card,Albuquerque do Oeste,DF,delivered,parceiro_b
+6ad6a012-ef60-4201-c9c3-e45ef0f89fba,CUST_01851,PROD_4873,5,4361.51,21807.55,2023-11-13,credit_card,Martins,PR,delivered,parceiro_c
+60d78727-9127-64b0-c783-0e5c83af20b3,CUST_33570,PROD_0853,3,674.45,2023.35,2023-11-13,pix,Pacheco,RS,cancelled,parceiro_a
+0efb8bff-9d3f-cb1d-84fd-d1f8c383ba13,CUST_39973,PROD_4278,18,626.13,11270.34,2023-11-13,debit_card,Abreu da Prata,PE,cancelled,parceiro_a
+9a7a08cb-a8eb-62ff-1b2c-242e536582b3,CUST_17531,PROD_2866,7,1801.48,12610.36,2023-11-13,credit_card,Cirino,RS,delivered,parceiro_a
+d1329d1c-78a2-a3b6-0a07-cb945be0ad76,CUST_28338,PROD_1423,2,964.85,1929.7,2023-11-13,credit_card,Pacheco de Minas,MG,delivered,parceiro_a
+6a945ad7-3108-12a8-8b4f-1400b748d836,CUST_09023,PROD_3595,13,1871.85,24334.05,2023-11-13,credit_card,das Neves,ES,shipped,parceiro_b
+7d19e9bb-250f-577a-9219-907ca54c2f18,CUST_18373,PROD_1248,11,1197.92,13177.12,2023-11-13,pix,da Luz,PR,delivered,parceiro_b
+380c0f36-3066-82f4-a2ce-169cabd89caa,CUST_03073,PROD_1741,5,1340.96,6704.8,2023-11-13,pix,Pastor Alegre,MT,delivered,parceiro_b
+2a6128c8-c1dc-5264-bc2b-7e1e8500dda4,CUST_41399,PROD_3798,4,1083.76,4335.04,2023-11-13,boleto,Brito,ES,pending,parceiro_a
+21d8cca8-8904-7ceb-9382-c7172157f65f,CUST_29982,PROD_0859,8,3439.96,27519.68,2023-11-13,debit_card,da Costa Verde,RS,delivered,parceiro_b
+7d893431-fa5e-fb46-9552-bd3544a1a57d,CUST_07780,PROD_1692,13,2723.81,35409.53,2023-11-13,pix,Ribeiro,PE,cancelled,parceiro_a
+56ce3dd5-2461-62e6-8e06-bfe79c98af60,CUST_21634,PROD_2543,2,3336.36,6672.72,2023-11-13,boleto,das Neves das Flores,ES,cancelled,parceiro_a
+0d8f5ea5-06af-0e1e-c645-1a6aaeab191b,CUST_34012,PROD_1131,11,2221.0,24431.0,2023-11-13,debit_card,Nogueira,MA,cancelled,parceiro_a
+163f6f30-6935-3e76-5a0d-bd501d24ebd5,CUST_48092,PROD_0172,4,3894.39,15577.56,2023-11-13,debit_card,Siqueira,AC,delivered,parceiro_c
+f0a11cf6-01d4-79fa-a0e7-4d7f78a5bdad,CUST_03317,PROD_2716,1,775.95,775.95,2023-11-13,credit_card,Câmara,PB,cancelled,parceiro_a
+e1a0cb00-94ef-a95a-73bd-33402e744898,CUST_10433,PROD_2510,12,2023.58,24282.96,2023-11-13,credit_card,Marques de Santos,PE,delivered,parceiro_a
+ef338377-faac-46e5-539a-7803a1b219fa,CUST_47648,PROD_1682,18,4901.98,88235.64,2023-11-13,debit_card,Santos,RJ,delivered,parceiro_a
+0ed2b44c-fa2f-824a-c85a-db4e6be29410,CUST_23464,PROD_1705,2,4304.36,8608.72,2023-11-13,boleto,Costela,RJ,delivered,parceiro_a
+a3ba5253-2e5b-16b8-a8b1-1d9ef887f82c,CUST_12231,PROD_1557,19,2651.62,50380.78,2023-11-13,debit_card,Caldeira,ES,delivered,parceiro_a
+654816a4-81e6-8fa6-5dc5-2ff8d387c0d9,CUST_26272,PROD_3725,6,4782.32,28693.92,2023-11-13,boleto,Sá,RJ,delivered,parceiro_a
+17abcafa-b6f7-5e02-4f96-c7838566437c,CUST_12559,PROD_1568,11,951.85,10470.35,2023-11-13,credit_card,Costela,BA,shipped,parceiro_a
+dbd4aa5d-08f8-bc5c-a7fa-104a7e9e9740,CUST_08217,PROD_3045,15,3743.14,56147.1,2023-11-13,pix,Vargas,SP,delivered,parceiro_a
+95493bd3-caba-1a30-5e7a-7c5095f8fd39,CUST_40773,PROD_0379,15,1479.72,22195.8,2023-11-13,debit_card,Duarte Paulista,SP,delivered,parceiro_a
+01887ac2-67e4-2682-e1e0-e88212389fe8,CUST_14302,PROD_0104,7,2425.44,16978.08,2023-11-13,pix,Fogaça,GO,delivered,parceiro_b
+8897bd4e-4460-fd2e-4793-45a79b13c474,CUST_19981,PROD_4974,3,2254.48,6763.44,2023-11-13,debit_card,Gomes,MG,delivered,parceiro_c
+fa2c6372-925d-c617-5aa0-540cbffa3624,CUST_37226,PROD_3140,10,639.0,6390.0,2023-11-13,credit_card,da Mota,MG,shipped,parceiro_a
+9ef6cec5-b4bf-df89-d904-65417dd24f0b,CUST_18561,PROD_0813,6,1823.53,10941.18,2023-11-13,credit_card,Sá,SC,delivered,parceiro_b
+5cd149e2-62d4-4cc2-449f-34ecc6155c40,CUST_01013,PROD_0283,3,4992.39,14977.17,2023-11-13,boleto,Macedo do Amparo,AM,delivered,parceiro_b
+616f0483-5ece-1fbb-685b-a465292bc839,CUST_04842,PROD_2730,7,27.07,189.49,2023-11-13,credit_card,Rios,RJ,pending,parceiro_b
+6056af81-3f30-b42e-3bac-fefff3df8867,CUST_09348,PROD_3730,9,2731.77,24585.93,2023-11-13,credit_card,Vargas,SP,cancelled,parceiro_b
+0e720626-ce64-d242-49c0-e472ffd3cfde,CUST_43373,PROD_4533,17,56.59,962.03,2023-11-13,boleto,Camargo do Galho,MG,delivered,parceiro_b
+c1542f3c-15e8-e49a-aa4e-f32e97ce77cf,CUST_17088,PROD_2121,6,3994.95,23969.7,2023-11-13,credit_card,Lima de Câmara,SP,pending,parceiro_a
+5be1915e-663b-53d3-8302-0cd835a5157f,CUST_05342,PROD_0143,1,2700.22,2700.22,2023-11-13,credit_card,Cavalcanti,CE,delivered,parceiro_b
+d33cc590-e579-2f64-4029-1ab352d16d08,CUST_32992,PROD_4674,5,4924.52,24622.6,2023-11-13,debit_card,Moura da Mata,RJ,shipped,parceiro_c
+ed8abf83-ab8c-f221-8d5a-53a65a5a6f04,CUST_08940,PROD_1085,13,3481.88,45264.44,2023-11-13,pix,Casa Grande,SP,pending,parceiro_c
+14bb2281-7693-296d-5a23-1e4b87f6eee8,CUST_35000,PROD_4519,16,1153.76,18460.16,2023-11-13,pix,Rodrigues do Amparo,MG,cancelled,parceiro_a
+1eae06d8-ce91-d1f1-98ed-6e242903fa13,CUST_06396,PROD_0359,1,3981.02,3981.02,2023-11-13,pix,Fonseca do Oeste,RN,delivered,parceiro_c
+773b62ff-50f8-8ed3-802c-09d9c1ddcd06,CUST_03974,PROD_0878,10,2505.52,25055.2,2023-11-13,credit_card,Lopes de Minas,SP,pending,parceiro_a
+5eb906d9-12ad-a60e-ac13-204f0de45cf3,CUST_05157,PROD_4629,19,2071.83,39364.77,2023-11-13,debit_card,Cardoso da Prata,GO,delivered,parceiro_a
+d8555b5a-ab02-6f23-cbef-25be38e08780,CUST_27820,PROD_3528,2,1262.24,2524.48,2023-11-13,pix,Moraes,BA,delivered,parceiro_a
+991fda96-ba91-9849-eac6-f7b7f1e7cd9e,CUST_23647,PROD_4543,5,1533.44,7667.2,2023-11-13,boleto,Pereira,SE,pending,parceiro_c
+be1cc6b9-6bc6-aa4c-d0b7-39002a194895,CUST_20197,PROD_4172,7,2214.37,15500.59,2023-11-13,pix,Cardoso de Cunha,BA,delivered,parceiro_b
+eb990c37-1b60-1e4a-0b47-b6bf794b895c,CUST_44813,PROD_0303,7,4943.78,34606.46,2023-11-13,debit_card,Carvalho,CE,delivered,parceiro_a
+2d0257a1-09a5-a1aa-6201-a06ab5b6d11a,CUST_33624,PROD_1039,8,827.46,6619.68,2023-11-13,boleto,Viana,RJ,delivered,parceiro_c
+21c2ce25-5ed6-8fd6-cd1f-c747a5580c4a,CUST_04814,PROD_0313,17,1435.38,24401.46,2023-11-13,pix,Ferreira,SP,cancelled,parceiro_b
+81b05730-2dce-55c2-ff4e-97e4d94753e8,CUST_06273,PROD_4200,7,3395.86,23771.02,2023-11-13,boleto,Ramos Grande,PR,delivered,parceiro_a
+c18f2bff-e4e7-00c8-107b-7be6aa4947d5,CUST_40607,PROD_2569,19,1749.79,33246.01,2023-11-13,pix,Vasconcelos de Araújo,SP,delivered,parceiro_a
+2a1680c9-fc41-a9a9-a5d5-9566ee0cfe40,CUST_11693,PROD_1044,13,496.99,6460.87,2023-11-13,debit_card,Cassiano,AM,delivered,parceiro_a
+068a3df1-8ff0-59b1-d128-2221c912b77d,CUST_41861,PROD_4292,6,2781.32,16687.92,2023-11-13,boleto,Sales das Flores,SP,delivered,parceiro_b
+be3ccb4d-621f-bd69-eb70-3c00017cb66e,CUST_33762,PROD_2783,14,4772.83,66819.62,2023-11-13,debit_card,Ramos,SP,delivered,parceiro_c
+3f90624c-576c-51fa-59a6-5b74c2a4000d,CUST_08532,PROD_0554,15,2272.3,34084.5,2023-11-13,pix,Rios de Goiás,PE,delivered,parceiro_a
+c5798f35-84aa-eeb5-40a4-852a7ca9aa95,CUST_40827,PROD_2399,14,14.96,209.44,2023-11-13,credit_card,Oliveira das Flores,BA,shipped,parceiro_c
+edbbdb4d-fa98-648c-4730-a71e4f3a1675,CUST_06120,PROD_3390,1,480.68,480.68,2023-11-13,pix,Farias,RJ,delivered,parceiro_b
+8a48592f-250b-aff4-540a-c75804dc398c,CUST_42934,PROD_2770,2,149.3,298.6,2023-11-13,pix,da Cruz,RJ,shipped,parceiro_c
+38e01675-eb0a-7e7f-4899-1bd234afb271,CUST_23131,PROD_4524,13,2214.58,28789.54,2023-11-13,pix,Marques de Nogueira,BA,delivered,parceiro_b
+6046504a-905f-d761-0d07-756aaacac89d,CUST_21501,PROD_3601,2,625.09,1250.18,2023-11-13,pix,Jesus Verde,PE,delivered,parceiro_a
+34dd49f8-42f6-fd1a-094e-ac1f4f7a2bdb,CUST_33122,PROD_4462,3,222.09,666.27,2023-11-13,debit_card,Fogaça do Oeste,SP,delivered,parceiro_a
+4fbf4741-2ed7-484d-3f86-5513ac0e9b4a,CUST_05688,PROD_2325,13,2168.58,28191.54,2023-11-13,pix,Freitas,SP,cancelled,parceiro_c
+7496c730-d3b3-2ce8-10d2-d8f0272d12cf,CUST_01049,PROD_1035,6,1992.01,11952.06,2023-11-13,pix,Cavalcante de Pires,CE,delivered,parceiro_c
+e64551e7-270b-6035-9e51-00d6e2a1b3e1,CUST_30916,PROD_1620,19,2161.62,41070.78,2023-11-13,credit_card,Pacheco,SP,delivered,parceiro_c
+abec546d-2582-c169-4aa4-aadb40fe6dac,CUST_12264,PROD_0343,9,2541.32,22871.88,2023-11-13,pix,Rodrigues Grande,PA,shipped,parceiro_b
+977e7d2f-debe-f0a6-4329-2fcf86bb66aa,CUST_17652,PROD_1534,2,1361.02,2722.04,2023-11-13,debit_card,Moreira do Sul,ES,pending,parceiro_c
+fe4733ab-37ac-f702-5fd6-c51f4c4ce039,CUST_08916,PROD_4379,10,4324.88,43248.8,2023-11-13,debit_card,Câmara,SP,delivered,parceiro_b
+b7ffc0d1-487e-d952-5e5b-93a1c1809622,CUST_48801,PROD_0503,6,963.67,5782.02,2023-11-13,credit_card,Marques,BA,delivered,parceiro_b
+5e5cb481-cdc2-4c7c-6045-47df544602df,CUST_31137,PROD_3324,1,3115.15,3115.15,2023-11-13,debit_card,Borges,RJ,shipped,parceiro_a
+659693a9-d72f-b403-a348-83ca2d03b729,CUST_28697,PROD_3773,5,1523.82,7619.1,2023-11-13,debit_card,Castro de Brito,PB,shipped,parceiro_a
+2c9ef283-0774-4398-dc82-53c5d367b88b,CUST_23110,PROD_2672,7,4629.72,32408.04,2023-11-13,debit_card,Costa das Flores,GO,delivered,parceiro_b
+16cfffec-305f-4a7e-4064-aa946812ed32,CUST_48047,PROD_2764,17,102.06,1735.02,2023-11-13,pix,Lima das Flores,RR,cancelled,parceiro_a
+d9bdf0c8-ec06-c01d-d926-011d80396f94,CUST_48642,PROD_2217,7,1320.14,9240.98,2023-11-13,pix,Jesus,SP,cancelled,parceiro_a
+48208909-aa7b-53d8-55ef-fa4080281d66,CUST_24132,PROD_1747,8,685.89,5487.12,2023-11-13,boleto,Cunha,PR,delivered,parceiro_c
+59788553-31e3-5f34-3a20-547297553eed,CUST_17158,PROD_3871,15,4656.4,69846.0,2023-11-13,debit_card,Cassiano das Flores,SP,shipped,parceiro_a
+cf4f2831-479d-0043-bfcb-3ce16e17d3f0,CUST_39692,PROD_3724,16,2352.4,37638.4,2023-11-13,pix,Pimenta de Freitas,RJ,delivered,parceiro_b
+452dabc5-1684-2ae9-ffc4-4b19f63617b0,CUST_46614,PROD_2493,14,3360.47,47046.58,2023-11-13,credit_card,da Cunha,RJ,delivered,parceiro_b
+eb6917c3-141c-ae64-823c-6b9e155acc35,CUST_04541,PROD_0690,17,379.39,6449.63,2023-11-13,credit_card,da Mota,CE,pending,parceiro_a
+5eb35371-68a0-c635-02e9-6e9b0d827da8,CUST_26531,PROD_3445,19,4834.64,91858.16,2023-11-13,pix,Dias,SP,delivered,parceiro_c
+abed9556-5a9c-8a1d-0886-422d47ec8d04,CUST_34174,PROD_2058,7,1806.81,12647.67,2023-11-13,boleto,Cirino do Sul,RS,delivered,parceiro_c
+93db1c51-9681-5130-a730-b2ef1a832259,CUST_02002,PROD_2212,4,3860.95,15443.8,2023-11-13,boleto,Gomes,DF,delivered,parceiro_a
+985177f7-d91e-7def-5834-944022adf59a,CUST_25633,PROD_0895,18,4422.97,79613.46,2023-11-13,pix,Nascimento do Sul,SP,pending,parceiro_a
+22f7157d-f49f-dc1c-ddaa-baf762c5ae34,CUST_21729,PROD_0033,4,3160.02,12640.08,2023-11-13,credit_card,Viana de Minas,PA,delivered,parceiro_b
+e685d4c9-177f-330f-13f8-e3d3ab516d73,CUST_17203,PROD_3417,5,2782.46,13912.3,2023-11-13,boleto,Cirino da Praia,SP,delivered,parceiro_a
+f43e6b37-0da4-b4d1-0cb5-7a9751d45388,CUST_05192,PROD_4916,17,340.47,5787.99,2023-11-13,debit_card,Viana,RS,delivered,parceiro_b
+f73fc2b4-4b07-34d2-5962-64e325b6b3db,CUST_17303,PROD_0991,20,3609.54,72190.8,2023-11-13,debit_card,Martins do Sul,RJ,delivered,parceiro_b
+d3750b8d-6d1f-7c99-09db-25c524892414,CUST_38868,PROD_1152,5,4658.58,23292.9,2023-11-13,credit_card,Teixeira,CE,shipped,parceiro_c
+32f253d5-ef99-e480-cae2-230ac66e3d2c,CUST_14897,PROD_0767,3,2621.15,7863.45,2023-11-13,credit_card,Camargo,SP,pending,parceiro_c
+2e352f40-ba20-55e0-68e3-9e0171aafe9b,CUST_25908,PROD_0891,20,4269.97,85399.4,2023-11-13,pix,Fogaça,MG,delivered,parceiro_c
+d8df79f2-ce84-4b91-c0ba-df399e1db7d7,CUST_21462,PROD_3075,20,242.11,4842.2,2023-11-13,debit_card,Ribeiro de Goiás,RJ,delivered,parceiro_b
+555e3852-5d60-2322-11b5-954982c3801f,CUST_49742,PROD_3697,10,3005.38,30053.8,2023-11-13,debit_card,Gonçalves de da Costa,RJ,delivered,parceiro_c
+605d60dc-594c-2438-c695-04a4549eca36,CUST_39925,PROD_0751,20,2261.6,45232.0,2023-11-13,boleto,Albuquerque de Lopes,RS,pending,parceiro_b
+f65eef73-94e9-6e37-1158-3f269454529b,CUST_35549,PROD_3585,14,1049.6,14694.4,2023-11-13,pix,Siqueira,SP,delivered,parceiro_a
+15ccebb7-fc69-f2f5-8f40-ada4519dee48,CUST_28702,PROD_1940,5,2057.12,10285.6,2023-11-13,credit_card,Dias da Serra,PB,pending,parceiro_a
+ddababd5-0242-ffab-2ee1-c2db12a51dd7,CUST_23309,PROD_3172,11,2340.94,25750.34,2023-11-13,credit_card,Sousa,PR,delivered,parceiro_a
+b3d2ec2e-3016-e4ff-cee8-1a83500b3c66,CUST_29730,PROD_3674,7,1297.44,9082.08,2023-11-13,credit_card,Peixoto,PR,shipped,parceiro_b
+fdeaef89-e455-7132-f947-fc1a50526135,CUST_09679,PROD_2755,7,3324.85,23273.95,2023-11-13,pix,da Mata,MG,delivered,parceiro_a
+172f9154-1be1-0de8-4c8f-f0ea0da85419,CUST_14208,PROD_1613,5,3028.22,15141.1,2023-11-13,pix,Rodrigues,MS,shipped,parceiro_a
+6df6aa4a-5336-005b-e6c3-8fe074355514,CUST_23322,PROD_0184,20,1967.71,39354.2,2023-11-13,pix,Lopes de Ribeiro,SP,delivered,parceiro_c

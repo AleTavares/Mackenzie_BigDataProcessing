@@ -1,0 +1,212 @@
+# =============================================================================
+# Docker Compose - Stack Completa: Spark + Airflow + Jupyter
+# Curso: Big Data Processing - MBA Engenharia de Dados (Mackenzie)
+# =============================================================================
+# Arquivo AUTOCONTIDO com todos os serviços para ambiente de produção.
+# Utilizado nas Aulas 6 e 7 (Bloco Produção) onde todos os componentes
+# precisam operar em conjunto: processamento (Spark), orquestração (Airflow)
+# e desenvolvimento interativo (Jupyter).
+#
+# Este arquivo NÃO depende de outros compose files. É um stack completo.
+#
+# Uso:
+#   docker compose -f shared/docker-compose.full.yml up -d
+#   docker compose -f shared/docker-compose.full.yml down
+#   docker compose -f shared/docker-compose.full.yml logs -f
+#
+# Portas:
+#   - Spark Master UI: http://localhost:8080
+#   - Spark Master (cluster): spark://spark-master:7077
+#   - Airflow Webserver: http://localhost:8081
+#   - Jupyter Notebook: http://localhost:8888
+#
+# Credenciais Airflow (ambiente de laboratório):
+#   - Usuário: admin
+#   - Senha: admin
+#
+# Requisitos mínimos: 8GB RAM, 4 cores de CPU
+# Após o primeiro "docker compose pull", não requer acesso à internet.
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Spark Master - Gerenciador do cluster Spark
+  # ---------------------------------------------------------------------------
+  spark-master:
+    image: spark:3.5.8-python3
+    container_name: spark-master
+    command: /opt/spark/sbin/start-master.sh
+    environment:
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_NO_DAEMONIZE=true
+    ports:
+      # Interface web do Spark Master
+      - "8080:8080"
+      # Porta de comunicação do cluster
+      - "7077:7077"
+    networks:
+      - dataflow-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Spark Worker - Nó de processamento do cluster
+  # ---------------------------------------------------------------------------
+  spark-worker:
+    image: spark:3.5.8-python3
+    container_name: spark-worker
+    command: /opt/spark/sbin/start-worker.sh spark://spark-master:7077
+    depends_on:
+      spark-master:
+        condition: service_healthy
+    environment:
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+      - SPARK_NO_DAEMONIZE=true
+    networks:
+      - dataflow-network
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Airflow Init - Inicialização do banco de dados e criação do usuário admin
+  # ---------------------------------------------------------------------------
+  # Este serviço roda apenas uma vez para configurar o ambiente do Airflow.
+  # Após a inicialização, ele encerra automaticamente (sem restart policy).
+  airflow-init:
+    image: apache/airflow:2.8-python3.11
+    container_name: airflow-init
+    environment:
+      # Executor local (SQLite) - adequado para ambiente de laboratório
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      # Não carregar DAGs de exemplo para manter o ambiente limpo
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      # Backend SQLite para simplicidade (não requer PostgreSQL externo)
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        # Inicializar o banco de dados do Airflow
+        airflow db init
+        # Criar usuário administrador padrão (apenas para laboratório)
+        airflow users create \
+          --username admin \
+          --password admin \
+          --firstname Admin \
+          --lastname User \
+          --role Admin \
+          --email admin@dataflow.local
+        echo "✅ Airflow inicializado com sucesso! Usuário admin/admin criado."
+    volumes:
+      # Volume para o banco SQLite persistir entre serviços
+      - airflow-data:/opt/airflow
+      # DAGs do curso
+      - ./dags:/opt/airflow/dags
+    networks:
+      - dataflow-network
+
+  # ---------------------------------------------------------------------------
+  # Airflow Webserver - Interface web para monitoramento de DAGs
+  # ---------------------------------------------------------------------------
+  # Acesse em: http://localhost:8081 (Login: admin / admin)
+  airflow-webserver:
+    image: apache/airflow:2.8-python3.11
+    container_name: airflow-webserver
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      - AIRFLOW__WEBSERVER__WEB_SERVER_PORT=8080
+    ports:
+      # Porta 8081 externa → 8080 interna (evita conflito com Spark Master UI)
+      - "8081:8080"
+    volumes:
+      - airflow-data:/opt/airflow
+      - ./dags:/opt/airflow/dags
+    command: airflow webserver
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - dataflow-network
+
+  # ---------------------------------------------------------------------------
+  # Airflow Scheduler - Responsável por agendar e executar as DAGs
+  # ---------------------------------------------------------------------------
+  # O scheduler monitora a pasta de DAGs e executa tasks conforme agendamento.
+  airflow-scheduler:
+    image: apache/airflow:2.8-python3.11
+    container_name: airflow-scheduler
+    depends_on:
+      airflow-webserver:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    volumes:
+      - airflow-data:/opt/airflow
+      - ./dags:/opt/airflow/dags
+    command: airflow scheduler
+    restart: unless-stopped
+    networks:
+      - dataflow-network
+
+  # ---------------------------------------------------------------------------
+  # Jupyter Notebook - Ambiente interativo com PySpark integrado
+  # ---------------------------------------------------------------------------
+  # Conectado ao Spark Master para submissão de jobs distribuídos.
+  jupyter:
+    image: quay.io/jupyter/pyspark-notebook:latest
+    container_name: jupyter-notebook
+    depends_on:
+      - spark-master
+    environment:
+      # Conexão com o Spark Master para submissão de jobs
+      - SPARK_MASTER=spark://spark-master:7077
+      # Desabilitar token para facilitar acesso no lab (ambiente local)
+      - JUPYTER_TOKEN=
+      # Configurações do PySpark para conectar ao cluster
+      - PYSPARK_SUBMIT_ARGS=--master spark://spark-master:7077 pyspark-shell
+    ports:
+      # Interface do Jupyter Notebook
+      - "8888:8888"
+    volumes:
+      # Diretório de trabalho dos notebooks (persistente)
+      - ./notebooks:/home/jovyan/work
+      # Datasets do curso (somente leitura para evitar alterações acidentais)
+      - ../datasets:/home/jovyan/work/data:ro
+    networks:
+      - dataflow-network
+    working_dir: /home/jovyan/work
+    restart: unless-stopped
+
+# =============================================================================
+# Volumes - Persistência de dados
+# =============================================================================
+volumes:
+  # Volume para armazenar o banco SQLite e configurações do Airflow
+  airflow-data:
+    driver: local
+
+# =============================================================================
+# Rede compartilhada - Permite comunicação entre todos os serviços
+# =============================================================================
+networks:
+  dataflow-network:
+    driver: bridge
+    name: dataflow-network
