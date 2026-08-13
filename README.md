@@ -37,6 +37,50 @@ Cada aula de 4 horas segue a distribuição:
 | Produção | 6–7 | Qualidade de dados e pipelines end-to-end |
 | Integração | 8 | Projeto final em grupo |
 
+## Narrativa do Curso — A DataFlow Analytics
+
+A **DataFlow Analytics** é uma startup brasileira de inteligência de dados para e-commerce, fundada em 2021 em São Paulo por Marina Silva (CTO) e Roberto Tanaka (CEO). Com um time enxuto de 6 pessoas, a empresa conquistou seu primeiro grande cliente: a **ShopBrasil**, uma rede de e-commerce com 200 lojas online.
+
+No início, tudo funcionava bem com Python, pandas, PostgreSQL e scripts cron. Mas o volume de dados começou a crescer exponencialmente — 100 mil registros viraram 1 milhão, novos parceiros de marketplace entraram, a Black Friday se aproximava. O que antes rodava em minutos passou a levar horas. E então, numa segunda-feira de manhã, o inevitável aconteceu: o script morreu.
+
+Ao longo deste curso, você faz parte da equipe de engenharia da DataFlow. Semana a semana, os desafios escalam: migrar de pandas para processamento distribuído, integrar fontes heterogêneas, automatizar pipelines, garantir qualidade de dados e, finalmente, entregar um pipeline de produção completo — containerizado, orquestrado e monitorado.
+
+Cada aula apresenta um problema real que a equipe enfrenta, e o lab é a sua solução.
+
+---
+
+### Aula 1 — "O script morreu"
+
+Carlos Mendes (Engenheiro de Dados Sênior) chega ao escritório numa segunda-feira e encontra o temido `Killed` no terminal. O relatório de vendas da ShopBrasil — 100 mil registros — matou o script pandas após 4h37min. Marina (CTO) decide: é hora de migrar para processamento distribuído. **Nesta aula**, os alunos aprendem os fundamentos do Apache Spark e fazem sua primeira análise de faturamento usando PySpark.
+
+### Aula 2 — "Black Friday se aproxima"
+
+A DataFlow cresceu 10x. Ana (Product Owner) precisa de relatórios que cruzam vendas com clientes e categorias de produtos para a estratégia de Black Friday. Carlos precisa dominar joins complexos e análises avançadas. **Nesta aula**, os alunos aprendem joins distribuídos, window functions (ranking, tendências) e UDFs para classificação de clientes.
+
+### Aula 3 — "Três parceiros, três formatos"
+
+A ShopBrasil integrou novos parceiros de marketplace. Cada um envia dados em formato diferente: CSV legado com encoding ISO-8859-1, JSON de API paginada, e Parquet otimizado. Marina define a arquitetura Medallion para organizar o data lake. **Nesta aula**, os alunos constroem um pipeline de ingestão multi-formato com camadas Bronze → Silver → Gold, incluindo quarentena de dados inválidos.
+
+### Aula 4 — "Cron não escala"
+
+Os scripts cron começam a falhar silenciosamente. Quando uma etapa quebra, ninguém percebe até o relatório atrasar. Roberto (CEO) exige automação confiável. Carlos propõe Apache Airflow. **Nesta aula**, os alunos aprendem a criar DAGs com PythonOperator, BashOperator, XComs e template variables — a primeira automação real do pipeline.
+
+### Aula 5 — "O pipeline precisa ser inteligente"
+
+Nem todo dia é igual: segundas têm volume alto (acúmulo do fim de semana), sextas precisam de relatório semanal. O pipeline precisa tomar decisões automaticamente. **Nesta aula**, os alunos implementam branching condicional, FileSensors para detectar dados chegando, TaskGroups para organização e integração Airflow + Spark via SparkSubmitOperator.
+
+### Aula 6 — "Dados ruins, decisões ruins"
+
+Um bug silencioso: 15% dos registros de um parceiro chegam com valores negativos e campos nulos. O relatório foi para o board com números errados. Marina decreta: nenhum dado entra em produção sem validação. **Nesta aula**, os alunos implementam um framework de qualidade de dados com checks de completude, unicidade e validade, sistema de quarentena e relatório consolidado.
+
+### Aula 7 — "Preparando para produção"
+
+O pipeline funciona no notebook, mas "funcionar no notebook" não é produção. Marina exige: scripts parametrizados, logging estruturado, escrita idempotente, orquestração automática e tudo containerizado. **Nesta aula**, os alunos integram tudo: script Spark com CLI + DAG Airflow + Docker Compose + quality checks — o pipeline end-to-end completo.
+
+### Aula 8 — "Reunião do conselho"
+
+A DataFlow vai apresentar seus projetos ao board de investidores. Cada equipe de engenharia demonstra seu pipeline ao vivo. Não basta slides bonitos — os investidores querem ver o produto funcionando. **Nesta aula**, os grupos apresentam seus projetos finais com demo ao vivo: `docker compose up` → pipeline rodando end-to-end.
+
 ## Tecnologias
 
 | Tecnologia | Versão | Uso |
