@@ -2,7 +2,7 @@
 
 ## Contexto
 
-> **Carlos Mendes (Engenheiro de Dados Sênior):** "Antes de trabalharmos com os dados de vendas da DataFlow, precisamos garantir que o ambiente de desenvolvimento está funcionando. Vamos configurar um cluster Spark local com Docker — o mesmo tipo de setup que usamos em produção, só que em escala reduzida."
+> **Carlos Mendes (Engenheiro de Dados Sênior):** "Antes de trabalharmos com os dados de vendas da DataFlow, precisamos garantir que o ambiente de desenvolvimento está funcionando. Vamos configurar um ambiente Spark local com Docker — prático e leve para aprender os fundamentos."
 
 ## Pré-requisitos
 
@@ -16,7 +16,7 @@ Antes de iniciar, verifique que você possui os seguintes itens instalados e con
 | RAM disponível | 8 GB | Docker Desktop → Settings → Resources |
 | CPU cores | 4 cores | Docker Desktop → Settings → Resources |
 
-> **⚠️ Importante:** No Docker Desktop (Windows/Mac), vá em **Settings → Resources** e configure pelo menos **8 GB de RAM** e **4 cores de CPU** para o Docker. Sem isso, o Spark Worker pode falhar ao inicializar.
+> **⚠️ Importante:** No Docker Desktop (Windows/Mac), vá em **Settings → Resources** e configure pelo menos **8 GB de RAM** e **4 cores de CPU** para o Docker.
 
 ---
 
@@ -64,7 +64,7 @@ cd Mackenzie_Mackenzie_BigDataProcessing
 
 ## Passo 3: Subir o Ambiente Base com Docker Compose
 
-**Descrição:** Iniciar os containers do cluster Spark (Master + Worker) e do Jupyter Notebook.
+**Descrição:** Iniciar o container do Jupyter Notebook com PySpark embutido (Spark em modo local).
 
 **Comando (opção 1 — Docker Compose direto):**
 ```bash
@@ -78,27 +78,25 @@ docker compose -f shared/docker-compose.yml up -d
 
 **Resultado esperado:**
 ```
-[+] Running 4/4
- ✔ Network dataflow-network    Created
- ✔ Container spark-master      Started
- ✔ Container spark-worker      Started
- ✔ Container jupyter-notebook  Started
+[+] Running 2/2
+ ✔ Network shared_default      Created
+ ✔ Container jupyter-spark     Started
 ```
 
-**Explicação:** Este comando cria três containers:
-- **spark-master**: Gerenciador do cluster Spark (coordena os jobs)
-- **spark-worker**: Nó de processamento (executa as tarefas distribuídas)
-- **jupyter-notebook**: Interface interativa onde você escreverá código PySpark
+**Explicação:** Este comando cria um container:
+- **jupyter-spark**: Jupyter Notebook com PySpark embutido, rodando Spark em modo local (`local[*]`)
 
-A flag `-d` executa os containers em background (detached mode), liberando o terminal.
+O Spark em modo local utiliza todos os cores disponíveis da máquina para processar dados. Não há containers separados de Spark Master ou Worker — tudo roda dentro do mesmo container. Isso é suficiente para os labs do curso com datasets de até 1M de registros.
 
-**Dica:** Na primeira execução, o Docker precisa baixar as imagens (~2 GB total). Isso pode levar 5-10 minutos dependendo da sua conexão. Nas próximas vezes, será instantâneo.
+A flag `-d` executa o container em background (detached mode), liberando o terminal.
+
+**Dica:** Na primeira execução, o Docker precisa baixar a imagem (~2 GB). Isso pode levar 5-10 minutos dependendo da sua conexão. Nas próximas vezes, será instantâneo.
 
 ---
 
-## Passo 4: Verificar que os Containers Estão Rodando
+## Passo 4: Verificar que o Container Está Rodando
 
-**Descrição:** Confirmar que todos os serviços inicializaram corretamente.
+**Descrição:** Confirmar que o serviço inicializou corretamente.
 
 **Comando:**
 ```bash
@@ -107,15 +105,13 @@ docker compose -f shared/docker-compose.yml ps
 
 **Resultado esperado:**
 ```
-NAME               IMAGE                          STATUS          PORTS
-spark-master       bitnami/spark:3.5             Up (healthy)    0.0.0.0:7077->7077/tcp, 0.0.0.0:8080->8080/tcp
-spark-worker       bitnami/spark:3.5             Up              
-jupyter-notebook   jupyter/pyspark-notebook      Up              0.0.0.0:8888->8888/tcp
+NAME               IMAGE                                    STATUS     PORTS
+jupyter-spark      quay.io/jupyter/pyspark-notebook:latest  Up         0.0.0.0:8888->8888/tcp, 0.0.0.0:4040->4040/tcp
 ```
 
-**Explicação:** Todos os três containers devem exibir status **"Up"**. O spark-master possui um healthcheck configurado — quando exibir **"Up (healthy)"**, significa que a interface web já está acessível. O spark-worker depende do master estar healthy antes de iniciar.
+**Explicação:** O container deve exibir status **"Up"**. A porta 8888 é o Jupyter Notebook e a porta 4040 é a Spark App UI (que só fica ativa quando um job Spark está executando).
 
-**Dica:** Se algum container mostrar "Restarting" ou "Exit", veja os logs com `docker compose -f shared/docker-compose.yml logs <nome-do-container>` para diagnosticar o problema.
+**Dica:** Se o container mostrar "Restarting" ou "Exit", veja os logs com `docker compose -f shared/docker-compose.yml logs jupyter` para diagnosticar o problema.
 
 ---
 
@@ -139,30 +135,27 @@ Abra o navegador e acesse: http://localhost:8888
 
 ---
 
-## Passo 6: Verificar o Spark Master UI
+## Passo 6: Verificar a Spark App UI (Opcional)
 
-**Descrição:** Acessar a interface de administração do Spark para confirmar que o cluster está operacional.
+**Descrição:** A Spark App UI fica disponível na porta 4040 **apenas enquanto um SparkSession está ativo** (ou seja, enquanto um notebook com Spark está rodando). Não se preocupe se ela não estiver acessível agora — ela aparecerá no Passo 7 quando criarmos o SparkSession.
 
 **Comando:**
 ```
-Abra o navegador e acesse: http://localhost:8080
+Abra o navegador e acesse: http://localhost:4040
+(Só funciona após executar código Spark no notebook)
 ```
 
-**Resultado esperado:**
-- A página exibe **"Spark Master at spark://spark-master:7077"**
-- Na seção **"Workers"**, deve haver **1 worker registrado**
-- O worker exibe: 2 cores, 2.0 GB de memória disponível
-- Status do worker: **ALIVE**
+**Resultado esperado (após Passo 7):**
+- A página exibe informações sobre o SparkSession ativo
+- Mostra jobs executados, stages, e detalhes de storage
 
-**Explicação:** O Spark Master UI é a central de monitoramento do cluster. Aqui você pode acompanhar workers conectados, jobs em execução, uso de memória e CPU. Em produção, teríamos dezenas ou centenas de workers — no nosso lab, um é suficiente para aprender os conceitos.
-
-**Dica:** Se nenhum worker aparecer, aguarde ~60 segundos. O worker só se registra após o master estar completamente healthy (healthcheck passa).
+**Explicação:** Diferente de um cluster Spark standalone (que possui uma Master UI permanente na porta 8080), no modo local a interface de monitoramento é a **Spark App UI** — ela existe por aplicação e só fica ativa durante a execução. Isso é normal e esperado para este ambiente de laboratório.
 
 ---
 
 ## Passo 7: Testar Conexão com o Spark
 
-**Descrição:** Criar um novo notebook no Jupyter e verificar que o PySpark consegue se conectar ao cluster Spark.
+**Descrição:** Criar um novo notebook no Jupyter e verificar que o PySpark está funcionando corretamente.
 
 **Comando (no Jupyter):**
 
@@ -172,11 +165,10 @@ Abra o navegador e acesse: http://localhost:8080
 ```python
 from pyspark.sql import SparkSession
 
-# Criar SparkSession conectada ao cluster
+# Criar SparkSession em modo local (usa todos os cores disponíveis)
 spark = SparkSession.builder \
     .appName("DataFlow-Lab-Setup-Teste") \
-    .master("spark://spark-master:7077") \
-    .config("spark.executor.memory", "1g") \
+    .master("local[*]") \
     .getOrCreate()
 
 # Verificar versão e conexão
@@ -200,7 +192,7 @@ print(f"   DataFrame criado com {df.count()} linhas ✅")
 ✅ Spark conectado com sucesso!
    Versão: 3.5.x
    App Name: DataFlow-Lab-Setup-Teste
-   Master: spark://spark-master:7077
+   Master: local[*]
 +---+------+
 | id|status|
 +---+------+
@@ -212,18 +204,15 @@ print(f"   DataFrame criado com {df.count()} linhas ✅")
    DataFrame criado com 3 linhas ✅
 ```
 
-**Explicação:** A SparkSession é o ponto de entrada principal para toda interação com o Spark. O `.master("spark://spark-master:7077")` conecta nosso notebook ao cluster Docker. Se esse teste passar, significa que:
-- O Jupyter consegue se comunicar com o Spark Master
-- O Spark Master consegue delegar tarefas ao Worker
-- O ambiente está 100% funcional para os exercícios do lab
+**Explicação:** A SparkSession é o ponto de entrada principal para toda interação com o Spark. O `.master("local[*]")` indica que o Spark usará todos os cores do container para processamento paralelo. Se esse teste passar, o ambiente está 100% funcional para os exercícios do lab.
 
-**Dica:** Se a célula travar por mais de 2 minutos, verifique se o spark-worker está registrado no Master UI (Passo 6). Sem worker disponível, os jobs ficam na fila indefinidamente.
+**Dica:** Após executar esse código, a Spark App UI estará disponível em http://localhost:4040. Abra em outra aba para explorar!
 
 ---
 
 ## Passo 8: Encerrar o Ambiente (Pós-Lab)
 
-**Descrição:** Ao final do laboratório, parar todos os containers para liberar recursos da máquina.
+**Descrição:** Ao final do laboratório, parar o container para liberar recursos da máquina.
 
 **Comando (opção 1 — Docker Compose direto):**
 ```bash
@@ -237,16 +226,14 @@ docker compose -f shared/docker-compose.yml down
 
 **Resultado esperado:**
 ```
-[+] Running 4/4
- ✔ Container jupyter-notebook  Removed
- ✔ Container spark-worker      Removed
- ✔ Container spark-master      Removed
- ✔ Network dataflow-network    Removed
+[+] Running 2/2
+ ✔ Container jupyter-spark     Removed
+ ✔ Network shared_default      Removed
 ```
 
-**Explicação:** O comando `down` para e remove os containers, liberando memória e CPU. Os notebooks que você salvou ficam persistidos no diretório `shared/notebooks/` (volume montado), então não serão perdidos. Na próxima aula, basta executar `docker compose up -d` novamente.
+**Explicação:** O comando `down` para e remove o container, liberando memória e CPU. Os notebooks que você salvou ficam persistidos no diretório `shared/notebooks/` (volume montado), então não serão perdidos. Na próxima aula, basta executar `docker compose up -d` novamente.
 
-**Dica:** Se quiser apenas pausar (sem remover containers), use `docker compose -f shared/docker-compose.yml stop`. Para reiniciar depois: `docker compose -f shared/docker-compose.yml start`.
+**Dica:** Se quiser apenas pausar (sem remover o container), use `docker compose -f shared/docker-compose.yml stop`. Para reiniciar depois: `docker compose -f shared/docker-compose.yml start`.
 
 ---
 
@@ -254,15 +241,15 @@ docker compose -f shared/docker-compose.yml down
 
 ### Problema: "Port already in use" (Porta já em uso)
 
-**Sintoma:** Erro ao subir os containers mencionando que a porta 8080, 8888 ou 7077 já está em uso.
+**Sintoma:** Erro ao subir o container mencionando que a porta 8888 ou 4040 já está em uso.
 
 **Solução:**
 ```bash
-# Identificar o processo usando a porta (exemplo: porta 8080)
+# Identificar o processo usando a porta (exemplo: porta 8888)
 # Linux/Mac:
-lsof -i :8080
+lsof -i :8888
 # Windows (PowerShell):
-netstat -ano | findstr :8080
+netstat -ano | findstr :8888
 
 # Encerrar o processo ou alterar a porta no docker-compose.yml
 # Para alterar a porta do Jupyter para 9999, edite shared/docker-compose.yml:
@@ -289,7 +276,7 @@ docker info
 
 ### Problema: "Not enough memory" / Container OOM (Out of Memory)
 
-**Sintoma:** O spark-worker reinicia repetidamente ou exibe "Killed" nos logs.
+**Sintoma:** O container reinicia repetidamente ou exibe "Killed" nos logs.
 
 **Solução:**
 1. **Docker Desktop (Windows/Mac):**
@@ -298,14 +285,6 @@ docker info
    - Clique em **Apply & Restart**
 
 2. **Linux:** Verifique a memória disponível com `free -h`. Se tiver menos de 8 GB livre, feche outros programas.
-
-3. **Alternativa:** Reduza a memória do worker editando `shared/docker-compose.yml`:
-   ```yaml
-   # De:
-   - SPARK_WORKER_MEMORY=2g
-   # Para:
-   - SPARK_WORKER_MEMORY=1g
-   ```
 
 ---
 
@@ -316,14 +295,13 @@ docker info
 **Solução:**
 ```bash
 # Ver logs do container com problema:
-docker compose -f shared/docker-compose.yml logs spark-worker
+docker compose -f shared/docker-compose.yml logs jupyter
 
 # Causas comuns:
-# 1. Spark Master ainda não está pronto → aguarde ~60 segundos e tente novamente
-# 2. Conflito de rede → remova redes antigas:
+# 1. Conflito de rede → remova redes antigas:
 docker network prune
 
-# 3. Imagem corrompida → force o download novamente:
+# 2. Imagem corrompida → force o download novamente:
 docker compose -f shared/docker-compose.yml pull
 docker compose -f shared/docker-compose.yml up -d --force-recreate
 ```
@@ -348,24 +326,20 @@ docker compose -f shared/docker-compose.yml restart jupyter
 
 ---
 
-### Problema: SparkSession não conecta ao cluster
+### Problema: Spark App UI (porta 4040) não acessível
 
-**Sintoma:** A célula do notebook trava indefinidamente ao criar SparkSession.
+**Sintoma:** Ao abrir http://localhost:4040, a página não carrega.
 
 **Solução:**
+Isso é **normal** se você não tem nenhum notebook com SparkSession ativo. A porta 4040 só fica disponível enquanto um SparkSession está rodando. Execute o código do Passo 7 e tente novamente.
+
 ```bash
-# 1. Verifique se o worker está registrado:
-#    Acesse http://localhost:8080 → seção "Workers" deve mostrar 1 worker ALIVE
+# Verificar se a porta está publicada:
+docker port jupyter-spark
 
-# 2. Verifique a rede entre containers:
-docker exec jupyter-notebook ping -c 3 spark-master
-
-# 3. Se falhar, recrie a rede:
-docker compose -f shared/docker-compose.yml down
-docker compose -f shared/docker-compose.yml up -d
-
-# 4. No notebook, use master "local[*]" como alternativa temporária:
-# spark = SparkSession.builder.master("local[*]").getOrCreate()
+# Deve mostrar:
+# 4040/tcp -> 0.0.0.0:4040
+# 8888/tcp -> 0.0.0.0:8888
 ```
 
 ---
@@ -375,11 +349,10 @@ docker compose -f shared/docker-compose.yml up -d
 Antes de prosseguir para os exercícios do lab, confirme que todos os itens abaixo estão ✅:
 
 - [ ] Docker está rodando (`docker info` sem erros)
-- [ ] Três containers estão "Up" (`docker compose ps`)
-- [ ] Spark Master UI acessível em http://localhost:8080
-- [ ] 1 worker registrado e ALIVE no Spark Master UI
+- [ ] Container `jupyter-spark` está "Up" (`docker compose ps`)
 - [ ] Jupyter Notebook acessível em http://localhost:8888
 - [ ] Pasta `data/` visível no Jupyter com datasets
-- [ ] SparkSession conecta ao cluster e cria DataFrame com sucesso
+- [ ] SparkSession local cria DataFrame com sucesso (Passo 7)
+- [ ] Spark App UI acessível em http://localhost:4040 (após executar Passo 7)
 
 > **Carlos:** "Ambiente pronto! Agora podemos focar no que importa: processar os dados de vendas da DataFlow. Vamos para o primeiro exercício."
