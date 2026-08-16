@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 2 — Transformações Avançadas com Spark | Mackenzie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC092F;
+  --red-dark:#9E0724;
+  --red-light:#F9E8EB;
+  --gold:#C4A35A;
+  --white:#FFFFFF;
+  --gray-50:#FAFAFA;
+  --gray-100:#F4F4F5;
+  --gray-200:#E4E4E7;
+  --gray-500:#71717A;
+  --gray-700:#3F3F46;
+  --gray-900:#18181B;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+body{background:var(--gray-900);}
+
+.slide{
+  display:none;position:absolute;inset:0;
+  width:100vw;height:100vh;
+  padding:60px 80px;
+  flex-direction:column;justify-content:flex-start;
+  background:var(--white);color:var(--gray-900);
+  overflow-y:auto;
+}
+.slide.active{display:flex;}
+.slide::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--red-dark));
+}
+.slide .mackenzie-mark{
+  position:absolute;top:18px;right:40px;
+  font-size:.7em;font-weight:700;letter-spacing:2px;color:var(--red);
+}
+
+/* Capa */
+.slide.cover{
+  background:linear-gradient(145deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);align-items:center;justify-content:center;text-align:center;
+  padding:80px;
+}
+.slide.cover::before{display:none;}
+.slide.cover h1{font-size:2.8em;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.slide.cover .subtitle{font-size:1.15em;font-weight:300;opacity:.9;margin-bottom:4px;}
+.slide.cover .meta{
+  margin-top:30px;display:inline-flex;gap:16px;
+  background:rgba(255,255,255,.15);padding:10px 24px;border-radius:24px;
+  font-size:.9em;
+}
+
+/* Section divider */
+.slide.section{
+  background:var(--gray-900);color:var(--white);
+  align-items:center;justify-content:center;text-align:center;
+}
+.slide.section::before{background:var(--gold);}
+.slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+
+/* Typography */
+.slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
+.slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
+.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide ul,.slide ol{margin:8px 0 12px 28px;}
+.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide strong{color:var(--gray-900);}
+
+/* Code */
+.slide pre{
+  background:var(--gray-900);color:#e4e4e7;
+  padding:18px 22px;border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.8em;
+  line-height:1.6;margin:12px 0;overflow-x:auto;
+  border-left:4px solid var(--red);
+}
+
+/* Table */
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide tr:nth-child(even) td{background:var(--gray-50);}
+
+/* Blockquote */
+.slide blockquote{
+  border-left:4px solid var(--gold);background:var(--gray-50);
+  padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
+  font-style:italic;color:var(--gray-700);font-size:.95em;
+}
+
+/* Columns */
+.cols{display:flex;gap:32px;margin:12px 0;}
+.cols .col{flex:1;}
+
+/* Highlight box */
+.highlight{
+  background:var(--red-light);border:1px solid var(--red);
+  padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Navigation */
+.nav{position:fixed;bottom:24px;right:36px;display:flex;gap:8px;z-index:999;}
+.nav button{
+  background:var(--red);color:var(--white);border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-size:1em;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.nav button:hover{background:var(--red-dark);transform:scale(1.05);}
+.counter{
+  position:fixed;bottom:28px;left:36px;
+  color:var(--gray-500);font-size:.8em;font-weight:500;z-index:999;
+}
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:var(--red);transition:width .3s;z-index:999;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- SLIDE 1 — Capa -->
+<div class="slide cover active">
+<h1>Transformações Avançadas<br>com Apache Spark</h1>
+<p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
+<p class="subtitle">Universidade Presbiteriana Mackenzie</p>
+<div class="meta"><span>📅 Semana 2</span><span>⏱️ 50 min teoria</span></div>
+</div>
+
+<!-- SLIDE 2 — Contexto Narrativo -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🚀 DataFlow Analytics — 6 Meses Depois</h2>
+<ul>
+<li><strong>Crescimento de 10x</strong> no volume de dados processados</li>
+<li>De 1 cliente (ShopBrasil) para <strong>12 clientes</strong> de e-commerce</li>
+<li>Base de <strong>1 milhão de registros</strong> de vendas mensais</li>
+<li><strong>500 mil clientes</strong> cadastrados em múltiplas plataformas</li>
+<li><strong>3 fontes de dados</strong> distintas que precisam ser cruzadas</li>
+</ul>
+<blockquote><strong>Roberto</strong> (CEO): "A Black Friday é em duas semanas. Precisamos de relatórios que cruzem vendas, clientes e categorias. É possível?"</blockquote>
+</div>
+
+<!-- SLIDE 3 — O Pedido Impossível -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 O Pedido Impossível (com pandas)</h2>
+<p><strong>Ana</strong> (Product Owner) chega com a lista de relatórios para a Black Friday:</p>
+<ol>
+<li>🏆 <strong>Ranking dos Top 100 clientes</strong> por estado (faturamento acumulado)</li>
+<li>📈 <strong>Tendência de compra</strong> — comparar valor do pedido atual vs anterior</li>
+<li>🏷️ <strong>Segmentação</strong> — clientes por faixa de ticket (baixo/médio/alto)</li>
+<li>🔗 <strong>Cruzamento</strong> vendas × clientes × categorias para relatório consolidado</li>
+</ol>
+<pre>MemoryError: Unable to allocate 3.7 GiB for merge operation</pre>
+<blockquote><strong>Marina</strong> (CTO): "Joins com 1M de vendas e 500K clientes não cabem em memória com pandas. Precisamos usar joins distribuídos do Spark e Window Functions para os rankings."</blockquote>
+</div>
+
+<!-- SLIDE 4 — O Plano de Carlos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🛠️ O Plano de Carlos</h2>
+<pre>
+┌─────────────────────────────────────────────────────────┐
+│  PROBLEMA: Cruzar 3 fontes (vendas + clientes + categ.) │
+│  Volume: 1M vendas × 500K clientes = JOIN MASSIVO      │
+└─────────────────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────┐
+│  SOLUÇÃO: Spark Distributed Joins + Window Functions    │
+│                                                         │
+│  1. Joins distribuídos (shuffle entre executors)        │
+│  2. Broadcast join para tabela pequena (categorias)     │
+│  3. Window Functions para rankings e tendências         │
+│  4. UDFs para lógica customizada de segmentação         │
+└─────────────────────────────────────────────────────────┘
+</pre>
+<blockquote><strong>Marina</strong>: "Perfeito. E usem explain() para verificar que o Catalyst está otimizando os joins."</blockquote>
+</div>
+
+<!-- SLIDE 5 — Objetivos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Objetivos de Aprendizagem</h2>
+<ol>
+<li><strong>Dominar</strong> todos os tipos de join no Spark (inner, left, right, full, cross, semi, anti)</li>
+<li><strong>Aplicar</strong> Broadcast Joins para otimizar joins com tabelas pequenas</li>
+<li><strong>Utilizar</strong> Window Functions para rankings, tendências e totais acumulados</li>
+<li><strong>Criar</strong> UDFs (User Defined Functions) e entender seu impacto na performance</li>
+<li><strong>Analisar</strong> planos de execução com <code>explain()</code> e identificar gargalos</li>
+<li><strong>Otimizar</strong> queries com particionamento, cache e persist</li>
+</ol>
+</div>
+
+<!-- SLIDE 6 — Section: Joins -->
+<div class="slide section">
+<h2>Joins no Spark</h2>
+<p>Combinando DataFrames de múltiplas fontes</p>
+</div>
+
+<!-- SLIDE 7 — Joins Visão Geral -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Joins — Combinando DataFrames</h2>
+<blockquote>Um <strong>join</strong> combina registros de dois DataFrames baseado em uma condição de igualdade entre colunas.</blockquote>
+<pre>df_resultado = df_vendas.join(
+    df_clientes,                    # DataFrame direito
+    df_vendas.customer_id == df_clientes.customer_id,  # Condição
+    "inner"                         # Tipo de join
+)
+
+# Sintaxe simplificada (coluna com mesmo nome):
+df_resultado = df_vendas.join(df_clientes, "customer_id", "inner")</pre>
+<table>
+<tr><th>Tipo</th><th>Alias</th><th>Registros retornados</th></tr>
+<tr><td><strong>inner</strong></td><td>inner</td><td>Apenas matches em ambos</td></tr>
+<tr><td><strong>left</strong></td><td>left_outer</td><td>Todos da esquerda + matches</td></tr>
+<tr><td><strong>right</strong></td><td>right_outer</td><td>Todos da direita + matches</td></tr>
+<tr><td><strong>full</strong></td><td>full_outer</td><td>Todos de ambos</td></tr>
+<tr><td><strong>cross</strong></td><td>cross</td><td>Produto cartesiano</td></tr>
+<tr><td><strong>left_semi</strong></td><td>left_semi</td><td>Esquerda onde existe match</td></tr>
+<tr><td><strong>left_anti</strong></td><td>left_anti</td><td>Esquerda onde NÃO existe match</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 8 — Inner Join -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Inner Join — Apenas Correspondências</h2>
+<blockquote>Retorna <strong>somente</strong> os registros que possuem correspondência em <strong>ambos</strong> os DataFrames.</blockquote>
+<pre>
+df_vendas                    df_clientes
+┌──────┬─────────┐          ┌─────────┬──────────┐
+│venda │cust_id  │          │cust_id  │nome      │
+├──────┼─────────┤          ├─────────┼──────────┤
+│V001  │C001     │          │C001     │João      │
+│V002  │C002     │          │C002     │Maria     │
+│V003  │C003     │          │C004     │Pedro     │
+│V004  │C005     │          └─────────┴──────────┘
+└──────┴─────────┘
+
+INNER JOIN → Resultado:
+┌──────┬─────────┬──────────┐
+│venda │cust_id  │nome      │
+├──────┼─────────┼──────────┤
+│V001  │C001     │João      │  ← match
+│V002  │C002     │Maria     │  ← match
+└──────┴─────────┴──────────┘
+❌ V003 (C003 não existe em clientes)
+❌ V004 (C005 não existe em clientes)
+❌ C004 (Pedro não tem vendas)
+</pre>
+<pre># Caso DataFlow: vendas com dados do cliente
+df_vendas_clientes = df_vendas.join(df_clientes, "customer_id", "inner")</pre>
+<p><strong>Quando usar:</strong> Quando você quer apenas registros que existem em ambas as tabelas.</p>
+</div>
+
+<!-- SLIDE 9 — Left Join -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Left Join — Todos da Esquerda</h2>
+<blockquote>Retorna <strong>todos</strong> os registros do DataFrame da esquerda, com dados do direito quando houver match. Campos sem correspondência ficam <code>null</code>.</blockquote>
+<pre>
+LEFT JOIN → Resultado:
+┌──────┬─────────┬──────────┐
+│venda │cust_id  │nome      │
+├──────┼─────────┼──────────┤
+│V001  │C001     │João      │  ← match
+│V002  │C002     │Maria     │  ← match
+│V003  │C003     │null      │  ← sem match (mantém)
+│V004  │C005     │null      │  ← sem match (mantém)
+└──────┴─────────┴──────────┘
+</pre>
+<pre># Caso DataFlow: TODAS as vendas, com dados de cliente quando disponível
+df_completo = df_vendas.join(df_clientes, "customer_id", "left")</pre>
+<p><strong>Quando usar:</strong> Quando a tabela da esquerda é a "principal" e você não quer perder registros. Caso clássico: vendas que podem ter clientes não-cadastrados (guest checkout).</p>
+</div>
+
+<!-- SLIDE 10 — Right, Full e Cross Join -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Right, Full e Cross Join</h2>
+<pre># Right Join: todos da direita + matches da esquerda
+df_clientes_vendas = df_vendas.join(df_clientes, "customer_id", "right")
+
+# Full Outer Join: todos de ambos os lados
+df_reconciliacao = df_vendas.join(df_clientes, "customer_id", "full")
+
+# Cross Join: produto cartesiano (CUIDADO!)
+# 1M × 500K = 500 BILHÕES de registros!
+df_combinacoes = df_produtos.crossJoin(df_regioes)  # 5K × 27 = 135K</pre>
+<table>
+<tr><th>Tipo</th><th>Caso de uso DataFlow</th></tr>
+<tr><td><strong>Right</strong></td><td>Relatório de clientes (mostra todos, mesmo sem compra)</td></tr>
+<tr><td><strong>Full</strong></td><td>Auditoria — identificar órfãos em ambos os lados</td></tr>
+<tr><td><strong>Cross</strong></td><td>Gerar combinações (produto × região para pricing)</td></tr>
+</table>
+<div class="highlight">
+<strong>Cross join sem filtro é quase sempre um erro!</strong> Resulta em explosão de dados.
+</div>
+</div>
+
+<!-- SLIDE 11 — Semi e Anti Join -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Semi Join e Anti Join — Filtragem por Existência</h2>
+<pre># Left Semi: clientes que JÁ compraram
+clientes_ativos = df_clientes.join(df_vendas, "customer_id", "left_semi")
+
+# Left Anti: clientes que NUNCA compraram
+clientes_inativos = df_clientes.join(df_vendas, "customer_id", "left_anti")</pre>
+<pre>
+Semi Join (EXISTS):          Anti Join (NOT EXISTS):
+┌─────────┬──────────┐      ┌─────────┬──────────┐
+│cust_id  │nome      │      │cust_id  │nome      │
+├─────────┼──────────┤      ├─────────┼──────────┤
+│C001     │João      │ ✅   │C003     │Ana       │ ✅
+│C002     │Maria     │ ✅   │C005     │Pedro     │ ✅
+└─────────┴──────────┘      └─────────┴──────────┘
+(tem match em vendas)        (NÃO tem match em vendas)
+</pre>
+<p><strong>Casos de uso:</strong></p>
+<ul>
+<li><strong>Semi:</strong> Segmentar campanha — apenas clientes que já compraram</li>
+<li><strong>Anti:</strong> Encontrar vendas com customer_id inválido</li>
+<li><strong>Anti:</strong> Identificar produtos sem nenhuma venda</li>
+</ul>
+</div>
+
+<!-- SLIDE 12 — Guia de Decisão -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🗺️ Guia de Decisão: Qual Join Usar?</h2>
+<pre>
+                    Preciso de TODOS os registros
+                    da tabela principal?
+                           │
+                    ┌──────┴──────┐
+                    │ SIM         │ NÃO
+                    ▼             ▼
+              Preciso dos       Preciso só saber
+              DADOS da outra    se EXISTE match?
+              tabela?                │
+                    │          ┌─────┴─────┐
+              ┌─────┴─────┐    │ SIM       │ NÃO
+              │ SIM       │    ▼           ▼
+              ▼           │  LEFT_SEMI   LEFT_ANTI
+           LEFT JOIN      │
+                          ▼
+                    Preciso APENAS dos matches?
+                    ┌─────┴─────┐
+                    │ SIM       │ NÃO (tudo)
+                    ▼           ▼
+                 INNER       FULL OUTER
+                 JOIN        JOIN
+</pre>
+<table>
+<tr><th>Cenário DataFlow</th><th>Join recomendado</th></tr>
+<tr><td>Relatório de vendas com nome do cliente</td><td><code>left</code></td></tr>
+<tr><td>Faturamento por categoria</td><td><code>inner</code></td></tr>
+<tr><td>Clientes para campanha de reativação</td><td><code>left_anti</code></td></tr>
+<tr><td>Auditoria de integridade</td><td><code>full_outer</code></td></tr>
+<tr><td>Clientes VIP elegíveis para desconto</td><td><code>left_semi</code></td></tr>
+</table>
+</div>
+
+<!-- SLIDE 13 — Broadcast Join -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📡 Broadcast Join — Tabela Pequena</h2>
+<blockquote>Quando uma das tabelas é <strong>pequena</strong> (&lt; 10MB), o Spark pode <strong>broadcast</strong> (enviar cópia completa) para todos os executors, evitando shuffle.</blockquote>
+<pre>
+                 ┌──────────────┐
+                 │ df_categorias│ ← Tabela pequena (200 registros)
+                 │   (broadcast)│
+                 └──────┬───────┘
+            cópia completa enviada a todos
+          ┌─────────────┼─────────────┐
+          ▼             ▼             ▼
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│Executor 1   │  │Executor 2   │  │Executor 3   │
+│Vendas P.1   │  │Vendas P.2   │  │Vendas P.3   │
+│+ categorias │  │+ categorias │  │+ categorias │
+│(join local) │  │(join local) │  │(join local) │
+└─────────────┘  └─────────────┘  └─────────────┘
+      SEM SHUFFLE! Join 100% local em cada executor
+</pre>
+<pre>from pyspark.sql.functions import broadcast
+
+# Forçar broadcast da tabela de categorias
+df_enriquecido = df_vendas.join(
+    broadcast(df_categorias), "category_id", "left"
+)</pre>
+</div>
+
+<!-- SLIDE 14 — Section: Window Functions -->
+<div class="slide section">
+<h2>Window Functions</h2>
+<p>Análise sobre partições sem reduzir linhas</p>
+</div>
+
+<!-- SLIDE 15 — Window Conceito -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🪟 Window Functions — Conceito</h2>
+<blockquote><strong>Window Functions</strong> permitem calcular valores em relação a um grupo de registros (janela) sem reduzir o número de linhas.</blockquote>
+<table>
+<tr><th>Operação</th><th>Comportamento</th><th>Resultado</th></tr>
+<tr><td><code>groupBy().agg()</code></td><td>Colapsa linhas em grupos</td><td>1 linha por grupo</td></tr>
+<tr><td><strong>Window Function</strong></td><td>Calcula sobre um "frame"</td><td>Mantém todas as linhas</td></tr>
+</table>
+<pre>from pyspark.sql import Window
+
+window_spec = Window \
+    .partitionBy("coluna_grupo")   # ← COMO agrupar
+    .orderBy("coluna_ordem")       # ← COMO ordenar dentro do grupo
+    .rowsBetween(start, end)       # ← Tamanho da janela (opcional)</pre>
+<pre>
+┌─────────── Partição: Estado = "SP" ────────────┐
+│ Row │ Cliente │ Valor │ rank() │ running_sum   │
+│  1  │ João    │ 500   │   1    │    500        │
+│  2  │ Maria   │ 350   │   2    │    850        │
+│  3  │ Pedro   │ 200   │   3    │   1050        │
+└────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<!-- SLIDE 16 — Ranking Functions -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏆 Funções de Ranking: row_number, rank, dense_rank</h2>
+<pre>from pyspark.sql import Window
+from pyspark.sql.functions import row_number, rank, dense_rank, col
+
+window_estado = Window.partitionBy("shipping_state") \
+    .orderBy(col("total_amount").desc())</pre>
+<pre>
+┌──────────┬────────┬─────────────┬──────┬────────────┐
+│ Cliente  │ Valor  │ row_number  │ rank │ dense_rank │
+├──────────┼────────┼─────────────┼──────┼────────────┤
+│ João     │ 500    │     1       │  1   │     1      │
+│ Maria    │ 500    │     2       │  1   │     1      │ ← EMPATE
+│ Pedro    │ 350    │     3       │  3   │     2      │
+│ Ana      │ 200    │     4       │  4   │     3      │
+└──────────┴────────┴─────────────┴──────┴────────────┘
+                          │            │         │
+                          │            │         └─ Sem pular posição
+                          │            └─ Pula posição após empate
+                          └─ Sempre único (desempata arbitrariamente)
+</pre>
+<pre># Top 10 clientes por estado
+df_ranking = df_vendas_clientes \
+    .withColumn("posicao", row_number().over(window_estado))
+
+top_10_por_estado = df_ranking.filter(col("posicao") &lt;= 10)</pre>
+</div>
+
+<!-- SLIDE 17 — lag e lead -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⏪⏩ Análise Temporal: lag() e lead()</h2>
+<blockquote><code>lag()</code> acessa o valor da linha <strong>anterior</strong>. <code>lead()</code> acessa o valor da linha <strong>seguinte</strong>.</blockquote>
+<pre>from pyspark.sql.functions import lag, lead
+
+window_temporal = Window.partitionBy("customer_id") \
+    .orderBy("order_date")
+
+df_tendencia = df_vendas \
+    .withColumn("compra_anterior", lag("total_amount", 1).over(window_temporal)) \
+    .withColumn("proxima_compra", lead("total_amount", 1).over(window_temporal))</pre>
+<pre>
+┌──── Partição: customer_id = "C001" (ordenado por data) ────┐
+│ order_date │ total │ lag(total) │ lead(total) │ variação  │
+├────────────┼───────┼────────────┼─────────────┼───────────┤
+│ 2023-01-15 │ 150   │ null       │ 200         │ null      │
+│ 2023-03-20 │ 200   │ 150        │ 350         │ +33%      │
+│ 2023-06-10 │ 350   │ 200        │ 180         │ +75%      │
+│ 2023-09-05 │ 180   │ 350        │ null        │ -49%      │
+└────────────┴───────┴────────────┴─────────────┴───────────┘
+</pre>
+<p><strong>Caso DataFlow:</strong> Identificar clientes com tendência de queda (possível churn) antes da Black Friday.</p>
+</div>
+
+<!-- SLIDE 18 — Running Totals -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📈 Totais e Médias Acumuladas</h2>
+<pre>from pyspark.sql.functions import sum as spark_sum, avg as spark_avg
+from pyspark.sql import Window
+
+# Do início da partição até a linha atual
+window_acumulado = Window.partitionBy("customer_id") \
+    .orderBy("order_date") \
+    .rowsBetween(Window.unboundedPreceding, Window.currentRow)
+
+df_acumulado = df_vendas.withColumn(
+    "total_acumulado", spark_sum("total_amount").over(window_acumulado)
+)
+
+# Média móvel dos últimos 3 pedidos
+window_movel = Window.partitionBy("customer_id") \
+    .orderBy("order_date") \
+    .rowsBetween(-2, Window.currentRow)
+
+df_media_movel = df_vendas.withColumn(
+    "media_movel_3", spark_avg("total_amount").over(window_movel)
+)</pre>
+<table>
+<tr><th>Frame</th><th>Significado</th></tr>
+<tr><td><code>rowsBetween(unboundedPreceding, currentRow)</code></td><td>Do início ao registro atual</td></tr>
+<tr><td><code>rowsBetween(-2, currentRow)</code></td><td>2 anteriores + atual</td></tr>
+<tr><td><code>rowsBetween(-1, 1)</code></td><td>Anterior + atual + próximo</td></tr>
+<tr><td><code>rangeBetween(unboundedPreceding, currentRow)</code></td><td>Baseado em valor (não posição)</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 19 — ntile e percent_rank -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Segmentação com ntile e percent_rank</h2>
+<pre>from pyspark.sql.functions import ntile, percent_rank
+
+window_global = Window.orderBy(col("faturamento_total").desc())
+
+df_segmentado = df_faturamento_cliente \
+    .withColumn("quartil", ntile(4).over(window_global)) \
+    .withColumn("percentil", percent_rank().over(window_global))</pre>
+<pre>
+┌──────────┬──────────────────┬─────────┬───────────┐
+│ cliente  │ faturamento_total│ quartil │ percentil │
+├──────────┼──────────────────┼─────────┼───────────┤
+│ C001     │ 15000            │    1    │  0.00     │ ← Top 25%
+│ C045     │ 12000            │    1    │  0.08     │
+│ C102     │  8000            │    2    │  0.27     │ ← 25-50%
+│ C203     │  5000            │    2    │  0.35     │
+│ C305     │  2000            │    3    │  0.52     │ ← 50-75%
+│ C410     │   500            │    4    │  0.78     │ ← Bottom 25%
+└──────────┴──────────────────┴─────────┴───────────┘
+</pre>
+<p><strong>Caso DataFlow:</strong> Segmentar clientes em tiers para estratégia diferenciada na Black Friday:<br>
+Q1 (Top 25%): VIP exclusivo + frete grátis &middot; Q2: Desconto progressivo &middot; Q3: Cupom &middot; Q4: Reativação</p>
+</div>
+
+<!-- SLIDE 20 — Section: UDFs -->
+<div class="slide section">
+<h2>UDFs</h2>
+<p>User Defined Functions — Funções personalizadas</p>
+</div>
+
+<!-- SLIDE 21 — UDFs Conceito -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧩 UDFs — Funções Personalizadas</h2>
+<blockquote>Uma <strong>UDF</strong> permite aplicar lógica Python customizada a cada registro de um DataFrame Spark.</blockquote>
+<pre>from pyspark.sql.functions import udf
+from pyspark.sql.types import StringType
+
+@udf(returnType=StringType())
+def classificar_ticket(valor):
+    """Classifica o ticket do pedido em faixas."""
+    if valor is None:
+        return "indefinido"
+    elif valor &lt; 50:
+        return "baixo"
+    elif valor &lt; 200:
+        return "medio"
+    elif valor &lt; 500:
+        return "alto"
+    else:
+        return "premium"
+
+# Aplicar a UDF
+df_classificado = df_vendas.withColumn(
+    "faixa_ticket", classificar_ticket(col("total_amount"))
+)</pre>
+<p><strong>Quando usar:</strong> Lógica de negócio complexa que NÃO pode ser expressa com funções built-in do Spark.</p>
+</div>
+
+<!-- SLIDE 22 — UDFs Performance -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚠️ UDFs — O Custo Escondido</h2>
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│  FUNÇÕES BUILT-IN (col("x") + 1)                               │
+│  JVM ──── executa nativamente ──── resultado                    │
+│  Zero overhead. Otimizado pelo Tungsten.                         │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│  UDF Python (@udf def minha_funcao(x): ...)                     │
+│  JVM → serializa → Python → executa → serializa → JVM          │
+│  Para CADA REGISTRO! (1M registros = 1M serializações)          │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+<table>
+<tr><th>Operação</th><th>Tempo (1M registros)</th><th>Relativo</th></tr>
+<tr><td>Built-in <code>when/otherwise</code></td><td>0.8s</td><td>1x (baseline)</td></tr>
+<tr><td>UDF Python simples</td><td>12s</td><td><strong>15x mais lento</strong></td></tr>
+<tr><td>UDF com import externo</td><td>25s</td><td><strong>31x mais lento</strong></td></tr>
+<tr><td>Pandas UDF (vectorized)</td><td>2.5s</td><td>3x mais lento</td></tr>
+</table>
+<div class="highlight">
+<strong>Regras de ouro:</strong> 1) Primeiro tente built-in &middot; 2) Se precisar UDF, use Pandas UDF &middot; 3) UDF Python comum é último recurso
+</div>
+</div>
+
+<!-- SLIDE 23 — Pandas UDF -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🐼 Pandas UDF — Melhor dos Dois Mundos</h2>
+<blockquote><strong>Pandas UDF</strong> (Vectorized UDF) processa dados em <strong>batches</strong> usando Apache Arrow, evitando serialização registro-a-registro.</blockquote>
+<pre>import pandas as pd
+from pyspark.sql.functions import pandas_udf
+from pyspark.sql.types import StringType
+
+@pandas_udf(StringType())
+def classificar_ticket_pandas(valores: pd.Series) -> pd.Series:
+    """Versão vetorizada — 5-10x mais rápida que UDF comum."""
+    return valores.apply(
+        lambda v: "indefinido" if v is None
+        else "baixo" if v &lt; 50
+        else "medio" if v &lt; 200
+        else "alto" if v &lt; 500
+        else "premium"
+    )
+
+# Uso idêntico ao UDF normal
+df_classificado = df_vendas.withColumn(
+    "faixa_ticket", classificar_ticket_pandas(col("total_amount"))
+)</pre>
+<table>
+<tr><th>Tipo</th><th>Caso de uso</th><th>Performance</th></tr>
+<tr><td>Built-in functions</td><td>90% dos casos</td><td>⚡ Máxima</td></tr>
+<tr><td>Pandas UDF</td><td>Lógica complexa vetorizável</td><td>🚀 Boa</td></tr>
+<tr><td>UDF Python</td><td>Lógica impossível de vetorizar</td><td>🐌 Baixa</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 24 — Section: Otimização -->
+<div class="slide section">
+<h2>Otimização e Plano de Execução</h2>
+<p>Catalyst, explain() e estratégias de join</p>
+</div>
+
+<!-- SLIDE 25 — Catalyst Deep Dive -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧠 Catalyst Optimizer — Deep Dive</h2>
+<pre>
+  Seu código     Análise      Otimização      Plano        Execução
+  PySpark   →   Semântica  →  Lógica     →   Físico   →   (Tungsten)
+
+  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
+  │Unresolved│→│ Logical │→│Optimized│→│Physical │→│   Code   │
+  │  Plan    │  │  Plan   │  │  Plan   │  │  Plan   │  │Generation│
+  └─────────┘  └─────────┘  └─────────┘  └─────────┘  └─────────┘
+</pre>
+<table>
+<tr><th>Otimização</th><th>O que faz</th><th>Impacto</th></tr>
+<tr><td><strong>Predicate Pushdown</strong></td><td>Move filtros antes do join</td><td>Menos dados no shuffle</td></tr>
+<tr><td><strong>Column Pruning</strong></td><td>Remove colunas não usadas</td><td>Menos dados transferidos</td></tr>
+<tr><td><strong>Join Reordering</strong></td><td>Reordena joins para menor custo</td><td>Menos dados intermediários</td></tr>
+<tr><td><strong>Broadcast Detection</strong></td><td>Auto-broadcast tabela &lt; threshold</td><td>Elimina shuffle</td></tr>
+<tr><td><strong>Filter Pushdown into Join</strong></td><td>Filtra durante (não após) o join</td><td>Reduz resultado intermediário</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 26 — explain() -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔍 Lendo o Plano de Execução com explain()</h2>
+<pre>df_resultado = df_vendas \
+    .join(df_clientes, "customer_id", "left") \
+    .join(broadcast(df_categorias), "category_id", "left") \
+    .filter(col("shipping_state") == "SP")
+
+df_resultado.explain(mode="formatted")</pre>
+<pre>
+== Physical Plan ==
+*(5) Project [order_id, nome_cliente, categoria, total_amount]
++- *(5) BroadcastHashJoin [category_id], LeftOuter       ← broadcast!
+   :- *(5) SortMergeJoin [customer_id], LeftOuter        ← sort-merge
+   :  :- *(2) Filter (shipping_state = SP)               ← pushdown!
+   :  :  +- *(2) Scan parquet [vendas_2023]
+   :  +- *(3) Scan parquet [clientes]
+   +- BroadcastExchange HashedRelationBroadcastMode
+      +- *(4) Scan json [categorias.json]
+</pre>
+<table>
+<tr><th>Keyword</th><th>Significado</th><th>Bom/Ruim</th></tr>
+<tr><td><code>BroadcastHashJoin</code></td><td>Join com broadcast (sem shuffle)</td><td>✅ Ótimo</td></tr>
+<tr><td><code>SortMergeJoin</code></td><td>Join com shuffle</td><td>⚠️ Normal p/ tabelas grandes</td></tr>
+<tr><td><code>Filter</code> antes do <code>Scan</code></td><td>Predicate pushdown</td><td>✅ Ótimo</td></tr>
+<tr><td><code>Exchange</code></td><td>Shuffle de dados</td><td>⚠️ Custoso</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 27 — Particionamento -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧩 Particionamento — repartition vs coalesce</h2>
+<pre># REPARTITION: redistribui dados (causa shuffle completo)
+df_200_parts = df_vendas.repartition(200)
+df_por_estado = df_vendas.repartition("shipping_state")
+
+# COALESCE: reduz partições SEM shuffle
+df_4_parts = df_vendas.coalesce(4)</pre>
+<table>
+<tr><th>Operação</th><th>Shuffle</th><th>Direção</th><th>Distribuição</th><th>Uso</th></tr>
+<tr><td><code>repartition(N)</code></td><td>✅ Sim</td><td>Aumentar ou diminuir</td><td>Uniforme</td><td>Antes de joins pesados</td></tr>
+<tr><td><code>repartition(col)</code></td><td>✅ Sim</td><td>—</td><td>Por coluna</td><td>Otimizar joins subsequentes</td></tr>
+<tr><td><code>coalesce(N)</code></td><td>❌ Não</td><td>Apenas diminuir</td><td>Pode ficar desigual</td><td>Antes de salvar (menos arquivos)</td></tr>
+</table>
+<div class="highlight">
+<strong>Regra prática:</strong> Dev local: 2-4 × num_cores &middot; Produção: 2-3 × total_cores_cluster &middot; Partições entre 128MB e 256MB cada
+</div>
+</div>
+
+<!-- SLIDE 28 — Cache e Persist -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>💾 Cache e Persist — Reutilizando Computações</h2>
+<pre># SEM cache: join executado do zero a cada ação
+df_base = df_vendas.join(df_clientes, "customer_id", "left")
+df_base.count()                    # Executa join
+df_base.groupBy("state").sum().show()  # Executa join DE NOVO
+
+# COM cache: join executado apenas 1 vez
+df_base.cache()
+df_base.count()                    # Executa e armazena
+df_base.groupBy("state").sum().show()  # Lê do cache ⚡
+
+df_base.unpersist()  # Liberar memória quando não precisar mais</pre>
+<table>
+<tr><th>Nível</th><th>Memória</th><th>Disco</th><th>Serializado</th></tr>
+<tr><td><code>MEMORY_ONLY</code> (default cache)</td><td>✅</td><td>❌</td><td>❌</td></tr>
+<tr><td><code>MEMORY_AND_DISK</code></td><td>✅</td><td>Overflow</td><td>❌</td></tr>
+<tr><td><code>DISK_ONLY</code></td><td>❌</td><td>✅</td><td>✅</td></tr>
+<tr><td><code>MEMORY_ONLY_SER</code></td><td>✅</td><td>❌</td><td>✅</td></tr>
+</table>
+<div class="highlight">
+<strong>Quando cachear:</strong> DataFrame reutilizado 2+ vezes e resultado de operação cara. <strong>Quando não:</strong> DataFrame usado apenas uma vez ou muito grande para a memória.
+</div>
+</div>
+
+<!-- SLIDE 29 — Estratégias de Join -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏗️ Estratégias de Join Internas do Spark</h2>
+<pre>
+┌─────────────────────────────────────────────────────────────┐
+│ 1. BROADCAST HASH JOIN (BHJ)                                │
+│    Condição: tabela &lt; autoBroadcastJoinThreshold (10MB)     │
+│    Custo: O(n) — sem shuffle                                │
+│    Tabela pequena copiada para todos os executors            │
+├─────────────────────────────────────────────────────────────┤
+│ 2. SORT-MERGE JOIN (SMJ) — DEFAULT para tabelas grandes     │
+│    Condição: ambas tabelas são grandes                      │
+│    Custo: O(n log n) — shuffle + sort + merge               │
+├─────────────────────────────────────────────────────────────┤
+│ 3. SHUFFLE HASH JOIN (SHJ) — Casos específicos              │
+│    Condição: uma tabela cabe na memória do executor          │
+│    Custo: O(n) — shuffle + hash (sem sort)                  │
+└─────────────────────────────────────────────────────────────┘
+</pre>
+<p><strong>Hierarquia de preferência do Catalyst:</strong></p>
+<ol>
+<li>🥇 Broadcast Hash Join (se possível)</li>
+<li>🥈 Sort-Merge Join (padrão para tabelas grandes)</li>
+<li>🥉 Shuffle Hash Join (desabilitado por default)</li>
+</ol>
+</div>
+
+<!-- SLIDE 30 — Data Skew -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚠️ Data Skew — O Inimigo Silencioso</h2>
+<blockquote><strong>Data skew</strong> ocorre quando uma chave de join concentra quantidade desproporcional de registros em um único executor.</blockquote>
+<pre>
+Distribuição IDEAL:              Distribuição com SKEW:
+┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐   ┌─────┐ ┌─────┐ ┌─────┐ ┌───────────┐
+│250K │ │250K │ │250K │ │250K │   │100K │ │100K │ │100K │ │   700K    │
+│ 10s │ │ 10s │ │ 10s │ │ 10s │   │  4s │ │  4s │ │  4s │ │   28s ⚠️ │
+└─────┘ └─────┘ └─────┘ └─────┘   └─────┘ └─────┘ └─────┘ └───────────┘
+ Total: 10s (ideal)               Total: 28s (gargalo!)
+</pre>
+<h3>Soluções:</h3>
+<ol>
+<li><strong>Salting</strong> — Adicionar sufixo aleatório à chave de join</li>
+<li><strong>Broadcast</strong> — Se uma das tabelas é pequena</li>
+<li><strong>AQE (Adaptive Query Execution)</strong> — Spark 3.x otimiza automaticamente:</li>
+</ol>
+<pre>spark.conf.set("spark.sql.adaptive.enabled", "true")
+spark.conf.set("spark.sql.adaptive.skewJoin.enabled", "true")</pre>
+</div>
+
+<!-- SLIDE 31 — Boas Práticas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Boas Práticas — Resumo</h2>
+<table>
+<tr><th>Prática</th><th>Por quê</th></tr>
+<tr><td>Use <code>broadcast()</code> para tabelas &lt; 10MB</td><td>Elimina shuffle, join 100% local</td></tr>
+<tr><td>Prefira <code>when/otherwise</code> sobre UDFs</td><td>15-30x mais rápido (Catalyst)</td></tr>
+<tr><td>Se precisar UDF, use Pandas UDF</td><td>5-10x mais rápido que UDF Python</td></tr>
+<tr><td>Faça <code>cache()</code> em DataFrames reutilizados</td><td>Evita recomputação</td></tr>
+<tr><td>Chame <code>unpersist()</code> quando terminar</td><td>Libera memória</td></tr>
+<tr><td>Use <code>explain()</code> para validar o plano</td><td>Confirma broadcast e identifica shuffles</td></tr>
+<tr><td>Filtre ANTES do join quando possível</td><td>Catalyst faz, mas confira</td></tr>
+<tr><td>Evite <code>cross join</code> sem filtro</td><td>Explosão combinatória</td></tr>
+<tr><td>Habilite AQE no Spark 3.x</td><td>Otimização adaptativa em runtime</td></tr>
+<tr><td>Use <code>left_anti</code> para encontrar órfãos</td><td>Mais eficiente que NOT IN</td></tr>
+<tr><td>Ajuste <code>shuffle.partitions</code></td><td>Default 200 é alto para &lt; 1GB</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 32 — Preview Lab -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔬 O Que Faremos no Lab Hoje</h2>
+<p><strong>Cenário:</strong> Você é o Carlos Mendes. A Black Friday é em 2 semanas. Ana precisa dos relatórios que cruzam vendas (1M), clientes (500K) e categorias.</p>
+<div class="cols">
+<div class="col">
+<h3>Lab Parte 1 — Guiado (60 min)</h3>
+<ol>
+<li>Ler dados de 3 fontes (Parquet + JSON)</li>
+<li>Joins multi-fonte (inner, left, broadcast)</li>
+<li>Verificar plano com <code>explain()</code></li>
+<li>Window Functions: ranking (<code>dense_rank</code>)</li>
+<li>Análise de tendência com <code>lag</code>/<code>lead</code></li>
+</ol>
+</div>
+<div class="col">
+<h3>Lab Parte 2 — Intermediário + Desafio (50 min)</h3>
+<ol>
+<li>UDFs para classificação de ticket</li>
+<li>Comparar: UDF vs <code>when</code> vs Pandas UDF</li>
+<li>Analisar plano e identificar gargalos</li>
+<li>🏆 <strong>Desafio:</strong> Otimizar query com broadcast + cache + coalesce</li>
+</ol>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 33 — Próxima Aula -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔮 Preview — Aula 3: Ingestão e Persistência</h2>
+<p>Na próxima aula, a DataFlow fechará parcerias com 3 novos fornecedores. Cada parceiro envia dados em formato diferente.</p>
+<ul>
+<li>Formatos de arquivo (CSV, JSON, Parquet, ORC, Avro)</li>
+<li>Trade-offs entre formatos (compressão, schema, splittability)</li>
+<li>Arquitetura Medallion (Bronze → Silver → Gold)</li>
+<li>Schema evolution e enforcement</li>
+<li>Pipeline de ingestão multi-formato</li>
+</ul>
+<blockquote>"Temos 3 parceiros novos. Cada um manda dados num formato diferente. Precisamos normalizar tudo num data lake unificado." — Marina Silva, CTO</blockquote>
+</div>
+
+<!-- SLIDE 34 — Encerramento -->
+<div class="slide cover">
+<h1>Hora do Lab! 🔬</h1>
+<p class="subtitle">Agora vocês vão resolver o problema da Black Friday</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">Joins + Window Functions + UDFs + 1M registros</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">&#9664;</button>
+<button onclick="next()">&#9654;</button>
+</div>
+<div class="counter" id="counter"></div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;const total=slides.length;
+function show(n){
+  slides[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  slides[cur].classList.add('active');
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+}
+function next(){show(cur+1);}
+function prev(){show(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});
+show(0);
+</script>
+</body>
+</html>
