@@ -54,26 +54,3 @@ Laboratório hands-on da Aula 2, onde os alunos dominam joins distribuídos, win
 | Clientes | Parquet | ~500.000 | `datasets/aula_02/clientes.parquet` |
 | Categorias | JSON | 10 | `datasets/aula_02/categorias.json` |
 
----
-
-## Validação de Tempo
-
-| Bloco | Limite | Alocado | Status |
-|-------|--------|---------|--------|
-| Lab Parte 1 (guiado) | 60 min | 60 min | ✅ Dentro do limite |
-| Lab Parte 2 (intermediário + desafio) | 50 min | 50 min | ✅ Dentro do limite |
-| **Total** | **110 min** | **110 min** | ✅ **OK** |
-
----
-
-## Notas para o Instrutor
-
-- **Parte 1** é guiada com todos os comandos e resultados esperados. Os alunos devem acompanhar executando célula a célula.
-- O **Exercício 1 (joins)** é o mais longo e fundamental — garanta que todos completem antes de avançar. Se necessário, sacrifique tempo do exercício 5 (desafio).
-- No **Exercício 2 (window functions)**, o conceito de `partitionBy` vs `groupBy` costuma gerar dúvidas. Reforce a analogia: "groupBy colapsa linhas; window mantém todas as linhas".
-- Na **Parte 2**, os exercícios são progressivamente mais abertos. Ofereça dicas verbais mas evite dar a solução completa.
-- O **Exercício 5 (desafio)** é opcional para alunos mais rápidos. Se o tempo estiver apertado, pode ser atribuído como tarefa de casa.
-- **Performance de UDFs:** o exercício 3 demonstra o impacto dramático — garanta que os alunos rodem o benchmark e vejam os números com seus próprios olhos.
-- Consulte `06_troubleshooting.md` para erros comuns (OOM em joins, broadcast threshold, cache não materializado).
-- Os datasets de 1M registros podem demorar ~10-15s para joins no ambiente Docker local — isso é esperado e serve como motivação para as otimizações.
-- Reserve os últimos 2-3 min de cada parte para dúvidas rápidas antes do intervalo.
