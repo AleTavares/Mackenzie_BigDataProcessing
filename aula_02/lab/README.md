@@ -19,8 +19,9 @@ Laboratório hands-on da Aula 2, onde os alunos dominam joins distribuídos, win
 | # | Exercício | Arquivo | Duração |
 |---|-----------|---------|---------|
 | — | **Lab Parte 1 — Guiado (60 min)** | | |
-| 1 | Joins com múltiplas fontes de dados | `01_joins_multifonte.md` | 30 min |
-| 2 | Window Functions: ranking e tendências | `02_window_functions.md` | 30 min |
+| 0 | Setup do ambiente e verificação dos datasets | `00_setup.md` | 10 min |
+| 1 | Joins com múltiplas fontes de dados | `01_joins_multifonte.md` | 25 min |
+| 2 | Window Functions: ranking e tendências | `02_window_functions.md` | 25 min |
 | | **Subtotal Parte 1** | | **60 min** |
 | — | **Lab Parte 2 — Intermediário + Desafio (50 min)** | | |
 | 3 | UDFs e análise com explain() | `03_udfs_explain.md` | 15 min |
@@ -36,6 +37,7 @@ Laboratório hands-on da Aula 2, onde os alunos dominam joins distribuídos, win
 
 | Arquivo | Descrição |
 |---------|-----------|
+| `00_setup.md` | Configuração do ambiente Docker + verificação dos datasets |
 | `01_joins_multifonte.md` | Exercício guiado: joins multi-fonte (inner, left, broadcast, anti) |
 | `02_window_functions.md` | Exercício guiado: row_number, rank, dense_rank, lag, lead, running totals |
 | `03_udfs_explain.md` | Exercício intermediário: UDFs, Pandas UDFs e impacto de performance |
