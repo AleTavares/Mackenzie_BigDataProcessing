@@ -3,11 +3,10 @@
   "image": "quay.io/jupyter/pyspark-notebook:latest",
   "workspaceFolder": "/home/jovyan/work",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind",
+  "overrideCommand": true,
   "containerEnv": {
-    "JUPYTER_TOKEN": "",
     "JUPYTER_ENABLE_LAB": "yes"
   },
-  "overrideCommand": false,
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "dockerDashComposeVersion": "v2"
@@ -45,6 +44,7 @@
       }
     }
   },
-  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto!'",
+  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ PySpark + Delta Lake instalados.'",
+  "postStartCommand": "start-notebook.py --IdentityProvider.token='' --ServerApp.password='' --ServerApp.allow_origin='*' --ip=0.0.0.0 --port=8888 --no-browser &",
   "remoteUser": "jovyan"
 }
