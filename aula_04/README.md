@@ -79,6 +79,26 @@ aula_04/
 
 ---
 
+## Rodar no Google Colab (labs com PySpark)
+
+As aulas 4 e 5 focam em **Airflow** (orquestração), que precisa de Docker. Mas os conceitos de DAG podem ser estudados localmente, e os exercícios com PySpark funcionam no Colab:
+
+1. Acesse [colab.research.google.com](https://colab.research.google.com)
+2. Adicione esta célula no topo:
+
+```python
+# === SETUP COLAB ===
+!pip install pyspark apache-airflow -q
+!git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+DATA_PATH = "/content/repo/datasets/aula_04"
+```
+
+> **Nota:** Para o Airflow UI e DAGs rodando, é necessário Docker local. O Colab serve para estudar o código das DAGs e testar funções Python.
+
+---
+
 ## Pré-requisitos
 
 - Ter completado as Aulas 1-3 (Spark, DataFrame API, Medallion)

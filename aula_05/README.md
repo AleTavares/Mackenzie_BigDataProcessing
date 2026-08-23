@@ -78,6 +78,26 @@ aula_05/
 
 ---
 
+## Rodar no Google Colab (labs com PySpark)
+
+As aulas 4 e 5 focam em **Airflow** (orquestração), que precisa de Docker. Mas os conceitos podem ser estudados e o código testado no Colab:
+
+1. Acesse [colab.research.google.com](https://colab.research.google.com)
+2. Adicione esta célula no topo:
+
+```python
+# === SETUP COLAB ===
+!pip install pyspark apache-airflow -q
+!git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+DATA_PATH = "/content/repo/datasets/aula_05"
+```
+
+> **Nota:** Para o Airflow UI, Sensors e SparkSubmitOperator rodando de fato, é necessário Docker local. O Colab serve para estudar o código e testar funções Python/PySpark.
+
+---
+
 ## Pré-requisitos
 
 - Ter completado a Aula 4 (conceitos básicos de Airflow, DAGs, Operators)

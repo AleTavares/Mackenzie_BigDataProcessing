@@ -80,6 +80,26 @@ aula_07/
 
 ---
 
+## Rodar no Google Colab (parcial)
+
+A Aula 7 integra Spark + Airflow + Docker — o pipeline completo precisa de Docker local. Mas os exercícios de PySpark (logging, escrita idempotente) funcionam no Colab:
+
+1. Acesse [colab.research.google.com](https://colab.research.google.com)
+2. Adicione esta célula no topo:
+
+```python
+# === SETUP COLAB ===
+!pip install pyspark -q
+!git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+DATA_PATH = "/content/repo/datasets/aula_07"
+```
+
+> **Nota:** A integração Airflow + Docker Compose precisa de ambiente local. No Colab, foque nos exercícios 01-03 (Spark puro).
+
+---
+
 ## Pré-requisitos
 
 - Ter completado as Aulas 1-6 (Spark + Airflow + Qualidade)

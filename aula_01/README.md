@@ -94,6 +94,31 @@ Localização: `datasets/aula_01/`
 
 ---
 
+## Rodar no Google Colab (recomendado)
+
+Se não quiser configurar Docker local, use o Google Colab:
+
+1. Acesse [colab.research.google.com](https://colab.research.google.com)
+2. Menu **Arquivo → Abrir notebook → GitHub**
+3. Cole a URL do repositório: `https://github.com/AleTavares/Mackenzie_BigDataProcessing`
+4. Selecione o notebook `aula_01/code/aula01_lab.ipynb`
+5. Adicione esta célula no topo antes de rodar:
+
+```python
+# === SETUP COLAB ===
+!pip install pyspark -q
+!git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+
+# Path dos datasets (ajuste para Colab)
+DATA_PATH = "/content/repo/datasets/aula_01"
+```
+
+> **Nota:** No Colab, substitua os paths `/home/jovyan/work/data/aula_01/` por `/content/repo/datasets/aula_01/` nas células de leitura.
+
+---
+
 ## Pré-requisitos
 
 - Docker rodando com pelo menos 8 GB de RAM alocados
