@@ -35,11 +35,12 @@
         "python.defaultInterpreterPath": "/opt/conda/bin/python",
         "editor.formatOnSave": true,
         "files.autoSave": "afterDelay",
-        "files.autoSaveDelay": 1000
+        "files.autoSaveDelay": 1000,
+        "jupyter.notebookFileRoot": "/home/jovyan/work"
       }
     }
   },
-  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto! PySpark disponível em modo local[*].'",
-  "postStartCommand": "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password='' &",
+  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto!'",
+  "postStartCommand": "nohup jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --ServerApp.token='' --ServerApp.password='' --ServerApp.allow_origin='*' --ServerApp.base_url='/' > /tmp/jupyter.log 2>&1 &",
   "remoteUser": "jovyan"
 }
