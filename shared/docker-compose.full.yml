@@ -33,14 +33,13 @@ services:
   # Spark Master - Gerenciador do cluster Spark
   # ---------------------------------------------------------------------------
   spark-master:
-    image: spark:3.5.8-python3
+    image: bitnami/spark:3.5
     container_name: spark-master
-    command: /opt/spark/sbin/start-master.sh
     environment:
+      - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master
       - SPARK_MASTER_PORT=7077
       - SPARK_MASTER_WEBUI_PORT=8080
-      - SPARK_NO_DAEMONIZE=true
     ports:
       # Interface web do Spark Master
       - "8080:8080"
@@ -60,16 +59,16 @@ services:
   # Spark Worker - Nó de processamento do cluster
   # ---------------------------------------------------------------------------
   spark-worker:
-    image: spark:3.5.8-python3
+    image: bitnami/spark:3.5
     container_name: spark-worker
-    command: /opt/spark/sbin/start-worker.sh spark://spark-master:7077
     depends_on:
       spark-master:
         condition: service_healthy
     environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2g
       - SPARK_WORKER_CORES=2
-      - SPARK_NO_DAEMONIZE=true
     networks:
       - dataflow-network
     restart: unless-stopped
@@ -174,7 +173,8 @@ services:
     image: quay.io/jupyter/pyspark-notebook:latest
     container_name: jupyter-notebook
     depends_on:
-      - spark-master
+      spark-master:
+        condition: service_healthy
     environment:
       # Conexão com o Spark Master para submissão de jobs
       - SPARK_MASTER=spark://spark-master:7077
@@ -185,11 +185,14 @@ services:
     ports:
       # Interface do Jupyter Notebook
       - "8888:8888"
+      # Spark App UI (ativa quando jobs executam)
+      - "4040:4040"
     volumes:
       # Diretório de trabalho dos notebooks (persistente)
       - ./notebooks:/home/jovyan/work
       # Datasets do curso (somente leitura para evitar alterações acidentais)
       - ../datasets:/home/jovyan/work/data:ro
+    command: start-notebook.py --IdentityProvider.token=''
     networks:
       - dataflow-network
     working_dir: /home/jovyan/work
