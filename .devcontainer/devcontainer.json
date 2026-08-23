@@ -45,6 +45,6 @@
       }
     }
   },
-  "postCreateCommand": "/opt/conda/bin/python -m ipykernel install --user --name pyspark --display-name 'PySpark (conda)' && /usr/bin/python3 -m pip install ipykernel pyspark --user --quiet 2>/dev/null; pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto! Abra qualquer arquivo .ipynb para começar.'",
+  "postCreateCommand": "echo 'JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' | sudo tee -a /etc/environment && echo 'SPARK_HOME=/usr/local/spark' | sudo tee -a /etc/environment && echo 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' >> ~/.bashrc && echo 'export SPARK_HOME=/usr/local/spark' >> ~/.bashrc && echo 'export PATH=/opt/conda/bin:/usr/local/spark/bin:$JAVA_HOME/bin:$PATH' >> ~/.bashrc && mkdir -p ~/.ipython/profile_default/startup && echo \"import os; os.environ['JAVA_HOME']='/usr/lib/jvm/java-21-openjdk-amd64'; os.environ['SPARK_HOME']='/usr/local/spark'; os.environ['PATH']='/usr/local/spark/bin:/usr/lib/jvm/java-21-openjdk-amd64/bin:' + os.environ.get('PATH','')\" > ~/.ipython/profile_default/startup/00-spark-env.py && /opt/conda/bin/python -m ipykernel install --user --name pyspark --display-name 'PySpark' && pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto!'",
   "remoteUser": "jovyan"
 }
