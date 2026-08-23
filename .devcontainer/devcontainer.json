@@ -7,7 +7,8 @@
     "JAVA_HOME": "/usr/lib/jvm/java-21-openjdk-amd64",
     "SPARK_HOME": "/usr/local/spark",
     "PYSPARK_PYTHON": "/opt/conda/bin/python",
-    "PYSPARK_DRIVER_PYTHON": "/opt/conda/bin/python"
+    "PYSPARK_DRIVER_PYTHON": "/opt/conda/bin/python",
+    "PATH": "/opt/conda/bin:/usr/local/spark/bin:/usr/lib/jvm/java-21-openjdk-amd64/bin:/usr/local/bin:/usr/bin:/bin"
   },
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
