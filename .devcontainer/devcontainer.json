@@ -5,9 +5,9 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind",
   "containerEnv": {
     "JUPYTER_ENABLE_LAB": "yes",
-    "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64",
+    "JAVA_HOME": "/usr/lib/jvm/java-21-openjdk-amd64",
     "SPARK_HOME": "/usr/local/spark",
-    "PATH": "/usr/local/spark/bin:/usr/lib/jvm/java-17-openjdk-amd64/bin:/opt/conda/bin:/usr/local/bin:/usr/bin:/bin"
+    "PATH": "/usr/local/spark/bin:/usr/lib/jvm/java-21-openjdk-amd64/bin:/opt/conda/bin:/usr/local/bin:/usr/bin:/bin"
   },
   "overrideCommand": true,
   "features": {
@@ -47,7 +47,7 @@
       }
     }
   },
-  "postCreateCommand": "echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc && echo 'export SPARK_HOME=/usr/local/spark' >> ~/.bashrc && echo 'export PATH=$SPARK_HOME/bin:$JAVA_HOME/bin:$PATH' >> ~/.bashrc && pip install delta-spark==3.2.0 2>/dev/null; echo '✅ PySpark + Java + Delta Lake configurados.'",
+  "postCreateCommand": "echo 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' >> ~/.bashrc && echo 'export SPARK_HOME=/usr/local/spark' >> ~/.bashrc && echo 'export PATH=$SPARK_HOME/bin:$JAVA_HOME/bin:$PATH' >> ~/.bashrc && pip install delta-spark==3.2.0 2>/dev/null; echo '✅ PySpark + Java 21 + Delta Lake configurados.'",
   "postStartCommand": "start-notebook.py --IdentityProvider.token='' --ServerApp.password='' --ServerApp.allow_origin='*' --ip=0.0.0.0 --port=8888 --no-browser &",
   "remoteUser": "jovyan"
 }
