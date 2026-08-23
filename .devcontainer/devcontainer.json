@@ -3,6 +3,11 @@
   "image": "quay.io/jupyter/pyspark-notebook:latest",
   "workspaceFolder": "/home/jovyan/work",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind",
+  "containerEnv": {
+    "JUPYTER_TOKEN": "",
+    "JUPYTER_ENABLE_LAB": "yes"
+  },
+  "overrideCommand": false,
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "dockerDashComposeVersion": "v2"
@@ -11,7 +16,7 @@
   "forwardPorts": [8888, 4040],
   "portsAttributes": {
     "8888": {
-      "label": "Jupyter Notebook",
+      "label": "Jupyter Lab",
       "onAutoForward": "openBrowser"
     },
     "4040": {
@@ -41,6 +46,5 @@
     }
   },
   "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto!'",
-  "postStartCommand": "nohup jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --IdentityProvider.token='' --ServerApp.password='' --ServerApp.allow_origin='*' --ServerApp.disable_check_xsrf=True > /tmp/jupyter.log 2>&1 &",
   "remoteUser": "jovyan"
 }
