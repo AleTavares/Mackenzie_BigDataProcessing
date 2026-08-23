@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 5 — Orquestração Avançada com Airflow | Mackenzie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC092F;
+  --red-dark:#9E0724;
+  --red-light:#F9E8EB;
+  --gold:#C4A35A;
+  --white:#FFFFFF;
+  --gray-50:#FAFAFA;
+  --gray-100:#F4F4F5;
+  --gray-200:#E4E4E7;
+  --gray-500:#71717A;
+  --gray-700:#3F3F46;
+  --gray-900:#18181B;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+body{background:var(--gray-900);}
+
+.slide{
+  display:none;position:absolute;inset:0;
+  width:100vw;height:100vh;
+  padding:60px 80px;
+  flex-direction:column;justify-content:flex-start;
+  background:var(--white);color:var(--gray-900);
+  overflow-y:auto;
+}
+.slide.active{display:flex;}
+.slide::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--red-dark));
+}
+.slide .mackenzie-mark{
+  position:absolute;top:18px;right:40px;
+  font-size:.7em;font-weight:700;letter-spacing:2px;color:var(--red);
+}
+
+/* Capa */
+.slide.cover{
+  background:linear-gradient(145deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);align-items:center;justify-content:center;text-align:center;
+  padding:80px;
+}
+.slide.cover::before{display:none;}
+.slide.cover h1{font-size:2.8em;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.slide.cover .subtitle{font-size:1.15em;font-weight:300;opacity:.9;margin-bottom:4px;}
+.slide.cover .meta{
+  margin-top:30px;display:inline-flex;gap:16px;
+  background:rgba(255,255,255,.15);padding:10px 24px;border-radius:24px;
+  font-size:.9em;
+}
+
+/* Section divider */
+.slide.section{
+  background:var(--gray-900);color:var(--white);
+  align-items:center;justify-content:center;text-align:center;
+}
+.slide.section::before{background:var(--gold);}
+.slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+
+/* Typography */
+.slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
+.slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
+.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide ul,.slide ol{margin:8px 0 12px 28px;}
+.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide strong{color:var(--gray-900);}
+
+/* Code */
+.slide pre{
+  background:var(--gray-900);color:#e4e4e7;
+  padding:18px 22px;border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.8em;
+  line-height:1.6;margin:12px 0;overflow-x:auto;
+  border-left:4px solid var(--red);
+}
+
+/* Table */
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide tr:nth-child(even) td{background:var(--gray-50);}
+
+/* Blockquote */
+.slide blockquote{
+  border-left:4px solid var(--gold);background:var(--gray-50);
+  padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
+  font-style:italic;color:var(--gray-700);font-size:.95em;
+}
+
+/* Columns */
+.cols{display:flex;gap:32px;margin:12px 0;}
+.cols .col{flex:1;}
+
+/* Highlight box */
+.highlight{
+  background:var(--red-light);border:1px solid var(--red);
+  padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Navigation */
+.nav{position:fixed;bottom:24px;right:36px;display:flex;gap:8px;z-index:999;}
+.nav button{
+  background:var(--red);color:var(--white);border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-size:1em;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.nav button:hover{background:var(--red-dark);transform:scale(1.05);}
+.counter{
+  position:fixed;bottom:28px;left:36px;
+  color:var(--gray-500);font-size:.8em;font-weight:500;z-index:999;
+}
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:var(--red);transition:width .3s;z-index:999;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- SLIDE 1 — Capa -->
+<div class="slide cover active">
+<h1>Orquestração Avançada<br>com Airflow</h1>
+<p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
+<p class="subtitle">Universidade Presbiteriana Mackenzie</p>
+<div class="meta"><span>📅 Semana 5</span><span>⏱️ 50 min teoria</span></div>
+</div>
+
+<!-- SLIDE 2 — Contexto Narrativo -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🤝 DataFlow Analytics — "O Pipeline Precisa Ser Inteligente"</h2>
+<ul>
+<li>Pipeline básico funciona, mas é <strong>linear e burro</strong></li>
+<li>Aos sábados, Parceiro B não envia dados — pipeline falha desnecessariamente</li>
+<li>Volume de sexta-feira é <strong>3x maior</strong> — precisa de cluster Spark maior</li>
+<li>Parceiro C envia arquivos em <strong>horários aleatórios</strong> — precisamos esperar</li>
+<li>Equipe quer <strong>notificações inteligentes</strong> — só alertar em falhas críticas</li>
+</ul>
+<blockquote><strong>Ana</strong> (Product Owner): "O pipeline precisa tomar decisões sozinho. Se é sábado e o Parceiro B não mandou, pula. Se o volume é alto, usa mais recursos. Pipeline inteligente."</blockquote>
+</div>
+
+<!-- SLIDE 3 — Problema: Pipeline Burro vs Inteligente -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚠️ Pipeline Linear vs Pipeline Inteligente</h2>
+<pre>
+PIPELINE BURRO (Aula 4):
+[ingest_a] → [ingest_b] → [ingest_c] → [transform] → [load]
+                  ↑
+            FALHA no sábado!
+            (Parceiro B não envia)
+            Pipeline INTEIRO para.
+
+PIPELINE INTELIGENTE (Aula 5):
+                    ┌─ SIM → [ingest_b] ──┐
+[check_day] ──────►│                      ├──► [transform]
+                    └─ NÃO (sábado) ──────┘
+                    
+[sensor_file_c] ──► [ingest_c] ──► ─────────────►┘
+(espera arquivo)
+
+[check_volume] ──► HIGH → [spark_large_cluster]
+                   LOW  → [spark_small_cluster]
+</pre>
+<blockquote><strong>Marina</strong> (CTO): "Airflow não é só cron glorificado. Usem branching, sensors e task groups. É o que separa um pipeline amador de um pipeline de produção."</blockquote>
+</div>
+
+<!-- SLIDE 4 — Objetivos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Objetivos de Aprendizagem</h2>
+<ol>
+<li><strong>Implementar</strong> branching condicional com BranchPythonOperator</li>
+<li><strong>Usar</strong> Sensors para esperar eventos externos (arquivos, DAGs)</li>
+<li><strong>Organizar</strong> tasks complexas com TaskGroups</li>
+<li><strong>Integrar</strong> Spark ao Airflow com SparkSubmitOperator</li>
+<li><strong>Configurar</strong> callbacks de falha para alertas inteligentes</li>
+<li><strong>Dominar</strong> trigger_rule para controle avançado de fluxo</li>
+</ol>
+</div>
+
+<!-- SLIDE 5 — Section: Branching -->
+<div class="slide section">
+<h2>Branching Condicional</h2>
+<p>BranchPythonOperator — decisões automáticas no pipeline</p>
+</div>
+
+<!-- SLIDE 6 — BranchPythonOperator Conceito -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔀 BranchPythonOperator — Conceito</h2>
+<blockquote><strong>BranchPythonOperator</strong> executa uma função que retorna o <code>task_id</code> da próxima task a executar. Tasks não selecionadas são marcadas como <strong>skipped</strong>.</blockquote>
+<pre>
+FLUXO DE BRANCHING:
+
+                         ┌── "process_weekday" ──► [transform_full]
+[check_day_of_week] ────►│
+                         └── "process_weekend" ──► [transform_light]
+                                                         │
+                                                         ▼
+                                                    [join_point]
+
+• check_day_of_week retorna "process_weekday" OU "process_weekend"
+• A branch NÃO selecionada fica com status SKIPPED
+• join_point precisa de trigger_rule="none_failed_min_one_success"
+</pre>
+<div class="highlight">
+<strong>Regra fundamental:</strong> A função do Branch deve retornar um <code>task_id</code> (string) ou lista de <code>task_ids</code>. Tasks fora da lista são automaticamente skipped.
+</div>
+</div>
+
+<!-- SLIDE 7 — BranchPythonOperator Código -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔀 BranchPythonOperator — Implementação</h2>
+<pre>from airflow.operators.python import BranchPythonOperator
+from datetime import datetime
+
+def choose_branch(**kwargs):
+    """Decide qual caminho seguir baseado no dia da semana."""
+    execution_date = kwargs["execution_date"]
+    day_of_week = execution_date.weekday()  # 0=seg, 6=dom
+    
+    if day_of_week >= 5:  # Sábado ou Domingo
+        return "skip_parceiro_b"  # Parceiro B não envia no fim de semana
+    else:
+        return "ingest_parceiro_b"
+
+with DAG(...) as dag:
+    branch = BranchPythonOperator(
+        task_id="check_day_of_week",
+        python_callable=choose_branch
+    )
+    
+    ingest_b = PythonOperator(task_id="ingest_parceiro_b", ...)
+    skip_b = DummyOperator(task_id="skip_parceiro_b")
+    
+    join = DummyOperator(
+        task_id="join_after_branch",
+        trigger_rule="none_failed_min_one_success"  # Importante!
+    )
+    
+    branch >> [ingest_b, skip_b] >> join >> transform</pre>
+</div>
+
+<!-- SLIDE 8 — Branch por Volume -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Branching por Volume de Dados</h2>
+<pre>def choose_cluster_size(**kwargs):
+    """Seleciona cluster baseado no volume esperado."""
+    ti = kwargs["ti"]
+    records = ti.xcom_pull(task_ids="count_records")
+    
+    if records > 1_000_000:
+        return "spark_large_cluster"   # 8 workers
+    elif records > 100_000:
+        return "spark_medium_cluster"  # 4 workers
+    else:
+        return "spark_small_cluster"   # 2 workers
+
+branch_volume = BranchPythonOperator(
+    task_id="check_volume",
+    python_callable=choose_cluster_size
+)
+
+spark_large = BashOperator(
+    task_id="spark_large_cluster",
+    bash_command="spark-submit --num-executors 8 /jobs/transform.py --date {{ ds }}"
+)
+spark_medium = BashOperator(
+    task_id="spark_medium_cluster",
+    bash_command="spark-submit --num-executors 4 /jobs/transform.py --date {{ ds }}"
+)
+spark_small = BashOperator(
+    task_id="spark_small_cluster",
+    bash_command="spark-submit --num-executors 2 /jobs/transform.py --date {{ ds }}"
+)
+
+count >> branch_volume >> [spark_large, spark_medium, spark_small] >> join</pre>
+</div>
+
+<!-- SLIDE 9 — Section: Sensors -->
+<div class="slide section">
+<h2>Sensors</h2>
+<p>Esperando eventos externos — arquivos, APIs, outras DAGs</p>
+</div>
+
+<!-- SLIDE 10 — Sensors Conceito -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>👁️ Sensors — Esperando o Mundo Exterior</h2>
+<blockquote><strong>Sensors</strong> são operators especiais que ficam <strong>esperando</strong> uma condição ser verdadeira antes de liberar a execução. Polling até sucesso ou timeout.</blockquote>
+<table>
+<tr><th>Sensor</th><th>Espera por...</th><th>Caso de uso</th></tr>
+<tr><td><code>FileSensor</code></td><td>Arquivo aparecer no path</td><td>Parceiro deposita arquivo</td></tr>
+<tr><td><code>ExternalTaskSensor</code></td><td>Task de outra DAG completar</td><td>Dependência entre DAGs</td></tr>
+<tr><td><code>HttpSensor</code></td><td>Endpoint retornar 200</td><td>API disponível</td></tr>
+<tr><td><code>S3KeySensor</code></td><td>Objeto aparecer no S3</td><td>Arquivo no cloud storage</td></tr>
+<tr><td><code>SqlSensor</code></td><td>Query retornar resultado</td><td>Dados prontos no DB</td></tr>
+<tr><td><code>TimeDeltaSensor</code></td><td>Tempo passar</td><td>Esperar N minutos</td></tr>
+</table>
+<pre>
+Comportamento do Sensor:
+
+[Sensor] ──poke──► condição falsa ──► espera (poke_interval) ──► poke novamente
+                   condição falsa ──► espera ──► poke novamente
+                   condição TRUE  ──► ✅ SUCESSO → próxima task executa
+                   timeout         ──► ❌ FALHA (ou soft_fail → skip)
+</pre>
+</div>
+
+<!-- SLIDE 11 — FileSensor -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📁 FileSensor — Esperando Arquivos do Parceiro</h2>
+<pre>from airflow.sensors.filesystem import FileSensor
+
+# Esperar arquivo do Parceiro C (horário imprevisível)
+wait_for_file = FileSensor(
+    task_id="wait_parceiro_c_file",
+    filepath="/data/incoming/parceiro_c/{{ ds }}/export.parquet",
+    poke_interval=300,        # Verificar a cada 5 minutos
+    timeout=3600 * 6,         # Timeout após 6 horas
+    mode="poke",              # poke = ocupa worker slot
+    soft_fail=True            # Se timeout → SKIP (não FAIL)
+)
+
+# Esperar qualquer arquivo .csv no diretório
+wait_csv = FileSensor(
+    task_id="wait_any_csv",
+    filepath="/data/incoming/parceiro_a/{{ ds }}/*.csv",
+    fs_conn_id="fs_default",
+    poke_interval=60,
+    timeout=7200,
+    mode="reschedule"         # reschedule = libera worker entre pokes
+)
+
+# Fluxo
+wait_for_file >> ingest_parceiro_c >> transform</pre>
+<div class="highlight">
+<strong>mode="poke" vs "reschedule":</strong> Poke mantém o worker ocupado (bom para esperas curtas). Reschedule libera o slot entre verificações (bom para esperas longas).
+</div>
+</div>
+
+<!-- SLIDE 12 — ExternalTaskSensor -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 ExternalTaskSensor — Dependências entre DAGs</h2>
+<blockquote>Quando uma DAG depende da conclusão de outra DAG (ou task específica de outra DAG).</blockquote>
+<pre>from airflow.sensors.external_task import ExternalTaskSensor
+
+# DAG "gold_reports" depende da DAG "pipeline_medallion" ter completado
+wait_silver = ExternalTaskSensor(
+    task_id="wait_silver_pipeline",
+    external_dag_id="pipeline_medallion_v1",
+    external_task_id="spark_silver",       # Task específica (ou None = DAG inteira)
+    execution_delta=timedelta(hours=0),    # Mesma execution_date
+    timeout=3600,
+    mode="reschedule",
+    poke_interval=120
+)
+
+# Na DAG de reports:
+# wait_silver >> generate_daily_report >> send_email</pre>
+<pre>
+CENÁRIO:
+┌─────────────────────────────────────┐
+│ DAG: pipeline_medallion_v1          │
+│ [ingest] → [silver] → [gold]       │  ← Executa às 2h
+└──────────────────┬──────────────────┘
+                   │ ExternalTaskSensor
+                   ▼
+┌─────────────────────────────────────┐
+│ DAG: gold_reports                    │
+│ [wait_silver] → [report] → [email] │  ← Executa às 4h
+└─────────────────────────────────────┘
+</pre>
+</div>
+
+<!-- SLIDE 13 — Section: TaskGroups -->
+<div class="slide section">
+<h2>TaskGroups</h2>
+<p>Organizando DAGs complexas — agrupamento visual e lógico</p>
+</div>
+
+<!-- SLIDE 14 — TaskGroups -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📦 TaskGroups — Organização de Tasks</h2>
+<blockquote><strong>TaskGroups</strong> agrupam tasks visualmente na UI sem criar sub-DAGs. Melhoram legibilidade de pipelines complexos.</blockquote>
+<pre>from airflow.utils.task_group import TaskGroup
+
+with DAG(...) as dag:
+    start = DummyOperator(task_id="start")
+    
+    # Grupo de Ingestão
+    with TaskGroup(group_id="ingest") as ingest_group:
+        ingest_a = PythonOperator(task_id="parceiro_a", ...)
+        ingest_b = PythonOperator(task_id="parceiro_b", ...)
+        ingest_c = PythonOperator(task_id="parceiro_c", ...)
+    
+    # Grupo de Transformação
+    with TaskGroup(group_id="transform") as transform_group:
+        silver = BashOperator(task_id="silver", ...)
+        gold = BashOperator(task_id="gold", ...)
+        silver >> gold
+    
+    # Grupo de Notificação
+    with TaskGroup(group_id="notify") as notify_group:
+        slack = PythonOperator(task_id="slack", ...)
+        email = PythonOperator(task_id="email", ...)
+    
+    start >> ingest_group >> transform_group >> notify_group</pre>
+<pre>
+UI do Airflow (Graph View):
+[start] → [📦 ingest] → [📦 transform] → [📦 notify]
+              │ expand:        │ expand:
+              ├─ parceiro_a    ├─ silver
+              ├─ parceiro_b    └─ gold
+              └─ parceiro_c
+</pre>
+</div>
+
+<!-- SLIDE 15 — TaskGroups Dinâmicos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔄 TaskGroups Dinâmicos — Loop por Parceiros</h2>
+<pre>partners = ["parceiro_a", "parceiro_b", "parceiro_c"]
+
+with DAG(...) as dag:
+    start = DummyOperator(task_id="start")
+    join = DummyOperator(task_id="join", trigger_rule="none_failed")
+    
+    for partner in partners:
+        with TaskGroup(group_id=f"pipeline_{partner}") as tg:
+            ingest = PythonOperator(
+                task_id="ingest",
+                python_callable=ingest_data,
+                op_kwargs={"partner": partner}
+            )
+            validate = PythonOperator(
+                task_id="validate",
+                python_callable=validate_data,
+                op_kwargs={"partner": partner}
+            )
+            ingest >> validate
+        
+        start >> tg >> join
+    
+    join >> transform_silver >> compute_gold</pre>
+<pre>
+Resultado na UI:
+              ┌─ [📦 pipeline_parceiro_a] ─┐
+[start] ─────┼─ [📦 pipeline_parceiro_b] ─┼──► [join] → [silver] → [gold]
+              └─ [📦 pipeline_parceiro_c] ─┘
+</pre>
+</div>
+
+<!-- SLIDE 16 — Section: SparkSubmitOperator -->
+<div class="slide section">
+<h2>SparkSubmitOperator</h2>
+<p>Integrando Apache Spark com Airflow</p>
+</div>
+
+<!-- SLIDE 17 — SparkSubmitOperator -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚡ SparkSubmitOperator — Submeter Jobs Spark</h2>
+<blockquote>Integração nativa entre Airflow e Spark. O operator chama <code>spark-submit</code> com configurações gerenciadas via Connections.</blockquote>
+<pre>from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
+
+task_transform = SparkSubmitOperator(
+    task_id="spark_transform_silver",
+    application="/opt/spark/jobs/transform_silver.py",
+    conn_id="spark_default",           # Connection configurada na UI
+    name="transform_silver_{{ ds }}",
+    conf={
+        "spark.executor.memory": "4g",
+        "spark.executor.cores": "2",
+        "spark.dynamicAllocation.enabled": "true"
+    },
+    application_args=[
+        "--date", "{{ ds }}",
+        "--input", "/datalake/bronze/",
+        "--output", "/datalake/silver/"
+    ],
+    num_executors=4,
+    executor_memory="4g",
+    driver_memory="2g",
+    verbose=True
+)</pre>
+<pre># Configurar Connection na UI do Airflow:
+# Connection ID: spark_default
+# Connection Type: Spark
+# Host: spark://spark-master
+# Port: 7077
+# Extra: {"deploy-mode": "client"}</pre>
+</div>
+
+<!-- SLIDE 18 — Spark + Airflow Pipeline -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Pipeline Completo: Airflow + Spark</h2>
+<pre>with DAG(
+    dag_id="medallion_spark_pipeline",
+    schedule_interval="0 2 * * *",
+    start_date=datetime(2024, 1, 1),
+    catchup=False
+) as dag:
+
+    wait_files = FileSensor(
+        task_id="wait_input_files",
+        filepath="/data/incoming/{{ ds }}/*.csv",
+        timeout=3600, mode="reschedule"
+    )
+    
+    spark_bronze = SparkSubmitOperator(
+        task_id="spark_ingest_bronze",
+        application="/jobs/ingest_bronze.py",
+        application_args=["--date", "{{ ds }}"],
+        conn_id="spark_default"
+    )
+    
+    spark_silver = SparkSubmitOperator(
+        task_id="spark_transform_silver",
+        application="/jobs/transform_silver.py",
+        application_args=["--date", "{{ ds }}"],
+        conn_id="spark_default"
+    )
+    
+    spark_gold = SparkSubmitOperator(
+        task_id="spark_compute_gold",
+        application="/jobs/compute_gold.py",
+        application_args=["--date", "{{ ds }}"],
+        conn_id="spark_default"
+    )
+    
+    notify = PythonOperator(task_id="notify_success", ...)
+
+    wait_files >> spark_bronze >> spark_silver >> spark_gold >> notify</pre>
+</div>
+
+<!-- SLIDE 19 — Section: Callbacks -->
+<div class="slide section">
+<h2>Callbacks de Falha</h2>
+<p>Alertas inteligentes — notificar as pessoas certas</p>
+</div>
+
+<!-- SLIDE 20 — Callbacks -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📢 Callbacks — Alertas Inteligentes</h2>
+<pre>import requests
+
+def notify_slack_on_failure(context):
+    """Envia alerta formatado para Slack quando task falha."""
+    dag_id = context["dag"].dag_id
+    task_id = context["task_instance"].task_id
+    exec_date = context["ds"]
+    log_url = context["task_instance"].log_url
+    exception = context.get("exception", "Unknown")
+    
+    payload = {
+        "blocks": [
+            {"type": "header", "text": {"type": "plain_text",
+                "text": f"❌ Pipeline Failure: {dag_id}"}},
+            {"type": "section", "fields": [
+                {"type": "mrkdwn", "text": f"*Task:* {task_id}"},
+                {"type": "mrkdwn", "text": f"*Date:* {exec_date}"},
+                {"type": "mrkdwn", "text": f"*Error:* {exception}"},
+                {"type": "mrkdwn", "text": f"*Logs:* <{log_url}|View>"}
+            ]}
+        ]
+    }
+    requests.post(SLACK_WEBHOOK_URL, json=payload)
+
+def notify_on_dag_success(context):
+    """Chamado quando a DAG inteira completa com sucesso."""
+    send_slack_message(f"✅ Pipeline {context['dag'].dag_id} OK - {context['ds']}")
+
+with DAG(
+    ...,
+    on_failure_callback=notify_slack_on_failure,
+    on_success_callback=notify_on_dag_success
+) as dag:
+    ...</pre>
+</div>
+
+<!-- SLIDE 21 — Callbacks Granulares -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Callbacks Granulares por Criticidade</h2>
+<pre>def notify_critical(context):
+    """Alerta IMEDIATO: SMS + Slack + PagerDuty."""
+    send_pagerduty_alert(context)
+    send_slack_alert(context, channel="#critical-alerts")
+
+def notify_warning(context):
+    """Alerta WARNING: apenas Slack."""
+    send_slack_alert(context, channel="#data-warnings")
+
+def notify_info(context):
+    """Info: log apenas."""
+    print(f"ℹ️ Task {context['task_instance'].task_id} falhou, retry em curso.")
+
+# Tasks com diferentes níveis de criticidade
+ingest_critical = PythonOperator(
+    task_id="ingest_financial_data",
+    python_callable=ingest_financial,
+    on_failure_callback=notify_critical,   # PagerDuty!
+    retries=5
+)
+
+ingest_optional = PythonOperator(
+    task_id="ingest_marketing_data",
+    python_callable=ingest_marketing,
+    on_failure_callback=notify_warning,    # Só Slack
+    retries=2
+)
+
+enrich_data = PythonOperator(
+    task_id="enrich_metadata",
+    python_callable=enrich,
+    on_failure_callback=notify_info,       # Só log
+    on_retry_callback=notify_info,
+    retries=3
+)</pre>
+</div>
+
+<!-- SLIDE 22 — Section: Trigger Rules -->
+<div class="slide section">
+<h2>Trigger Rules</h2>
+<p>Controle avançado de quando uma task deve executar</p>
+</div>
+
+<!-- SLIDE 23 — Trigger Rules -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎛️ Trigger Rules — Controle de Execução</h2>
+<blockquote>O <strong>trigger_rule</strong> define a condição que uma task avalia nos seus upstream para decidir se executa. Default: <code>all_success</code>.</blockquote>
+<table>
+<tr><th>Trigger Rule</th><th>Executa quando...</th><th>Caso de uso</th></tr>
+<tr><td><code>all_success</code></td><td>Todos upstream = success</td><td>Default, fluxo normal</td></tr>
+<tr><td><code>all_failed</code></td><td>Todos upstream = failed</td><td>Task de recovery</td></tr>
+<tr><td><code>all_done</code></td><td>Todos upstream terminaram (qualquer estado)</td><td>Cleanup final</td></tr>
+<tr><td><code>one_success</code></td><td>Pelo menos 1 upstream = success</td><td>Fan-in parcial</td></tr>
+<tr><td><code>one_failed</code></td><td>Pelo menos 1 upstream = failed</td><td>Alerta rápido</td></tr>
+<tr><td><code>none_failed</code></td><td>Nenhum upstream falhou (success ou skip)</td><td>Após branch</td></tr>
+<tr><td><code>none_failed_min_one_success</code></td><td>Nenhum falhou + pelo menos 1 sucesso</td><td>Join de branch</td></tr>
+<tr><td><code>none_skipped</code></td><td>Nenhum upstream skipped</td><td>Validação</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 24 — Trigger Rules em Ação -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔧 Trigger Rules — Exemplos Práticos</h2>
+<pre>from airflow.utils.trigger_rule import TriggerRule
+
+# CENÁRIO 1: Join após branching
+join_point = DummyOperator(
+    task_id="join",
+    trigger_rule=TriggerRule.NONE_FAILED_MIN_ONE_SUCCESS
+)
+
+# CENÁRIO 2: Cleanup SEMPRE executa (mesmo se pipeline falhou)
+cleanup = PythonOperator(
+    task_id="cleanup_temp_files",
+    python_callable=cleanup_temp,
+    trigger_rule=TriggerRule.ALL_DONE  # Executa SEMPRE
+)
+
+# CENÁRIO 3: Alerta se QUALQUER ingestão falhar
+alert_on_any_failure = PythonOperator(
+    task_id="alert_failure",
+    python_callable=send_alert,
+    trigger_rule=TriggerRule.ONE_FAILED  # Dispara com 1 falha
+)
+
+# CENÁRIO 4: Report só se TODOS parceiros ingeridos com sucesso
+generate_report = PythonOperator(
+    task_id="full_report",
+    python_callable=gen_report,
+    trigger_rule=TriggerRule.ALL_SUCCESS  # Precisa de todos
+)</pre>
+<pre>
+[ingest_a] ─┐     trigger_rule=ALL_SUCCESS
+[ingest_b] ─┼──►  [full_report]
+[ingest_c] ─┘
+       │           trigger_rule=ONE_FAILED
+       └────────►  [alert_failure]
+       │           trigger_rule=ALL_DONE
+       └────────►  [cleanup]
+</pre>
+</div>
+
+<!-- SLIDE 25 — Combinando Tudo -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏗️ DAG Avançada — Combinando Tudo</h2>
+<pre>with DAG("pipeline_inteligente_v2", ...) as dag:
+
+    # SENSOR: Esperar arquivo chegar
+    wait_file = FileSensor(task_id="wait_file", ...)
+    
+    # BRANCH: Decidir por dia da semana
+    branch = BranchPythonOperator(task_id="check_day", ...)
+    
+    # TASK GROUPS por parceiro
+    with TaskGroup("ingest_weekday") as tg_weekday:
+        [ingest_a, ingest_b, ingest_c]
+    
+    with TaskGroup("ingest_weekend") as tg_weekend:
+        [ingest_a, ingest_c]  # Sem parceiro B
+    
+    # JOIN com trigger_rule adequado
+    join = DummyOperator(
+        task_id="join",
+        trigger_rule="none_failed_min_one_success"
+    )
+    
+    # SPARK: Transform
+    spark_transform = SparkSubmitOperator(task_id="spark", ...)
+    
+    # CLEANUP: sempre executa
+    cleanup = PythonOperator(
+        task_id="cleanup",
+        trigger_rule="all_done"
+    )
+    
+    wait_file >> branch >> [tg_weekday, tg_weekend] >> join
+    join >> spark_transform >> cleanup</pre>
+</div>
+
+<!-- SLIDE 26 — Anti-Patterns -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>❌ Anti-Patterns a Evitar</h2>
+<table>
+<tr><th>Anti-Pattern</th><th>Problema</th><th>Solução</th></tr>
+<tr><td>DAGs com 100+ tasks</td><td>UI lenta, difícil debugar</td><td>Dividir em sub-DAGs ou usar TaskGroups</td></tr>
+<tr><td>XCom com DataFrames</td><td>Metadata DB estoura</td><td>Passar file paths, não dados</td></tr>
+<tr><td>Sensor com mode="poke" longo</td><td>Worker slot ocupado por horas</td><td>Usar mode="reschedule"</td></tr>
+<tr><td>catchup=True sem limite</td><td>Centenas de DAG Runs simultâneas</td><td>max_active_runs + catchup=False</td></tr>
+<tr><td>Lógica pesada no DAG file</td><td>Scheduler lento (parse a cada 30s)</td><td>Lógica em funções importadas</td></tr>
+<tr><td>Ignorar trigger_rule após branch</td><td>Tasks downstream ficam skipped</td><td>Usar none_failed_min_one_success</td></tr>
+<tr><td>Hardcoded dates</td><td>Backfill impossível</td><td>Usar {{ ds }} sempre</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 27 — Boas Práticas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Boas Práticas — Orquestração Avançada</h2>
+<table>
+<tr><th>Prática</th><th>Por quê</th></tr>
+<tr><td>Use <strong>Sensors com mode="reschedule"</strong> para esperas longas</td><td>Não bloqueia worker slots</td></tr>
+<tr><td>Defina <strong>timeout</strong> em todo Sensor</td><td>Evita tasks presas infinitamente</td></tr>
+<tr><td>Use <strong>soft_fail=True</strong> em sensors opcionais</td><td>Skip > Fail para dados não-críticos</td></tr>
+<tr><td>Agrupe com <strong>TaskGroups</strong> (não SubDAGs)</td><td>SubDAGs estão deprecated, TaskGroups são superiores</td></tr>
+<tr><td>Use <strong>trigger_rule</strong> após branches</td><td>Evita cascata de skips indesejados</td></tr>
+<tr><td>Implemente <strong>callbacks por criticidade</strong></td><td>Nem toda falha merece PagerDuty</td></tr>
+<tr><td>Prefira <strong>SparkSubmitOperator</strong> sobre BashOperator</td><td>Monitoramento integrado, connections gerenciadas</td></tr>
+<tr><td>Use <strong>max_active_runs</strong> para limitar concorrência</td><td>Evita sobrecarga do cluster</td></tr>
+<tr><td>Teste branches com <strong>airflow tasks test</strong></td><td>Validar lógica antes do deploy</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 28 — Preview Lab -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔬 O Que Faremos no Lab Hoje</h2>
+<p><strong>Cenário:</strong> Ana pediu que o pipeline da DataFlow seja inteligente: pular Parceiro B nos fins de semana, esperar arquivos do Parceiro C, e escalar Spark conforme volume.</p>
+<div class="cols">
+<div class="col">
+<h3>Lab Parte 1 — Guiado (60 min)</h3>
+<ol>
+<li>Implementar BranchPythonOperator (dia da semana)</li>
+<li>Configurar FileSensor para Parceiro C</li>
+<li>Criar TaskGroups por parceiro</li>
+<li>Configurar trigger_rules nos joins</li>
+<li>Testar branching na UI do Airflow</li>
+</ol>
+</div>
+<div class="col">
+<h3>Lab Parte 2 — Intermediário + Desafio (50 min)</h3>
+<ol>
+<li>SparkSubmitOperator integrado</li>
+<li>Callbacks de falha com Slack mock</li>
+<li>ExternalTaskSensor entre DAGs</li>
+<li>🏆 <strong>Desafio:</strong> Pipeline completo com branch + sensor + spark + alert</li>
+</ol>
+</div>
+</div>
+<p><strong>Entregável:</strong> DAG inteligente com branching condicional, sensors, TaskGroups e alertas diferenciados por criticidade.</p>
+</div>
+
+<!-- SLIDE 29 — Encerramento -->
+<div class="slide cover">
+<h1>Hora do Lab! 🔬</h1>
+<p class="subtitle">Agora vocês vão construir pipelines inteligentes com Airflow</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">Branching + Sensors + TaskGroups + SparkSubmit + Callbacks</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">&#9664;</button>
+<button onclick="next()">&#9654;</button>
+</div>
+<div class="counter" id="counter"></div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;const total=slides.length;
+function show(n){
+  slides[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  slides[cur].classList.add('active');
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+}
+function next(){show(cur+1);}
+function prev(){show(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});
+show(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 6 — Qualidade de Dados e Monitoramento | Mackenzie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC092F;
+  --red-dark:#9E0724;
+  --red-light:#F9E8EB;
+  --gold:#C4A35A;
+  --white:#FFFFFF;
+  --gray-50:#FAFAFA;
+  --gray-100:#F4F4F5;
+  --gray-200:#E4E4E7;
+  --gray-500:#71717A;
+  --gray-700:#3F3F46;
+  --gray-900:#18181B;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+body{background:var(--gray-900);}
+
+.slide{
+  display:none;position:absolute;inset:0;
+  width:100vw;height:100vh;
+  padding:60px 80px;
+  flex-direction:column;justify-content:flex-start;
+  background:var(--white);color:var(--gray-900);
+  overflow-y:auto;
+}
+.slide.active{display:flex;}
+.slide::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--red-dark));
+}
+.slide .mackenzie-mark{
+  position:absolute;top:18px;right:40px;
+  font-size:.7em;font-weight:700;letter-spacing:2px;color:var(--red);
+}
+
+/* Capa */
+.slide.cover{
+  background:linear-gradient(145deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);align-items:center;justify-content:center;text-align:center;
+  padding:80px;
+}
+.slide.cover::before{display:none;}
+.slide.cover h1{font-size:2.8em;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.slide.cover .subtitle{font-size:1.15em;font-weight:300;opacity:.9;margin-bottom:4px;}
+.slide.cover .meta{
+  margin-top:30px;display:inline-flex;gap:16px;
+  background:rgba(255,255,255,.15);padding:10px 24px;border-radius:24px;
+  font-size:.9em;
+}
+
+/* Section divider */
+.slide.section{
+  background:var(--gray-900);color:var(--white);
+  align-items:center;justify-content:center;text-align:center;
+}
+.slide.section::before{background:var(--gold);}
+.slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+
+/* Typography */
+.slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
+.slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
+.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide ul,.slide ol{margin:8px 0 12px 28px;}
+.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide strong{color:var(--gray-900);}
+
+/* Code */
+.slide pre{
+  background:var(--gray-900);color:#e4e4e7;
+  padding:18px 22px;border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.8em;
+  line-height:1.6;margin:12px 0;overflow-x:auto;
+  border-left:4px solid var(--red);
+}
+
+/* Table */
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide tr:nth-child(even) td{background:var(--gray-50);}
+
+/* Blockquote */
+.slide blockquote{
+  border-left:4px solid var(--gold);background:var(--gray-50);
+  padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
+  font-style:italic;color:var(--gray-700);font-size:.95em;
+}
+
+/* Columns */
+.cols{display:flex;gap:32px;margin:12px 0;}
+.cols .col{flex:1;}
+
+/* Highlight box */
+.highlight{
+  background:var(--red-light);border:1px solid var(--red);
+  padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Navigation */
+.nav{position:fixed;bottom:24px;right:36px;display:flex;gap:8px;z-index:999;}
+.nav button{
+  background:var(--red);color:var(--white);border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-size:1em;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.nav button:hover{background:var(--red-dark);transform:scale(1.05);}
+.counter{
+  position:fixed;bottom:28px;left:36px;
+  color:var(--gray-500);font-size:.8em;font-weight:500;z-index:999;
+}
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:var(--red);transition:width .3s;z-index:999;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- SLIDE 1 — Capa -->
+<div class="slide cover active">
+<h1>Qualidade de Dados<br>e Monitoramento</h1>
+<p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
+<p class="subtitle">Universidade Presbiteriana Mackenzie</p>
+<div class="meta"><span>📅 Semana 6</span><span>⏱️ 50 min teoria</span></div>
+</div>
+
+<!-- SLIDE 2 — Contexto Narrativo -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🤝 DataFlow Analytics — "Dados Ruins, Decisões Ruins"</h2>
+<ul>
+<li>Relatório de faturamento mostrou <strong>-R$ 45.000</strong> em vendas de SP</li>
+<li>Investigação: 15% dos registros do Parceiro A com <strong>valores negativos</strong></li>
+<li>Parceiro B enviou <strong>3.200 registros duplicados</strong> na última carga</li>
+<li>Parceiro C referencia <code>customer_id</code> que <strong>não existe</strong> na base de clientes</li>
+<li>Dashboard de Roberto mostra dados <strong>inconsistentes</strong> há 2 semanas</li>
+</ul>
+<blockquote><strong>Roberto</strong> (CEO): "Esse relatório está errado! Vendas negativas? Duplicatas? Eu não posso apresentar isso para o conselho. Quero garantia de que os dados estão corretos ANTES de chegarem no dashboard."</blockquote>
+</div>
+
+<!-- SLIDE 3 — O Custo da Má Qualidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>💸 O Custo da Má Qualidade de Dados</h2>
+<pre>
+PROBLEMA DETECTADO:
+┌─────────────────────────────────────────────────────────┐
+│ Parceiro A: 15% dos registros com total_amount &lt; 0      │
+│ Parceiro B: 3.200 duplicatas (mesmo order_id, datas ≠)  │
+│ Parceiro C: 450 pedidos com customer_id inexistente     │
+└─────────────────────────────────────────────────────────┘
+
+IMPACTO:
+├── Dashboard de faturamento: -R$ 45K (valores negativos)
+├── Contagem de pedidos: +3.200 (inflado por duplicatas)
+├── Relatório de clientes: 450 "orphan orders"
+└── Decisão de negócio: ERRADA (baseada em dados ruins)
+
+REGRA DE OURO: "Garbage In, Garbage Out"
+Se dados ruins entram no pipeline → métricas erradas saem.
+</pre>
+<blockquote><strong>Marina</strong> (CTO): "Precisamos de um framework de qualidade integrado ao pipeline. Dados que não passam nos checks vão para quarentena. Nunca mais dados ruins chegam na Gold."</blockquote>
+</div>
+
+<!-- SLIDE 4 — Objetivos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Objetivos de Aprendizagem</h2>
+<ol>
+<li><strong>Compreender</strong> as 6 dimensões de qualidade de dados</li>
+<li><strong>Implementar</strong> checks de completude (null/missing)</li>
+<li><strong>Implementar</strong> checks de unicidade (duplicatas)</li>
+<li><strong>Implementar</strong> checks de integridade referencial</li>
+<li><strong>Implementar</strong> checks de validade (ranges, formatos)</li>
+<li><strong>Projetar</strong> sistema de quarentena para dados inválidos</li>
+<li><strong>Gerar</strong> relatórios de qualidade automatizados</li>
+<li><strong>Integrar</strong> checks de qualidade no Airflow (alertas)</li>
+</ol>
+</div>
+
+<!-- SLIDE 5 — Section: Dimensões -->
+<div class="slide section">
+<h2>Dimensões de Qualidade</h2>
+<p>Os 6 pilares da qualidade de dados</p>
+</div>
+
+<!-- SLIDE 6 — Dimensões de Qualidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📐 As 6 Dimensões de Qualidade de Dados</h2>
+<table>
+<tr><th>Dimensão</th><th>Pergunta</th><th>Exemplo de Violação</th></tr>
+<tr><td><strong>Completude</strong></td><td>Todos os campos obrigatórios estão preenchidos?</td><td>customer_id = NULL em 5% dos registros</td></tr>
+<tr><td><strong>Unicidade</strong></td><td>Existem duplicatas?</td><td>Mesmo order_id aparece 3 vezes</td></tr>
+<tr><td><strong>Validade</strong></td><td>Valores estão dentro do esperado?</td><td>total_amount = -500 (negativo)</td></tr>
+<tr><td><strong>Consistência</strong></td><td>Dados concordam entre fontes/campos?</td><td>data_entrega antes de data_pedido</td></tr>
+<tr><td><strong>Integridade</strong></td><td>Referências existem?</td><td>customer_id não existe na tabela customers</td></tr>
+<tr><td><strong>Atualidade</strong></td><td>Dados são recentes o suficiente?</td><td>Última carga há 72h (esperado: diário)</td></tr>
+</table>
+<div class="highlight">
+<strong>Na DataFlow:</strong> Completude (nulls do Parceiro A) + Unicidade (duplicatas do B) + Integridade (orphans do C) + Validade (negativos) = 4 dimensões violadas em uma semana.
+</div>
+</div>
+
+<!-- SLIDE 7 — Framework de Qualidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏗️ Framework de Qualidade — Arquitetura</h2>
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│                    PIPELINE COM QUALIDADE                         │
+│                                                                  │
+│  [Bronze] ──► [Quality Checks] ──┬──► [Silver] ──► [Gold]      │
+│                                   │                              │
+│                                   └──► [Quarantine] ──► [Alert] │
+│                                                                  │
+│  Quality Checks:                                                 │
+│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐   │
+│  │Completude  │ │Unicidade   │ │Validade    │ │Integridade │   │
+│  │(nulls)     │ │(duplicatas)│ │(ranges)    │ │(FK exists) │   │
+│  └────────────┘ └────────────┘ └────────────┘ └────────────┘   │
+│                                                                  │
+│  Resultado:                                                      │
+│  ├── ✅ Dados válidos → Silver                                  │
+│  ├── ❌ Dados inválidos → Quarantine                            │
+│  └── 📊 Relatório de qualidade → Metadata DB                   │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<!-- SLIDE 8 — Section: Completude -->
+<div class="slide section">
+<h2>Check de Completude</h2>
+<p>Detectando e tratando valores nulos e missing</p>
+</div>
+
+<!-- SLIDE 9 — Check de Completude -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔍 Check de Completude — Nulls e Missing</h2>
+<blockquote>Verificar se campos obrigatórios estão preenchidos. Campos opcionais podem ter null, mas campos de negócio críticos não.</blockquote>
+<pre>from pyspark.sql.functions import col, count, when, isnan, lit
+
+def check_completeness(df, required_columns, threshold=0.95):
+    """
+    Verifica completude dos campos obrigatórios.
+    threshold=0.95 → aceita até 5% de nulls.
+    """
+    total = df.count()
+    results = []
+    
+    for column in required_columns:
+        null_count = df.filter(
+            col(column).isNull() | (col(column) == "") | isnan(col(column))
+        ).count()
+        
+        completeness = 1 - (null_count / total)
+        passed = completeness >= threshold
+        
+        results.append({
+            "column": column,
+            "total_rows": total,
+            "null_count": null_count,
+            "completeness": round(completeness, 4),
+            "threshold": threshold,
+            "passed": passed
+        })
+    
+    return results
+
+# Uso
+required = ["order_id", "customer_id", "total_amount", "order_date"]
+results = check_completeness(df_bronze, required, threshold=0.98)</pre>
+</div>
+
+<!-- SLIDE 10 — Completude: Separando Válidos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✂️ Separando Dados Válidos de Inválidos</h2>
+<pre># Definir regra de completude
+required_columns = ["order_id", "customer_id", "total_amount", "order_date"]
+
+# Construir condição de completude
+completeness_condition = None
+for col_name in required_columns:
+    cond = col(col_name).isNotNull() &amp; (col(col_name) != "")
+    completeness_condition = cond if completeness_condition is None \
+        else completeness_condition &amp; cond
+
+# Separar dados válidos e inválidos
+df_valid = df_bronze.filter(completeness_condition)
+df_invalid = df_bronze.filter(~completeness_condition)
+
+# Dados válidos seguem para Silver
+df_valid.write.mode("overwrite").parquet("datalake/silver/vendas/")
+
+# Dados inválidos vão para quarentena com motivo
+df_quarantine = df_invalid.withColumn(
+    "_rejection_reason", lit("COMPLETENESS_FAILURE")
+).withColumn(
+    "_rejection_ts", current_timestamp()
+)
+df_quarantine.write.mode("append").parquet("datalake/quarantine/vendas/")</pre>
+<div class="highlight">
+<strong>Resultado DataFlow:</strong> 847 registros → quarentena (customer_id NULL). 99.2% dos dados passaram. Silver mantém qualidade.
+</div>
+</div>
+
+<!-- SLIDE 11 — Section: Unicidade -->
+<div class="slide section">
+<h2>Check de Unicidade</h2>
+<p>Detectando e eliminando duplicatas</p>
+</div>
+
+<!-- SLIDE 12 — Check de Unicidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔄 Check de Unicidade — Duplicatas</h2>
+<blockquote>Verificar se registros com a mesma chave primária aparecem mais de uma vez. Duplicatas inflam métricas e causam double-counting.</blockquote>
+<pre>from pyspark.sql.functions import count as spark_count, row_number
+from pyspark.sql.window import Window
+
+def check_uniqueness(df, key_columns):
+    """Identifica duplicatas baseado nas colunas-chave."""
+    total = df.count()
+    
+    # Contar registros por chave
+    duplicates = df.groupBy(key_columns) \
+        .agg(spark_count("*").alias("occurrences")) \
+        .filter(col("occurrences") > 1)
+    
+    dup_keys = duplicates.count()
+    dup_records = duplicates.agg(
+        spark_count("*").alias("dup_keys"),
+        {"occurrences": "sum"}
+    ).collect()[0]
+    
+    return {
+        "total_rows": total,
+        "duplicate_keys": dup_keys,
+        "uniqueness_ratio": round(1 - (dup_keys / total), 4),
+        "passed": dup_keys == 0
+    }
+
+# Parceiro B: verificar unicidade por order_id
+result = check_uniqueness(df_parceiro_b, key_columns=["order_id"])
+# → {"duplicate_keys": 3200, "uniqueness_ratio": 0.968, "passed": False}</pre>
+</div>
+
+<!-- SLIDE 13 — Deduplicação -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧹 Estratégias de Deduplicação</h2>
+<pre>from pyspark.sql.window import Window
+from pyspark.sql.functions import row_number, col, max as spark_max
+
+# ESTRATÉGIA 1: Manter o mais recente (por timestamp de ingestão)
+window = Window.partitionBy("order_id").orderBy(col("_ingestion_ts").desc())
+
+df_dedup = df_bronze \
+    .withColumn("_row_num", row_number().over(window)) \
+    .filter(col("_row_num") == 1) \
+    .drop("_row_num")
+
+# ESTRATÉGIA 2: Manter o mais completo (menos nulls)
+from pyspark.sql.functions import coalesce, lit
+
+def count_non_nulls(df, cols):
+    """Conta campos não-null por registro."""
+    return df.withColumn(
+        "_completeness_score",
+        sum([when(col(c).isNotNull(), lit(1)).otherwise(lit(0)) for c in cols])
+    )
+
+# ESTRATÉGIA 3: dropDuplicates simples (primeiro encontrado)
+df_simple_dedup = df_bronze.dropDuplicates(["order_id"])</pre>
+<table>
+<tr><th>Estratégia</th><th>Quando usar</th><th>Risco</th></tr>
+<tr><td>Manter mais recente</td><td>Dados com timestamp confiável</td><td>Pode perder versão "correta" anterior</td></tr>
+<tr><td>Manter mais completo</td><td>Fontes com qualidade variável</td><td>Registro mais antigo pode ser mais completo</td></tr>
+<tr><td>dropDuplicates</td><td>Duplicatas exatas (todos campos iguais)</td><td>Determinístico apenas se ordenado</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 14 — Section: Integridade -->
+<div class="slide section">
+<h2>Check de Integridade Referencial</h2>
+<p>Referências entre tabelas — FK exists?</p>
+</div>
+
+<!-- SLIDE 15 — Integridade Referencial -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Integridade Referencial — Orphan Records</h2>
+<blockquote>Verificar se valores em uma coluna existem como chave primária em outra tabela. Registros "órfãos" indicam inconsistência entre fontes.</blockquote>
+<pre>def check_referential_integrity(df_child, df_parent, 
+                                  child_col, parent_col):
+    """
+    Verifica se todos os valores de child_col existem em parent_col.
+    Retorna registros órfãos (sem pai).
+    """
+    # Left anti join: registros em child que NÃO existem em parent
+    df_orphans = df_child.join(
+        df_parent.select(col(parent_col).alias("_ref")),
+        df_child[child_col] == col("_ref"),
+        "left_anti"
+    )
+    
+    orphan_count = df_orphans.count()
+    total = df_child.count()
+    
+    return {
+        "total_rows": total,
+        "orphan_count": orphan_count,
+        "integrity_ratio": round(1 - (orphan_count / total), 4),
+        "passed": orphan_count == 0,
+        "orphan_df": df_orphans
+    }
+
+# Parceiro C: pedidos referenciando clientes inexistentes
+result = check_referential_integrity(
+    df_pedidos, df_clientes,
+    child_col="customer_id", parent_col="id"
+)
+# → {"orphan_count": 450, "integrity_ratio": 0.991, "passed": False}</pre>
+</div>
+
+<!-- SLIDE 16 — Tratamento de Orphans -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏥 Tratamento de Registros Órfãos</h2>
+<pre># Opção 1: Quarentena (padrão seguro)
+df_orphans.withColumn("_rejection_reason", lit("REFERENTIAL_INTEGRITY")) \
+    .write.mode("append").parquet("datalake/quarantine/vendas/")
+
+# Opção 2: Enriquecer com "UNKNOWN" customer
+df_with_default = df_pedidos.join(
+    df_clientes.select("id", "nome"),
+    df_pedidos["customer_id"] == df_clientes["id"],
+    "left"
+).withColumn(
+    "customer_name",
+    coalesce(col("nome"), lit("UNKNOWN"))
+)
+
+# Opção 3: Filtrar (eliminar órfãos)
+df_valid_orders = df_pedidos.join(
+    df_clientes.select("id"),
+    df_pedidos["customer_id"] == df_clientes["id"],
+    "inner"  # Apenas pedidos com cliente válido
+)</pre>
+<table>
+<tr><th>Estratégia</th><th>Quando usar</th><th>Trade-off</th></tr>
+<tr><td>Quarentena</td><td>Não perder dados, investigar depois</td><td>Acumula registros pendentes</td></tr>
+<tr><td>Default value</td><td>Dados necessários mesmo incompletos</td><td>Métricas com "UNKNOWN"</td></tr>
+<tr><td>Filtrar (inner join)</td><td>Qualidade é prioridade absoluta</td><td>Perde registros potencialmente válidos</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 17 — Section: Validade -->
+<div class="slide section">
+<h2>Check de Validade</h2>
+<p>Ranges, formatos, regras de negócio</p>
+</div>
+
+<!-- SLIDE 18 — Check de Validade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📏 Check de Validade — Regras de Negócio</h2>
+<blockquote>Verificar se valores estão dentro de <strong>ranges aceitáveis</strong> e aderem a <strong>regras de negócio</strong>. Dados "válidos" sintaticamente podem ser absurdos semanticamente.</blockquote>
+<pre>from pyspark.sql.functions import col, when, lit, length, regexp_extract
+
+# Definir regras de validade
+validity_rules = {
+    "total_amount": (col("total_amount") > 0) &amp; (col("total_amount") &lt; 1_000_000),
+    "order_date": (col("order_date") >= "2020-01-01") &amp; 
+                  (col("order_date") &lt;= current_date()),
+    "shipping_state": col("shipping_state").isin(
+        ["SP","RJ","MG","RS","PR","SC","BA","PE","CE","DF",
+         "GO","PA","MA","MT","MS","ES","PB","RN","AL","PI",
+         "SE","TO","RO","AC","AP","RR","AM"]
+    ),
+    "customer_id": (length(col("customer_id")) >= 3) &amp;
+                   (col("customer_id").rlike("^C\\d+$")),
+    "quantity": (col("quantity") > 0) &amp; (col("quantity") &lt; 10000)
+}
+
+# Aplicar todas as regras
+df_with_flags = df_bronze
+for rule_name, condition in validity_rules.items():
+    df_with_flags = df_with_flags.withColumn(
+        f"_valid_{rule_name}",
+        when(condition, lit(True)).otherwise(lit(False))
+    )</pre>
+</div>
+
+<!-- SLIDE 19 — Validade: Resultados -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Resultados de Validade — DataFlow</h2>
+<pre># Contar violações por regra
+for rule_name in validity_rules.keys():
+    violations = df_with_flags.filter(
+        col(f"_valid_{rule_name}") == False
+    ).count()
+    print(f"  {rule_name}: {violations} violações")
+
+# Output:
+#   total_amount: 12.450 violações (valores negativos!)
+#   order_date:   23 violações (datas no futuro)
+#   shipping_state: 89 violações (estados inválidos: "XX", "ZZ")
+#   customer_id:  0 violações ✅
+#   quantity:     156 violações (quantity = 0 ou > 10000)</pre>
+<pre># Separar válidos de inválidos (ALL rules must pass)
+all_valid_condition = None
+for rule_name in validity_rules.keys():
+    cond = col(f"_valid_{rule_name}") == True
+    all_valid_condition = cond if all_valid_condition is None \
+        else all_valid_condition &amp; cond
+
+df_valid = df_with_flags.filter(all_valid_condition)
+df_invalid = df_with_flags.filter(~all_valid_condition)
+
+print(f"✅ Válidos: {df_valid.count()}")
+print(f"❌ Inválidos: {df_invalid.count()} → Quarentena")</pre>
+</div>
+
+<!-- SLIDE 20 — Section: Quarentena -->
+<div class="slide section">
+<h2>Sistema de Quarentena</h2>
+<p>Isolando dados ruins sem perder informação</p>
+</div>
+
+<!-- SLIDE 21 — Quarentena -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏥 Sistema de Quarentena — Design</h2>
+<blockquote>Dados que falham em checks de qualidade NÃO são deletados — vão para uma área de <strong>quarentena</strong> com metadados de rejeição para análise posterior.</blockquote>
+<pre>
+FLUXO DE QUARENTENA:
+
+[Bronze Data] ──► [Quality Engine] ──┬──► [Silver] (dados limpos)
+                                      │
+                                      └──► [Quarantine]
+                                            ├── _rejection_reason
+                                            ├── _rejection_ts
+                                            ├── _failed_rules[]
+                                            ├── _source_file
+                                            └── _can_be_fixed (bool)
+
+Quarantine folder:
+datalake/quarantine/
+├── vendas/
+│   ├── date=2024-01-15/
+│   │   └── part-00000.parquet (847 registros)
+│   └── date=2024-01-16/
+│       └── part-00000.parquet (234 registros)
+└── clientes/
+    └── date=2024-01-15/
+        └── part-00000.parquet (12 registros)
+</pre>
+</div>
+
+<!-- SLIDE 22 — Quarentena: Implementação -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔧 Quarentena — Implementação</h2>
+<pre>from pyspark.sql.functions import array, when, lit, current_timestamp
+
+def quarantine_invalid_records(df, rules, output_path):
+    """Separa dados válidos/inválidos e salva quarentena."""
+    
+    # Adicionar coluna com lista de regras falhadas
+    failed_rules_col = array(*[
+        when(~condition, lit(rule_name))
+        for rule_name, condition in rules.items()
+    ])
+    
+    df_flagged = df.withColumn("_failed_rules", failed_rules_col)
+    
+    # Válidos: nenhuma regra falhou (array vazio)
+    df_valid = df_flagged.filter(
+        size(col("_failed_rules")) == 0
+    ).drop("_failed_rules")
+    
+    # Inválidos: pelo menos 1 regra falhou
+    df_quarantine = df_flagged.filter(
+        size(col("_failed_rules")) > 0
+    ).withColumn("_rejection_ts", current_timestamp()) \
+     .withColumn("_source", lit("parceiro_a"))
+    
+    # Persistir quarentena
+    df_quarantine.write.mode("append") \
+        .partitionBy("order_date") \
+        .parquet(f"{output_path}/quarantine/")
+    
+    return df_valid, df_quarantine.count()
+
+df_clean, rejected = quarantine_invalid_records(
+    df_bronze, validity_rules, "datalake"
+)
+print(f"🏥 {rejected} registros em quarentena")</pre>
+</div>
+
+<!-- SLIDE 23 — Section: Relatório -->
+<div class="slide section">
+<h2>Relatório de Qualidade</h2>
+<p>Métricas, tendências e alertas automatizados</p>
+</div>
+
+<!-- SLIDE 24 — Relatório de Qualidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Relatório de Qualidade — Métricas</h2>
+<pre>def generate_quality_report(df, rules, key_columns, reference_dfs=None):
+    """Gera relatório completo de qualidade."""
+    total = df.count()
+    report = {
+        "execution_date": datetime.now().isoformat(),
+        "total_records": total,
+        "checks": {}
+    }
+    
+    # 1. Completude
+    for col_name in required_columns:
+        nulls = df.filter(col(col_name).isNull()).count()
+        report["checks"][f"completeness_{col_name}"] = {
+            "metric": round(1 - nulls/total, 4),
+            "threshold": 0.98,
+            "passed": (1 - nulls/total) >= 0.98
+        }
+    
+    # 2. Unicidade
+    uniq = df.dropDuplicates(key_columns).count()
+    report["checks"]["uniqueness"] = {
+        "metric": round(uniq/total, 4),
+        "threshold": 0.99,
+        "passed": (uniq/total) >= 0.99
+    }
+    
+    # 3. Validade (por regra)
+    for rule_name, condition in rules.items():
+        valid = df.filter(condition).count()
+        report["checks"][f"validity_{rule_name}"] = {
+            "metric": round(valid/total, 4),
+            "threshold": 0.95,
+            "passed": (valid/total) >= 0.95
+        }
+    
+    # Score geral
+    all_passed = all(c["passed"] for c in report["checks"].values())
+    report["overall_passed"] = all_passed
+    return report</pre>
+</div>
+
+<!-- SLIDE 25 — Relatório Visual -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📋 Exemplo de Relatório — DataFlow 2024-01-15</h2>
+<pre>
+╔══════════════════════════════════════════════════════════════╗
+║           RELATÓRIO DE QUALIDADE — 2024-01-15               ║
+║           Pipeline: medallion_v2 | Source: all_partners     ║
+╠══════════════════════════════════════════════════════════════╣
+║ Total de registros analisados: 152.340                      ║
+╠══════════════════════════════════════════════════════════════╣
+║ CHECK                  │ SCORE  │ THRESHOLD │ STATUS        ║
+╠════════════════════════╪════════╪═══════════╪═══════════════╣
+║ Completude order_id    │ 100.0% │ 98%       │ ✅ PASS       ║
+║ Completude customer_id │ 99.4%  │ 98%       │ ✅ PASS       ║
+║ Completude amount      │ 99.8%  │ 98%       │ ✅ PASS       ║
+║ Unicidade (order_id)   │ 97.9%  │ 99%       │ ❌ FAIL       ║
+║ Validade amount > 0    │ 91.8%  │ 95%       │ ❌ FAIL       ║
+║ Validade state válido  │ 99.9%  │ 95%       │ ✅ PASS       ║
+║ Integridade customer   │ 99.7%  │ 99%       │ ✅ PASS       ║
+╠══════════════════════════════════════════════════════════════╣
+║ OVERALL: ❌ FAILED (2 checks falharam)                      ║
+║ Quarentena: 12.718 registros (8.3%)                         ║
+║ Silver: 139.622 registros (91.7%) ✅                        ║
+╚══════════════════════════════════════════════════════════════╝
+</pre>
+</div>
+
+<!-- SLIDE 26 — Section: Integração Airflow -->
+<div class="slide section">
+<h2>Integração com Airflow</h2>
+<p>Quality checks como tasks do pipeline — alertas automáticos</p>
+</div>
+
+<!-- SLIDE 27 — Airflow + Qualidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🌬️ Quality Checks no Airflow</h2>
+<pre>from airflow import DAG
+from airflow.operators.python import PythonOperator, BranchPythonOperator
+
+def run_quality_checks(**kwargs):
+    """Executa todos os checks e decide se continua."""
+    report = generate_quality_report(df_bronze, rules, ["order_id"])
+    
+    # Push report para XCom
+    kwargs["ti"].xcom_push(key="quality_report", value=report)
+    
+    return report["overall_passed"]
+
+def decide_on_quality(**kwargs):
+    """Branch: se qualidade OK → Silver, senão → alerta."""
+    ti = kwargs["ti"]
+    passed = ti.xcom_pull(task_ids="quality_checks")
+    
+    if passed:
+        return "transform_silver"
+    else:
+        return "alert_quality_failure"
+
+with DAG("pipeline_with_quality", ...) as dag:
+    ingest = PythonOperator(task_id="ingest_bronze", ...)
+    
+    quality = PythonOperator(
+        task_id="quality_checks",
+        python_callable=run_quality_checks
+    )
+    
+    branch = BranchPythonOperator(
+        task_id="quality_gate",
+        python_callable=decide_on_quality
+    )
+    
+    transform = SparkSubmitOperator(task_id="transform_silver", ...)
+    alert = PythonOperator(task_id="alert_quality_failure", ...)
+    
+    ingest >> quality >> branch >> [transform, alert]</pre>
+</div>
+
+<!-- SLIDE 28 — Quality Gate Pattern -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🚦 Quality Gate Pattern — Bloqueio Inteligente</h2>
+<pre>
+QUALITY GATE — 3 modos:
+
+1. STRICT (Gold layer):
+   Score &lt; threshold → BLOQUEIA pipeline + ALERTA
+   Nenhum dado ruim passa.
+
+2. LENIENT (Silver layer):
+   Score &lt; threshold → QUARENTENA + CONTINUA
+   Dados ruins são isolados, bons seguem.
+
+3. MONITOR (Bronze layer):
+   Score &lt; threshold → LOG + MÉTRICA
+   Apenas observar, não bloquear.
+</pre>
+<table>
+<tr><th>Camada</th><th>Modo</th><th>Ação em Falha</th></tr>
+<tr><td>Bronze → Silver</td><td>LENIENT</td><td>Quarentena + continua</td></tr>
+<tr><td>Silver → Gold</td><td>STRICT</td><td>Bloqueia + alerta Roberto</td></tr>
+<tr><td>Gold → Dashboard</td><td>STRICT</td><td>Bloqueia publicação</td></tr>
+</table>
+<div class="highlight">
+<strong>Regra DataFlow:</strong> "Dados ruins NUNCA chegam na Gold. Se quality gate falha na Silver→Gold, pipeline para e Carlos é notificado. Melhor não publicar do que publicar errado."
+</div>
+</div>
+
+<!-- SLIDE 29 — Boas Práticas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Boas Práticas — Qualidade de Dados</h2>
+<table>
+<tr><th>Prática</th><th>Por quê</th></tr>
+<tr><td>Defina <strong>thresholds por dimensão</strong></td><td>Nem todo check precisa ser 100%</td></tr>
+<tr><td>Use <strong>quarentena</strong>, não delete</td><td>Preservar dados para investigação</td></tr>
+<tr><td>Implemente <strong>quality gates</strong> entre camadas</td><td>Impedir propagação de erros</td></tr>
+<tr><td>Gere <strong>relatórios de qualidade</strong> automáticos</td><td>Visibilidade e histórico de tendências</td></tr>
+<tr><td>Monitore <strong>tendências</strong> (score degradando?)</td><td>Detectar problemas antes da crise</td></tr>
+<tr><td>Integre alertas no <strong>Airflow</strong> (callbacks)</td><td>Notificação automática em degradação</td></tr>
+<tr><td>Documente <strong>regras de negócio</strong> como código</td><td>Regras versionáveis e auditáveis</td></tr>
+<tr><td>Teste <strong>edge cases</strong> (arquivo vazio, 100% null)</td><td>Pipeline não deve quebrar em cenários extremos</td></tr>
+<tr><td>Classifique checks por <strong>criticidade</strong></td><td>Bloquear em críticos, alertar em warnings</td></tr>
+<tr><td>Revise thresholds <strong>mensalmente</strong></td><td>Qualidade melhora com o tempo, thresholds também</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 30 — Preview Lab -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔬 O Que Faremos no Lab Hoje</h2>
+<p><strong>Cenário:</strong> Roberto exige que dados ruins nunca mais cheguem ao dashboard. Carlos precisa implementar um framework de qualidade integrado ao pipeline Medallion.</p>
+<div class="cols">
+<div class="col">
+<h3>Lab Parte 1 — Guiado (60 min)</h3>
+<ol>
+<li>Implementar check de completude</li>
+<li>Implementar check de unicidade + dedup</li>
+<li>Implementar check de validade (ranges)</li>
+<li>Sistema de quarentena com metadados</li>
+<li>Gerar relatório de qualidade</li>
+</ol>
+</div>
+<div class="col">
+<h3>Lab Parte 2 — Intermediário + Desafio (50 min)</h3>
+<ol>
+<li>Check de integridade referencial</li>
+<li>Quality gate no Airflow (branch)</li>
+<li>Alertas automáticos em falha</li>
+<li>🏆 <strong>Desafio:</strong> Framework completo com score + trend + quarentena</li>
+</ol>
+</div>
+</div>
+<p><strong>Entregável:</strong> Framework de qualidade com 4 dimensões, quarentena e quality gate integrado ao Airflow.</p>
+</div>
+
+<!-- SLIDE 31 — Encerramento -->
+<div class="slide cover">
+<h1>Hora do Lab! 🔬</h1>
+<p class="subtitle">Agora vocês vão construir o framework de qualidade de dados</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">Completude + Unicidade + Validade + Integridade + Quarentena</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">&#9664;</button>
+<button onclick="next()">&#9654;</button>
+</div>
+<div class="counter" id="counter"></div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;const total=slides.length;
+function show(n){
+  slides[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  slides[cur].classList.add('active');
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+}
+function next(){show(cur+1);}
+function prev(){show(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});
+show(0);
+</script>
+</body>
+</html>

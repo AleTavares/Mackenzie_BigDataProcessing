@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 3 — Ingestão e Persistência de Dados | Mackenzie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC092F;
+  --red-dark:#9E0724;
+  --red-light:#F9E8EB;
+  --gold:#C4A35A;
+  --white:#FFFFFF;
+  --gray-50:#FAFAFA;
+  --gray-100:#F4F4F5;
+  --gray-200:#E4E4E7;
+  --gray-500:#71717A;
+  --gray-700:#3F3F46;
+  --gray-900:#18181B;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+body{background:var(--gray-900);}
+
+.slide{
+  display:none;position:absolute;inset:0;
+  width:100vw;height:100vh;
+  padding:60px 80px;
+  flex-direction:column;justify-content:flex-start;
+  background:var(--white);color:var(--gray-900);
+  overflow-y:auto;
+}
+.slide.active{display:flex;}
+.slide::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--red-dark));
+}
+.slide .mackenzie-mark{
+  position:absolute;top:18px;right:40px;
+  font-size:.7em;font-weight:700;letter-spacing:2px;color:var(--red);
+}
+
+/* Capa */
+.slide.cover{
+  background:linear-gradient(145deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);align-items:center;justify-content:center;text-align:center;
+  padding:80px;
+}
+.slide.cover::before{display:none;}
+.slide.cover h1{font-size:2.8em;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.slide.cover .subtitle{font-size:1.15em;font-weight:300;opacity:.9;margin-bottom:4px;}
+.slide.cover .meta{
+  margin-top:30px;display:inline-flex;gap:16px;
+  background:rgba(255,255,255,.15);padding:10px 24px;border-radius:24px;
+  font-size:.9em;
+}
+
+/* Section divider */
+.slide.section{
+  background:var(--gray-900);color:var(--white);
+  align-items:center;justify-content:center;text-align:center;
+}
+.slide.section::before{background:var(--gold);}
+.slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+
+/* Typography */
+.slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
+.slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
+.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide ul,.slide ol{margin:8px 0 12px 28px;}
+.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide strong{color:var(--gray-900);}
+
+/* Code */
+.slide pre{
+  background:var(--gray-900);color:#e4e4e7;
+  padding:18px 22px;border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.8em;
+  line-height:1.6;margin:12px 0;overflow-x:auto;
+  border-left:4px solid var(--red);
+}
+
+/* Table */
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide tr:nth-child(even) td{background:var(--gray-50);}
+
+/* Blockquote */
+.slide blockquote{
+  border-left:4px solid var(--gold);background:var(--gray-50);
+  padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
+  font-style:italic;color:var(--gray-700);font-size:.95em;
+}
+
+/* Columns */
+.cols{display:flex;gap:32px;margin:12px 0;}
+.cols .col{flex:1;}
+
+/* Highlight box */
+.highlight{
+  background:var(--red-light);border:1px solid var(--red);
+  padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Navigation */
+.nav{position:fixed;bottom:24px;right:36px;display:flex;gap:8px;z-index:999;}
+.nav button{
+  background:var(--red);color:var(--white);border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-size:1em;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.nav button:hover{background:var(--red-dark);transform:scale(1.05);}
+.counter{
+  position:fixed;bottom:28px;left:36px;
+  color:var(--gray-500);font-size:.8em;font-weight:500;z-index:999;
+}
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:var(--red);transition:width .3s;z-index:999;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- SLIDE 1 — Capa -->
+<div class="slide cover active">
+<h1>Ingestão e Persistência<br>de Dados</h1>
+<p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
+<p class="subtitle">Universidade Presbiteriana Mackenzie</p>
+<div class="meta"><span>📅 Semana 3</span><span>⏱️ 50 min teoria</span></div>
+</div>
+
+<!-- SLIDE 2 — Contexto Narrativo: Expansão -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🤝 DataFlow Analytics — Expansão de Fontes</h2>
+<ul>
+<li><strong>3 novos parceiros</strong> fechados no último trimestre</li>
+<li>Cada parceiro envia dados em <strong>formato diferente</strong></li>
+<li>Volume total: de 1M para <strong>5M de registros mensais</strong></li>
+<li>Necessidade de <strong>normalizar e unificar</strong> tudo no data lake</li>
+<li>Dados chegam <strong>diariamente</strong> em horários diferentes</li>
+</ul>
+<blockquote><strong>Roberto</strong> (CEO): "Fechamos com os 3 fornecedores. Cada um tem um sistema diferente. Quanto tempo para integrar tudo?"</blockquote>
+</div>
+
+<!-- SLIDE 3 — Contexto: O Caos dos Formatos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📦 Os 3 Parceiros — O Caos dos Formatos</h2>
+<p><strong>Ana</strong> (Product Owner) traz a situação:</p>
+<table>
+<tr><th>Parceiro</th><th>Sistema</th><th>Formato</th><th>Peculiaridades</th></tr>
+<tr><td>🏭 Parceiro A</td><td>ERP legado (2005)</td><td>CSV</td><td>Encoding ISO-8859-1, separador <code>;</code></td></tr>
+<tr><td>🌐 Parceiro B</td><td>API REST moderna</td><td>JSON</td><td>Nested, arrays, timestamps UTC</td></tr>
+<tr><td>📊 Parceiro C</td><td>Data Lake próprio</td><td>Parquet</td><td>Comprimido Snappy, particionado</td></tr>
+</table>
+<pre>UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe7...
+AnalysisException: cannot resolve column 'pedidos[0].valor'...</pre>
+<blockquote><strong>Marina</strong> (CTO): "Precisamos de um pipeline robusto de ingestão. Cada fonte entra como está na Bronze, normalizamos na Silver e agregamos na Gold. É a Arquitetura Medallion."</blockquote>
+</div>
+
+<!-- SLIDE 4 — Contexto: A Solução de Marina -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🛠️ O Plano de Marina</h2>
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│  PROBLEMA: 3 fontes × 3 formatos × schemas diferentes           │
+│  Cada parceiro manda do jeito que quer                          │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  SOLUÇÃO: Arquitetura Medallion + Schema Evolution               │
+│                                                                  │
+│  1. BRONZE: Ingestão raw (cada formato como está)               │
+│  2. SILVER: Normalização + schema unificado                     │
+│  3. GOLD: Agregações prontas para consumo                       │
+│                                                                  │
+│  + Particionamento por data para performance                    │
+│  + Parquet como formato padrão do lake                          │
+│  + Schema evolution para novos campos de parceiros              │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+<blockquote><strong>Carlos</strong>: "E quando um parceiro mudar o schema?"<br><strong>Marina</strong>: "Schema evolution. Aceitamos colunas novas sem quebrar o pipeline."</blockquote>
+</div>
+
+<!-- SLIDE 5 — Objetivos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Objetivos de Aprendizagem</h2>
+<ol>
+<li><strong>Implementar</strong> ingestão de múltiplos formatos (CSV, JSON, Parquet, Delta)</li>
+<li><strong>Comparar</strong> trade-offs entre formatos de arquivo para big data</li>
+<li><strong>Aplicar</strong> schema evolution e schema enforcement em pipelines</li>
+<li><strong>Particionar</strong> dados para otimizar leitura e escrita</li>
+<li><strong>Implementar</strong> a arquitetura Medallion (Bronze → Silver → Gold)</li>
+<li><strong>Escolher</strong> o modo de escrita correto (append, overwrite, merge)</li>
+</ol>
+</div>
+
+<!-- SLIDE 6 — Section: Formatos -->
+<div class="slide section">
+<h2>Formatos de Arquivo</h2>
+<p>Trade-offs entre CSV, JSON, Parquet, ORC, Avro e Delta</p>
+</div>
+
+<!-- SLIDE 7 — Formatos Visão Geral -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📄 Por Que o Formato Importa em Big Data?</h2>
+<blockquote>Em processamento distribuído, o <strong>formato do arquivo</strong> impacta diretamente: velocidade de leitura, compressão, suporte a schema e paralelismo.</blockquote>
+<p><strong>O cenário da DataFlow:</strong></p>
+<ul>
+<li>Parceiro A: <strong>CSV</strong> — simples, mas sem tipos, sem compressão, lento</li>
+<li>Parceiro B: <strong>JSON</strong> — flexível, mas verboso e sem otimização de coluna</li>
+<li>Parceiro C: <strong>Parquet</strong> — otimizado, mas exige ferramentas específicas</li>
+</ul>
+<table>
+<tr><th>Categoria</th><th>Formatos</th><th>Característica</th></tr>
+<tr><td><strong>Texto</strong></td><td>CSV, JSON, XML</td><td>Legíveis por humanos, sem otimização</td></tr>
+<tr><td><strong>Colunar binário</strong></td><td>Parquet, ORC</td><td>Otimizados para analytics</td></tr>
+<tr><td><strong>Row-based binário</strong></td><td>Avro</td><td>Otimizado para escrita e streaming</td></tr>
+<tr><td><strong>Transacional</strong></td><td>Delta, Iceberg, Hudi</td><td>ACID + time travel + schema evolution</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 8 — CSV -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📋 CSV — Comma Separated Values</h2>
+<blockquote>Formato mais antigo e universalmente suportado. Ideal para <strong>interoperabilidade</strong>, mas péssimo para <strong>performance</strong> em big data.</blockquote>
+<div class="cols">
+<div class="col">
+<h3>Vantagens</h3>
+<ul>
+<li>✅ Legível por humanos (texto plano)</li>
+<li>✅ Qualquer ferramenta lê (Excel, Python, Shell)</li>
+<li>✅ Fácil debug e inspeção manual</li>
+</ul>
+</div>
+<div class="col">
+<h3>Desvantagens</h3>
+<ul>
+<li>❌ <strong>Sem tipos</strong> — tudo é string</li>
+<li>❌ <strong>Sem compressão nativa</strong></li>
+<li>❌ <strong>Leitura completa</strong> — todas as colunas sempre</li>
+<li>❌ <strong>Sem schema embutido</strong></li>
+</ul>
+</div>
+</div>
+<pre># Parceiro A: CSV legado com peculiaridades
+df_csv = spark.read.csv(
+    "data/parceiro_a/*.csv",
+    header=True,              # Primeira linha é header
+    sep=";",                  # Separador ponto-e-vírgula
+    encoding="ISO-8859-1",   # Encoding latin (acentos)
+    inferSchema=True,         # Tentar inferir tipos (LENTO em produção!)
+    nullValue="N/A",          # String que representa null
+    dateFormat="dd/MM/yyyy"   # Formato de data brasileiro
+)</pre>
+</div>
+
+<!-- SLIDE 9 — JSON -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 JSON — JavaScript Object Notation</h2>
+<blockquote>Formato padrão de APIs REST. Excelente para <strong>dados semiestruturados</strong> e hierárquicos, mas verboso e ineficiente para analytics.</blockquote>
+<div class="cols">
+<div class="col">
+<ul>
+<li>✅ Suporta dados <strong>aninhados</strong> (nested objects, arrays)</li>
+<li>✅ Schema flexível por registro</li>
+<li>✅ Padrão universal de APIs web</li>
+</ul>
+</div>
+<div class="col">
+<ul>
+<li>❌ <strong>Verboso</strong> — overhead de chaves repetidas</li>
+<li>❌ <strong>Sem compressão nativa</strong></li>
+<li>❌ <strong>Não é splittable</strong> (multiLine)</li>
+<li>❌ <strong>Parsing lento</strong></li>
+</ul>
+</div>
+</div>
+<pre># Parceiro B: JSON de API dumps
+df_json = spark.read.json("data/parceiro_b/*.json", multiLine=True)
+
+# Flatten de dados aninhados
+from pyspark.sql.functions import explode, col
+df_flat = df_json.select(
+    col("cliente_id"),
+    explode(col("pedidos")).alias("pedido")
+).select(
+    col("cliente_id"),
+    col("pedido.id").alias("order_id"),
+    col("pedido.valor").alias("total_amount")
+)</pre>
+<p><strong>JSON Lines (JSONL)</strong> — cada linha é um JSON independente → <strong>splittable</strong> → paralelismo possível.</p>
+</div>
+
+<!-- SLIDE 10 — Parquet -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏛️ Parquet — O Padrão do Data Lake</h2>
+<blockquote><strong>Apache Parquet</strong> armazena dados por <strong>coluna</strong>, otimizando drasticamente leituras analíticas.</blockquote>
+<pre>
+ROW-BASED (CSV, JSON, Avro):          COLUNAR (Parquet, ORC):
+┌──────┬────────┬────────┬─────┐      ┌──────────────────────────┐
+│ id   │ nome   │ cidade │valor│      │ id:  1, 2, 3, 4, 5 ...  │
+├──────┼────────┼────────┼─────┤      ├──────────────────────────┤
+│ 1    │ João   │ SP     │ 150 │      │ nome: João, Maria, ...   │
+│ 2    │ Maria  │ RJ     │ 200 │      ├──────────────────────────┤
+│ 3    │ Pedro  │ MG     │ 350 │      │ cidade: SP, RJ, MG ...   │
+└──────┴────────┴────────┴─────┘      ├──────────────────────────┤
+Para ler só "valor":                   │ valor: 150, 200, 350 ... │
+Precisa ler TUDO (4 colunas)           └──────────────────────────┘
+                                       Para ler só "valor":
+                                       Lê APENAS a coluna "valor"
+</pre>
+<ul>
+<li>✅ <strong>Column pruning</strong> — lê apenas colunas solicitadas</li>
+<li>✅ <strong>Compressão excelente</strong> (Snappy, GZIP, ZSTD)</li>
+<li>✅ <strong>Schema embutido</strong> — metadados no arquivo</li>
+<li>✅ <strong>Predicate pushdown</strong> — filtra antes de ler</li>
+<li>✅ <strong>Splittable</strong> — paralelismo total</li>
+</ul>
+</div>
+
+<!-- SLIDE 11 — ORC e Avro -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📦 ORC e Avro — Quando Usar?</h2>
+<div class="cols">
+<div class="col">
+<h3>ORC (Optimized Row Columnar)</h3>
+<ul>
+<li>✅ Excelente compressão</li>
+<li>✅ Suporte nativo a ACID no Hive</li>
+<li>✅ Bloom filters embutidos</li>
+<li>❌ Ecossistema menor fora do Hadoop</li>
+<li>📌 <strong>Usar:</strong> ecossistema Hive/Hadoop</li>
+</ul>
+</div>
+<div class="col">
+<h3>Avro (Row-based binário)</h3>
+<ul>
+<li>✅ Schema evolution nativa</li>
+<li>✅ Compacto e binário</li>
+<li>✅ Excelente para <strong>Kafka/streaming</strong></li>
+<li>✅ Splittable</li>
+<li>❌ Sem column pruning</li>
+<li>📌 <strong>Usar:</strong> streaming, event sourcing</li>
+</ul>
+</div>
+</div>
+<pre># Leitura de Avro (requer spark-avro package)
+df_avro = spark.read.format("avro").load("data/events/")
+
+# Leitura de ORC
+df_orc = spark.read.orc("data/hive_tables/vendas/")</pre>
+<div class="highlight">
+<strong>Regra prática:</strong> No ecossistema Spark moderno, <strong>Parquet</strong> é a escolha padrão. Use Avro para streaming e ORC se já está no Hive.
+</div>
+</div>
+
+<!-- SLIDE 12 — Delta Lake -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔺 Delta Lake — Parquet + ACID + Time Travel</h2>
+<blockquote><strong>Delta Lake</strong> é uma camada sobre Parquet que adiciona transações ACID, time travel, e schema enforcement. Padrão para lakehouse moderno.</blockquote>
+<pre>
+DELTA LAKE = PARQUET + EXTRAS
+
+Parquet files (dados)        + _delta_log/ (transaction log)
+┌─────┐ ┌─────┐ ┌─────┐      ┌──────────────────────────────┐
+│.parq│ │.parq│ │.parq│      │ 000000.json (commit 0)       │
+└─────┘ └─────┘ └─────┘      │ 000001.json (commit 1)       │
+                              │ 000002.json (commit 2)       │
+                              └──────────────────────────────┘
+</pre>
+<ul>
+<li>✅ ACID transactions (leitura consistente durante escrita)</li>
+<li>✅ Time Travel (acessar versões anteriores)</li>
+<li>✅ Schema enforcement + Schema evolution</li>
+<li>✅ MERGE (upsert: update + insert em uma operação)</li>
+<li>✅ DELETE/UPDATE (impossíveis em Parquet puro)</li>
+</ul>
+<pre># Time travel: ler versão anterior
+df_ontem = spark.read.format("delta") \
+    .option("versionAsOf", 2) \
+    .load("datalake/silver/vendas/")</pre>
+</div>
+
+<!-- SLIDE 13 — Tabela Comparativa -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚖️ Tabela Comparativa de Formatos</h2>
+<table>
+<tr><th>Critério</th><th>CSV</th><th>JSON</th><th>Parquet</th><th>ORC</th><th>Avro</th><th>Delta</th></tr>
+<tr><td><strong>Legibilidade</strong></td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+<tr><td><strong>Compressão</strong></td><td>❌</td><td>❌</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td></tr>
+<tr><td><strong>Column Pruning</strong></td><td>❌</td><td>❌</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>❌</td><td>⭐⭐⭐</td></tr>
+<tr><td><strong>Schema embutido</strong></td><td>❌</td><td>❌</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+<tr><td><strong>Schema evolution</strong></td><td>❌</td><td>⭐⭐</td><td>⭐</td><td>⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+<tr><td><strong>Splittable</strong></td><td>⭐⭐</td><td>❌*</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+<tr><td><strong>Velocidade leitura</strong></td><td>⭐</td><td>⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td></tr>
+<tr><td><strong>ACID</strong></td><td>❌</td><td>❌</td><td>❌</td><td>⭐*</td><td>❌</td><td>⭐⭐⭐</td></tr>
+</table>
+<p><strong>Benchmark (1M registros de vendas):</strong></p>
+<table>
+<tr><th>Formato</th><th>Tamanho</th><th>Leitura</th><th>Escrita</th></tr>
+<tr><td>CSV</td><td>250 MB</td><td>12s</td><td>8s</td></tr>
+<tr><td>JSON</td><td>380 MB</td><td>18s</td><td>10s</td></tr>
+<tr><td>Parquet (Snappy)</td><td>45 MB</td><td>2s</td><td>5s</td></tr>
+<tr><td>Delta (Snappy)</td><td>45 MB</td><td>2.2s</td><td>5.5s</td></tr>
+</table>
+<div class="highlight"><strong>Conclusão:</strong> Parquet/Delta são <strong>5-6x menores</strong> e <strong>6x mais rápidos</strong> para leitura que CSV.</div>
+</div>
+
+<!-- SLIDE 14 — Guia de Decisão -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🗺️ Árvore de Decisão: Qual Formato Usar?</h2>
+<pre>
+                    Qual é o caso de uso principal?
+                              │
+              ┌───────────────┼───────────────────┐
+              │               │                   │
+         Analytics /     Streaming /          Interop /
+         Data Lake       Messaging            Integração
+              │               │                   │
+              ▼               ▼                   ▼
+        Precisa de       Precisa de           Sistema legado
+        ACID/Merge?      schema evolution     ou humano lê?
+              │          forte?                    │
+        ┌─────┴─────┐        │              ┌────┴────┐
+        │ SIM       │        ▼              │ SIM     │ NÃO
+        ▼           │      AVRO             ▼         ▼
+     DELTA LAKE     │   (Kafka, events)    CSV      PARQUET
+  (lakehouse)       │                    (export)   (batch)
+                    ▼ NÃO
+                 PARQUET (padrão data lake)
+</pre>
+<table>
+<tr><th>Cenário DataFlow</th><th>Formato</th><th>Motivo</th></tr>
+<tr><td>Ingestão raw de parceiros</td><td>Mantém original (Bronze)</td><td>Preservar fidelidade</td></tr>
+<tr><td>Data lake interno</td><td><strong>Parquet</strong></td><td>Performance + compressão</td></tr>
+<tr><td>Camada com merge/upsert</td><td><strong>Delta</strong></td><td>ACID + merge + time travel</td></tr>
+<tr><td>Export para stakeholders</td><td>CSV/JSON</td><td>Legibilidade</td></tr>
+<tr><td>Eventos de streaming (futuro)</td><td>Avro</td><td>Schema evolution + Kafka</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 15 — Compressão -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🗜️ Compressão — Velocidade vs Tamanho</h2>
+<blockquote>A escolha do codec de compressão impacta tanto o <strong>tamanho do arquivo</strong> quanto a <strong>velocidade de processamento</strong>.</blockquote>
+<table>
+<tr><th>Codec</th><th>Compressão</th><th>Velocidade</th><th>Splittable</th><th>Uso recomendado</th></tr>
+<tr><td><strong>Snappy</strong></td><td>Média (~2-4x)</td><td>⚡ Muito rápida</td><td>✅</td><td>Default Parquet/Spark</td></tr>
+<tr><td><strong>GZIP</strong></td><td>Alta (~5-8x)</td><td>🐌 Lenta</td><td>❌</td><td>Arquivamento, export</td></tr>
+<tr><td><strong>ZSTD</strong></td><td>Alta (~5-7x)</td><td>🚀 Rápida</td><td>✅</td><td>Melhor balanço geral</td></tr>
+<tr><td><strong>LZ4</strong></td><td>Baixa (~2x)</td><td>⚡⚡ Ultra-rápida</td><td>✅</td><td>Real-time, cache</td></tr>
+</table>
+<pre># Escolhendo compressão ao salvar Parquet
+df.write.parquet("output/", compression="snappy")   # Default, rápido
+df.write.parquet("output/", compression="gzip")     # Menor, mais lento
+df.write.parquet("output/", compression="zstd")     # Melhor balanço</pre>
+<div class="highlight">
+<strong>Regra prática:</strong> 🏃 Hot data (frequente): Snappy/LZ4 &middot; 📦 Warm data (ocasional): ZSTD &middot; 🗄️ Cold data (arquivo): GZIP
+</div>
+</div>
+
+<!-- SLIDE 16 — Section: Medallion -->
+<div class="slide section">
+<h2>Arquitetura Medallion</h2>
+<p>Bronze → Silver → Gold — Organização progressiva de qualidade</p>
+</div>
+
+<!-- SLIDE 17 — Medallion Conceito -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🥇🥈🥉 Arquitetura Medallion — Conceito</h2>
+<blockquote>A <strong>Arquitetura Medallion</strong> organiza o data lake em 3 camadas progressivas de qualidade e transformação.</blockquote>
+<pre>
+FONTES              BRONZE           SILVER            GOLD
+┌─────┐          ┌────────┐       ┌────────┐       ┌────────┐
+│CSV  │─ingest─►│ Raw    │─clean─►│Unified │─agg──►│Business│
+│(A)  │          │ As-Is  │       │Validated│       │ Ready  │
+└─────┘          └────────┘       └────────┘       └────────┘
+┌─────┐          ┌────────┐
+│JSON │─ingest─►│ Raw    │───────►
+│(B)  │          │ As-Is  │
+└─────┘          └────────┘
+┌─────┐          ┌────────┐
+│Parq │─ingest─►│ Raw    │───────►
+│(C)  │          │ As-Is  │
+└─────┘          └────────┘
+
+QUALIDADE:  Baixa ──────────────────────────────────► Alta
+SCHEMA:     Original ──► Normalizado ──► Desnormalizado
+FORMATO:    Qualquer ──► Parquet/Delta ──► Parquet/Delta
+AUDIÊNCIA:  Eng. Dados ─► Eng. Dados ──► Analistas/BI
+</pre>
+</div>
+
+<!-- SLIDE 18 — Bronze -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🥉 Bronze — "Ingira Tudo, Transforme Nada"</h2>
+<blockquote>A camada Bronze armazena os dados <strong>exatamente como chegaram</strong> da fonte, acrescidos de metadados de ingestão.</blockquote>
+<ul>
+<li>✅ <strong>Sem transformação</strong> — dados brutos, fiéis à origem</li>
+<li>✅ <strong>Append-only</strong> — nunca sobrescrever ou deletar</li>
+<li>✅ <strong>Adicionar metadados</strong>: timestamp de ingestão, fonte, arquivo</li>
+<li>❌ Sem validação de negócio</li>
+<li>❌ Sem deduplicação</li>
+</ul>
+<pre>from pyspark.sql.functions import lit, current_timestamp, input_file_name
+
+# Ingestão do Parceiro A (CSV legado)
+df_bronze_a = spark.read.csv(
+    "data/parceiro_a/*.csv",
+    header=True, sep=";", encoding="ISO-8859-1"
+).withColumn("_source", lit("parceiro_a")) \
+ .withColumn("_ingestion_ts", current_timestamp()) \
+ .withColumn("_file_origin", input_file_name())
+
+# Salvar na Bronze — preservar sem alterar
+df_bronze_a.write.mode("append").parquet("datalake/bronze/parceiro_a/")</pre>
+<table>
+<tr><th>Metadado</th><th>Tipo</th><th>Propósito</th></tr>
+<tr><td><code>_source</code></td><td>string</td><td>Identificar parceiro/sistema de origem</td></tr>
+<tr><td><code>_ingestion_ts</code></td><td>timestamp</td><td>Quando o dado foi ingerido</td></tr>
+<tr><td><code>_file_origin</code></td><td>string</td><td>Qual arquivo gerou o registro</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 19 — Silver -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🥈 Silver — "Dados Limpos e Unificados"</h2>
+<blockquote>A camada Silver normaliza schemas, aplica validações, remove duplicatas e unifica dados de diferentes fontes.</blockquote>
+<ul>
+<li>✅ <strong>Unificação de schemas</strong> — mesmas colunas, mesmos tipos</li>
+<li>✅ <strong>Deduplicação</strong> — remover registros duplicados</li>
+<li>✅ <strong>Validação</strong> — rejeitar/quarentena dados inválidos</li>
+<li>✅ <strong>Conversão de tipos</strong> — strings para dates, decimals</li>
+</ul>
+<pre>from pyspark.sql.functions import col, to_timestamp, upper, trim
+
+# Normalização: cada parceiro → schema unificado
+df_silver_a = df_bronze_a.select(
+    col("codigo_pedido").alias("order_id"),
+    col("cod_cliente").alias("customer_id"),
+    to_timestamp(col("data_pedido"), "dd/MM/yyyy").alias("order_date"),
+    col("valor_total").cast("double").alias("total_amount"),
+    upper(trim(col("estado"))).alias("shipping_state"),
+    lit("parceiro_a").alias("source")
+)
+
+# Unificar as 3 fontes normalizadas
+df_silver = df_silver_a.unionByName(df_silver_b).unionByName(df_silver_c)
+
+# Validações de negócio
+df_valid = df_silver.filter(
+    (col("total_amount") > 0) &amp;
+    (col("order_date").isNotNull()) &amp;
+    (col("order_id").isNotNull())
+)</pre>
+</div>
+
+<!-- SLIDE 20 — Gold -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🥇 Gold — "Pronto para Decisão de Negócio"</h2>
+<blockquote>A camada Gold contém dados <strong>agregados, desnormalizados e otimizados</strong> para consumo direto por analistas, dashboards e ML.</blockquote>
+<ul>
+<li>✅ <strong>Desnormalizado</strong> — joins já feitos, pronto para query</li>
+<li>✅ <strong>Agregado</strong> — métricas pré-calculadas</li>
+<li>✅ <strong>Otimizado</strong> — particionado para queries comuns</li>
+<li>📌 Audiência: Analistas, BI, Data Scientists</li>
+</ul>
+<pre>from pyspark.sql.functions import sum as spark_sum, count, avg as spark_avg
+
+# Gold: Faturamento diário por parceiro e estado
+df_gold = df_silver_valid.groupBy(
+    col("order_date").cast("date").alias("data"),
+    "source", "shipping_state"
+).agg(
+    spark_sum("total_amount").alias("faturamento"),
+    count("order_id").alias("total_pedidos"),
+    spark_avg("total_amount").alias("ticket_medio")
+)
+
+# Persistir na Gold (particionado para BI)
+df_gold.write.mode("overwrite") \
+    .partitionBy("data") \
+    .parquet("datalake/gold/faturamento_diario/")</pre>
+<pre>datalake/
+├── bronze/
+│   ├── parceiro_a/        ← CSV ingerido como Parquet (raw)
+│   ├── parceiro_b/        ← JSON ingerido como Parquet (raw)
+│   └── parceiro_c/        ← Parquet copiado (raw)
+├── silver/
+│   └── vendas_unificadas/ ← Schema único, validado, particionado
+└── gold/
+    ├── faturamento_diario/ ← Pronto para dashboard
+    └── clientes_360/       ← Visão consolidada do cliente</pre>
+</div>
+
+<!-- SLIDE 21 — Section: Particionamento -->
+<div class="slide section">
+<h2>Particionamento</h2>
+<p>Organizar dados para performance de leitura</p>
+</div>
+
+<!-- SLIDE 22 — Particionamento Conceito -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📂 Particionamento — Conceito Fundamental</h2>
+<blockquote><strong>Particionamento</strong> divide os dados em subdiretórios baseados no valor de uma coluna. Permite ao Spark <strong>ler apenas os dados relevantes</strong> (partition pruning).</blockquote>
+<pre>
+Sem particionamento:                Com particionamento por data:
+vendas/                             vendas/
+├── part-00000.parquet (MIX)        ├── order_date=2023-06-14/
+├── part-00001.parquet (MIX)        │   └── part-00000.parquet
+└── part-00002.parquet (MIX)        ├── order_date=2023-06-15/  ← Spark lê SÓ AQUI!
+                                    │   └── part-00000.parquet
+WHERE order_date = '2023-06-15'     └── order_date=2023-06-16/
+→ Abre TODOS os 3 arquivos              └── part-00000.parquet
+
+                                    WHERE order_date = '2023-06-15'
+                                    → Lê APENAS 1 diretório = 3x mais rápido!
+</pre>
+<pre># Salvar com particionamento
+df_vendas.write.mode("overwrite") \
+    .partitionBy("order_date") \
+    .parquet("datalake/silver/vendas/")
+
+# Spark faz partition pruning automaticamente na leitura
+df = spark.read.parquet("datalake/silver/vendas/")
+df.filter(col("order_date") == "2023-06-15").explain()
+# Plano mostra: PartitionFilters: [order_date = 2023-06-15]</pre>
+</div>
+
+<!-- SLIDE 23 — Estratégias de Particionamento -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📐 Escolhendo a Coluna de Partição</h2>
+<blockquote>A escolha errada de particionamento pode <strong>piorar</strong> a performance. Particione por colunas que aparecem frequentemente em filtros (<code>WHERE</code>).</blockquote>
+<table>
+<tr><th>Coluna</th><th>Cardinalidade</th><th>Veredicto</th><th>Motivo</th></tr>
+<tr><td><code>order_date</code></td><td>365/ano</td><td>✅ Excelente</td><td>Queries sempre filtram por data</td></tr>
+<tr><td><code>shipping_state</code></td><td>27</td><td>✅ Bom</td><td>Relatórios regionais comuns</td></tr>
+<tr><td><code>source</code> (parceiro)</td><td>3</td><td>⚠️ Aceitável</td><td>Poucos valores, útil para isolamento</td></tr>
+<tr><td><code>customer_id</code></td><td>500K</td><td>❌ Péssimo</td><td>Small files problem!</td></tr>
+<tr><td><code>order_id</code></td><td>5M</td><td>❌ Terrível</td><td>1 arquivo por pedido</td></tr>
+</table>
+<pre># Particionamento composto (multi-level)
+df.write.partitionBy("shipping_state", "order_month") \
+    .parquet("datalake/gold/vendas_regionais/")
+
+# Resultado:
+# vendas_regionais/
+# ├── shipping_state=SP/
+# │   ├── order_month=2023-01/
+# │   └── order_month=2023-02/
+# ├── shipping_state=RJ/
+# │   ├── order_month=2023-01/
+# │   └── ...</pre>
+<div class="highlight">
+<strong>Critérios:</strong> 1) Alta cardinalidade controlada (100-10K valores) &middot; 2) Usada em filtros &middot; 3) Distribuição uniforme
+</div>
+</div>
+
+<!-- SLIDE 24 — Small Files Problem -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚠️ Small Files Problem e Over-Partitioning</h2>
+<blockquote>O erro mais comum em data lakes: <strong>partições com arquivos muito pequenos</strong>. Cada Parquet deve ter entre <strong>128MB e 1GB</strong>.</blockquote>
+<pre>
+❌ OVER-PARTITIONING (particionar por customer_id):
+vendas/
+├── customer_id=C00001/
+│   └── part-00000.parquet  (2 KB — 3 registros!)
+├── customer_id=C00002/
+│   └── part-00000.parquet  (1 KB — 2 registros!)
+└── ... (500.000 diretórios!)
+
+RESULTADO: 500K chamadas ao filesystem, driver OOM, Spark ineficiente
+
+✅ PARTICIONAMENTO CORRETO (por data):
+vendas/
+├── order_date=2023-06-14/
+│   └── part-00000.parquet  (150 MB — 100K registros)
+├── order_date=2023-06-15/
+│   └── part-00000.parquet  (145 MB — 98K registros)
+
+RESULTADO: 365 diretórios/ano, arquivos de tamanho ideal
+</pre>
+<div class="highlight">
+<strong>Regras de ouro:</strong> 📏 Arquivo ideal: 128MB — 1GB &middot; 📂 Máximo: 10.000 partições &middot; 🛠️ Use <code>coalesce()</code> para controlar arquivos por partição
+</div>
+<pre># Controlar tamanho dos arquivos
+df.repartition(1).write.partitionBy("order_date") \
+    .parquet("output/")  # 1 arquivo por partição de data</pre>
+</div>
+
+<!-- SLIDE 25 — Section: Schema Evolution -->
+<div class="slide section">
+<h2>Schema Evolution</h2>
+<p>Quando a fonte muda — e ela sempre muda</p>
+</div>
+
+<!-- SLIDE 26 — Schema Evolution: O Problema -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔄 Schema Evolution — Quando a Fonte Muda</h2>
+<blockquote>Em produção, schemas <strong>mudam inevitavelmente</strong>. Novos campos são adicionados, tipos mudam. O pipeline precisa lidar com isso sem quebrar.</blockquote>
+<pre>
+Semana 1: Parceiro B envia JSON com 5 campos
+{"order_id": "V001", "customer_id": "C001", "amount": 150,
+ "date": "2023-01-15", "status": "delivered"}
+
+Semana 5: Parceiro B adiciona "discount"
+{"order_id": "V100", ..., "status": "shipped", "discount": 15.0}
+
+Semana 8: Parceiro B adiciona "payment_method"
+{"order_id": "V200", ..., "discount": 0, "payment_method": "pix"}
+</pre>
+<pre># Sem schema evolution → ERRO!
+df_novo.write.mode("append").parquet("datalake/silver/vendas/")
+# AnalysisException: Cannot write incompatible data:
+#   Extra column: discount (DoubleType)</pre>
+<table>
+<tr><th>Abordagem</th><th>Comportamento</th><th>Quando usar</th></tr>
+<tr><td><strong>Schema Enforcement</strong></td><td>Rejeita dados com schema diferente</td><td>Gold layer, dados críticos</td></tr>
+<tr><td><strong>Schema Evolution</strong></td><td>Aceita novos campos automaticamente</td><td>Bronze/Silver, fontes mutáveis</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 27 — Schema Evolution vs Enforcement -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔒 Enforcement vs 🔓 Evolution</h2>
+<div class="cols">
+<div class="col">
+<h3>Schema Enforcement</h3>
+<pre># Parquet puro: enforcement é default
+df_novo.write.mode("append") \
+    .parquet("output/")
+# Colunas extras → ERRO
+
+# Delta: enforcement explícito
+df_novo.write.format("delta") \
+    .mode("append") \
+    .save("datalake/gold/vendas/")</pre>
+</div>
+<div class="col">
+<h3>Schema Evolution</h3>
+<pre># Parquet: merge schemas ao LER
+df = spark.read \
+    .option("mergeSchema", "true") \
+    .parquet("datalake/silver/")
+# Colunas novas → null nos antigos
+
+# Delta: evolution ao ESCREVER
+df_novo.write.format("delta") \
+    .option("mergeSchema", "true") \
+    .mode("append") \
+    .save("datalake/silver/")</pre>
+</div>
+</div>
+<table>
+<tr><th>Mudança</th><th>Parquet (mergeSchema)</th><th>Delta Lake</th></tr>
+<tr><td>Adicionar coluna</td><td>✅</td><td>✅</td></tr>
+<tr><td>Remover coluna</td><td>⚠️ (fica null)</td><td>✅ (configurável)</td></tr>
+<tr><td>Mudar tipo (int → long)</td><td>❌</td><td>✅ (widening)</td></tr>
+<tr><td>Mudar tipo (string → int)</td><td>❌</td><td>❌ (incompatível)</td></tr>
+<tr><td>Renomear coluna</td><td>❌</td><td>❌ (trata como nova)</td></tr>
+</table>
+<div class="highlight">
+<strong>Estratégia DataFlow:</strong> Bronze = evolution ativado &middot; Silver = evolution controlado &middot; Gold = enforcement fixo
+</div>
+</div>
+
+<!-- SLIDE 28 — Section: Modos de Escrita -->
+<div class="slide section">
+<h2>Modos de Escrita</h2>
+<p>append, overwrite, merge — como persistir sem duplicar ou perder</p>
+</div>
+
+<!-- SLIDE 29 — Write Modes -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✍️ Modos de Escrita — Como Persistir Dados</h2>
+<blockquote>O <strong>modo de escrita</strong> define o comportamento quando dados já existem no destino. Escolher errado causa <strong>perda de dados</strong> ou <strong>duplicatas</strong>.</blockquote>
+<table>
+<tr><th>Modo</th><th>Comportamento</th><th>Risco</th><th>Caso de uso</th></tr>
+<tr><td><code>append</code></td><td>Adiciona ao final</td><td>Duplicatas se re-executar</td><td>Ingestão incremental</td></tr>
+<tr><td><code>overwrite</code></td><td>Substitui tudo</td><td>Perda de dados</td><td>Recálculo completo</td></tr>
+<tr><td><code>ignore</code></td><td>Não faz nada se existe</td><td>Dados desatualizados</td><td>Scripts idempotentes</td></tr>
+<tr><td><code>error</code> (default)</td><td>Erro se existe</td><td>Pipeline para</td><td>Segurança</td></tr>
+</table>
+<pre># APPEND: Bronze — ingestão diária (⚠️ duplicatas se rodar 2x!)
+df_hoje.write.mode("append").partitionBy("order_date") \
+    .parquet("datalake/bronze/vendas/")
+
+# OVERWRITE: Gold — recálculo diário
+df_gold.write.mode("overwrite").parquet("datalake/gold/faturamento/")
+
+# OVERWRITE DINÂMICO: substitui apenas partições presentes
+spark.conf.set("spark.sql.sources.partitionOverwriteMode", "dynamic")
+df_hoje.write.mode("overwrite").partitionBy("order_date") \
+    .parquet("datalake/silver/vendas/")
+# ✅ Substitui APENAS partições de hoje — idempotente!</pre>
+</div>
+
+<!-- SLIDE 30 — MERGE -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔀 MERGE — Update + Insert em Uma Operação</h2>
+<blockquote><strong>MERGE</strong> (upsert) atualiza registros existentes e insere novos em uma única operação atômica. Disponível com <strong>Delta Lake</strong>.</blockquote>
+<pre># O problema sem merge:
+# Com append → DUPLICATA! (V001 aparece 2x com status diferente)
+# Com overwrite → PERDE dados de outros dias!</pre>
+<pre>from delta.tables import DeltaTable
+
+delta_vendas = DeltaTable.forPath(spark, "datalake/silver/vendas/")
+df_novos = spark.read.json("data/parceiro_b/2023-06-16/*.json")
+
+# MERGE: atualiza se existe, insere se não existe
+delta_vendas.alias("target").merge(
+    df_novos.alias("source"),
+    "target.order_id = source.order_id"
+).whenMatchedUpdate(set={
+    "status": col("source.status"),
+    "total_amount": col("source.total_amount"),
+    "updated_at": current_timestamp()
+}).whenNotMatchedInsertAll() \
+  .execute()</pre>
+<table>
+<tr><th>Camada</th><th>Modo</th><th>Motivo</th></tr>
+<tr><td>Bronze</td><td><code>append</code></td><td>Nunca perder dados raw</td></tr>
+<tr><td>Silver (Parquet)</td><td><code>overwrite</code> (dynamic partition)</td><td>Idempotência por partição</td></tr>
+<tr><td>Silver (Delta)</td><td><code>merge</code></td><td>Upsert sem duplicatas</td></tr>
+<tr><td>Gold</td><td><code>overwrite</code></td><td>Recalcular métricas completas</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 31 — Anatomia Parquet -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📐 Anatomia de um Arquivo Parquet</h2>
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│ ROW GROUP 1 (tipicamente 128MB)                                  │
+│  ┌────────────────────────────────────────────────────────────┐ │
+│  │ Column Chunk: order_id     [min:"V001", max:"V999"]        │ │
+│  │ Column Chunk: customer_id  [min:"C001", max:"C500"]        │ │
+│  │ Column Chunk: total_amount [min: 10.0,  max: 5000.0]      │ │
+│  │ Column Chunk: order_date   [min:"2023-01", max:"2023-06"]  │ │
+│  └────────────────────────────────────────────────────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│ ROW GROUP 2                                                      │
+│  ┌────────────────────────────────────────────────────────────┐ │
+│  │ Column Chunk: total_amount [min: 5.0,   max: 8000.0]      │ │
+│  │ Column Chunk: order_date   [min:"2023-07", max:"2023-12"]  │ │
+│  └────────────────────────────────────────────────────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│ FOOTER (metadata)                                                │
+│  - Schema completo (nomes, tipos)                               │
+│  - Estatísticas por row group (min, max, null_count)            │
+│  - Offsets para cada column chunk                               │
+└─────────────────────────────────────────────────────────────────┘
+
+Como o Spark otimiza:
+Query: WHERE total_amount > 6000
+→ Row Group 1: max=5000 → SKIP (não precisa ler!)
+→ Row Group 2: max=8000 → LER (pode ter registros)
+= Lê apenas 50% dos dados!
+</pre>
+</div>
+
+<!-- SLIDE 32 — Partition Pruning em Ação -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚡ Partition Pruning + Predicate Pushdown</h2>
+<pre>
+Query: df.filter(col("order_date") == "2023-06-15")
+           .filter(col("total_amount") > 1000)
+           .select("order_id", "customer_id", "total_amount")
+
+ETAPA 1: Partition Pruning (filesystem)
+  vendas/
+  ├── order_date=2023-06-14/ ← SKIP
+  ├── order_date=2023-06-15/ ← LER ✅
+  └── order_date=2023-06-16/ ← SKIP
+
+ETAPA 2: Row Group Filtering (Parquet metadata)
+  Dentro de order_date=2023-06-15/:
+  Row Group 1: total_amount [min:10, max:500]  ← SKIP
+  Row Group 2: total_amount [min:200, max:5000] ← LER ✅
+
+ETAPA 3: Column Pruning
+  Dentro do Row Group 2, ler apenas:
+  ✅ order_id
+  ✅ customer_id
+  ✅ total_amount
+  ❌ status (não solicitado → não lido)
+  ❌ shipping_state (não solicitado → não lido)
+
+RESULTADO: Leu ~5% dos dados totais!
+</pre>
+</div>
+
+<!-- SLIDE 33 — Boas Práticas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Boas Práticas — Resumo</h2>
+<table>
+<tr><th>Prática</th><th>Por quê</th></tr>
+<tr><td>Use <strong>Parquet</strong> como formato padrão</td><td>5-6x menor e 6x mais rápido que CSV</td></tr>
+<tr><td>Implemente <strong>Arquitetura Medallion</strong></td><td>Separação clara de responsabilidades</td></tr>
+<tr><td><strong>Nunca transforme</strong> dados na Bronze</td><td>Preservar fidelidade para reprocessamento</td></tr>
+<tr><td>Particione por <strong>colunas de filtro frequente</strong></td><td>Partition pruning elimina leitura desnecessária</td></tr>
+<tr><td>Evite <strong>over-partitioning</strong> (&gt; 10K partições)</td><td>Small files problem degrada performance</td></tr>
+<tr><td>Use <strong>dynamic partition overwrite</strong></td><td>Reprocessar sem duplicatas nem perda</td></tr>
+<tr><td>Adicione <strong>metadados de ingestão</strong> na Bronze</td><td>Rastreabilidade: de onde, quando chegou</td></tr>
+<tr><td>Habilite <strong>schema evolution</strong> na Bronze/Silver</td><td>Fontes mudam; pipeline não pode quebrar</td></tr>
+<tr><td>Use <strong>schema enforcement</strong> na Gold</td><td>Consumidores precisam de contratos estáveis</td></tr>
+<tr><td>Prefira <strong>Delta Lake</strong> quando possível</td><td>ACID, merge, time travel, schema evolution</td></tr>
+<tr><td>Controle <strong>tamanho dos arquivos</strong> (128MB-1GB)</td><td>Performance ótima de I/O</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 34 — Preview Lab -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔬 O Que Faremos no Lab Hoje</h2>
+<p><strong>Cenário:</strong> Você é Carlos Mendes. Marina pediu para integrar os dados dos 3 novos parceiros em um data lake unificado. Sua missão: construir o pipeline de ingestão com arquitetura Medallion.</p>
+<div class="cols">
+<div class="col">
+<h3>Lab Parte 1 — Guiado (60 min)</h3>
+<ol>
+<li>Ingerir CSV do Parceiro A (encoding ISO-8859-1)</li>
+<li>Ingerir JSON do Parceiro B (nested objects)</li>
+<li>Ingerir Parquet do Parceiro C</li>
+<li>Implementar camada Bronze com metadados</li>
+<li>Verificar schemas e comparar entre parceiros</li>
+</ol>
+</div>
+<div class="col">
+<h3>Lab Parte 2 — Intermediário + Desafio (50 min)</h3>
+<ol>
+<li>Normalizar schemas (Silver)</li>
+<li>Persistir com particionamento por data</li>
+<li>Validar partition pruning com <code>explain()</code></li>
+<li>🏆 <strong>Desafio:</strong> Implementar Gold + schema evolution</li>
+</ol>
+</div>
+</div>
+<p><strong>Entregável:</strong> Pipeline completo: 3 fontes → Bronze → Silver (particionada) → Gold (métricas).</p>
+</div>
+
+<!-- SLIDE 35 — Encerramento -->
+<div class="slide cover">
+<h1>Hora do Lab! 🔬</h1>
+<p class="subtitle">Agora vocês vão construir o pipeline de ingestão multi-formato</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">Medallion Architecture + 3 formatos + Schema Evolution</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">&#9664;</button>
+<button onclick="next()">&#9654;</button>
+</div>
+<div class="counter" id="counter"></div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;const total=slides.length;
+function show(n){
+  slides[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  slides[cur].classList.add('active');
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+}
+function next(){show(cur+1);}
+function prev(){show(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});
+show(0);
+</script>
+</body>
+</html>

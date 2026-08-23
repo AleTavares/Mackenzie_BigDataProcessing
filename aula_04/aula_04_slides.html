@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 4 — Introdução ao Apache Airflow | Mackenzie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC092F;
+  --red-dark:#9E0724;
+  --red-light:#F9E8EB;
+  --gold:#C4A35A;
+  --white:#FFFFFF;
+  --gray-50:#FAFAFA;
+  --gray-100:#F4F4F5;
+  --gray-200:#E4E4E7;
+  --gray-500:#71717A;
+  --gray-700:#3F3F46;
+  --gray-900:#18181B;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+body{background:var(--gray-900);}
+
+.slide{
+  display:none;position:absolute;inset:0;
+  width:100vw;height:100vh;
+  padding:60px 80px;
+  flex-direction:column;justify-content:flex-start;
+  background:var(--white);color:var(--gray-900);
+  overflow-y:auto;
+}
+.slide.active{display:flex;}
+.slide::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--red-dark));
+}
+.slide .mackenzie-mark{
+  position:absolute;top:18px;right:40px;
+  font-size:.7em;font-weight:700;letter-spacing:2px;color:var(--red);
+}
+
+/* Capa */
+.slide.cover{
+  background:linear-gradient(145deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);align-items:center;justify-content:center;text-align:center;
+  padding:80px;
+}
+.slide.cover::before{display:none;}
+.slide.cover h1{font-size:2.8em;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.slide.cover .subtitle{font-size:1.15em;font-weight:300;opacity:.9;margin-bottom:4px;}
+.slide.cover .meta{
+  margin-top:30px;display:inline-flex;gap:16px;
+  background:rgba(255,255,255,.15);padding:10px 24px;border-radius:24px;
+  font-size:.9em;
+}
+
+/* Section divider */
+.slide.section{
+  background:var(--gray-900);color:var(--white);
+  align-items:center;justify-content:center;text-align:center;
+}
+.slide.section::before{background:var(--gold);}
+.slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+
+/* Typography */
+.slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
+.slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
+.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide ul,.slide ol{margin:8px 0 12px 28px;}
+.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide strong{color:var(--gray-900);}
+
+/* Code */
+.slide pre{
+  background:var(--gray-900);color:#e4e4e7;
+  padding:18px 22px;border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.8em;
+  line-height:1.6;margin:12px 0;overflow-x:auto;
+  border-left:4px solid var(--red);
+}
+
+/* Table */
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide tr:nth-child(even) td{background:var(--gray-50);}
+
+/* Blockquote */
+.slide blockquote{
+  border-left:4px solid var(--gold);background:var(--gray-50);
+  padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
+  font-style:italic;color:var(--gray-700);font-size:.95em;
+}
+
+/* Columns */
+.cols{display:flex;gap:32px;margin:12px 0;}
+.cols .col{flex:1;}
+
+/* Highlight box */
+.highlight{
+  background:var(--red-light);border:1px solid var(--red);
+  padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Navigation */
+.nav{position:fixed;bottom:24px;right:36px;display:flex;gap:8px;z-index:999;}
+.nav button{
+  background:var(--red);color:var(--white);border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-size:1em;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.nav button:hover{background:var(--red-dark);transform:scale(1.05);}
+.counter{
+  position:fixed;bottom:28px;left:36px;
+  color:var(--gray-500);font-size:.8em;font-weight:500;z-index:999;
+}
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:var(--red);transition:width .3s;z-index:999;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- SLIDE 1 — Capa -->
+<div class="slide cover active">
+<h1>Introdução ao<br>Apache Airflow</h1>
+<p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
+<p class="subtitle">Universidade Presbiteriana Mackenzie</p>
+<div class="meta"><span>📅 Semana 4</span><span>⏱️ 50 min teoria</span></div>
+</div>
+
+<!-- SLIDE 2 — Contexto Narrativo -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🤝 DataFlow Analytics — "Cron Não Escala"</h2>
+<ul>
+<li>Pipeline de ingestão funciona… mas roda via <strong>crontab</strong></li>
+<li>Scripts falham <strong>silenciosamente</strong> — ninguém descobre até o BI quebrar</li>
+<li>Sem <strong>dependências</strong> entre tarefas — reprocessamento manual</li>
+<li>Sem <strong>retry automático</strong> — Carlos recebe alertas às 3h da manhã</li>
+<li>Impossível <strong>monitorar</strong> status sem acessar o servidor via SSH</li>
+</ul>
+<blockquote><strong>Roberto</strong> (CEO): "Outro relatório atrasado? Eu preciso de automação de verdade. Não é aceitável depender de cron e torcer para funcionar."</blockquote>
+</div>
+
+<!-- SLIDE 3 — O Problema do Cron -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⚠️ O Problema: Por Que Cron Não Basta?</h2>
+<pre>
+# crontab atual da DataFlow (servidor de produção)
+0 2 * * * /opt/scripts/ingest_parceiro_a.sh >> /var/log/ingest_a.log 2>&1
+0 3 * * * /opt/scripts/ingest_parceiro_b.sh >> /var/log/ingest_b.log 2>&1
+0 4 * * * /opt/scripts/transform_silver.sh >> /var/log/silver.log 2>&1
+0 5 * * * /opt/scripts/compute_gold.sh >> /var/log/gold.log 2>&1
+</pre>
+<table>
+<tr><th>Problema</th><th>Impacto</th></tr>
+<tr><td>Falha silenciosa</td><td>Script falha e ninguém sabe até o dashboard ficar vazio</td></tr>
+<tr><td>Sem dependências</td><td>Gold roda mesmo que Bronze tenha falhado</td></tr>
+<tr><td>Sem retry</td><td>Falha transitória (rede) = pipeline parado até intervenção</td></tr>
+<tr><td>Sem monitoramento</td><td>Precisa fazer SSH + ler logs para saber status</td></tr>
+<tr><td>Sem histórico</td><td>Impossível saber quando/se rodou corretamente</td></tr>
+</table>
+<blockquote><strong>Marina</strong> (CTO): "Precisamos de um orquestrador. Airflow é o padrão da indústria. Vamos migrar nossos scripts para DAGs."</blockquote>
+</div>
+
+<!-- SLIDE 4 — Objetivos -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎯 Objetivos de Aprendizagem</h2>
+<ol>
+<li><strong>Compreender</strong> o conceito de DAG e orquestração de pipelines</li>
+<li><strong>Diferenciar</strong> Operators, Sensors e Hooks no Airflow</li>
+<li><strong>Implementar</strong> dependências entre tarefas com <code>&gt;&gt;</code></li>
+<li><strong>Usar</strong> PythonOperator e BashOperator em DAGs reais</li>
+<li><strong>Configurar</strong> XComs para comunicação entre tarefas</li>
+<li><strong>Definir</strong> schedule intervals com expressões cron</li>
+<li><strong>Aplicar</strong> template variables ({{ ds }}, {{ params }})</li>
+<li><strong>Configurar</strong> retry e error handling em produção</li>
+</ol>
+</div>
+
+<!-- SLIDE 5 — Section: O que é Airflow -->
+<div class="slide section">
+<h2>O que é Apache Airflow?</h2>
+<p>DAGs, Tasks e Operators — os blocos fundamentais</p>
+</div>
+
+<!-- SLIDE 6 — O que é Airflow -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🌬️ Apache Airflow — Visão Geral</h2>
+<blockquote><strong>Apache Airflow</strong> é uma plataforma de orquestração de workflows definidos como código (Python). Criado pelo Airbnb em 2014, é hoje o padrão da indústria para pipelines de dados.</blockquote>
+<ul>
+<li><strong>Workflows como código</strong> — DAGs escritas em Python puro</li>
+<li><strong>Scheduler</strong> inteligente — executa tarefas no horário certo, respeitando dependências</li>
+<li><strong>UI Web</strong> — monitoramento visual em tempo real</li>
+<li><strong>Extensível</strong> — centenas de operadores para qualquer integração</li>
+<li><strong>Backfill</strong> — reprocessar dados históricos facilmente</li>
+</ul>
+<div class="highlight">
+<strong>Airflow NÃO é:</strong> framework de processamento (como Spark). Ele <strong>orquestra</strong> a execução de ferramentas, não processa dados diretamente.
+</div>
+</div>
+
+<!-- SLIDE 7 — Conceitos Fundamentais -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧱 Conceitos Fundamentais</h2>
+<pre>
+DAG (Directed Acyclic Graph)
+┌─────────────────────────────────────────────────────────┐
+│                                                         │
+│   [ingest_csv] ──► [validate] ──► [transform] ──► [load]│
+│                                        ▲                │
+│   [ingest_json] ─────────────────────┘                 │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+
+DAG = Grafo Direcionado Acíclico = Pipeline com ordem definida
+</pre>
+<table>
+<tr><th>Conceito</th><th>Definição</th><th>Analogia</th></tr>
+<tr><td><strong>DAG</strong></td><td>Grafo de tarefas com ordem de execução</td><td>Receita de bolo (passos ordenados)</td></tr>
+<tr><td><strong>Task</strong></td><td>Uma unidade de trabalho individual</td><td>Um passo da receita</td></tr>
+<tr><td><strong>Operator</strong></td><td>Template que define o que a task faz</td><td>Tipo de ação (misturar, assar, decorar)</td></tr>
+<tr><td><strong>Task Instance</strong></td><td>Execução de uma task em uma data</td><td>Bolo feito no dia 15/06</td></tr>
+<tr><td><strong>DAG Run</strong></td><td>Execução completa da DAG em uma data</td><td>Uma fornada completa</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 8 — DAG: Directed Acyclic Graph -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 DAG — Directed Acyclic Graph</h2>
+<div class="cols">
+<div class="col">
+<h3>Directed (Direcionado)</h3>
+<p>Cada aresta tem <strong>direção</strong>: A → B significa "A executa antes de B".</p>
+<h3>Acyclic (Acíclico)</h3>
+<p><strong>Sem ciclos</strong>: impossível A → B → C → A. Garante que o pipeline termina.</p>
+</div>
+<div class="col">
+<h3>Graph (Grafo)</h3>
+<p>Conjunto de <strong>nós</strong> (tasks) conectados por <strong>arestas</strong> (dependências).</p>
+<pre>
+✅ VÁLIDO (acíclico):
+A → B → D
+A → C → D
+
+❌ INVÁLIDO (cíclico):
+A → B → C → A
+</pre>
+</div>
+</div>
+<pre>from airflow import DAG
+from datetime import datetime
+
+# Definição de uma DAG
+dag = DAG(
+    dag_id="pipeline_dataflow",
+    start_date=datetime(2024, 1, 1),
+    schedule_interval="@daily",
+    catchup=False,
+    tags=["dataflow", "production"]
+)</pre>
+</div>
+
+<!-- SLIDE 9 — Section: Arquitetura -->
+<div class="slide section">
+<h2>Arquitetura do Airflow</h2>
+<p>Webserver, Scheduler, Worker, Metadata DB</p>
+</div>
+
+<!-- SLIDE 10 — Arquitetura -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🏗️ Arquitetura do Airflow</h2>
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│                        AIRFLOW CLUSTER                           │
+│                                                                  │
+│  ┌──────────────┐   ┌──────────────┐   ┌──────────────────┐    │
+│  │  WEBSERVER   │   │  SCHEDULER   │   │  WORKER(s)       │    │
+│  │  (Flask UI)  │   │  (Loop)      │   │  (Executors)     │    │
+│  │              │   │              │   │                    │    │
+│  │ • Dashboard  │   │ • Parse DAGs │   │ • Executa tasks   │    │
+│  │ • Logs       │   │ • Trigger    │   │ • Local/Celery/K8s│    │
+│  │ • Trigger    │   │ • Monitor    │   │ • Retorna status  │    │
+│  └──────┬───────┘   └──────┬───────┘   └────────┬─────────┘    │
+│         │                   │                     │              │
+│         └───────────────────┼─────────────────────┘              │
+│                             │                                    │
+│                    ┌────────▼────────┐                           │
+│                    │  METADATA DB    │                           │
+│                    │  (PostgreSQL)   │                           │
+│                    │                 │                           │
+│                    │ • DAG state     │                           │
+│                    │ • Task status   │                           │
+│                    │ • XComs         │                           │
+│                    │ • Connections   │                           │
+│                    └─────────────────┘                           │
+│                                                                  │
+│  ┌──────────────────────────────────────────┐                   │
+│  │  DAGs FOLDER (/opt/airflow/dags/)        │                   │
+│  │  pipeline_dataflow.py, etl_vendas.py ... │                   │
+│  └──────────────────────────────────────────┘                   │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<!-- SLIDE 11 — Componentes Detalhados -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔧 Componentes em Detalhe</h2>
+<table>
+<tr><th>Componente</th><th>Função</th><th>Tecnologia</th></tr>
+<tr><td><strong>Webserver</strong></td><td>Interface gráfica para monitoramento e controle</td><td>Flask + Gunicorn</td></tr>
+<tr><td><strong>Scheduler</strong></td><td>Decide quando e quais tasks executar</td><td>Loop contínuo (5-10s)</td></tr>
+<tr><td><strong>Executor</strong></td><td>Define como as tasks são executadas</td><td>Local, Celery, Kubernetes</td></tr>
+<tr><td><strong>Worker</strong></td><td>Máquina que executa a task de fato</td><td>Processos/containers</td></tr>
+<tr><td><strong>Metadata DB</strong></td><td>Armazena estado de DAGs, tasks, variáveis</td><td>PostgreSQL (produção)</td></tr>
+<tr><td><strong>DAGs Folder</strong></td><td>Diretório com arquivos .py das DAGs</td><td>Volume compartilhado</td></tr>
+</table>
+<div class="highlight">
+<strong>Executors:</strong> LocalExecutor (dev/small) → CeleryExecutor (medium) → KubernetesExecutor (cloud-native, scale-to-zero)
+</div>
+</div>
+
+<!-- SLIDE 12 — Section: Operators -->
+<div class="slide section">
+<h2>Operators</h2>
+<p>PythonOperator, BashOperator e o ecossistema</p>
+</div>
+
+<!-- SLIDE 13 — PythonOperator -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🐍 PythonOperator — O Mais Versátil</h2>
+<blockquote>Executa qualquer função Python como uma task do Airflow. É o operador mais usado e flexível.</blockquote>
+<pre>from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime
+
+def ingest_parceiro_a(**kwargs):
+    """Função que será executada como task."""
+    execution_date = kwargs["ds"]
+    print(f"Ingerindo dados do Parceiro A para {execution_date}")
+    # Lógica de ingestão aqui...
+    records = 15000
+    return records  # Retorno vai para XCom automaticamente
+
+with DAG(
+    dag_id="pipeline_dataflow_v2",
+    start_date=datetime(2024, 1, 1),
+    schedule_interval="0 2 * * *",  # Todo dia às 2h
+    catchup=False
+) as dag:
+
+    task_ingest_a = PythonOperator(
+        task_id="ingest_parceiro_a",
+        python_callable=ingest_parceiro_a,
+        provide_context=True
+    )</pre>
+</div>
+
+<!-- SLIDE 14 — BashOperator -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>💻 BashOperator — Comandos Shell</h2>
+<blockquote>Executa comandos bash diretamente. Útil para chamar scripts existentes, spark-submit, ou ferramentas CLI.</blockquote>
+<pre>from airflow.operators.bash import BashOperator
+
+# Executar spark-submit
+task_spark = BashOperator(
+    task_id="run_spark_transform",
+    bash_command="""
+        spark-submit \
+            --master spark://master:7077 \
+            --deploy-mode client \
+            /opt/spark/jobs/transform_silver.py \
+            --date {{ ds }}
+    """,
+    dag=dag
+)
+
+# Verificar se arquivo existe
+task_check = BashOperator(
+    task_id="check_file_exists",
+    bash_command="test -f /data/input/{{ ds }}/parceiro_a.csv",
+    dag=dag
+)</pre>
+<div class="highlight">
+<strong>Dica:</strong> <code>{{ ds }}</code> é uma template variable do Airflow = data de execução (YYYY-MM-DD). Mais sobre isso adiante.
+</div>
+</div>
+
+<!-- SLIDE 15 — Outros Operators -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧩 Ecossistema de Operators</h2>
+<table>
+<tr><th>Operator</th><th>Uso</th><th>Provider</th></tr>
+<tr><td><code>PythonOperator</code></td><td>Executar funções Python</td><td>Core</td></tr>
+<tr><td><code>BashOperator</code></td><td>Comandos shell/CLI</td><td>Core</td></tr>
+<tr><td><code>SparkSubmitOperator</code></td><td>Submeter jobs Spark</td><td>apache-airflow-providers-apache-spark</td></tr>
+<tr><td><code>PostgresOperator</code></td><td>Executar SQL no PostgreSQL</td><td>apache-airflow-providers-postgres</td></tr>
+<tr><td><code>S3ToRedshiftOperator</code></td><td>Copiar S3 → Redshift</td><td>apache-airflow-providers-amazon</td></tr>
+<tr><td><code>DockerOperator</code></td><td>Executar container Docker</td><td>apache-airflow-providers-docker</td></tr>
+<tr><td><code>EmailOperator</code></td><td>Enviar e-mails de notificação</td><td>Core</td></tr>
+<tr><td><code>DummyOperator</code></td><td>Task sem ação (join point)</td><td>Core</td></tr>
+</table>
+<pre># Instalando providers
+pip install apache-airflow-providers-apache-spark
+pip install apache-airflow-providers-postgres</pre>
+</div>
+
+<!-- SLIDE 16 — Section: Dependências -->
+<div class="slide section">
+<h2>Dependências entre Tasks</h2>
+<p>Definindo a ordem de execução com >> e <<</p>
+</div>
+
+<!-- SLIDE 17 — Dependências -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔗 Definindo Dependências — Operador >>  </h2>
+<blockquote>O operador <code>&gt;&gt;</code> define a ordem de execução. <code>A &gt;&gt; B</code> significa "B só executa após A ter sucesso".</blockquote>
+<pre># Dependência linear
+ingest >> validate >> transform >> load
+
+# Dependência com fan-out / fan-in
+ingest_a >> validate
+ingest_b >> validate
+ingest_c >> validate
+validate >> transform >> load
+
+# Usando listas (equivalente ao acima)
+[ingest_a, ingest_b, ingest_c] >> validate >> transform >> load</pre>
+<pre>
+RESULTADO VISUAL:
+
+[ingest_a] ──┐
+[ingest_b] ──┼──► [validate] ──► [transform] ──► [load]
+[ingest_c] ──┘
+
+• ingest_a, ingest_b, ingest_c rodam EM PARALELO
+• validate só inicia quando TODOS terminam
+• transform aguarda validate
+• load aguarda transform
+</pre>
+<div class="highlight">
+<strong>Regra:</strong> Sempre usar <code>&gt;&gt;</code> (bitshift). Evitar <code>set_upstream()</code> / <code>set_downstream()</code> — menos legível.
+</div>
+</div>
+
+<!-- SLIDE 18 — DAG Completa DataFlow -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📋 DAG Completa — Pipeline DataFlow</h2>
+<pre>from airflow import DAG
+from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.dummy import DummyOperator
+from datetime import datetime, timedelta
+
+default_args = {
+    "owner": "carlos",
+    "retries": 2,
+    "retry_delay": timedelta(minutes=5),
+    "email_on_failure": True,
+    "email": ["carlos@dataflow.com"]
+}
+
+with DAG(
+    dag_id="pipeline_medallion_v1",
+    default_args=default_args,
+    start_date=datetime(2024, 1, 1),
+    schedule_interval="0 2 * * *",
+    catchup=False,
+    tags=["dataflow", "medallion"]
+) as dag:
+
+    start = DummyOperator(task_id="start")
+
+    ingest_a = PythonOperator(task_id="ingest_parceiro_a", ...)
+    ingest_b = PythonOperator(task_id="ingest_parceiro_b", ...)
+    ingest_c = PythonOperator(task_id="ingest_parceiro_c", ...)
+
+    transform = BashOperator(task_id="spark_silver", ...)
+    gold = BashOperator(task_id="spark_gold", ...)
+    notify = PythonOperator(task_id="notify_slack", ...)
+
+    start >> [ingest_a, ingest_b, ingest_c] >> transform >> gold >> notify</pre>
+</div>
+
+<!-- SLIDE 19 — Section: XComs -->
+<div class="slide section">
+<h2>XComs</h2>
+<p>Comunicação entre tasks — passando dados no pipeline</p>
+</div>
+
+<!-- SLIDE 20 — XComs -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📨 XComs — Cross-Communication</h2>
+<blockquote><strong>XCom</strong> permite que tasks troquem pequenas mensagens (metadados, contagens, paths). NÃO usar para DataFrames grandes.</blockquote>
+<pre>def ingest_parceiro_a(**kwargs):
+    """Task que PUSHA um XCom."""
+    records_count = 15230
+    file_path = "/datalake/bronze/parceiro_a/2024-01-15/"
+    
+    # Push explícito
+    kwargs["ti"].xcom_push(key="records", value=records_count)
+    kwargs["ti"].xcom_push(key="output_path", value=file_path)
+    
+    # Ou simplesmente retornar (vai para key="return_value")
+    return {"records": records_count, "path": file_path}
+
+def validate_data(**kwargs):
+    """Task que PUXA um XCom."""
+    ti = kwargs["ti"]
+    
+    # Pull explícito
+    records = ti.xcom_pull(task_ids="ingest_parceiro_a", key="records")
+    result = ti.xcom_pull(task_ids="ingest_parceiro_a")  # return_value
+    
+    print(f"Validando {records} registros...")
+    if records == 0:
+        raise ValueError("Nenhum registro ingerido!")</pre>
+<div class="highlight">
+<strong>Limites XCom:</strong> Máximo ~48KB (SQLite) ou ~1GB (PostgreSQL). Use para metadados, NÃO para dados. Para DataFrames, passe caminhos de arquivo.
+</div>
+</div>
+
+<!-- SLIDE 21 — Section: Schedule -->
+<div class="slide section">
+<h2>Schedule Intervals</h2>
+<p>Quando a DAG deve executar — cron expressions e presets</p>
+</div>
+
+<!-- SLIDE 22 — Schedule Intervals -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>⏰ Schedule Intervals — Cron Expressions</h2>
+<pre>
+Formato cron: ┌───────── minuto (0-59)
+              │ ┌─────── hora (0-23)
+              │ │ ┌───── dia do mês (1-31)
+              │ │ │ ┌─── mês (1-12)
+              │ │ │ │ ┌─ dia da semana (0-6, dom=0)
+              │ │ │ │ │
+              * * * * *
+</pre>
+<table>
+<tr><th>Expressão</th><th>Preset</th><th>Significado</th></tr>
+<tr><td><code>0 2 * * *</code></td><td>—</td><td>Todo dia às 2:00 AM</td></tr>
+<tr><td><code>0 */6 * * *</code></td><td>—</td><td>A cada 6 horas</td></tr>
+<tr><td><code>0 0 * * 1</code></td><td><code>@weekly</code></td><td>Toda segunda-feira meia-noite</td></tr>
+<tr><td><code>0 0 1 * *</code></td><td><code>@monthly</code></td><td>Primeiro dia do mês</td></tr>
+<tr><td><code>@daily</code></td><td><code>0 0 * * *</code></td><td>Meia-noite todo dia</td></tr>
+<tr><td><code>@hourly</code></td><td><code>0 * * * *</code></td><td>A cada hora</td></tr>
+<tr><td><code>None</code></td><td>—</td><td>Apenas trigger manual</td></tr>
+</table>
+<pre>with DAG(
+    dag_id="etl_diario",
+    schedule_interval="0 2 * * *",    # 2 AM todo dia
+    start_date=datetime(2024, 1, 1),
+    catchup=False                      # NÃO executar datas passadas
+) as dag:
+    ...</pre>
+</div>
+
+<!-- SLIDE 23 — Execution Date e Catchup -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📅 Execution Date e Catchup</h2>
+<blockquote>A <strong>execution_date</strong> (logical_date) é o início do intervalo de dados que a DAG está processando, NÃO quando ela roda.</blockquote>
+<pre>
+DAG com schedule_interval="@daily", start_date=2024-01-01
+
+Dia real: 2024-01-02 às 00:00
+├── execution_date = 2024-01-01  (processa dados DO dia 01)
+├── data_interval_start = 2024-01-01
+└── data_interval_end   = 2024-01-02
+
+Dia real: 2024-01-03 às 00:00
+├── execution_date = 2024-01-02  (processa dados DO dia 02)
+└── ...
+</pre>
+<div class="cols">
+<div class="col">
+<h3>catchup=True (default)</h3>
+<p>Executa TODAS as datas passadas desde start_date. Útil para backfill.</p>
+</div>
+<div class="col">
+<h3>catchup=False</h3>
+<p>Executa apenas a data mais recente. Padrão para produção.</p>
+</div>
+</div>
+<div class="highlight">
+<strong>Armadilha comum:</strong> start_date=datetime(2023,1,1) com catchup=True = Airflow tenta rodar 365+ DAG Runs de uma vez!
+</div>
+</div>
+
+<!-- SLIDE 24 — Section: Template Variables -->
+<div class="slide section">
+<h2>Template Variables</h2>
+<p>{{ ds }}, {{ params }}, {{ macros }} — Jinja2 no Airflow</p>
+</div>
+
+<!-- SLIDE 25 — Template Variables -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔤 Template Variables — Jinja2</h2>
+<blockquote>Airflow usa <strong>Jinja2</strong> para injetar variáveis de contexto em strings de Operators. Permite parametrizar tasks por data de execução.</blockquote>
+<table>
+<tr><th>Variável</th><th>Exemplo</th><th>Descrição</th></tr>
+<tr><td><code>{{ ds }}</code></td><td>2024-01-15</td><td>Execution date (YYYY-MM-DD)</td></tr>
+<tr><td><code>{{ ds_nodash }}</code></td><td>20240115</td><td>Sem hífens</td></tr>
+<tr><td><code>{{ prev_ds }}</code></td><td>2024-01-14</td><td>Data anterior</td></tr>
+<tr><td><code>{{ next_ds }}</code></td><td>2024-01-16</td><td>Próxima data</td></tr>
+<tr><td><code>{{ execution_date }}</code></td><td>DateTime obj</td><td>Objeto completo</td></tr>
+<tr><td><code>{{ params.key }}</code></td><td>—</td><td>Parâmetros custom</td></tr>
+<tr><td><code>{{ macros.ds_add(ds, 7) }}</code></td><td>2024-01-22</td><td>Macro: +7 dias</td></tr>
+</table>
+<pre># Templates no BashOperator
+task_spark = BashOperator(
+    task_id="spark_ingest",
+    bash_command="""
+        spark-submit /jobs/ingest.py \
+            --date {{ ds }} \
+            --input /data/raw/{{ ds_nodash }}/ \
+            --output /datalake/bronze/{{ ds }}/
+    """
+)
+
+# Templates com params
+task_report = BashOperator(
+    task_id="generate_report",
+    bash_command="python report.py --type {{ params.report_type }}",
+    params={"report_type": "daily"}
+)</pre>
+</div>
+
+<!-- SLIDE 26 — Section: Retry e Error Handling -->
+<div class="slide section">
+<h2>Retry e Error Handling</h2>
+<p>Resiliência em produção — falhas acontecem</p>
+</div>
+
+<!-- SLIDE 27 — Retry -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔄 Retry — Recuperação Automática de Falhas</h2>
+<blockquote>Em produção, falhas transitórias (rede, timeout, serviço indisponível) são comuns. <strong>Retry</strong> resolve 80% sem intervenção humana.</blockquote>
+<pre>default_args = {
+    "owner": "carlos",
+    "retries": 3,                          # Tentar 3x antes de falhar
+    "retry_delay": timedelta(minutes=5),   # Esperar 5min entre tentativas
+    "retry_exponential_backoff": True,     # 5min, 10min, 20min...
+    "max_retry_delay": timedelta(hours=1), # Máximo 1h entre retries
+    "email_on_failure": True,              # Notificar quando falhar de vez
+    "email_on_retry": False,               # Não notificar em retry
+    "email": ["carlos@dataflow.com"],
+    "execution_timeout": timedelta(hours=2) # Timeout máximo da task
+}
+
+# Por task: override de retries
+critical_task = PythonOperator(
+    task_id="call_external_api",
+    python_callable=call_api,
+    retries=5,                             # Mais retries que o padrão
+    retry_delay=timedelta(minutes=2)
+)</pre>
+<pre>
+Timeline de um retry:
+[Tentativa 1] ──FALHA──► espera 5min ──► [Tentativa 2] ──FALHA──►
+espera 10min ──► [Tentativa 3] ──SUCESSO ✅
+
+Sem retry: FALHOU → pipeline parado → acordar Carlos às 3h
+Com retry: FALHOU → retry automático → sucesso na 3ª tentativa → todos dormem
+</pre>
+</div>
+
+<!-- SLIDE 28 — Error Handling -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🚨 Error Handling — Callbacks e SLA</h2>
+<pre>def on_failure_callback(context):
+    """Chamado quando a task falha definitivamente."""
+    task_id = context["task_instance"].task_id
+    dag_id = context["dag"].dag_id
+    exec_date = context["ds"]
+    error = context["exception"]
+    
+    # Enviar alerta no Slack
+    send_slack_alert(
+        channel="#data-alerts",
+        message=f"❌ FALHA: {dag_id}/{task_id} em {exec_date}\nErro: {error}"
+    )
+
+def on_success_callback(context):
+    """Chamado quando a task finaliza com sucesso."""
+    print(f"✅ {context['task_instance'].task_id} concluída!")
+
+with DAG(..., on_failure_callback=on_failure_callback) as dag:
+    
+    task_critical = PythonOperator(
+        task_id="ingest_critical",
+        python_callable=ingest_data,
+        on_failure_callback=on_failure_callback,  # Por task
+        on_success_callback=on_success_callback,
+        sla=timedelta(hours=1)  # Alerta se demorar mais que 1h
+    )</pre>
+</div>
+
+<!-- SLIDE 29 — Boas Práticas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Boas Práticas — Apache Airflow</h2>
+<table>
+<tr><th>Prática</th><th>Por quê</th></tr>
+<tr><td>Use <strong>catchup=False</strong> em produção</td><td>Evita execuções massivas ao ligar DAG</td></tr>
+<tr><td>Defina <strong>default_args</strong> com retries</td><td>Falhas transitórias se resolvem sozinhas</td></tr>
+<tr><td>Mantenha tasks <strong>idempotentes</strong></td><td>Re-execução segura sem duplicatas</td></tr>
+<tr><td>Use <strong>template variables</strong> ({{ ds }})</td><td>Tasks parametrizadas por data = backfill fácil</td></tr>
+<tr><td>Prefira <strong>PythonOperator</strong> para lógica</td><td>Testável, debugável, type hints</td></tr>
+<tr><td>XCom para <strong>metadados apenas</strong></td><td>Não passar DataFrames — passar file paths</td></tr>
+<tr><td>Nomeie tasks de forma <strong>descritiva</strong></td><td>"ingest_parceiro_a" > "task_1"</td></tr>
+<tr><td>Use <strong>tags</strong> nas DAGs</td><td>Facilita filtro na UI</td></tr>
+<tr><td>Teste DAGs com <strong>airflow dags test</strong></td><td>Validar antes de deploy</td></tr>
+<tr><td>Monitore <strong>SLAs</strong> em tasks críticas</td><td>Detectar lentidão antes do impacto</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 30 — Preview Lab -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔬 O Que Faremos no Lab Hoje</h2>
+<p><strong>Cenário:</strong> Marina pediu para migrar os scripts cron da DataFlow para DAGs do Airflow. Carlos precisa construir a primeira DAG de orquestração do pipeline Medallion.</p>
+<div class="cols">
+<div class="col">
+<h3>Lab Parte 1 — Guiado (60 min)</h3>
+<ol>
+<li>Subir ambiente Airflow com Docker Compose</li>
+<li>Criar primeira DAG simples (Hello World)</li>
+<li>Implementar PythonOperator e BashOperator</li>
+<li>Definir dependências com <code>&gt;&gt;</code></li>
+<li>Configurar schedule e testar na UI</li>
+</ol>
+</div>
+<div class="col">
+<h3>Lab Parte 2 — Intermediário + Desafio (50 min)</h3>
+<ol>
+<li>DAG completa: ingestão → transform → gold</li>
+<li>Usar XComs para passar contagens</li>
+<li>Configurar retries e callbacks</li>
+<li>🏆 <strong>Desafio:</strong> DAG com template variables + SLA + notificação</li>
+</ol>
+</div>
+</div>
+<p><strong>Entregável:</strong> DAG funcional no Airflow com 3 tasks de ingestão em paralelo, transform Silver e Gold com dependências.</p>
+</div>
+
+<!-- SLIDE 31 — Encerramento -->
+<div class="slide cover">
+<h1>Hora do Lab! 🔬</h1>
+<p class="subtitle">Agora vocês vão orquestrar pipelines com Apache Airflow</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">DAGs + Operators + Dependências + Schedule + XComs</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">&#9664;</button>
+<button onclick="next()">&#9654;</button>
+</div>
+<div class="counter" id="counter"></div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;const total=slides.length;
+function show(n){
+  slides[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  slides[cur].classList.add('active');
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+}
+function next(){show(cur+1);}
+function prev(){show(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});
+show(0);
+</script>
+</body>
+</html>
