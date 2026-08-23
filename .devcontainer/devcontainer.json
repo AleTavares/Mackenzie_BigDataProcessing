@@ -1,26 +1,22 @@
 {
-  "name": "Big Data Processing - Ambiente de Desenvolvimento",
-  "dockerComposeFile": "../shared/docker-compose.full.yml",
-  "service": "jupyter",
+  "name": "Big Data Processing - Mackenzie MBA",
+  "image": "quay.io/jupyter/pyspark-notebook:latest",
   "workspaceFolder": "/home/jovyan/work",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "dockerDashComposeVersion": "v2"
     }
   },
-  "forwardPorts": [8080, 8081, 8888],
+  "forwardPorts": [8888, 4040],
   "portsAttributes": {
-    "8080": {
-      "label": "Spark Master UI",
-      "onAutoForward": "notify"
-    },
-    "8081": {
-      "label": "Airflow Webserver",
-      "onAutoForward": "notify"
-    },
     "8888": {
       "label": "Jupyter Notebook",
       "onAutoForward": "openBrowser"
+    },
+    "4040": {
+      "label": "Spark App UI",
+      "onAutoForward": "notify"
     }
   },
   "hostRequirements": {
@@ -38,13 +34,12 @@
       "settings": {
         "python.defaultInterpreterPath": "/opt/conda/bin/python",
         "editor.formatOnSave": true,
-        "python.formatting.provider": "black",
-        "python.linting.enabled": true,
         "files.autoSave": "afterDelay",
         "files.autoSaveDelay": 1000
       }
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt || echo 'requirements.txt not found, skipping pip install'",
+  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto! PySpark disponível em modo local[*].'",
+  "postStartCommand": "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password='' &",
   "remoteUser": "jovyan"
 }
