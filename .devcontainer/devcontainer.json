@@ -4,23 +4,18 @@
   "workspaceFolder": "/home/jovyan/work",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind",
   "containerEnv": {
-    "JUPYTER_ENABLE_LAB": "yes",
     "JAVA_HOME": "/usr/lib/jvm/java-21-openjdk-amd64",
     "SPARK_HOME": "/usr/local/spark",
-    "PATH": "/usr/local/spark/bin:/usr/lib/jvm/java-21-openjdk-amd64/bin:/opt/conda/bin:/usr/local/bin:/usr/bin:/bin"
+    "PYSPARK_PYTHON": "/opt/conda/bin/python",
+    "PYSPARK_DRIVER_PYTHON": "/opt/conda/bin/python"
   },
-  "overrideCommand": true,
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "dockerDashComposeVersion": "v2"
     }
   },
-  "forwardPorts": [8888, 4040],
+  "forwardPorts": [4040],
   "portsAttributes": {
-    "8888": {
-      "label": "Jupyter Lab",
-      "onAutoForward": "openBrowser"
-    },
     "4040": {
       "label": "Spark App UI",
       "onAutoForward": "notify"
@@ -35,19 +30,20 @@
       "extensions": [
         "ms-python.python",
         "ms-toolsai.jupyter",
+        "ms-toolsai.vscode-jupyter-cell-tags",
         "ms-azuretools.vscode-docker",
         "redhat.vscode-yaml"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        "jupyter.notebookFileRoot": "/home/jovyan/work",
+        "notebook.formatOnSave.enabled": false,
         "editor.formatOnSave": true,
         "files.autoSave": "afterDelay",
-        "files.autoSaveDelay": 1000,
-        "jupyter.notebookFileRoot": "/home/jovyan/work"
+        "files.autoSaveDelay": 1000
       }
     }
   },
-  "postCreateCommand": "echo 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' >> ~/.bashrc && echo 'export SPARK_HOME=/usr/local/spark' >> ~/.bashrc && echo 'export PATH=$SPARK_HOME/bin:$JAVA_HOME/bin:$PATH' >> ~/.bashrc && pip install delta-spark==3.2.0 2>/dev/null; echo '✅ PySpark + Java 21 + Delta Lake configurados.'",
-  "postStartCommand": "start-notebook.py --IdentityProvider.token='' --ServerApp.password='' --ServerApp.allow_origin='*' --ip=0.0.0.0 --port=8888 --no-browser &",
+  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto! Abra qualquer arquivo .ipynb para começar.'",
   "remoteUser": "jovyan"
 }
