@@ -45,6 +45,6 @@
       }
     }
   },
-  "postCreateCommand": "pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto! Abra qualquer arquivo .ipynb para começar.'",
+  "postCreateCommand": "/opt/conda/bin/python -m ipykernel install --user --name pyspark --display-name 'PySpark (conda)' && /usr/bin/python3 -m pip install ipykernel pyspark --user --quiet 2>/dev/null; pip install delta-spark==3.2.0 2>/dev/null; echo '✅ Ambiente pronto! Abra qualquer arquivo .ipynb para começar.'",
   "remoteUser": "jovyan"
 }
