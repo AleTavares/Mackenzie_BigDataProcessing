@@ -89,6 +89,7 @@ A Aula 7 integra Spark + Airflow + Docker — o pipeline completo precisa de Doc
 
 ```python
 # === SETUP COLAB ===
+!apt-get install openjdk-11-jdk-headless -qq > /dev/null
 !pip install pyspark -q
 !git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
 import os

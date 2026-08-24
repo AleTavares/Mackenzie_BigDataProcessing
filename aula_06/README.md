@@ -87,6 +87,7 @@ Se não quiser configurar Docker local, use o Google Colab:
 
 ```python
 # === SETUP COLAB ===
+!apt-get install openjdk-11-jdk-headless -qq > /dev/null
 !pip install pyspark -q
 !git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
 import os
