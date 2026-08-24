@@ -88,11 +88,11 @@ As aulas 4 e 5 focam em **Airflow** (orquestração), que precisa de Docker. Mas
 
 ```python
 # === SETUP COLAB ===
-!apt-get install openjdk-11-jdk-headless -qq > /dev/null
+!apt-get install openjdk-17-jdk-headless -qq > /dev/null
 !pip install pyspark apache-airflow -q
 !git clone https://github.com/AleTavares/Mackenzie_BigDataProcessing.git /content/repo 2>/dev/null
 import os
-os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
 DATA_PATH = "/content/repo/datasets/aula_04"
 ```
 
