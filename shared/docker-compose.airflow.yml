@@ -30,11 +30,12 @@ services:
   # Este serviço roda apenas uma vez para configurar o ambiente do Airflow.
   # Após a inicialização, ele encerra automaticamente.
   airflow-init:
-    image: apache/airflow:2.8-python3.11
+    image: apache/airflow:2.8.4-python3.11
     container_name: airflow-init
     environment:
-      # Executor local (SQLite) - adequado para ambiente de laboratório
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      # SequentialExecutor é a única opção compatível com SQLite
+      # (LocalExecutor exige Postgres/MySQL). Adequado ao ambiente de laboratório.
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       # Não carregar DAGs de exemplo para manter o ambiente limpo
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       # Usar SQLite para simplicidade (não requer PostgreSQL externo)
@@ -68,13 +69,13 @@ services:
   # Acesse em: http://localhost:8081
   # Login: admin / admin
   airflow-webserver:
-    image: apache/airflow:2.8-python3.11
+    image: apache/airflow:2.8.4-python3.11
     container_name: airflow-webserver
     depends_on:
       airflow-init:
         condition: service_completed_successfully
     environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
       # Porta interna do webserver
@@ -106,13 +107,13 @@ services:
   # ---------------------------------------------------------------------------
   # O scheduler monitora a pasta de DAGs e executa tasks conforme agendamento.
   airflow-scheduler:
-    image: apache/airflow:2.8-python3.11
+    image: apache/airflow:2.8.4-python3.11
     container_name: airflow-scheduler
     depends_on:
       airflow-webserver:
         condition: service_healthy
     environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
     volumes:
