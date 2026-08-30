@@ -128,6 +128,43 @@ docker compose -f shared/docker-compose.full.yml up -d
 3. O ambiente será configurado automaticamente via `.devcontainer/devcontainer.json`
 4. Aguarde o build do container (primeira vez pode levar alguns minutos)
 
+### Opção 3: AWS Fargate via Terraform (AWS Academy)
+
+Para quem **não consegue rodar Docker localmente** (bloqueios de rede/máquina na faculdade), o ambiente base (Jupyter + PySpark) pode ser provisionado na nuvem com Terraform, dentro do **AWS Academy Learner Lab**, e acessado pelo navegador.
+
+**Requisitos**: Terraform >= 1.5, AWS CLI v2 e uma sessão do AWS Academy Learner Lab ativa.
+
+```bash
+# 1. Inicie o lab no AWS Academy e exporte as credenciais (aba "AWS Details")
+export AWS_ACCESS_KEY_ID="..."
+export AWS_SECRET_ACCESS_KEY="..."
+export AWS_SESSION_TOKEN="..."
+export AWS_DEFAULT_REGION="us-east-1"
+
+# 2. Suba o ambiente
+cd infra
+terraform init
+terraform apply
+
+# 3. Descubra as URLs públicas (aguarde ~1-2 min)
+./get_urls.sh
+
+# 4. Ao terminar, derrube tudo para não consumir crédito do lab
+terraform destroy
+```
+
+Para a **Aula 4 (Airflow)**, habilite antes do `apply` criando um `terraform.tfvars` com:
+
+```hcl
+enable_airflow = true
+```
+
+Isso sobe também o Airflow (Webserver + Scheduler) no Fargate, acessível na porta 8081 (login `admin`/`admin`). As DAGs de `aula_04/code/dags/` são carregadas automaticamente no boot.
+
+Passo a passo completo, restrições do AWS Academy e opções de configuração em [`infra/README.md`](infra/README.md).
+
+> **Nota:** esta opção cobre as Aulas 1–4 (Jupyter + PySpark e Airflow). Para o cluster Spark separado e a stack completa (Aulas 5–7), use Docker local ou Codespaces.
+
 ### Portas de Serviço
 
 | Serviço | Porta | URL |
@@ -186,6 +223,14 @@ Mackenzie_BigDataProcessing/
 │   └── aula_07/               # Dataset completo para pipeline E2E
 ├── .devcontainer/             # Configuração GitHub Codespaces
 │   └── devcontainer.json
+├── infra/                     # Terraform: ambiente no AWS Fargate (AWS Academy)
+│   ├── ecs.tf                 # Cluster, task e service Fargate (Jupyter+PySpark)
+│   ├── airflow.tf             # Task e service Fargate do Airflow (Aula 4, opcional)
+│   ├── network.tf             # VPC default + security groups
+│   ├── variables.tf           # Variáveis de entrada
+│   ├── outputs.tf             # Saídas (como obter as URLs)
+│   ├── get_urls.sh            # Descobre o IP público das tasks
+│   └── README.md              # Guia de uso no AWS Academy Learner Lab
 └── requirements.txt           # Dependências Python fixadas
 ```
 

@@ -1,0 +1,36 @@
+# =============================================================================
+# Exemplo de variáveis - copie para terraform.tfvars e ajuste conforme quiser
+# =============================================================================
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# Todas as variáveis têm valores padrão sensatos; sobrescreva apenas o que
+# precisar.
+
+# Região (AWS Academy: us-east-1 ou us-west-2)
+aws_region = "us-east-1"
+
+# Prefixo dos recursos
+project_name = "dataflow-lab"
+
+# Role pré-existente do AWS Academy (normalmente não precisa mudar)
+lab_role_name = "LabRole"
+
+# Recursos da task Fargate (combinações válidas de CPU/memória do Fargate)
+# 2048 CPU (2 vCPU) exige memória entre 4096 e 16384 MiB.
+task_cpu    = 2048
+task_memory = 8192
+
+# Restrinja o acesso ao IP/faixa da faculdade em vez de abrir para a internet.
+# Ex.: "203.0.113.10/32"
+allowed_cidr = "0.0.0.0/0"
+
+# Número de ambientes Jupyter simultâneos
+desired_count = 1
+
+# ---------------------------------------------------------------------------
+# Airflow (Aula 4) — deixe true para subir também o ambiente Airflow
+# ---------------------------------------------------------------------------
+enable_airflow = false
+# airflow_task_cpu    = 1024
+# airflow_task_memory = 3072
+# airflow_admin_password = "admin"
