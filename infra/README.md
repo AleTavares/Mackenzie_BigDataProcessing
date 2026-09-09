@@ -5,7 +5,7 @@ Terraform para subir o ambiente do curso em **AWS ECS Fargate**, dentro do **AWS
 Dois ambientes, controlados por variável:
 
 - **Jupyter + PySpark** (sempre) — mesma imagem do ambiente base (`quay.io/jupyter/pyspark-notebook`), Spark em modo `local[*]`. Cobre as **Aulas 1–3**.
-- **Apache Airflow** (opcional, `enable_airflow = true`) — Webserver + Scheduler no mesmo container (LocalExecutor + SQLite), igual ao lab local. Cobre a **Aula 4**. As DAGs de `aula_04/code/dags/*.py` são **carregadas automaticamente** no boot do container (sem bucket nem build de imagem).
+- **Apache Airflow** (opcional, `enable_airflow = true`) — Webserver + Scheduler no mesmo container (SequentialExecutor + SQLite). Cobre as **Aulas 4 e 5**. As DAGs de uma pasta configurável (`var.dags_source_dir`, padrão `../aula_04/code/dags`) são **carregadas automaticamente** no boot do container (sem bucket nem build de imagem). Para a Aula 5, aponte para `../aula_05/code/dags`.
 
 ## Por que este desenho (restrições do AWS Academy Learner Lab)
 
@@ -59,6 +59,15 @@ Para a **Aula 4** (Airflow), habilite no `terraform.tfvars`:
 ```hcl
 enable_airflow = true
 ```
+
+Para a **Aula 5**, aponte a pasta de DAGs para a aula:
+
+```hcl
+enable_airflow  = true
+dags_source_dir = "../aula_05/code/dags"
+```
+
+> A Aula 5 inclui um exercício com `SparkSubmitOperator` (submissão a um cluster Spark separado). A imagem base do Airflow **não traz** o `spark-submit` nem um Spark Master, então esse exercício específico não roda neste ambiente de container único — use o Docker local para ele. Os demais exercícios (branching, sensor, taskgroups, callbacks) funcionam normalmente.
 
 ### 3. Subir o ambiente
 

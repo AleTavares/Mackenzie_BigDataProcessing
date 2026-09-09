@@ -38,6 +38,8 @@ Laboratório hands-on da Aula 5, onde os alunos implementam padrões avançados 
 
 | Arquivo | Descrição |
 |---------|-----------|
+| `00_setup.md` | Setup do ambiente (Docker local) |
+| `08_setup_aws_fargate.md` | Setup alternativo na nuvem (AWS Fargate / AWS Academy) para quem não roda Docker local |
 | `01_branching.md` | Exercício guiado: BranchPythonOperator para decisões |
 | `02_file_sensor.md` | Exercício guiado: FileSensor para detectar arquivos |
 | `03_taskgroups.md` | Exercício guiado: TaskGroups para organizar DAGs |
@@ -54,4 +56,5 @@ Laboratório hands-on da Aula 5, onde os alunos implementam padrões avançados 
 - **Branching** é o conceito mais confuso — reforce que apenas UM caminho é seguido por execução.
 - O **FileSensor** precisa de um arquivo de teste — crie-o manualmente durante a demonstração.
 - **SparkSubmitOperator** pode exigir configuração extra de classpath — consulte troubleshooting.
+- **Alternativa sem Docker local:** alunos sem Docker na máquina podem usar o AWS Fargate via `08_setup_aws_fargate.md` (AWS Academy), com as DAGs da Aula 5 já carregadas. Atenção: o **Exercício 4 (SparkSubmit)** exige o cluster Spark separado e só roda no Docker local.
 - Lembre aos alunos que a **formação de grupos** para o projeto final deve ser feita até o final desta aula.

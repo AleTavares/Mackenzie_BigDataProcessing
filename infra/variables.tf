@@ -107,6 +107,24 @@ variable "airflow_admin_password" {
   sensitive   = true
 }
 
+variable "dags_source_dir" {
+  description = "Pasta (relativa à pasta infra/) de onde as DAGs .py são carregadas no boot do Airflow. Aponte para a aula desejada, ex.: ../aula_05/code/dags."
+  type        = string
+  default     = "../aula_04/code/dags"
+}
+
+variable "repo_url" {
+  description = "URL do repositório do curso, clonado no boot do Jupyter para trazer notebooks e datasets."
+  type        = string
+  default     = "https://github.com/AleTavares/Mackenzie_BigDataProcessing.git"
+}
+
+variable "repo_branch" {
+  description = "Branch do repositório a clonar no Jupyter."
+  type        = string
+  default     = "main"
+}
+
 variable "log_retention_days" {
   description = "Dias de retenção dos logs no CloudWatch."
   type        = number

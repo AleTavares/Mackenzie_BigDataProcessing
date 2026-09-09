@@ -73,13 +73,24 @@ resource "aws_ecs_task_definition" "jupyter" {
       image     = var.jupyter_image
       essential = true
 
-      # Sobe o Jupyter sem token (mesma configuração do docker-compose base).
+      # No boot: clona o repositório do curso e disponibiliza os notebooks de
+      # cada aula e os datasets dentro de /home/jovyan/work (equivalente aos
+      # volumes do docker-compose base). Depois sobe o Jupyter sem token.
       # ATENÇÃO: sem token o acesso é aberto a quem alcançar a porta. Restrinja
       # o acesso pelo security group (var.allowed_cidr) em ambientes expostos.
+      entryPoint = ["/bin/bash", "-c"]
       command = [
-        "start-notebook.py",
-        "--IdentityProvider.token=''",
-        "--ServerApp.ip=0.0.0.0"
+        join(" && ", [
+          "cd /home/jovyan/work",
+          # clona o repo (usa a saída de internet do Learner Lab)
+          "(git clone --depth 1 --branch ${var.repo_branch} ${var.repo_url} /tmp/curso 2>/dev/null || (rm -rf /tmp/curso && git clone --depth 1 ${var.repo_url} /tmp/curso))",
+          # notebooks de cada aula -> work/aula_XX
+          "for d in /tmp/curso/aula_*/code; do a=$(basename $(dirname $d)); rm -rf /home/jovyan/work/$a; cp -r $d /home/jovyan/work/$a; done",
+          # datasets do curso -> work/data
+          "if [ -d /tmp/curso/datasets ]; then rm -rf /home/jovyan/work/data; cp -r /tmp/curso/datasets /home/jovyan/work/data; fi",
+          "echo '>> notebooks e datasets prontos em /home/jovyan/work'",
+          "exec start-notebook.py --IdentityProvider.token='' --ServerApp.ip=0.0.0.0"
+        ])
       ]
 
       portMappings = [
