@@ -41,6 +41,7 @@ Laboratório hands-on da Aula 4, onde os alunos criam suas primeiras DAGs no Apa
 | Arquivo | Descrição |
 |---------|-----------|
 | `00_setup.md` | Configuração do ambiente Airflow com Docker Compose |
+| `08_setup_aws_fargate.md` | Setup alternativo na nuvem (AWS Fargate / AWS Academy) para quem não roda Docker local |
 | `01_primeira_dag.md` | Exercício guiado: criar primeira DAG com PythonOperator |
 | `02_dependencias_xcoms.md` | Exercício guiado: dependências entre tasks e XComs |
 | `03_bashoperator_templates.md` | Exercício intermediário: BashOperator com Jinja templates |
@@ -58,4 +59,5 @@ Laboratório hands-on da Aula 4, onde os alunos criam suas primeiras DAGs no Apa
 - Airflow UI demora ~30s para ficar disponível após o container subir. Peça paciência.
 - No **Exercício 2**, XComs costumam gerar dúvidas. Reforce que são key-value com limite de tamanho.
 - O **Exercício 6 (desafio)** é opcional — pode ser tarefa de casa.
-- Airflow UI: http://localhost:8081 (credenciais: airflow/airflow)
+- Airflow UI: http://localhost:8081 (credenciais: admin/admin)
+- **Alternativa sem Docker local:** alunos que não conseguem subir o ambiente na máquina da faculdade podem usar o AWS Fargate via `08_setup_aws_fargate.md` (AWS Academy). O Airflow sobe com a DAG da aula já carregada.

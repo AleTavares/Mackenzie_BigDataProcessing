@@ -1,5 +1,7 @@
 # Lab Setup - Aula 5: Orquestração Avançada com Airflow
 
+> **💡 Não consegue rodar Docker na faculdade?** Existe um caminho alternativo que sobe este ambiente (Jupyter + Airflow com as DAGs da Aula 5) na nuvem via AWS Fargate, usando o AWS Academy Learner Lab. Veja [`08_setup_aws_fargate.md`](08_setup_aws_fargate.md). O restante deste arquivo cobre o setup com Docker local. Observação: o Exercício 4 (SparkSubmit para cluster) só roda no Docker local.
+
 ## Contexto
 
 > **Carlos Mendes (Engenheiro de Dados Sênior):** "Hoje vamos tornar o pipeline inteligente — branching condicional, sensors que detectam quando dados chegam e integração Spark+Airflow. O ambiente é o mesmo da Aula 4 (Airflow + Spark), mas vamos confirmar que tudo está rodando e preparar os arquivos de teste para os sensors."
@@ -41,7 +43,7 @@ docker compose -f shared/docker-compose.yml -f shared/docker-compose.airflow.yml
 
 **Acessar:**
 - Jupyter: http://localhost:8888
-- Airflow UI: http://localhost:8081 (login: `airflow` / `airflow`)
+- Airflow UI: http://localhost:8081 (login: `admin` / `admin`)
 
 ---
 
@@ -118,7 +120,7 @@ FileSensor(
 ## Checklist de Validação
 
 - [ ] Airflow Webserver acessível em http://localhost:8081
-- [ ] Login `airflow/airflow` funciona
+- [ ] Login `admin/admin` funciona
 - [ ] DAGs da Aula 5 visíveis na UI
 - [ ] Jupyter acessível em http://localhost:8888
 - [ ] Diretório `/opt/airflow/data/incoming/` criado

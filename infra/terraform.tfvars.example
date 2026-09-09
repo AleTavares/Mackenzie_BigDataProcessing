@@ -34,3 +34,7 @@ enable_airflow = false
 # airflow_task_cpu    = 1024
 # airflow_task_memory = 3072
 # airflow_admin_password = "admin"
+
+# Pasta de DAGs carregadas no boot do Airflow (relativa a infra/).
+# Aula 4 (padrão): ../aula_04/code/dags   |   Aula 5: ../aula_05/code/dags
+# dags_source_dir = "../aula_04/code/dags"

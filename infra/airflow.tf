@@ -26,14 +26,15 @@ resource "aws_cloudwatch_log_group" "airflow" {
 }
 
 # ---------------------------------------------------------------------------
-# DAGs da Aula 4 carregadas automaticamente
+# DAGs da aula carregadas automaticamente
 # ---------------------------------------------------------------------------
-# Lê todos os arquivos .py da pasta de DAGs do curso e os injeta no container
-# no boot (base64 -> arquivo em /opt/airflow/dags). Assim, qualquer DAG que o
-# professor adicionar na pasta é carregada no próximo `terraform apply`, sem
-# precisar de bucket S3 nem build de imagem.
+# Lê todos os arquivos .py da pasta de DAGs do curso (var.dags_source_dir) e os
+# injeta no container no boot (base64 -> arquivo em /opt/airflow/dags). Assim,
+# qualquer DAG que o professor adicionar na pasta é carregada no próximo
+# `terraform apply`, sem precisar de bucket S3 nem build de imagem.
+# Para trocar a aula, defina -var dags_source_dir=../aula_05/code/dags.
 locals {
-  dags_dir = "${path.module}/../aula_04/code/dags"
+  dags_dir = "${path.module}/${var.dags_source_dir}"
 
   # Mapa: nome_do_arquivo => conteúdo em base64
   dag_files = var.enable_airflow ? {

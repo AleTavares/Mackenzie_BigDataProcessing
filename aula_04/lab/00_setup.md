@@ -4,6 +4,8 @@
 
 ⏱️ ~10 minutos
 
+> **💡 Não consegue rodar Docker na faculdade?** Existe um caminho alternativo que sobe este mesmo ambiente (Jupyter + Airflow) na nuvem via AWS Fargate, usando o AWS Academy Learner Lab. Veja [`08_setup_aws_fargate.md`](08_setup_aws_fargate.md). O restante deste arquivo cobre o setup com Docker local.
+
 ## Contexto
 
 > **Carlos Mendes (Engenheiro de Dados Sênior):** "Marina escolheu o Apache Airflow para automatizar nossos pipelines. Antes de criar nossa primeira DAG, precisamos adicionar o Airflow ao ambiente Docker que já temos rodando com Spark e Jupyter. A boa notícia: vamos usar um arquivo override — o ambiente base continua intacto."
@@ -93,7 +95,7 @@ cat shared/docker-compose.airflow.yml
 
 - **Configurações importantes:**
   - `AIRFLOW__CORE__LOAD_EXAMPLES=False` → Não carrega DAGs de exemplo (ambiente limpo)
-  - `AIRFLOW__CORE__EXECUTOR=LocalExecutor` → Execução local (adequado para lab)
+  - `AIRFLOW__CORE__EXECUTOR=SequentialExecutor` → Executor compatível com SQLite (adequado para lab)
   - Banco SQLite compartilhado via volume `airflow-data`
 
 > **Carlos:** "O conceito de 'override' no Docker Compose é poderoso — podemos adicionar novos serviços sem modificar o arquivo base. Assim, quem quiser usar só o Spark continua com o arquivo original."
@@ -200,10 +202,10 @@ docker compose -f shared/docker-compose.yml -f shared/docker-compose.airflow.yml
 
 **Resultado esperado:**
 ```
-NAME                IMAGE                          STATUS                     PORTS
-airflow-init        apache/airflow:2.8-python3.11  Exited (0)                 
-airflow-scheduler   apache/airflow:2.8-python3.11  Up                         
-airflow-webserver   apache/airflow:2.8-python3.11  Up (healthy)               0.0.0.0:8081->8080/tcp
+NAME                IMAGE                            STATUS                     PORTS
+airflow-init        apache/airflow:2.8.4-python3.11  Exited (0)                 
+airflow-scheduler   apache/airflow:2.8.4-python3.11  Up                         
+airflow-webserver   apache/airflow:2.8.4-python3.11  Up (healthy)               0.0.0.0:8081->8080/tcp
 jupyter-notebook    jupyter/pyspark-notebook       Up                         0.0.0.0:8888->8888/tcp
 spark-master        bitnami/spark:3.5              Up (healthy)               0.0.0.0:8080->8080/tcp, 0.0.0.0:7077->7077/tcp
 spark-worker        bitnami/spark:3.5              Up                         
