@@ -199,6 +199,11 @@ enable_airflow = true
 
 **Comando:**
 ```bash
+# Guarda o provider da AWS (~700 MB) em /tmp para não estourar o espaço do
+# home no AWS CloudShell (cota de 1 GB). Execute SEMPRE antes do init.
+export TF_PLUGIN_CACHE_DIR=/tmp/tf-plugin-cache
+mkdir -p "$TF_PLUGIN_CACHE_DIR"
+
 terraform init
 terraform apply -auto-approve
 ```
@@ -210,7 +215,11 @@ Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
 
 **Explicação:** O Terraform cria o cluster ECS, as definições de task, os services Fargate e os security groups. Na primeira vez, o Fargate baixa as imagens (Jupyter ~2 GB, Airflow ~400 MB), então as tasks levam **1 a 3 minutos** para ficarem prontas.
 
+O `TF_PLUGIN_CACHE_DIR` faz o Terraform baixar o provider da AWS para `/tmp` em vez do home. No **AWS CloudShell** o home tem apenas **1 GB**, e o provider sozinho ocupa ~700 MB — sem isso, o `terraform init` falha com `no space left on device`. Em máquinas com bastante disco, a variável não atrapalha em nada.
+
 > **⚠️ Importante:** o Terraform guarda o estado localmente (arquivo `terraform.tfstate`). Rode os comandos sempre a partir da **mesma pasta** para conseguir derrubar o ambiente depois.
+
+> **⚠️ CloudShell:** `/tmp` é efêmero. Se a sessão reiniciar, rode de novo `export TF_PLUGIN_CACHE_DIR=/tmp/tf-plugin-cache && mkdir -p "$TF_PLUGIN_CACHE_DIR"` antes de qualquer comando `terraform` (inclusive o `destroy`).
 
 ---
 
@@ -380,6 +389,7 @@ export AWS_DEFAULT_REGION="us-east-1"
 # 2. Subir
 cd Mackenzie_BigDataProcessing/infra
 cp terraform.tfvars.example terraform.tfvars   # enable_airflow = true
+export TF_PLUGIN_CACHE_DIR=/tmp/tf-plugin-cache && mkdir -p "$TF_PLUGIN_CACHE_DIR"
 terraform init
 terraform apply -auto-approve
 

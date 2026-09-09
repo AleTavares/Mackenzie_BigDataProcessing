@@ -166,6 +166,11 @@ dags_source_dir = "../aula_05/code/dags"
 ## Passo 7: Subir o Ambiente com Terraform
 
 ```bash
+# Guarda o provider da AWS (~700 MB) em /tmp para não estourar o home no
+# AWS CloudShell (cota de 1 GB). Execute SEMPRE antes do init.
+export TF_PLUGIN_CACHE_DIR=/tmp/tf-plugin-cache
+mkdir -p "$TF_PLUGIN_CACHE_DIR"
+
 terraform init
 terraform apply -auto-approve
 ```
@@ -177,7 +182,11 @@ Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
 
 **Explicação:** o Fargate baixa as imagens na primeira vez (Jupyter ~2 GB, Airflow ~400 MB), então as tasks levam **1 a 3 minutos** para ficarem prontas.
 
+O `TF_PLUGIN_CACHE_DIR` faz o provider da AWS ir para `/tmp` em vez do home. No **AWS CloudShell** o home tem só **1 GB** e o provider ocupa ~700 MB — sem isso, o `terraform init` falha com `no space left on device`. Em máquinas com bastante disco, a variável não atrapalha.
+
 > **⚠️ State local:** rode os comandos sempre da **mesma pasta** para conseguir derrubar depois.
+
+> **⚠️ CloudShell:** `/tmp` é efêmero. Se a sessão reiniciar, rode de novo `export TF_PLUGIN_CACHE_DIR=/tmp/tf-plugin-cache && mkdir -p "$TF_PLUGIN_CACHE_DIR"` antes de qualquer comando `terraform` (inclusive o `destroy`).
 
 ---
 
@@ -332,6 +341,7 @@ export AWS_DEFAULT_REGION="us-east-1"
 cd Mackenzie_BigDataProcessing/infra
 cp terraform.tfvars.example terraform.tfvars
 # no tfvars:  enable_airflow = true  e  dags_source_dir = "../aula_05/code/dags"
+export TF_PLUGIN_CACHE_DIR=/tmp/tf-plugin-cache && mkdir -p "$TF_PLUGIN_CACHE_DIR"
 terraform init
 terraform apply -auto-approve
 
