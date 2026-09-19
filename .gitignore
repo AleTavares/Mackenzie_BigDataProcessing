@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Documento de descrição para o Moodle (uso local, não versionar)
+DESCRICAO_MOODLE.md
