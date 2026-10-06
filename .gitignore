@@ -219,3 +219,7 @@ __marimo__/
 
 # Documento de descrição para o Moodle (uso local, não versionar)
 DESCRICAO_MOODLE.md
+
+# Configurações de ferramentas de IA (uso local, não versionar)
+.claude/
+.kiro/
