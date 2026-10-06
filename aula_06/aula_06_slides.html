@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aula 6 — Qualidade de Dados e Monitoramento | Mackenzie</title>
+<title>Aula 6 — Orquestração Avançada e Qualidade de Dados | Mackenzie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -64,17 +64,21 @@ body{background:var(--gray-900);}
 }
 .slide.section::before{background:var(--gold);}
 .slide.section h2{font-size:2.4em;font-weight:700;margin-bottom:12px;}
-.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:600px;}
+.slide.section p{font-size:1.1em;color:var(--gray-200);max-width:640px;}
+.slide.section .tag{
+  margin-top:22px;font-size:.8em;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);font-weight:700;
+}
 
 /* Typography */
 .slide h2{font-size:1.7em;font-weight:700;color:var(--red);margin-bottom:20px;}
 .slide h3{font-size:1.2em;font-weight:600;color:var(--gray-700);margin:16px 0 8px;}
-.slide p{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:10px;}
+.slide p{font-size:1.02em;line-height:1.8;color:var(--gray-700);margin-bottom:12px;}
 .slide ul,.slide ol{margin:8px 0 12px 28px;}
-.slide li{font-size:.98em;line-height:1.7;color:var(--gray-700);margin-bottom:6px;}
+.slide li{font-size:1em;line-height:1.75;color:var(--gray-700);margin-bottom:8px;}
 .slide strong{color:var(--gray-900);}
 
-/* Code */
+/* Code / diagrams */
 .slide pre{
   background:var(--gray-900);color:#e4e4e7;
   padding:18px 22px;border-radius:8px;
@@ -84,16 +88,16 @@ body{background:var(--gray-900);}
 }
 
 /* Table */
-.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.9em;}
+.slide table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.92em;}
 .slide th{background:var(--red);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;}
-.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);}
+.slide td{padding:9px 14px;border-bottom:1px solid var(--gray-200);vertical-align:top;}
 .slide tr:nth-child(even) td{background:var(--gray-50);}
 
 /* Blockquote */
 .slide blockquote{
   border-left:4px solid var(--gold);background:var(--gray-50);
   padding:14px 20px;margin:14px 0;border-radius:0 6px 6px 0;
-  font-style:italic;color:var(--gray-700);font-size:.95em;
+  font-style:italic;color:var(--gray-700);font-size:.97em;
 }
 
 /* Columns */
@@ -104,6 +108,25 @@ body{background:var(--gray-900);}
 .highlight{
   background:var(--red-light);border:1px solid var(--red);
   padding:14px 20px;border-radius:8px;margin:12px 0;
+}
+
+/* Discussion box */
+.discuss{
+  background:#FFFBEB;border:1px solid var(--gold);border-left:5px solid var(--gold);
+  padding:16px 22px;border-radius:0 8px 8px 0;margin:14px 0;
+}
+.discuss .label{
+  display:inline-block;font-size:.72em;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:#92710f;margin-bottom:8px;
+}
+.discuss ul{margin:4px 0 0 22px;}
+.discuss li{color:var(--gray-700);}
+
+/* Key idea pill */
+.pill{
+  display:inline-block;background:var(--gray-900);color:var(--white);
+  font-size:.72em;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 12px;border-radius:20px;margin-bottom:12px;
 }
 
 /* Navigation */
@@ -130,703 +153,422 @@ body{background:var(--gray-900);}
 
 <!-- SLIDE 1 — Capa -->
 <div class="slide cover active">
-<h1>Qualidade de Dados<br>e Monitoramento</h1>
+<h1>Orquestração Avançada<br>e Qualidade de Dados</h1>
+<p class="subtitle">Consolidação teórica das Aulas 5 e 6</p>
 <p class="subtitle">Big Data Processing — MBA Engenharia de Dados</p>
 <p class="subtitle">Universidade Presbiteriana Mackenzie</p>
-<div class="meta"><span>📅 Semana 6</span><span>⏱️ 50 min teoria</span></div>
+<div class="meta"><span>📅 Semana 6</span><span>💬 Aula teórica e discursiva</span></div>
 </div>
 
-<!-- SLIDE 2 — Contexto Narrativo -->
+<!-- SLIDE 2 — Como ler esta aula -->
 <div class="slide">
 <span class="mackenzie-mark">MACKENZIE</span>
-<h2>🤝 DataFlow Analytics — "Dados Ruins, Decisões Ruins"</h2>
+<h2>💬 Uma conversa sobre pipelines confiáveis</h2>
+<p>Nas últimas semanas nós <strong>colocamos a mão na massa</strong>: subimos o ambiente, ingerimos dados, criamos DAGs e fizemos o pipeline rodar de ponta a ponta. Hoje damos um passo atrás para olhar o quadro completo.</p>
+<p>Esta aula é <strong>teórica e discursiva</strong>. Não vamos digitar código — vamos entender <em>por que</em> as ferramentas existem, <em>quando</em> usá-las e <em>quais decisões</em> um engenheiro de dados precisa tomar. O código que vocês já escreveram serve de pano de fundo.</p>
+<div class="highlight">
+Vamos costurar dois temas que, juntos, definem um pipeline maduro:<br>
+<strong>1) Orquestração avançada</strong> — fazer o pipeline pensar e reagir.<br>
+<strong>2) Qualidade de dados</strong> — garantir que o que ele produz é confiável.
+</div>
+<blockquote>Ao longo dos slides você verá caixas <strong>"Para discutir"</strong>. Elas são convites para o debate — pare, pense e defenda um ponto de vista.</blockquote>
+</div>
+
+<!-- SLIDE 3 — O fio condutor -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧵 O fio condutor: orquestrar bem para confiar nos dados</h2>
+<p>Um pipeline de dados tem duas perguntas fundamentais por trás dele:</p>
+<ol>
+<li><strong>"O trabalho certo aconteceu, na ordem certa, na hora certa?"</strong> — é o território da <strong>orquestração</strong> (Aula 5).</li>
+<li><strong>"O resultado desse trabalho é confiável o suficiente para alguém decidir com base nele?"</strong> — é o território da <strong>qualidade de dados</strong> (Aula 6).</li>
+</ol>
+<p>As duas coisas se encontram num ponto prático: os <strong>quality gates</strong> — checagens de qualidade que a própria orquestração executa e usa para decidir se o pipeline segue, para ou alerta alguém. É onde as duas aulas se abraçam.</p>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
 <ul>
-<li>Relatório de faturamento mostrou <strong>-R$ 45.000</strong> em vendas de SP</li>
-<li>Investigação: 15% dos registros do Parceiro A com <strong>valores negativos</strong></li>
-<li>Parceiro B enviou <strong>3.200 registros duplicados</strong> na última carga</li>
-<li>Parceiro C referencia <code>customer_id</code> que <strong>não existe</strong> na base de clientes</li>
-<li>Dashboard de Roberto mostra dados <strong>inconsistentes</strong> há 2 semanas</li>
+<li>Um pipeline pode estar <strong>tecnicamente saudável</strong> (todas as tasks verdes) e ainda assim produzir <strong>dados ruins</strong>. Vocês conseguem imaginar um exemplo disso?</li>
 </ul>
-<blockquote><strong>Roberto</strong> (CEO): "Esse relatório está errado! Vendas negativas? Duplicatas? Eu não posso apresentar isso para o conselho. Quero garantia de que os dados estão corretos ANTES de chegarem no dashboard."</blockquote>
 </div>
-
-<!-- SLIDE 3 — O Custo da Má Qualidade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>💸 O Custo da Má Qualidade de Dados</h2>
-<pre>
-PROBLEMA DETECTADO:
-┌─────────────────────────────────────────────────────────┐
-│ Parceiro A: 15% dos registros com total_amount &lt; 0      │
-│ Parceiro B: 3.200 duplicatas (mesmo order_id, datas ≠)  │
-│ Parceiro C: 450 pedidos com customer_id inexistente     │
-└─────────────────────────────────────────────────────────┘
-
-IMPACTO:
-├── Dashboard de faturamento: -R$ 45K (valores negativos)
-├── Contagem de pedidos: +3.200 (inflado por duplicatas)
-├── Relatório de clientes: 450 "orphan orders"
-└── Decisão de negócio: ERRADA (baseada em dados ruins)
-
-REGRA DE OURO: "Garbage In, Garbage Out"
-Se dados ruins entram no pipeline → métricas erradas saem.
-</pre>
-<blockquote><strong>Marina</strong> (CTO): "Precisamos de um framework de qualidade integrado ao pipeline. Dados que não passam nos checks vão para quarentena. Nunca mais dados ruins chegam na Gold."</blockquote>
 </div>
 
 <!-- SLIDE 4 — Objetivos -->
 <div class="slide">
 <span class="mackenzie-mark">MACKENZIE</span>
-<h2>🎯 Objetivos de Aprendizagem</h2>
-<ol>
-<li><strong>Compreender</strong> as 6 dimensões de qualidade de dados</li>
-<li><strong>Implementar</strong> checks de completude (null/missing)</li>
-<li><strong>Implementar</strong> checks de unicidade (duplicatas)</li>
-<li><strong>Implementar</strong> checks de integridade referencial</li>
-<li><strong>Implementar</strong> checks de validade (ranges, formatos)</li>
-<li><strong>Projetar</strong> sistema de quarentena para dados inválidos</li>
-<li><strong>Gerar</strong> relatórios de qualidade automatizados</li>
-<li><strong>Integrar</strong> checks de qualidade no Airflow (alertas)</li>
-</ol>
-</div>
-
-<!-- SLIDE 5 — Section: Dimensões -->
-<div class="slide section">
-<h2>Dimensões de Qualidade</h2>
-<p>Os 6 pilares da qualidade de dados</p>
-</div>
-
-<!-- SLIDE 6 — Dimensões de Qualidade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>📐 As 6 Dimensões de Qualidade de Dados</h2>
-<table>
-<tr><th>Dimensão</th><th>Pergunta</th><th>Exemplo de Violação</th></tr>
-<tr><td><strong>Completude</strong></td><td>Todos os campos obrigatórios estão preenchidos?</td><td>customer_id = NULL em 5% dos registros</td></tr>
-<tr><td><strong>Unicidade</strong></td><td>Existem duplicatas?</td><td>Mesmo order_id aparece 3 vezes</td></tr>
-<tr><td><strong>Validade</strong></td><td>Valores estão dentro do esperado?</td><td>total_amount = -500 (negativo)</td></tr>
-<tr><td><strong>Consistência</strong></td><td>Dados concordam entre fontes/campos?</td><td>data_entrega antes de data_pedido</td></tr>
-<tr><td><strong>Integridade</strong></td><td>Referências existem?</td><td>customer_id não existe na tabela customers</td></tr>
-<tr><td><strong>Atualidade</strong></td><td>Dados são recentes o suficiente?</td><td>Última carga há 72h (esperado: diário)</td></tr>
-</table>
-<div class="highlight">
-<strong>Na DataFlow:</strong> Completude (nulls do Parceiro A) + Unicidade (duplicatas do B) + Integridade (orphans do C) + Validade (negativos) = 4 dimensões violadas em uma semana.
-</div>
-</div>
-
-<!-- SLIDE 7 — Framework de Qualidade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🏗️ Framework de Qualidade — Arquitetura</h2>
-<pre>
-┌─────────────────────────────────────────────────────────────────┐
-│                    PIPELINE COM QUALIDADE                         │
-│                                                                  │
-│  [Bronze] ──► [Quality Checks] ──┬──► [Silver] ──► [Gold]      │
-│                                   │                              │
-│                                   └──► [Quarantine] ──► [Alert] │
-│                                                                  │
-│  Quality Checks:                                                 │
-│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐   │
-│  │Completude  │ │Unicidade   │ │Validade    │ │Integridade │   │
-│  │(nulls)     │ │(duplicatas)│ │(ranges)    │ │(FK exists) │   │
-│  └────────────┘ └────────────┘ └────────────┘ └────────────┘   │
-│                                                                  │
-│  Resultado:                                                      │
-│  ├── ✅ Dados válidos → Silver                                  │
-│  ├── ❌ Dados inválidos → Quarantine                            │
-│  └── 📊 Relatório de qualidade → Metadata DB                   │
-└─────────────────────────────────────────────────────────────────┘
-</pre>
-</div>
-
-<!-- SLIDE 8 — Section: Completude -->
-<div class="slide section">
-<h2>Check de Completude</h2>
-<p>Detectando e tratando valores nulos e missing</p>
-</div>
-
-<!-- SLIDE 9 — Check de Completude -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🔍 Check de Completude — Nulls e Missing</h2>
-<blockquote>Verificar se campos obrigatórios estão preenchidos. Campos opcionais podem ter null, mas campos de negócio críticos não.</blockquote>
-<pre>from pyspark.sql.functions import col, count, when, isnan, lit
-
-def check_completeness(df, required_columns, threshold=0.95):
-    """
-    Verifica completude dos campos obrigatórios.
-    threshold=0.95 → aceita até 5% de nulls.
-    """
-    total = df.count()
-    results = []
-    
-    for column in required_columns:
-        null_count = df.filter(
-            col(column).isNull() | (col(column) == "") | isnan(col(column))
-        ).count()
-        
-        completeness = 1 - (null_count / total)
-        passed = completeness >= threshold
-        
-        results.append({
-            "column": column,
-            "total_rows": total,
-            "null_count": null_count,
-            "completeness": round(completeness, 4),
-            "threshold": threshold,
-            "passed": passed
-        })
-    
-    return results
-
-# Uso
-required = ["order_id", "customer_id", "total_amount", "order_date"]
-results = check_completeness(df_bronze, required, threshold=0.98)</pre>
-</div>
-
-<!-- SLIDE 10 — Completude: Separando Válidos -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>✂️ Separando Dados Válidos de Inválidos</h2>
-<pre># Definir regra de completude
-required_columns = ["order_id", "customer_id", "total_amount", "order_date"]
-
-# Construir condição de completude
-completeness_condition = None
-for col_name in required_columns:
-    cond = col(col_name).isNotNull() &amp; (col(col_name) != "")
-    completeness_condition = cond if completeness_condition is None \
-        else completeness_condition &amp; cond
-
-# Separar dados válidos e inválidos
-df_valid = df_bronze.filter(completeness_condition)
-df_invalid = df_bronze.filter(~completeness_condition)
-
-# Dados válidos seguem para Silver
-df_valid.write.mode("overwrite").parquet("datalake/silver/vendas/")
-
-# Dados inválidos vão para quarentena com motivo
-df_quarantine = df_invalid.withColumn(
-    "_rejection_reason", lit("COMPLETENESS_FAILURE")
-).withColumn(
-    "_rejection_ts", current_timestamp()
-)
-df_quarantine.write.mode("append").parquet("datalake/quarantine/vendas/")</pre>
-<div class="highlight">
-<strong>Resultado DataFlow:</strong> 847 registros → quarentena (customer_id NULL). 99.2% dos dados passaram. Silver mantém qualidade.
-</div>
-</div>
-
-<!-- SLIDE 11 — Section: Unicidade -->
-<div class="slide section">
-<h2>Check de Unicidade</h2>
-<p>Detectando e eliminando duplicatas</p>
-</div>
-
-<!-- SLIDE 12 — Check de Unicidade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🔄 Check de Unicidade — Duplicatas</h2>
-<blockquote>Verificar se registros com a mesma chave primária aparecem mais de uma vez. Duplicatas inflam métricas e causam double-counting.</blockquote>
-<pre>from pyspark.sql.functions import count as spark_count, row_number
-from pyspark.sql.window import Window
-
-def check_uniqueness(df, key_columns):
-    """Identifica duplicatas baseado nas colunas-chave."""
-    total = df.count()
-    
-    # Contar registros por chave
-    duplicates = df.groupBy(key_columns) \
-        .agg(spark_count("*").alias("occurrences")) \
-        .filter(col("occurrences") > 1)
-    
-    dup_keys = duplicates.count()
-    dup_records = duplicates.agg(
-        spark_count("*").alias("dup_keys"),
-        {"occurrences": "sum"}
-    ).collect()[0]
-    
-    return {
-        "total_rows": total,
-        "duplicate_keys": dup_keys,
-        "uniqueness_ratio": round(1 - (dup_keys / total), 4),
-        "passed": dup_keys == 0
-    }
-
-# Parceiro B: verificar unicidade por order_id
-result = check_uniqueness(df_parceiro_b, key_columns=["order_id"])
-# → {"duplicate_keys": 3200, "uniqueness_ratio": 0.968, "passed": False}</pre>
-</div>
-
-<!-- SLIDE 13 — Deduplicação -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🧹 Estratégias de Deduplicação</h2>
-<pre>from pyspark.sql.window import Window
-from pyspark.sql.functions import row_number, col, max as spark_max
-
-# ESTRATÉGIA 1: Manter o mais recente (por timestamp de ingestão)
-window = Window.partitionBy("order_id").orderBy(col("_ingestion_ts").desc())
-
-df_dedup = df_bronze \
-    .withColumn("_row_num", row_number().over(window)) \
-    .filter(col("_row_num") == 1) \
-    .drop("_row_num")
-
-# ESTRATÉGIA 2: Manter o mais completo (menos nulls)
-from pyspark.sql.functions import coalesce, lit
-
-def count_non_nulls(df, cols):
-    """Conta campos não-null por registro."""
-    return df.withColumn(
-        "_completeness_score",
-        sum([when(col(c).isNotNull(), lit(1)).otherwise(lit(0)) for c in cols])
-    )
-
-# ESTRATÉGIA 3: dropDuplicates simples (primeiro encontrado)
-df_simple_dedup = df_bronze.dropDuplicates(["order_id"])</pre>
-<table>
-<tr><th>Estratégia</th><th>Quando usar</th><th>Risco</th></tr>
-<tr><td>Manter mais recente</td><td>Dados com timestamp confiável</td><td>Pode perder versão "correta" anterior</td></tr>
-<tr><td>Manter mais completo</td><td>Fontes com qualidade variável</td><td>Registro mais antigo pode ser mais completo</td></tr>
-<tr><td>dropDuplicates</td><td>Duplicatas exatas (todos campos iguais)</td><td>Determinístico apenas se ordenado</td></tr>
-</table>
-</div>
-
-<!-- SLIDE 14 — Section: Integridade -->
-<div class="slide section">
-<h2>Check de Integridade Referencial</h2>
-<p>Referências entre tabelas — FK exists?</p>
-</div>
-
-<!-- SLIDE 15 — Integridade Referencial -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🔗 Integridade Referencial — Orphan Records</h2>
-<blockquote>Verificar se valores em uma coluna existem como chave primária em outra tabela. Registros "órfãos" indicam inconsistência entre fontes.</blockquote>
-<pre>def check_referential_integrity(df_child, df_parent, 
-                                  child_col, parent_col):
-    """
-    Verifica se todos os valores de child_col existem em parent_col.
-    Retorna registros órfãos (sem pai).
-    """
-    # Left anti join: registros em child que NÃO existem em parent
-    df_orphans = df_child.join(
-        df_parent.select(col(parent_col).alias("_ref")),
-        df_child[child_col] == col("_ref"),
-        "left_anti"
-    )
-    
-    orphan_count = df_orphans.count()
-    total = df_child.count()
-    
-    return {
-        "total_rows": total,
-        "orphan_count": orphan_count,
-        "integrity_ratio": round(1 - (orphan_count / total), 4),
-        "passed": orphan_count == 0,
-        "orphan_df": df_orphans
-    }
-
-# Parceiro C: pedidos referenciando clientes inexistentes
-result = check_referential_integrity(
-    df_pedidos, df_clientes,
-    child_col="customer_id", parent_col="id"
-)
-# → {"orphan_count": 450, "integrity_ratio": 0.991, "passed": False}</pre>
-</div>
-
-<!-- SLIDE 16 — Tratamento de Orphans -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🏥 Tratamento de Registros Órfãos</h2>
-<pre># Opção 1: Quarentena (padrão seguro)
-df_orphans.withColumn("_rejection_reason", lit("REFERENTIAL_INTEGRITY")) \
-    .write.mode("append").parquet("datalake/quarantine/vendas/")
-
-# Opção 2: Enriquecer com "UNKNOWN" customer
-df_with_default = df_pedidos.join(
-    df_clientes.select("id", "nome"),
-    df_pedidos["customer_id"] == df_clientes["id"],
-    "left"
-).withColumn(
-    "customer_name",
-    coalesce(col("nome"), lit("UNKNOWN"))
-)
-
-# Opção 3: Filtrar (eliminar órfãos)
-df_valid_orders = df_pedidos.join(
-    df_clientes.select("id"),
-    df_pedidos["customer_id"] == df_clientes["id"],
-    "inner"  # Apenas pedidos com cliente válido
-)</pre>
-<table>
-<tr><th>Estratégia</th><th>Quando usar</th><th>Trade-off</th></tr>
-<tr><td>Quarentena</td><td>Não perder dados, investigar depois</td><td>Acumula registros pendentes</td></tr>
-<tr><td>Default value</td><td>Dados necessários mesmo incompletos</td><td>Métricas com "UNKNOWN"</td></tr>
-<tr><td>Filtrar (inner join)</td><td>Qualidade é prioridade absoluta</td><td>Perde registros potencialmente válidos</td></tr>
-</table>
-</div>
-
-<!-- SLIDE 17 — Section: Validade -->
-<div class="slide section">
-<h2>Check de Validade</h2>
-<p>Ranges, formatos, regras de negócio</p>
-</div>
-
-<!-- SLIDE 18 — Check de Validade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>📏 Check de Validade — Regras de Negócio</h2>
-<blockquote>Verificar se valores estão dentro de <strong>ranges aceitáveis</strong> e aderem a <strong>regras de negócio</strong>. Dados "válidos" sintaticamente podem ser absurdos semanticamente.</blockquote>
-<pre>from pyspark.sql.functions import col, when, lit, length, regexp_extract
-
-# Definir regras de validade
-validity_rules = {
-    "total_amount": (col("total_amount") > 0) &amp; (col("total_amount") &lt; 1_000_000),
-    "order_date": (col("order_date") >= "2020-01-01") &amp; 
-                  (col("order_date") &lt;= current_date()),
-    "shipping_state": col("shipping_state").isin(
-        ["SP","RJ","MG","RS","PR","SC","BA","PE","CE","DF",
-         "GO","PA","MA","MT","MS","ES","PB","RN","AL","PI",
-         "SE","TO","RO","AC","AP","RR","AM"]
-    ),
-    "customer_id": (length(col("customer_id")) >= 3) &amp;
-                   (col("customer_id").rlike("^C\\d+$")),
-    "quantity": (col("quantity") > 0) &amp; (col("quantity") &lt; 10000)
-}
-
-# Aplicar todas as regras
-df_with_flags = df_bronze
-for rule_name, condition in validity_rules.items():
-    df_with_flags = df_with_flags.withColumn(
-        f"_valid_{rule_name}",
-        when(condition, lit(True)).otherwise(lit(False))
-    )</pre>
-</div>
-
-<!-- SLIDE 19 — Validade: Resultados -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>📊 Resultados de Validade — DataFlow</h2>
-<pre># Contar violações por regra
-for rule_name in validity_rules.keys():
-    violations = df_with_flags.filter(
-        col(f"_valid_{rule_name}") == False
-    ).count()
-    print(f"  {rule_name}: {violations} violações")
-
-# Output:
-#   total_amount: 12.450 violações (valores negativos!)
-#   order_date:   23 violações (datas no futuro)
-#   shipping_state: 89 violações (estados inválidos: "XX", "ZZ")
-#   customer_id:  0 violações ✅
-#   quantity:     156 violações (quantity = 0 ou > 10000)</pre>
-<pre># Separar válidos de inválidos (ALL rules must pass)
-all_valid_condition = None
-for rule_name in validity_rules.keys():
-    cond = col(f"_valid_{rule_name}") == True
-    all_valid_condition = cond if all_valid_condition is None \
-        else all_valid_condition &amp; cond
-
-df_valid = df_with_flags.filter(all_valid_condition)
-df_invalid = df_with_flags.filter(~all_valid_condition)
-
-print(f"✅ Válidos: {df_valid.count()}")
-print(f"❌ Inválidos: {df_invalid.count()} → Quarentena")</pre>
-</div>
-
-<!-- SLIDE 20 — Section: Quarentena -->
-<div class="slide section">
-<h2>Sistema de Quarentena</h2>
-<p>Isolando dados ruins sem perder informação</p>
-</div>
-
-<!-- SLIDE 21 — Quarentena -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🏥 Sistema de Quarentena — Design</h2>
-<blockquote>Dados que falham em checks de qualidade NÃO são deletados — vão para uma área de <strong>quarentena</strong> com metadados de rejeição para análise posterior.</blockquote>
-<pre>
-FLUXO DE QUARENTENA:
-
-[Bronze Data] ──► [Quality Engine] ──┬──► [Silver] (dados limpos)
-                                      │
-                                      └──► [Quarantine]
-                                            ├── _rejection_reason
-                                            ├── _rejection_ts
-                                            ├── _failed_rules[]
-                                            ├── _source_file
-                                            └── _can_be_fixed (bool)
-
-Quarantine folder:
-datalake/quarantine/
-├── vendas/
-│   ├── date=2024-01-15/
-│   │   └── part-00000.parquet (847 registros)
-│   └── date=2024-01-16/
-│       └── part-00000.parquet (234 registros)
-└── clientes/
-    └── date=2024-01-15/
-        └── part-00000.parquet (12 registros)
-</pre>
-</div>
-
-<!-- SLIDE 22 — Quarentena: Implementação -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🔧 Quarentena — Implementação</h2>
-<pre>from pyspark.sql.functions import array, when, lit, current_timestamp
-
-def quarantine_invalid_records(df, rules, output_path):
-    """Separa dados válidos/inválidos e salva quarentena."""
-    
-    # Adicionar coluna com lista de regras falhadas
-    failed_rules_col = array(*[
-        when(~condition, lit(rule_name))
-        for rule_name, condition in rules.items()
-    ])
-    
-    df_flagged = df.withColumn("_failed_rules", failed_rules_col)
-    
-    # Válidos: nenhuma regra falhou (array vazio)
-    df_valid = df_flagged.filter(
-        size(col("_failed_rules")) == 0
-    ).drop("_failed_rules")
-    
-    # Inválidos: pelo menos 1 regra falhou
-    df_quarantine = df_flagged.filter(
-        size(col("_failed_rules")) > 0
-    ).withColumn("_rejection_ts", current_timestamp()) \
-     .withColumn("_source", lit("parceiro_a"))
-    
-    # Persistir quarentena
-    df_quarantine.write.mode("append") \
-        .partitionBy("order_date") \
-        .parquet(f"{output_path}/quarantine/")
-    
-    return df_valid, df_quarantine.count()
-
-df_clean, rejected = quarantine_invalid_records(
-    df_bronze, validity_rules, "datalake"
-)
-print(f"🏥 {rejected} registros em quarentena")</pre>
-</div>
-
-<!-- SLIDE 23 — Section: Relatório -->
-<div class="slide section">
-<h2>Relatório de Qualidade</h2>
-<p>Métricas, tendências e alertas automatizados</p>
-</div>
-
-<!-- SLIDE 24 — Relatório de Qualidade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>📊 Relatório de Qualidade — Métricas</h2>
-<pre>def generate_quality_report(df, rules, key_columns, reference_dfs=None):
-    """Gera relatório completo de qualidade."""
-    total = df.count()
-    report = {
-        "execution_date": datetime.now().isoformat(),
-        "total_records": total,
-        "checks": {}
-    }
-    
-    # 1. Completude
-    for col_name in required_columns:
-        nulls = df.filter(col(col_name).isNull()).count()
-        report["checks"][f"completeness_{col_name}"] = {
-            "metric": round(1 - nulls/total, 4),
-            "threshold": 0.98,
-            "passed": (1 - nulls/total) >= 0.98
-        }
-    
-    # 2. Unicidade
-    uniq = df.dropDuplicates(key_columns).count()
-    report["checks"]["uniqueness"] = {
-        "metric": round(uniq/total, 4),
-        "threshold": 0.99,
-        "passed": (uniq/total) >= 0.99
-    }
-    
-    # 3. Validade (por regra)
-    for rule_name, condition in rules.items():
-        valid = df.filter(condition).count()
-        report["checks"][f"validity_{rule_name}"] = {
-            "metric": round(valid/total, 4),
-            "threshold": 0.95,
-            "passed": (valid/total) >= 0.95
-        }
-    
-    # Score geral
-    all_passed = all(c["passed"] for c in report["checks"].values())
-    report["overall_passed"] = all_passed
-    return report</pre>
-</div>
-
-<!-- SLIDE 25 — Relatório Visual -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>📋 Exemplo de Relatório — DataFlow 2024-01-15</h2>
-<pre>
-╔══════════════════════════════════════════════════════════════╗
-║           RELATÓRIO DE QUALIDADE — 2024-01-15               ║
-║           Pipeline: medallion_v2 | Source: all_partners     ║
-╠══════════════════════════════════════════════════════════════╣
-║ Total de registros analisados: 152.340                      ║
-╠══════════════════════════════════════════════════════════════╣
-║ CHECK                  │ SCORE  │ THRESHOLD │ STATUS        ║
-╠════════════════════════╪════════╪═══════════╪═══════════════╣
-║ Completude order_id    │ 100.0% │ 98%       │ ✅ PASS       ║
-║ Completude customer_id │ 99.4%  │ 98%       │ ✅ PASS       ║
-║ Completude amount      │ 99.8%  │ 98%       │ ✅ PASS       ║
-║ Unicidade (order_id)   │ 97.9%  │ 99%       │ ❌ FAIL       ║
-║ Validade amount > 0    │ 91.8%  │ 95%       │ ❌ FAIL       ║
-║ Validade state válido  │ 99.9%  │ 95%       │ ✅ PASS       ║
-║ Integridade customer   │ 99.7%  │ 99%       │ ✅ PASS       ║
-╠══════════════════════════════════════════════════════════════╣
-║ OVERALL: ❌ FAILED (2 checks falharam)                      ║
-║ Quarentena: 12.718 registros (8.3%)                         ║
-║ Silver: 139.622 registros (91.7%) ✅                        ║
-╚══════════════════════════════════════════════════════════════╝
-</pre>
-</div>
-
-<!-- SLIDE 26 — Section: Integração Airflow -->
-<div class="slide section">
-<h2>Integração com Airflow</h2>
-<p>Quality checks como tasks do pipeline — alertas automáticos</p>
-</div>
-
-<!-- SLIDE 27 — Airflow + Qualidade -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🌬️ Quality Checks no Airflow</h2>
-<pre>from airflow import DAG
-from airflow.operators.python import PythonOperator, BranchPythonOperator
-
-def run_quality_checks(**kwargs):
-    """Executa todos os checks e decide se continua."""
-    report = generate_quality_report(df_bronze, rules, ["order_id"])
-    
-    # Push report para XCom
-    kwargs["ti"].xcom_push(key="quality_report", value=report)
-    
-    return report["overall_passed"]
-
-def decide_on_quality(**kwargs):
-    """Branch: se qualidade OK → Silver, senão → alerta."""
-    ti = kwargs["ti"]
-    passed = ti.xcom_pull(task_ids="quality_checks")
-    
-    if passed:
-        return "transform_silver"
-    else:
-        return "alert_quality_failure"
-
-with DAG("pipeline_with_quality", ...) as dag:
-    ingest = PythonOperator(task_id="ingest_bronze", ...)
-    
-    quality = PythonOperator(
-        task_id="quality_checks",
-        python_callable=run_quality_checks
-    )
-    
-    branch = BranchPythonOperator(
-        task_id="quality_gate",
-        python_callable=decide_on_quality
-    )
-    
-    transform = SparkSubmitOperator(task_id="transform_silver", ...)
-    alert = PythonOperator(task_id="alert_quality_failure", ...)
-    
-    ingest >> quality >> branch >> [transform, alert]</pre>
-</div>
-
-<!-- SLIDE 28 — Quality Gate Pattern -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🚦 Quality Gate Pattern — Bloqueio Inteligente</h2>
-<pre>
-QUALITY GATE — 3 modos:
-
-1. STRICT (Gold layer):
-   Score &lt; threshold → BLOQUEIA pipeline + ALERTA
-   Nenhum dado ruim passa.
-
-2. LENIENT (Silver layer):
-   Score &lt; threshold → QUARENTENA + CONTINUA
-   Dados ruins são isolados, bons seguem.
-
-3. MONITOR (Bronze layer):
-   Score &lt; threshold → LOG + MÉTRICA
-   Apenas observar, não bloquear.
-</pre>
-<table>
-<tr><th>Camada</th><th>Modo</th><th>Ação em Falha</th></tr>
-<tr><td>Bronze → Silver</td><td>LENIENT</td><td>Quarentena + continua</td></tr>
-<tr><td>Silver → Gold</td><td>STRICT</td><td>Bloqueia + alerta Roberto</td></tr>
-<tr><td>Gold → Dashboard</td><td>STRICT</td><td>Bloqueia publicação</td></tr>
-</table>
-<div class="highlight">
-<strong>Regra DataFlow:</strong> "Dados ruins NUNCA chegam na Gold. Se quality gate falha na Silver→Gold, pipeline para e Carlos é notificado. Melhor não publicar do que publicar errado."
-</div>
-</div>
-
-<!-- SLIDE 29 — Boas Práticas -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>✅ Boas Práticas — Qualidade de Dados</h2>
-<table>
-<tr><th>Prática</th><th>Por quê</th></tr>
-<tr><td>Defina <strong>thresholds por dimensão</strong></td><td>Nem todo check precisa ser 100%</td></tr>
-<tr><td>Use <strong>quarentena</strong>, não delete</td><td>Preservar dados para investigação</td></tr>
-<tr><td>Implemente <strong>quality gates</strong> entre camadas</td><td>Impedir propagação de erros</td></tr>
-<tr><td>Gere <strong>relatórios de qualidade</strong> automáticos</td><td>Visibilidade e histórico de tendências</td></tr>
-<tr><td>Monitore <strong>tendências</strong> (score degradando?)</td><td>Detectar problemas antes da crise</td></tr>
-<tr><td>Integre alertas no <strong>Airflow</strong> (callbacks)</td><td>Notificação automática em degradação</td></tr>
-<tr><td>Documente <strong>regras de negócio</strong> como código</td><td>Regras versionáveis e auditáveis</td></tr>
-<tr><td>Teste <strong>edge cases</strong> (arquivo vazio, 100% null)</td><td>Pipeline não deve quebrar em cenários extremos</td></tr>
-<tr><td>Classifique checks por <strong>criticidade</strong></td><td>Bloquear em críticos, alertar em warnings</td></tr>
-<tr><td>Revise thresholds <strong>mensalmente</strong></td><td>Qualidade melhora com o tempo, thresholds também</td></tr>
-</table>
-</div>
-
-<!-- SLIDE 30 — Preview Lab -->
-<div class="slide">
-<span class="mackenzie-mark">MACKENZIE</span>
-<h2>🔬 O Que Faremos no Lab Hoje</h2>
-<p><strong>Cenário:</strong> Roberto exige que dados ruins nunca mais cheguem ao dashboard. Carlos precisa implementar um framework de qualidade integrado ao pipeline Medallion.</p>
+<h2>🎯 O que queremos consolidar hoje</h2>
 <div class="cols">
 <div class="col">
-<h3>Lab Parte 1 — Guiado (60 min)</h3>
-<ol>
-<li>Implementar check de completude</li>
-<li>Implementar check de unicidade + dedup</li>
-<li>Implementar check de validade (ranges)</li>
-<li>Sistema de quarentena com metadados</li>
-<li>Gerar relatório de qualidade</li>
-</ol>
+<h3>Da Aula 5 — Orquestração</h3>
+<ul>
+<li>Por que um pipeline <strong>linear</strong> não basta</li>
+<li><strong>Branching</strong>: o pipeline que decide caminhos</li>
+<li><strong>Sensors</strong>: esperar o mundo externo</li>
+<li><strong>TaskGroups</strong>: organizar a complexidade</li>
+<li><strong>SparkSubmit</strong>: orquestrar vs. processar</li>
+<li><strong>Callbacks</strong> e <strong>trigger rules</strong></li>
+</ul>
 </div>
 <div class="col">
-<h3>Lab Parte 2 — Intermediário + Desafio (50 min)</h3>
-<ol>
-<li>Check de integridade referencial</li>
-<li>Quality gate no Airflow (branch)</li>
-<li>Alertas automáticos em falha</li>
-<li>🏆 <strong>Desafio:</strong> Framework completo com score + trend + quarentena</li>
-</ol>
+<h3>Da Aula 6 — Qualidade</h3>
+<ul>
+<li>O custo real de <strong>dados ruins</strong></li>
+<li>As <strong>6 dimensões</strong> de qualidade</li>
+<li><strong>Quarentena</strong> em vez de descarte</li>
+<li><strong>Quality gates</strong> entre camadas</li>
+<li>Qualidade como <strong>parte da orquestração</strong></li>
+<li>Cultura: qualidade é <strong>decisão</strong>, não só código</li>
+</ul>
 </div>
 </div>
-<p><strong>Entregável:</strong> Framework de qualidade com 4 dimensões, quarentena e quality gate integrado ao Airflow.</p>
 </div>
 
-<!-- SLIDE 31 — Encerramento -->
+<!-- ============================================================= -->
+<!-- PARTE A — ORQUESTRAÇÃO AVANÇADA -->
+<!-- ============================================================= -->
+<div class="slide section">
+<h2>Parte A — Orquestração Avançada</h2>
+<p>Fazendo o pipeline pensar, esperar e reagir</p>
+<div class="tag">Aula 5 · revisão conceitual</div>
+</div>
+
+<!-- SLIDE 6 — Linear vs inteligente -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<span class="pill">Ideia central</span>
+<h2>🤖 De pipeline "burro" a pipeline inteligente</h2>
+<p>Na Aula 4, o pipeline da DataFlow era uma <strong>fila reta</strong>: extrair → transformar → carregar, sempre igual, todo dia. Funciona — até o dia em que o mundo não coopera.</p>
+<p>E o mundo raramente coopera: o arquivo do parceiro atrasa, a segunda-feira tem o triplo do volume, a sexta precisa de um relatório extra, uma fonte falha mas as outras não. Um pipeline linear não sabe lidar com nada disso — ele só executa cegamente.</p>
+<blockquote>Orquestração avançada é dar ao pipeline a capacidade de <strong>observar o contexto e reagir</strong>: escolher caminhos, esperar condições, isolar falhas e chamar as pessoas certas.</blockquote>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Pensem no pipeline que vocês subiram na Aula 5. Em que momento ele deixou de ser "uma fila reta"?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 7 — Branching -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🔀 Branching — o pipeline que escolhe caminhos</h2>
+<p>O <strong>BranchPythonOperator</strong> resolve uma pergunta simples: <em>"dependendo da situação, qual caminho seguir?"</em> Uma função avalia o contexto (o dia da semana, o volume de dados, uma flag externa) e devolve o nome da próxima etapa. Os caminhos não escolhidos são marcados como <strong>skipped</strong> — não falham, apenas não acontecem.</p>
+<p>É a diferença entre uma receita única e uma receita com "se... então...". O pipeline ganha ramificações condicionais.</p>
+<pre>
+                        ┌──► processamento_pesado   (volume alto)
+[avaliar_contexto] ──►──┤
+                        └──► processamento_leve     (volume baixo)
+   (decide o caminho)        os demais viram "skipped"
+</pre>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Branching escolhe <strong>um</strong> caminho. E se precisássemos rodar <strong>vários</strong> caminhos em paralelo — isso ainda é branching? Qual seria a diferença?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 8 — Sensors -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>👁️ Sensors — esperar o mundo externo</h2>
+<p>Nem tudo está sob nosso controle. O arquivo do parceiro chega "por volta das 6h". Uma outra DAG precisa terminar antes. Uma API precisa responder. O <strong>Sensor</strong> é um operator que <strong>espera</strong> uma condição virar verdadeira — ele fica "cutucando" (poll) até conseguir, ou até estourar o <em>timeout</em>.</p>
+<table>
+<tr><th>Sensor</th><th>Espera por...</th><th>Exemplo na DataFlow</th></tr>
+<tr><td>FileSensor</td><td>um arquivo aparecer</td><td>o CSV de vendas do parceiro do dia</td></tr>
+<tr><td>ExternalTaskSensor</td><td>outra DAG/task terminar</td><td>a ingestão terminar antes de agregar</td></tr>
+<tr><td>Sensores de API/tempo</td><td>uma condição externa</td><td>uma janela de horário, um endpoint no ar</td></tr>
+</table>
+<blockquote>Um sensor mal configurado é perigoso: sem <strong>timeout</strong>, ele espera para sempre e prende recursos. Esperar é útil; esperar sem limite é um bug.</blockquote>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>O arquivo do parceiro nunca chegou. O sensor deve <strong>falhar</strong> o pipeline ou apenas <strong>pular</strong> a etapa (soft-fail)? De que depende essa escolha?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 9 — TaskGroups -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📦 TaskGroups — domando a complexidade visual</h2>
+<p>Conforme o pipeline cresce, a tela vira um emaranhado de caixas e setas. <strong>TaskGroups</strong> agrupam tasks relacionadas em blocos — na interface, viram um bloco que abre e fecha. Não muda o que o pipeline faz; muda a <strong>legibilidade</strong> e a capacidade de raciocinar sobre ele.</p>
+<p>Pensem em processar três parceiros: cada um tem "baixar → validar → padronizar". Em vez de nove caixas soltas, você tem três grupos limpos e idênticos — inclusive gerados em um laço.</p>
+<div class="highlight">
+Legibilidade não é luxo. Um pipeline que ninguém entende é um pipeline que ninguém consegue consertar às 3h da manhã quando ele quebra.
+</div>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Organização "só visual" tem valor real de engenharia? Argumentem a favor e contra.</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 10 — SparkSubmit: separar responsabilidades -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<span class="pill">Conceito-chave</span>
+<h2>⚡ Orquestrar não é processar</h2>
+<p>Este é um dos conceitos mais importantes das duas aulas. O Airflow é o <strong>maestro</strong>: ele agenda, dispara e monitora. Ele <strong>não deve</strong> ser o músico que carrega milhões de registros na própria memória — para isso existe o cluster Spark.</p>
+<p>O <strong>SparkSubmitOperator</strong> materializa essa separação: o Airflow <em>submete</em> o job ao cluster e acompanha o status; o processamento pesado acontece no Spark, que foi feito para isso.</p>
+<pre>
+   ❌ Anti-padrão                     ✅ Correto
+   ┌────────────────┐                ┌───────────┐   submete   ┌──────────────┐
+   │ Airflow worker │                │  Airflow  │ ──────────► │ Cluster Spark│
+   │ processa 1M    │  → estoura     │ (orquestra│ ◄────────── │ (processa)   │
+   │ registros      │    memória     │ e monitora)│   status    └──────────────┘
+   └────────────────┘                └───────────┘
+</pre>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Para um dataset de 5 MB, faz sentido a complexidade de submeter ao cluster, ou processar "ali mesmo" é aceitável? Onde fica a fronteira?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 11 — Callbacks e trigger rules -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📢 Falhas acontecem — o que importa é a reação</h2>
+<p>Pipelines maduros assumem que falhas <strong>vão</strong> ocorrer e se preparam para elas com dois mecanismos:</p>
+<h3>Callbacks — notificar a pessoa certa</h3>
+<p>Ao falhar (ou ter sucesso), a task dispara uma função: registrar log, mandar mensagem no Slack, abrir um alerta. A ideia é <strong>graduar</strong> o alerta pela criticidade — um aviso discreto para um warning, um chamado urgente para uma falha na camada crítica.</p>
+<h3>Trigger rules — quando uma task deve rodar</h3>
+<p>Por padrão, uma task só roda se <strong>todos</strong> os anteriores tiveram sucesso (<code>all_success</code>). Mas às vezes queremos "rode se <strong>qualquer</strong> um deu certo", ou "rode <strong>de qualquer forma</strong> para limpar recursos" (<code>all_done</code>). A trigger rule controla essa lógica de fluxo.</p>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Alertar demais gera <strong>fadiga de alerta</strong> (as pessoas param de olhar). Alertar de menos deixa problemas passarem. Como calibrar isso?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 12 — Síntese Parte A -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧩 Síntese — a orquestração como sistema nervoso</h2>
+<p>Juntando as peças da Aula 5, o pipeline ganha um "sistema nervoso": ele <strong>percebe</strong> (sensors), <strong>decide</strong> (branching, trigger rules), <strong>delega</strong> o trabalho pesado (SparkSubmit), <strong>se organiza</strong> (TaskGroups) e <strong>avisa</strong> quando algo dá errado (callbacks).</p>
+<table>
+<tr><th>Recurso</th><th>Pergunta que responde</th></tr>
+<tr><td>Branching</td><td>Qual caminho seguir agora?</td></tr>
+<tr><td>Sensor</td><td>Já posso começar?</td></tr>
+<tr><td>TaskGroup</td><td>Como manter isso legível?</td></tr>
+<tr><td>SparkSubmit</td><td>Quem faz o trabalho pesado?</td></tr>
+<tr><td>Callback / trigger rule</td><td>O que fazer quando algo muda ou falha?</td></tr>
+</table>
+<blockquote>Mas orquestrar bem não garante <strong>dados bons</strong>. Um pipeline impecável pode entregar lixo com pontualidade. É aqui que entra a Parte B.</blockquote>
+</div>
+
+<!-- ============================================================= -->
+<!-- PARTE B — QUALIDADE DE DADOS -->
+<!-- ============================================================= -->
+<div class="slide section">
+<h2>Parte B — Qualidade de Dados</h2>
+<p>Garantindo que o resultado é confiável o suficiente para decidir</p>
+<div class="tag">Aula 6 · revisão conceitual</div>
+</div>
+
+<!-- SLIDE 14 — O custo de dados ruins -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>💸 "Dados ruins, decisões ruins"</h2>
+<p>O gatilho da DataFlow foi concreto: um relatório de faturamento mostrou <strong>vendas negativas</strong>. Investigando, apareceu de tudo — 15% dos registros de um parceiro com valores negativos, milhares de duplicatas de outro, pedidos apontando para clientes que não existem.</p>
+<p>O resultado não foi só um número errado numa planilha: foi um relatório <strong>errado no conselho</strong>. Dados ruins não ficam quietos — eles viram decisões ruins, com custo real.</p>
+<blockquote>"Garbage in, garbage out." Se dado ruim entra no pipeline, métrica errada sai do outro lado — com aparência de verdade, o que é ainda pior.</blockquote>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Entre um pipeline que <strong>atrasa</strong> mas entrega dado correto, e um que é <strong>pontual</strong> mas às vezes entrega dado errado — qual é o pior para o negócio? Por quê?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 15 — As 6 dimensões -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📐 As 6 dimensões da qualidade</h2>
+<p>"Qualidade" é vago demais para virar ação. Por isso a decompomos em dimensões — cada uma responde a uma pergunta concreta e mensurável:</p>
+<table>
+<tr><th>Dimensão</th><th>Pergunta</th><th>Violação típica</th></tr>
+<tr><td><strong>Completude</strong></td><td>Os campos obrigatórios estão preenchidos?</td><td>customer_id nulo em 5% das linhas</td></tr>
+<tr><td><strong>Unicidade</strong></td><td>Há duplicatas?</td><td>o mesmo pedido aparece 3 vezes</td></tr>
+<tr><td><strong>Validade</strong></td><td>Os valores fazem sentido?</td><td>valor de venda negativo</td></tr>
+<tr><td><strong>Consistência</strong></td><td>Os dados concordam entre si?</td><td>entrega antes do pedido</td></tr>
+<tr><td><strong>Integridade</strong></td><td>As referências existem?</td><td>pedido de cliente inexistente</td></tr>
+<tr><td><strong>Atualidade</strong></td><td>Os dados são recentes o bastante?</td><td>última carga há 72h (esperado: diário)</td></tr>
+</table>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Um dado pode ser <strong>válido</strong> (formato certo, valor plausível) e mesmo assim <strong>errado</strong>. Como isso é possível? Qual dimensão pega esse caso — e qual não pega?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 16 — Validar não é limpar cegamente -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🩺 Validar é diagnosticar, não apagar</h2>
+<p>Diante de um dado suspeito, o instinto ingênuo é "jogar fora". Mas em engenharia de dados, <strong>apagar dado é perder informação</strong> — e muitas vezes perder a própria pista do problema.</p>
+<p>A postura madura é <strong>medir</strong> cada dimensão e decidir <strong>com base num limite (threshold)</strong>: "aceito até 2% de nulos neste campo". A validação vira um exame de saúde do dado, com resultado quantitativo, não um chute.</p>
+<div class="highlight">
+Um bom check responde três coisas: <strong>o que</strong> falhou, <strong>quanto</strong> falhou (métrica) e <strong>se passou</strong> no limite acordado. Sem número, não é qualidade — é opinião.
+</div>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Quem deveria definir os thresholds — o time técnico ou a área de negócio? O que muda conforme a resposta?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 17 — Quarentena -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<span class="pill">Padrão de projeto</span>
+<h2>🏥 Quarentena — isolar sem destruir</h2>
+<p>A resposta da DataFlow para dado ruim não foi deletar: foi <strong>colocar em quarentena</strong>. Os registros que falham nos checks vão para uma área separada, carregando metadados que contam a história: <em>qual regra falhou, quando, de qual arquivo veio</em>.</p>
+<pre>
+[Bronze] ──► [Checks de qualidade] ──┬──► [Silver] (dados que passaram)
+                                     │
+                                     └──► [Quarentena] + motivo da rejeição
+                                            → investigar, corrigir, reprocessar
+</pre>
+<p>Assim ninguém perde dado, o pipeline não trava por causa de algumas linhas ruins, e o time ganha material para descobrir a <strong>causa raiz</strong> — muitas vezes um problema na origem, não no dado em si.</p>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>A quarentena vive crescendo e ninguém olha. Que processo ou responsabilidade evita que ela vire um "cemitério de dados"?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 18 — Relatório de qualidade -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>📊 Tornar a qualidade visível</h2>
+<p>Qualidade que ninguém enxerga não muda comportamento. Por isso cada execução gera um <strong>relatório</strong>: quantos registros entraram, qual o score de cada check, o que passou, o que falhou, quanto foi para quarentena.</p>
+<pre>
+RELATÓRIO DE QUALIDADE — 2024-01-15
+Total analisado: 152.340
+  Completude order_id ....... 100.0%  (limite 98%)  ✅
+  Unicidade (order_id) ......  97.9%  (limite 99%)  ❌
+  Validade valor > 0 ........  91.8%  (limite 95%)  ❌
+  Integridade cliente .......  99.7%  (limite 99%)  ✅
+RESULTADO: ❌ 2 checks falharam · Quarentena: 8,3%
+</pre>
+<p>Guardando esses relatórios ao longo do tempo, surge algo valioso: <strong>tendência</strong>. Um score que cai lentamente semana após semana avisa de um problema <em>antes</em> de ele virar crise.</p>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>O que é mais útil: um relatório de "hoje" ou a <strong>curva</strong> dos últimos 30 dias? O que cada um revela?</li>
+</ul>
+</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PARTE C — ONDE AS DUAS AULAS SE ENCONTRAM -->
+<!-- ============================================================= -->
+<div class="slide section">
+<h2>Parte C — Onde tudo se encontra</h2>
+<p>Quality gates: quando a orquestração usa a qualidade para decidir</p>
+<div class="tag">Aulas 5 + 6 · integração</div>
+</div>
+
+<!-- SLIDE 20 — Quality gate -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<span class="pill">A ponte entre as aulas</span>
+<h2>🚦 Quality Gate — a qualidade vira decisão do pipeline</h2>
+<p>Aqui as duas aulas se fundem. Lembram do <strong>branching</strong> da Aula 5? Um <strong>quality gate</strong> é exatamente isso, mas a decisão é baseada na <strong>qualidade dos dados</strong>: o pipeline roda os checks e, conforme o resultado, decide se <em>segue</em>, <em>para</em> ou <em>alerta</em>.</p>
+<pre>
+[ingestão] ──► [checks de qualidade] ──► (quality gate / branch)
+                                              │
+                                    passou ───┼──► [transformar → Silver/Gold]
+                                              │
+                                    falhou ───┴──► [alertar + parar]
+</pre>
+<p>A orquestração fornece o mecanismo (branch, callbacks). A qualidade fornece o critério (os scores). Sozinhos, cada um é incompleto; juntos, formam um pipeline em que <strong>dado ruim não avança calado</strong>.</p>
+</div>
+
+<!-- SLIDE 21 — 3 modos de gate -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎚️ Nem todo gate é igual — 3 posturas</h2>
+<p>A rigidez do gate depende de <strong>onde</strong> ele está no pipeline. Quanto mais perto da decisão de negócio, mais rígido:</p>
+<table>
+<tr><th>Modo</th><th>Ação ao falhar</th><th>Onde faz sentido</th></tr>
+<tr><td><strong>Monitor</strong></td><td>só registra e mede</td><td>entrada (Bronze) — ainda estamos observando</td></tr>
+<tr><td><strong>Lenient</strong></td><td>manda o ruim para quarentena e segue</td><td>meio (Bronze → Silver)</td></tr>
+<tr><td><strong>Strict</strong></td><td>bloqueia o pipeline e alerta</td><td>saída crítica (Silver → Gold → dashboard)</td></tr>
+</table>
+<blockquote>Regra da DataFlow: "Dado ruim <strong>nunca</strong> chega na Gold. Melhor não publicar do que publicar errado." Perto do board, o gate é sempre <em>strict</em>.</blockquote>
+<div class="discuss">
+<span class="label">💬 Para discutir</span>
+<ul>
+<li>Bloquear o pipeline também tem custo (dashboard desatualizado, gente esperando). Quando <strong>parar</strong> é pior do que deixar passar um dado imperfeito?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 22 — Boas práticas combinadas -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>✅ Princípios que atravessam as duas aulas</h2>
+<table>
+<tr><th>Princípio</th><th>Por quê</th></tr>
+<tr><td>Assuma que <strong>vai falhar</strong></td><td>retries, timeouts, callbacks e quarentena existem porque falha é normal</td></tr>
+<tr><td><strong>Isole</strong>, não destrua</td><td>quarentena preserva dado e pista; skip preserva execução</td></tr>
+<tr><td>Torne tudo <strong>visível</strong></td><td>relatórios e alertas transformam problema silencioso em problema tratável</td></tr>
+<tr><td>Separe <strong>orquestrar de processar</strong></td><td>cada ferramenta no seu papel escala melhor</td></tr>
+<tr><td>Regras como <strong>código versionado</strong></td><td>thresholds e validações auditáveis e revisáveis</td></tr>
+<tr><td>Qualidade é <strong>decisão de negócio</strong></td><td>o limite aceitável não é técnico, é acordado</td></tr>
+</table>
+</div>
+
+<!-- SLIDE 23 — Estudo de caso para debate -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🧪 Estudo de caso — vamos decidir juntos</h2>
+<p>São 5h50. A DAG diária da DataFlow está rodando. O cenário:</p>
+<ul>
+<li>O arquivo do <strong>Parceiro A</strong> ainda não chegou (o sensor está esperando).</li>
+<li>O <strong>Parceiro B</strong> chegou, mas com <strong>4% de valores negativos</strong> (limite de validade: 2%).</li>
+<li>O <strong>Parceiro C</strong> chegou perfeito.</li>
+<li>Às 6h30 sai o relatório que <strong>Roberto</strong> leva ao conselho.</li>
+</ul>
+<div class="discuss">
+<span class="label">💬 Para discutir — em grupos</span>
+<ul>
+<li>O sensor do Parceiro A deve segurar todo o pipeline, ou os outros seguem sem ele?</li>
+<li>Os 4% do Parceiro B: quarentena parcial e segue, ou bloqueia? Qual modo de gate?</li>
+<li>Que <strong>alertas</strong> disparam, e para <strong>quem</strong>, em cada decisão?</li>
+<li>O que aparece no relatório das 6h30 em cada uma das escolhas?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 24 — Fechamento -->
+<div class="slide">
+<span class="mackenzie-mark">MACKENZIE</span>
+<h2>🎓 O que levar desta aula</h2>
+<p>Um pipeline profissional não é o que <strong>funciona no dia bom</strong> — é o que <strong>se comporta bem no dia ruim</strong>: quando o arquivo atrasa, o volume explode, uma fonte falha e os dados chegam sujos.</p>
+<p>A <strong>orquestração avançada</strong> dá ao pipeline reflexos para reagir ao contexto. A <strong>qualidade de dados</strong> dá a ele consciência do que está produzindo. E os <strong>quality gates</strong> são onde essas duas capacidades viram uma só decisão: <em>seguir, isolar ou parar</em>.</p>
+<blockquote>Confiabilidade não é um recurso que você liga no fim. É uma <strong>postura de projeto</strong> — pensada desde a primeira DAG e defendida em cada camada.</blockquote>
+<div class="discuss">
+<span class="label">💬 Pergunta de encerramento</span>
+<ul>
+<li>Se vocês pudessem adicionar <strong>um único</strong> mecanismo ao pipeline que construíram nas aulas anteriores para torná-lo mais confiável, qual seria — e por quê?</li>
+</ul>
+</div>
+</div>
+
+<!-- SLIDE 25 — Encerramento -->
 <div class="slide cover">
-<h1>Hora do Lab! 🔬</h1>
-<p class="subtitle">Agora vocês vão construir o framework de qualidade de dados</p>
-<p class="subtitle" style="opacity:.7;margin-top:16px;">Completude + Unicidade + Validade + Integridade + Quarentena</p>
+<h1>Obrigado! 💬</h1>
+<p class="subtitle">Orquestração que reage + Qualidade que garante = pipelines confiáveis</p>
+<p class="subtitle" style="opacity:.7;margin-top:16px;">Dúvidas e discussão aberta</p>
 </div>
 
 </div><!-- /deck -->
